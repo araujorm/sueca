@@ -1,0 +1,22 @@
+/* XPM */
+static char *b1pb[] = {
+/* columns rows colors chars-per-pixel */
+"96 11 5 1",
+"  c black",
+". c navy",
+"X c #008000",
+"o c #808080",
+"O c white",
+/* pixels */
+" OOO..O....O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O.O..OOO ",
+" OOO..O..O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O..OOO ",
+" OOO..O..O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O...O..OOO ",
+" OOO..O..................................................................................O..OOO ",
+" OOO..OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO..OOO ",
+" OOO........................................................................................OOO ",
+" OOO........................................................................................OOO ",
+" OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO ",
+" OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO ",
+" oOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo ",
+"X                                                                                              X"
+};

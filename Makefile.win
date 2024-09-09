@@ -1,0 +1,56 @@
+# Project: sueca
+# Makefile created by Dev-C++ 4.9.8.7
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = sueca_private.res
+OBJ  = mycanvas.o cards.o main.o player.o game.o scoredialog.o smartplayer.o myframe.o trumphdialog.o $(RES)
+LINKOBJ  = mycanvas.o cards.o main.o player.o game.o scoredialog.o smartplayer.o myframe.o trumphdialog.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -mwindows -lwxmsw -lole32 -lwsock32 -lcomctl32 -lctl3d32 -lgcc -lstdc++ -lshell32 -loleaut32 -ladvapi32 -luuid -lodbc32 -ltiff -lpng -ljpeg -lzlib -g3 
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/include/c++"  -I"C:/Dev-Cpp/include/c++/mingw32"  -I"C:/Dev-Cpp/include/c++/backward"  -I"C:/Dev-Cpp/include" 
+BIN  = sueca.exe
+CXXFLAGS = $(CXXINCS)-fno-rtti -fno-exceptions -fno-pcc-struct-return -fstrict-aliasing -Wall -D__WXMSW__ -D__GNUWIN32__ -D__WIN95__    -g3
+CFLAGS = $(INCS)-fno-rtti -fno-exceptions -fno-pcc-struct-return -fstrict-aliasing -Wall -fvtable-thunks -D__WXMSW__ -D__GNUWIN32__ -D__WIN95__   -g3
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before sueca.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "sueca.exe" $(LIBS)
+
+mycanvas.o: mycanvas.cpp
+	$(CPP) -c mycanvas.cpp -o mycanvas.o $(CXXFLAGS)
+
+cards.o: cards.cpp
+	$(CPP) -c cards.cpp -o cards.o $(CXXFLAGS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+player.o: player.cpp
+	$(CPP) -c player.cpp -o player.o $(CXXFLAGS)
+
+game.o: game.cpp
+	$(CPP) -c game.cpp -o game.o $(CXXFLAGS)
+
+scoredialog.o: scoredialog.cpp
+	$(CPP) -c scoredialog.cpp -o scoredialog.o $(CXXFLAGS)
+
+smartplayer.o: smartplayer.cpp
+	$(CPP) -c smartplayer.cpp -o smartplayer.o $(CXXFLAGS)
+
+myframe.o: myframe.cpp
+	$(CPP) -c myframe.cpp -o myframe.o $(CXXFLAGS)
+
+trumphdialog.o: trumphdialog.cpp
+	$(CPP) -c trumphdialog.cpp -o trumphdialog.o $(CXXFLAGS)
+
+sueca_private.res: sueca_private.rc sueca_resources.rc 
+	$(WINDRES) -i sueca_private.rc -I rc -o sueca_private.res -O coff 

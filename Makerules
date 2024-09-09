@@ -1,0 +1,17 @@
+include Makedefs
+
+ # Automatic dependency generation
+sinclude $(DEPS)
+
+sueca: $(OBJS)
+	$(CXX) $(LDFLAGS) $^ -o $@
+	$(STRIP) $@
+
+# Implicit rules
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+%.d: %.cpp
+	set -e; $(CXX) -MM $(CXXFLAGS) $< \
+		| sed 's/\($*\)\.o[ :]*/\1.o $@ : /g' > $@; \
+		[ -s $@ ] || rm -f $@
