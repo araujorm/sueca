@@ -63,7 +63,7 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
   wxRadioButton* p4button = new wxRadioButton( this, ID_RADIOBUTTON_P4, noconnstr );
   p4button->Enable( false );
   connectedlist.Append( p4button );
-  wxBoxSizer* posmidsizer = new wxBoxSizer( wxHORIZONTAL );
+  wxBoxSizer* posmidsizer = new wxBoxSizer( wxVERTICAL );
   posmidsizer->Add( p4button, 0, wxALIGN_LEFT );
   posmidsizer->Add( 10, wxID_ANY, 1 );
   posmidsizer->Add( p2button, 0, wxALIGN_RIGHT );
