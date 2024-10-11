@@ -56,7 +56,7 @@ END_EVENT_TABLE();
 #endif
 
 MyFrame::MyFrame():
-  wxFrame( NULL, -1, "Sueca", wxDefaultPosition, wxDefaultSize,
+  wxFrame( NULL, wxID_ANY, "Sueca", wxDefaultPosition, wxDefaultSize,
            wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX) ),
   viewscores( false ), score_pos( wxDefaultPosition ),
   viewtrumph( false ), trumph_pos( wxDefaultPosition )
@@ -90,12 +90,12 @@ MyFrame::MyFrame():
   mymenubar->Append( helpMenu, "&Help" );
   SetMenuBar( mymenubar );
 
-  MyStatusBar* status = new MyStatusBar( this, -1 );
+  MyStatusBar* status = new MyStatusBar( this, wxID_ANY );
   SetStatusBar( status );
   status->SetStatusText( "Welcome!" );
 
   main_sizer = new wxBoxSizer( wxVERTICAL );
-  canvas = new MyCanvas( this, -1 );
+  canvas = new MyCanvas( this, wxID_ANY );
   main_sizer->Add( canvas );
   SetSizer( main_sizer );
   main_sizer->SetSizeHints( this );

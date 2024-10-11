@@ -13,16 +13,16 @@ END_EVENT_TABLE();
 static char* no_trumph_str = "No trumph set";
 
 TrumphDialog::TrumphDialog( wxWindow* parent, wxPoint& pos ):
-  wxDialog( parent, -1, wxString( "Trumph" ), pos ), empty_bmp( 1, 1 )
+  wxDialog( parent, wxID_ANY, wxString( "Trumph" ), pos ), empty_bmp( 1, 1 )
 {
-  bmp = new wxStaticBitmap( this, -1, empty_bmp );
-  text = new wxStaticText( this, -1, no_trumph_str, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER );
+  bmp = new wxStaticBitmap( this, wxID_ANY, empty_bmp );
+  text = new wxStaticText( this, wxID_ANY, no_trumph_str, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER );
   top_sizer = new wxBoxSizer( wxVERTICAL );
   top_sizer->Add( 1, 10 );
   top_sizer->Add( bmp, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER, 10 );
   top_sizer->Add( text, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER, 10 );
   top_sizer->Add( 1, 5 );
-  top_sizer->Add( new wxButton( this, -1, "Close" ), 0, wxALIGN_CENTER );
+  top_sizer->Add( new wxButton( this, wxID_ANY, "Close" ), 0, wxALIGN_CENTER );
   top_sizer->Add( 1, 10 );
   SetSizer( top_sizer );
   top_sizer->SetSizeHints( this );

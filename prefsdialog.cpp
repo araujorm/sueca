@@ -13,19 +13,19 @@ BEGIN_EVENT_TABLE( PrefsDialog, wxDialog )
 END_EVENT_TABLE();
 
 PrefsDialog::PrefsDialog( wxWindow* parent ):
-  wxDialog( parent, -1, wxString( "Game Preferences" ) )
+  wxDialog( parent, wxID_ANY, wxString( "Game Preferences" ) )
 {
   // Name entry
   wxBoxSizer* name_sizer = new wxBoxSizer( wxHORIZONTAL );  
-  name_sizer->Add( new wxStaticText( this, -1, "Player name" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
-  name_entry = new wxTextCtrl( this, -1, wxGetApp().GetLocalPlayerName() );
+  name_sizer->Add( new wxStaticText( this, wxID_ANY, "Player name" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
+  name_entry = new wxTextCtrl( this, wxID_ANY, wxGetApp().GetLocalPlayerName() );
   name_entry->SetMaxLength( PLAYER_NAME_MAX );
   name_sizer->Add( name_entry, 0, wxALIGN_CENTER );
 
   // Card speed option
   wxBoxSizer* delay_sizer = new wxBoxSizer( wxHORIZONTAL );
-  delay_sizer->Add( new wxStaticText( this, -1, "Card movement speed" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
-  delay_entry = new wxSlider( this, -1, wxGetApp().GetUpdateDelay(), 1, 10, wxDefaultPosition, wxSize(100, -1), wxSL_HORIZONTAL | wxSL_LABELS | wxSL_AUTOTICKS );
+  delay_sizer->Add( new wxStaticText( this, wxID_ANY, "Card movement speed" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
+  delay_entry = new wxSlider( this, wxID_ANY, wxGetApp().GetUpdateDelay(), 1, 10, wxDefaultPosition, wxSize(100, wxID_ANY), wxSL_HORIZONTAL | wxSL_LABELS | wxSL_AUTOTICKS );
   delay_sizer->Add( delay_entry, 0, wxALIGN_CENTER );
 
   // Buttons

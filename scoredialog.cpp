@@ -12,7 +12,7 @@ BEGIN_EVENT_TABLE( ScoreDialog, wxDialog )
 END_EVENT_TABLE();
 
 ScoreDialog::ScoreDialog( wxWindow* parent, Team* nteam1, Team* nteam2, wxPoint& pos ):
-  wxDialog( parent, -1, wxString( "Game scores" ), pos ), round( 1 ), displayed( 0 ),
+  wxDialog( parent, wxID_ANY, wxString( "Game scores" ), pos ), round( 1 ), displayed( 0 ),
   team1points( NULL ), team2points( NULL ), roundlabel( NULL ),
   new_round( true ), team1( nteam1 ), team2( nteam2 )
 {
@@ -27,7 +27,7 @@ ScoreDialog::ScoreDialog( wxWindow* parent, Team* nteam1, Team* nteam2, wxPoint&
   top_sizer->Add( 1, 5 );
   top_sizer->Add( gridsz, 0, wxLEFT | wxRIGHT, 20 );
   top_sizer->Add( 1, 10 );
-  top_sizer->Add( new wxButton( this, -1, "Close" ), 0, wxALIGN_CENTER );
+  top_sizer->Add( new wxButton( this, wxID_ANY, "Close" ), 0, wxALIGN_CENTER );
   top_sizer->Add( 1, 5 );
   SetSizer( top_sizer );  // Fit is called in UpdateRoundResults()
 }
@@ -101,13 +101,13 @@ void ScoreDialog::AddLine( wxString header, wxString s1, wxString s2,
 {
   wxFont fnt( *wxNORMAL_FONT );
   fnt.SetWeight( fontw );
-  wxStaticText *txth = new wxStaticText( this, -1, header, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER );
+  wxStaticText *txth = new wxStaticText( this, wxID_ANY, header, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER );
   txth->SetFont( fnt );
   txth->SetForegroundColour( color );
-  wxStaticText *txt1 = new wxStaticText( this, -1, s1, wxDefaultPosition, wxDefaultSize, flags );
+  wxStaticText *txt1 = new wxStaticText( this, wxID_ANY, s1, wxDefaultPosition, wxDefaultSize, flags );
   txt1->SetFont( fnt );
   txt1->SetForegroundColour( color );
-  wxStaticText *txt2 = new wxStaticText( this, -1, s2, wxDefaultPosition, wxDefaultSize, flags );
+  wxStaticText *txt2 = new wxStaticText( this, wxID_ANY, s2, wxDefaultPosition, wxDefaultSize, flags );
   txt2->SetFont( fnt );
   txt2->SetForegroundColour( color );
   gridsz->Add( txth, 0, wxEXPAND | wxRIGHT, 20 );

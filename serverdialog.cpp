@@ -20,7 +20,7 @@ BEGIN_EVENT_TABLE( ServerDialog, wxDialog )
 END_EVENT_TABLE();
 
 ServerDialog::ServerDialog( wxWindow* parent ):
-  wxDialog( parent, -1, wxString( "Host network game" ) ),
+  wxDialog( parent, wxID_ANY, wxString( "Host network game" ) ),
   positions( 3 )
 {
   Sueca& app = wxGetApp();
@@ -35,39 +35,39 @@ ServerDialog::ServerDialog( wxWindow* parent ):
   ip_checkbox->SetValue( ip_enabled );
   ip_sizer->Add( ip_checkbox, 0, wxRIGHT | wxALIGN_CENTER, 5 );
   disconnectedlist.Append( ip_checkbox );
-  ip_entry = new wxTextCtrl( this, -1, app.bound_ip_address, wxDefaultPosition, wxSize( 100, -1 ) );
+  ip_entry = new wxTextCtrl( this, wxID_ANY, app.bound_ip_address, wxDefaultPosition, wxSize( 100, wxID_ANY ) );
   ip_entry->Enable( ip_enabled );
   ip_sizer->Add( ip_entry, 0, wxALIGN_CENTER );
   disconnectedlist.Append( ip_entry );
   top_sizer->Add( ip_sizer );
-  wxStaticText* ip_hint_text = new wxStaticText( this, -1, "(separate with ; if more than one)" );
+  wxStaticText* ip_hint_text = new wxStaticText( this, wxID_ANY, "(separate with ; if more than one)" );
   top_sizer->Add( ip_hint_text, 0, wxBOTTOM | wxALIGN_CENTER, 10 );
   disconnectedlist.Append( ip_hint_text );
 
   // Port entry
   wxBoxSizer* port_sizer = new wxBoxSizer( wxHORIZONTAL );
-  wxStaticText* port_text = new wxStaticText( this, -1, "Port");
+  wxStaticText* port_text = new wxStaticText( this, wxID_ANY, "Port");
   port_sizer->Add( port_text, 0, wxRIGHT | wxALIGN_CENTER, 5 );
   disconnectedlist.Append( port_text );
-  port_entry = new wxTextCtrl( this, -1, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 50, -1 ) );
+  port_entry = new wxTextCtrl( this, wxID_ANY, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 50, wxID_ANY ) );
   port_sizer->Add( port_entry, 0, wxALIGN_CENTER );
   disconnectedlist.Append( port_entry );
   top_sizer->Add( port_sizer, 0, wxBOTTOM, 10 );
 
   // Positions
-  wxStaticBox* pos_box = new wxStaticBox( this, -1, "Player positions" );
+  wxStaticBox* pos_box = new wxStaticBox( this, wxID_ANY, "Player positions" );
   wxStaticBoxSizer* pos_sizer =
     new wxStaticBoxSizer( pos_box, wxVERTICAL );
-  wxStaticText* p1text = new wxStaticText( this, -1, app.GetLocalPlayerName(), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
-  wxStaticText* p2text = new wxStaticText( this, -1, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT );
+  wxStaticText* p1text = new wxStaticText( this, wxID_ANY, app.GetLocalPlayerName(), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
+  wxStaticText* p2text = new wxStaticText( this, wxID_ANY, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT );
   p2text->Enable( false );
-  wxStaticText* p3text = new wxStaticText( this, -1, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
+  wxStaticText* p3text = new wxStaticText( this, wxID_ANY, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
   p3text->Enable( false );
-  wxStaticText* p4text = new wxStaticText( this, -1, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT );
+  wxStaticText* p4text = new wxStaticText( this, wxID_ANY, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT );
   p4text->Enable( false );
   wxBoxSizer* posmidsizer = new wxBoxSizer( wxHORIZONTAL );
   posmidsizer->Add( p4text, 0, wxALIGN_LEFT );
-  posmidsizer->Add( 10, -1, 1 );
+  posmidsizer->Add( 10, wxID_ANY, 1 );
   posmidsizer->Add( p2text, 0, wxALIGN_RIGHT );
   pos_sizer->Add( p3text, 0, wxALIGN_CENTER | wxBOTTOM, 20 );
   pos_sizer->Add( posmidsizer, 0, wxEXPAND | wxBOTTOM, 20 );
@@ -75,7 +75,7 @@ ServerDialog::ServerDialog( wxWindow* parent ):
   top_sizer->Add( pos_sizer, 0, wxEXPAND | wxBOTTOM, 10 );
 
   // Chat stuff
-  wxStaticBox* chat_box = new wxStaticBox( this, -1, "Chat" );
+  wxStaticBox* chat_box = new wxStaticBox( this, wxID_ANY, "Chat" );
   chat_box->Enable( false );
   connectedlist.Append( chat_box );
   chat = new ChatPanel( this );

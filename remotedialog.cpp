@@ -18,7 +18,7 @@ const char* noconnstr = "<not connected>";
 const char* connect_caption = "C&onnect";
 
 RemoteDialog::RemoteDialog( wxWindow* parent ):
-  wxDialog( parent, -1, wxString( "Connect to remote game" ) ), positions( 4 )
+  wxDialog( parent, wxID_ANY, wxString( "Connect to remote game" ) ), positions( 4 )
 {
   Sueca& app = wxGetApp();
   app.rmtdlg = this;
@@ -28,27 +28,27 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
 
   // IP entry
   wxBoxSizer* ip_sizer = new wxBoxSizer( wxHORIZONTAL );
-  wxStaticText* ip_text = new wxStaticText( this, -1, "Host address");
+  wxStaticText* ip_text = new wxStaticText( this, wxID_ANY, "Host address");
   ip_sizer->Add( ip_text, 0, wxRIGHT | wxALIGN_CENTER, 5 );
   disconnectedlist.Append( ip_text );
-  ip_entry = new wxTextCtrl( this, -1, app.connect_ip_address, wxDefaultPosition, wxSize( 100, -1 ) );
+  ip_entry = new wxTextCtrl( this, wxID_ANY, app.connect_ip_address, wxDefaultPosition, wxSize( 100, wxID_ANY ) );
   ip_sizer->Add( ip_entry, 0, wxALIGN_CENTER | wxRIGHT, 10 );
   disconnectedlist.Append( ip_entry );
 
   // Port entry
-  wxStaticText* port_text = new wxStaticText( this, -1, "Port");
+  wxStaticText* port_text = new wxStaticText( this, wxID_ANY, "Port");
   ip_sizer->Add( port_text, 0, wxRIGHT | wxALIGN_CENTER, 5 );
   disconnectedlist.Append( port_text );
-  port_entry = new wxTextCtrl( this, -1, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 50, -1 ) );
+  port_entry = new wxTextCtrl( this, wxID_ANY, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 50, wxID_ANY ) );
   ip_sizer->Add( port_entry, 0, wxALIGN_CENTER );
   disconnectedlist.Append( port_entry );
   top_sizer->Add( ip_sizer, 0, wxBOTTOM, 10 );
 
   // Positions
-  wxStaticBox* pos_box = new wxStaticBox( this, -1, "Player positions" );
+  wxStaticBox* pos_box = new wxStaticBox( this, wxID_ANY, "Player positions" );
   wxStaticBoxSizer* pos_sizer =
     new wxStaticBoxSizer( pos_box, wxVERTICAL );
-  invisible = new wxRadioButton( this, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
+  invisible = new wxRadioButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
   invisible->Show( false );
   invisible->SetValue( true );
   wxRadioButton* p1button = new wxRadioButton( this, ID_RADIOBUTTON_P1, noconnstr );
@@ -65,7 +65,7 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
   connectedlist.Append( p4button );
   wxBoxSizer* posmidsizer = new wxBoxSizer( wxHORIZONTAL );
   posmidsizer->Add( p4button, 0, wxALIGN_LEFT );
-  posmidsizer->Add( 10, -1, 1 );
+  posmidsizer->Add( 10, wxID_ANY, 1 );
   posmidsizer->Add( p2button, 0, wxALIGN_RIGHT );
   pos_sizer->Add( p3button, 0, wxALIGN_CENTER | wxBOTTOM, 20 );
   pos_sizer->Add( posmidsizer, 0, wxEXPAND | wxBOTTOM, 20 );
@@ -73,7 +73,7 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
   top_sizer->Add( pos_sizer, 0, wxEXPAND | wxBOTTOM, 10 );
 
   // Chat stuff
-  wxStaticBox* chat_box = new wxStaticBox( this, -1, "Chat" );
+  wxStaticBox* chat_box = new wxStaticBox( this, wxID_ANY, "Chat" );
   chat_box->Enable( false );
   connectedlist.Append( chat_box );
   chat = new ChatPanel( this );

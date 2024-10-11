@@ -21,7 +21,7 @@ ChatPanel::ChatPanel( wxWindow* parent ):
   wxPanel( parent ), has_text( false )
 {
   // Chat window
-  chat_text = new ChatControl( this, -1, "", wxDefaultPosition, wxSize( -1, 100 ), wxTE_READONLY | wxTE_MULTILINE );
+  chat_text = new ChatControl( this, wxID_ANY, "", wxDefaultPosition, wxSize( -1, 100 ), wxTE_READONLY | wxTE_MULTILINE );
   send_text = new wxTextCtrl( this, ID_SENDTEXT, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
   wxButton* send_button = new wxButton( this, ID_SEND, "S&end" );
   wxBoxSizer* send_sizer = new wxBoxSizer( wxHORIZONTAL );
