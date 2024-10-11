@@ -28,7 +28,7 @@ void MyStatusBar::DClick( wxMouseEvent& event )
   wxRect field_area;
   GetFieldRect( 1, field_area );
   Game* game = wxGetApp().GetGame();
-  if( game && field_area.Inside( event.GetPosition() ) ) {
+  if( game && field_area.Contains( event.GetPosition() ) ) {
     wxGetApp().GetFrame()->viewMenu->Check( ID_VIEW_SCORES, true );
     game->DisplayResults();
   }
@@ -57,7 +57,7 @@ END_EVENT_TABLE();
 
 MyFrame::MyFrame():
   wxFrame( NULL, -1, "Sueca", wxDefaultPosition, wxDefaultSize,
-           wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxRESIZE_BOX | wxMAXIMIZE_BOX) ),
+           wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX) ),
   viewscores( false ), score_pos( wxDefaultPosition ),
   viewtrumph( false ), trumph_pos( wxDefaultPosition )
 {

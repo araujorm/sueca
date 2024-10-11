@@ -130,7 +130,7 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
   PrepareDC( destdc );
   wxMemoryDC m_dc;
   m_dc.SelectObject( m_buffer );
-  m_dc.SetBackground( wxBrush( GetBackgroundColour(), wxSOLID ) );
+  m_dc.SetBackground( wxBrush( GetBackgroundColour(), wxBRUSHSTYLE_SOLID ) );
 
   // Update all regions at once
   wxRegion upd;
@@ -140,12 +140,13 @@ void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
     updi++;
   }
   wxRect updrect = upd.GetBox();
-  m_dc.BeginDrawing();
+  //m_dc.BeginDrawing();
   DrawShapes( m_dc, updrect );
   destdc.Blit( updrect.GetX(), updrect.GetY(),
 	       updrect.GetWidth(), updrect.GetHeight(),
 	       & m_dc, updrect.GetX(), updrect.GetY() );
-  m_dc.EndDrawing();
+  //m_dc.EndDrawing();
+  m_dc.SelectObject(wxNullBitmap);
 }
 
 void MyCanvas::OnMouseEvent( wxMouseEvent& event )
@@ -154,7 +155,7 @@ void MyCanvas::OnMouseEvent( wxMouseEvent& event )
   static Card* raised = NULL;
 
   if( event.LeftDClick() && m_trumph &&
-      m_trumph->GetRect().Inside( event.GetPosition() ) ) {
+      m_trumph->GetRect().Contains( event.GetPosition() ) ) {
     wxGetApp().GetFrame()->viewMenu->Check( ID_VIEW_TRUMPH, true );
     wxGetApp().GetGame()->trumphdlg->Show( true );
   }
@@ -205,7 +206,7 @@ void MyCanvas::OnMouseEvent( wxMouseEvent& event )
       if( !under->GetTurned() )
         statusbar->SetStatusText( under->NameStr() );
     }
-    else if( m_trumph && m_trumph->GetRect().Inside( event.GetPosition() ) )
+    else if( m_trumph && m_trumph->GetRect().Contains( event.GetPosition() ) )
       statusbar->SetStatusText( "Trumph: " + m_trumph->GetCardName() );
     else
       statusbar->SetStatusText( "" );

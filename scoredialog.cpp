@@ -19,13 +19,13 @@ ScoreDialog::ScoreDialog( wxWindow* parent, Team* nteam1, Team* nteam2, wxPoint&
   gridsz = new wxFlexGridSizer( 3 );
   AddLine( "", team1->GetP1()->GetName() + "\n" + team1->GetP2()->GetName(),
            team2->GetP1()->GetName() + "\n" + team2->GetP2()->GetName(),
-           wxBOLD, *wxBLACK, wxALIGN_CENTER, &team1text, &team2text );
+           wxFONTWEIGHT_BOLD, *wxBLACK, wxALIGN_CENTER, &team1text, &team2text );
   AddLine( "Victories", wxString::Format( "%hu", team1->GetWon() ),
            wxString::Format( "%hu", team2->GetWon() ),
-           wxBOLD, *wxRED, wxALIGN_RIGHT, &team1won, &team2won );
+           wxFONTWEIGHT_BOLD, *wxRED, wxALIGN_RIGHT, &team1won, &team2won );
   top_sizer = new wxBoxSizer( wxVERTICAL );
   top_sizer->Add( 1, 5 );
-  top_sizer->Add( gridsz, 0, wxLEFT | wxRIGHT | wxADJUST_MINSIZE, 20 );
+  top_sizer->Add( gridsz, 0, wxLEFT | wxRIGHT, 20 );
   top_sizer->Add( 1, 10 );
   top_sizer->Add( new wxButton( this, -1, "Close" ), 0, wxALIGN_CENTER );
   top_sizer->Add( 1, 5 );
@@ -43,7 +43,7 @@ void ScoreDialog::UpdateRoundResults( const wxString& s1, const wxString& s2,
   if( new_round ) {
     new_round = false;
     wxFont fnt( *wxNORMAL_FONT );
-    fnt.SetWeight( wxNORMAL );
+    fnt.SetWeight( wxFONTWEIGHT_NORMAL );
     if( team1points ) {  // Testing one of them should be enough
       team1points->SetFont( fnt );
       team1points->SetForegroundColour( *wxBLACK );
@@ -56,14 +56,15 @@ void ScoreDialog::UpdateRoundResults( const wxString& s1, const wxString& s2,
       while( oldobjs.GetCount() != 3 ) {  // Leave one row of rounds
         StaticTextList::Node *node = oldobjs.GetFirst();
         wxStaticText* child = node->GetData();
-        gridsz->Remove( child );
+        gridsz->Detach( child );
         child->Destroy();
         oldobjs.DeleteNode( node );
       }
+      gridsz->Layout();
       displayed = 1;
     }
     AddLine( wxString::Format( "Round %u", round ),
-             t1points, t2points, wxBOLD, *wxBLUE,
+             t1points, t2points, wxFONTWEIGHT_BOLD, *wxBLUE,
              wxALIGN_RIGHT, &team1points, &team2points, &roundlabel );
     oldobjs.Append( roundlabel );
     oldobjs.Append( team1points );
@@ -109,9 +110,9 @@ void ScoreDialog::AddLine( wxString header, wxString s1, wxString s2,
   wxStaticText *txt2 = new wxStaticText( this, -1, s2, wxDefaultPosition, wxDefaultSize, flags );
   txt2->SetFont( fnt );
   txt2->SetForegroundColour( color );
-  gridsz->Add( txth, 0, wxEXPAND | wxADJUST_MINSIZE | wxRIGHT, 20 );
-  gridsz->Add( txt1, 0, wxEXPAND | wxADJUST_MINSIZE | wxRIGHT, 20 );
-  gridsz->Add( txt2, 0, wxEXPAND | wxADJUST_MINSIZE );
+  gridsz->Add( txth, 0, wxEXPAND | wxRIGHT, 20 );
+  gridsz->Add( txt1, 0, wxEXPAND | wxRIGHT, 20 );
+  gridsz->Add( txt2, 0, wxEXPAND );
   if( stxt1 )
     *stxt1 = txt1;
   if( stxt2 )

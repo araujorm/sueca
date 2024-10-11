@@ -8,6 +8,7 @@ class Card;
 class CardList;
 class Deck;
 
+#include <wx/dc.h>
 #include <wx/bitmap.h>
 #include <wx/string.h>
 #include <wx/list.h>
@@ -85,7 +86,7 @@ private:
   bool m_playable;
   wxBitmap m_bitmap;
   wxPoint m_pos;
-  int blitop;
+  wxRasterOperationMode blitop;
 };
 
 // List of Cards

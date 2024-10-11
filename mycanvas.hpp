@@ -15,6 +15,7 @@ class MyCanvas;
 #define MC_Y_SIZE 450
 #endif
 
+#include <wx/dcclient.h>
 #include <wx/panel.h>
 #include <wx/frame.h>
 #include <wx/dcmemory.h>
