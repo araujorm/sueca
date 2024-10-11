@@ -171,7 +171,7 @@ void RemoteDialog::OnConnect( wxCommandEvent& event )
     // Check IP address
     wxString host = ip_entry->GetValue();
     host.Trim( true );
-    host.Trim( false );  
+    host.Trim( false );
     if( ! host.Len() ) {
       wxMessageBox( "Invalid address.", "Error", wxOK | wxICON_ERROR );
       return;

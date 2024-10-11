@@ -91,7 +91,7 @@ MyFrame::MyFrame():
   SetMenuBar( mymenubar );
 
   MyStatusBar* status = new MyStatusBar( this, -1 );
-  SetStatusBar( status );  
+  SetStatusBar( status );
   status->SetStatusText( "Welcome!" );
 
   main_sizer = new wxBoxSizer( wxVERTICAL );

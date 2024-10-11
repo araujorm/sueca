@@ -74,7 +74,7 @@ public:
   bool HitTest( const wxPoint& pt ) const;
   bool Draw( wxDC& dc );
   wxPoint GetPosition() const { return m_pos; }
-  void SetPosition( const wxPoint& pos ) { m_pos = pos; } 
+  void SetPosition( const wxPoint& pos ) { m_pos = pos; }
   wxRect GetRect() const { return wxRect( m_pos.x, m_pos.y, m_bitmap.GetWidth(), m_bitmap.GetHeight() ); }
   wxBitmap& GetBitmap() const { return (wxBitmap&)m_bitmap; }
   void ColorInvert( bool inverted = true );

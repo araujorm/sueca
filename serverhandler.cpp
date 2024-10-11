@@ -109,7 +109,7 @@ void ServerHandler::OnSocketEvent( wxSocketEvent& event )
   NetServerPlayer* player = (NetServerPlayer*)event.GetClientData();
   ServerDialog* diag = wxGetApp().servdlg;
   switch( event.GetSocketEvent() ) {
-  case wxSOCKET_LOST: 
+  case wxSOCKET_LOST:
     if( player ) {
       // We can't delete the player right now but need to clear client_sockets
       // from the socket

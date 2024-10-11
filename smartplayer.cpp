@@ -9,7 +9,7 @@ SmartPlayer::SmartPlayer( GamePos* gamepos ):
 SmartPlayer::~SmartPlayer()
 {
   if( players )
-    delete players;  
+    delete players;
 }
 
 void SmartPlayer::NewGame( Game* game )
@@ -93,7 +93,7 @@ Card* SmartPlayer::PlayCard( const CardList* played )
     // We are the first to play
     // Start by trying our best non-trumph cards
     for( int thissuit = SUITMIN; thissuit <= SUITMAX; thissuit++ ) {
-      if( thissuit == trumphsuit || 
+      if( thissuit == trumphsuit ||
 	  released[SBOT_LEFT][thissuit] > 1 ||
 	  released[SBOT_RIGHT][thissuit] > 1 ||
 	  n_out[thissuit] > 4 )

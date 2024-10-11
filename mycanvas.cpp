@@ -108,7 +108,7 @@ MyCanvas::MyCanvas( wxFrame* parent, wxWindowID id ):
   m_trumph( NULL ), m_buffer( MC_X_SIZE, MC_Y_SIZE ), fltimer( this ),
   lastclicked( NULL )
 {
-  
+
   for( int i = 0; i < 4; i++ )
     m_names[i] = NULL;
   SetBackgroundColour( wxColour( 0, 128, 0 ) );
@@ -356,8 +356,8 @@ void MyCanvas::MoveCardTo( Card* card, wxPoint destpos, bool raise )
   if( raise ) {
     if( !m_displayList.DeleteObject( card ) )
       return;
-    m_displayList.Insert( card );  
-  } 
+    m_displayList.Insert( card );
+  }
   CardMoveEvent event( card, destpos, wxGetApp().GetGame() );
   AddPendingEvent( event );
 }

@@ -269,7 +269,7 @@ unsigned short Game::CalcWonGames( Team** win )
     team1->SetWonStr( tiedstr );
     team2->SetWonStr( tiedstr );
     *win = NULL;
-    return 0;    
+    return 0;
   }
   Team *winner, *loser;
   if( dif > 0 ) {

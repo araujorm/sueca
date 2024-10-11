@@ -54,7 +54,7 @@ CommandList* GetCommands( wxSocketBase* socket,
       reading = "";
     }
     if( incomplete )
-      reading += tkz.GetNextToken();    
+      reading += tkz.GetNextToken();
   }
   return comlist;
 }

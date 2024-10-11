@@ -24,7 +24,7 @@ public:
 protected:
   friend class ServerHandler;
   wxSocketBase* GetSocket() { return m_socket; }
-  wxString reading;  
+  wxString reading;
 private:
   wxSocketBase* m_socket;
 };

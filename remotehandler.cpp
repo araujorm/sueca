@@ -184,7 +184,7 @@ void RemoteHandler::OnSocketEvent( wxSocketEvent& event )
 	  case RESP_INVMOVE:
 	    wxGetApp().GetFrame()->canvas->InvalidLocalMove();
 	    break;
-	  case RESP_NAME:  // Empty name means player has left 
+	  case RESP_NAME:  // Empty name means player has left
 	    if( diag && args.GetCount() > 2 ) {
 	      diag->SetPosition( args[2], args[1] );
 	      diag->ReLayout();
@@ -205,12 +205,12 @@ void RemoteHandler::OnSocketEvent( wxSocketEvent& event )
 	  if( args.GetCount() != 1 || args[0] != VERSION_STRING ) {
 	    // Different server version
 	    TerminateConnection();
-	    return;	    
+	    return;
 	  }
 	  // Send our name
 	  Send( "name:" + wxGetApp().GetLocalPlayerName() );
 	  m_authenticated = true;
-	}	    
+	}
       }
     }
     break;
