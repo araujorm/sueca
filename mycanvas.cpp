@@ -114,7 +114,7 @@ MyCanvas::MyCanvas( wxFrame* parent, wxWindowID id ):
   SetBackgroundColour( wxColour( 0, 128, 0 ) );
   ClearBackground();
   SetCursor( wxCursor( wxCURSOR_ARROW ) );
-  SetClientSize( MC_X_SIZE, MC_Y_SIZE );
+  SetMinSize( wxSize(MC_X_SIZE, MC_Y_SIZE) );
 }
 
 MyCanvas::~MyCanvas()
