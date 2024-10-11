@@ -65,7 +65,7 @@ ServerDialog::ServerDialog( wxWindow* parent ):
   p3text->Enable( false );
   wxStaticText* p4text = new wxStaticText( this, wxID_ANY, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT );
   p4text->Enable( false );
-  wxBoxSizer* posmidsizer = new wxBoxSizer( wxHORIZONTAL );
+  wxBoxSizer* posmidsizer = new wxBoxSizer( wxVERTICAL );
   posmidsizer->Add( p4text, 0, wxALIGN_LEFT );
   posmidsizer->Add( 10, wxID_ANY, 1 );
   posmidsizer->Add( p2text, 0, wxALIGN_RIGHT );
