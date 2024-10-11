@@ -35,7 +35,7 @@ ServerDialog::ServerDialog( wxWindow* parent ):
   ip_checkbox->SetValue( ip_enabled );
   ip_sizer->Add( ip_checkbox, 0, wxRIGHT | wxALIGN_CENTER, 5 );
   disconnectedlist.Append( ip_checkbox );
-  ip_entry = new wxTextCtrl( this, wxID_ANY, app.bound_ip_address, wxDefaultPosition, wxSize( 100, wxID_ANY ) );
+  ip_entry = new wxTextCtrl( this, wxID_ANY, app.bound_ip_address, wxDefaultPosition, wxSize( 120, wxID_ANY ) );
   ip_entry->Enable( ip_enabled );
   ip_sizer->Add( ip_entry, 0, wxALIGN_CENTER );
   disconnectedlist.Append( ip_entry );
@@ -49,7 +49,7 @@ ServerDialog::ServerDialog( wxWindow* parent ):
   wxStaticText* port_text = new wxStaticText( this, wxID_ANY, "Port");
   port_sizer->Add( port_text, 0, wxRIGHT | wxALIGN_CENTER, 5 );
   disconnectedlist.Append( port_text );
-  port_entry = new wxTextCtrl( this, wxID_ANY, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 50, wxID_ANY ) );
+  port_entry = new wxTextCtrl( this, wxID_ANY, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 60, wxID_ANY ) );
   port_sizer->Add( port_entry, 0, wxALIGN_CENTER );
   disconnectedlist.Append( port_entry );
   top_sizer->Add( port_sizer, 0, wxBOTTOM, 10 );

@@ -31,7 +31,7 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
   wxStaticText* ip_text = new wxStaticText( this, wxID_ANY, "Host address");
   ip_sizer->Add( ip_text, 0, wxRIGHT | wxALIGN_CENTER, 5 );
   disconnectedlist.Append( ip_text );
-  ip_entry = new wxTextCtrl( this, wxID_ANY, app.connect_ip_address, wxDefaultPosition, wxSize( 100, wxID_ANY ) );
+  ip_entry = new wxTextCtrl( this, wxID_ANY, app.connect_ip_address, wxDefaultPosition, wxSize( 120, wxID_ANY ) );
   ip_sizer->Add( ip_entry, 0, wxALIGN_CENTER | wxRIGHT, 10 );
   disconnectedlist.Append( ip_entry );
 
@@ -39,7 +39,7 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
   wxStaticText* port_text = new wxStaticText( this, wxID_ANY, "Port");
   ip_sizer->Add( port_text, 0, wxRIGHT | wxALIGN_CENTER, 5 );
   disconnectedlist.Append( port_text );
-  port_entry = new wxTextCtrl( this, wxID_ANY, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 50, wxID_ANY ) );
+  port_entry = new wxTextCtrl( this, wxID_ANY, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 60, wxID_ANY ) );
   ip_sizer->Add( port_entry, 0, wxALIGN_CENTER );
   disconnectedlist.Append( port_entry );
   top_sizer->Add( ip_sizer, 0, wxBOTTOM, 10 );
