@@ -48,7 +48,7 @@ protected:
   Player* trumphowner;
   Card* trumph;
   Card* played_card;
-  bool plhasnot[3][4];
+  bool plhasnot[3][12];
   unsigned short released[3][4];
   Player* left;
   Player* partner;
