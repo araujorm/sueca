@@ -58,7 +58,7 @@ ServerHandler::~ServerHandler()
 
 bool ServerHandler::StartServer( wxSockAddress& address )
 {
-  wxSocketServer* sock = new wxSocketServer( address );
+  wxSocketServer* sock = new wxSocketServer( address, wxSOCKET_REUSEADDR );
   if( ! sock->Ok() ) {
     sock->Destroy();
     return false;
