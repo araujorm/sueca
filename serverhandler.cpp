@@ -206,7 +206,7 @@ void ServerHandler::OnSocketEvent( wxSocketEvent& event )
 	    Card* card = game->GetDeck().cardmap[args[1]];
 	    // Ignore invalid card strings
 	    if( game && card )
-	      switch( wxGetApp().GetGame()->PlayMove( player, card ) ) {
+	      switch( game->PlayMove( player, card ) ) {
 	      case MOVE_INVALID:
 		SocketPrintln( socket, "invalid" );
 		continue;
