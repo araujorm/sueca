@@ -84,13 +84,15 @@ ServerDialog::ServerDialog( wxWindow* parent ):
   p3text->Enable( false );
   wxStaticText* p4text = new wxStaticText( this, wxID_ANY, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT );
   p4text->Enable( false );
-  wxBoxSizer* posmidsizer = new wxBoxSizer( wxVERTICAL );
-  posmidsizer->Add( p4text, 0, wxALIGN_LEFT );
-  posmidsizer->Add( 10, wxID_ANY, 1 );
-  posmidsizer->Add( p2text, 0, wxALIGN_RIGHT );
-  pos_sizer->Add( p3text, 0, wxALIGN_CENTER | wxBOTTOM, 20 );
-  pos_sizer->Add( posmidsizer, 0, wxEXPAND | wxBOTTOM, 20 );
-  pos_sizer->Add( p1text, 0, wxALIGN_CENTER );
+  wxBoxSizer* posmidsizer = new wxBoxSizer( wxHORIZONTAL );
+  posmidsizer->Add( p4text, 0, wxALIGN_CENTER );
+  posmidsizer->Add( 10, -1, 1, wxEXPAND );
+  posmidsizer->Add( p2text, 0, wxALIGN_CENTER );
+  pos_sizer->Add( p3text, 0, wxALIGN_CENTER);
+  pos_sizer->Add( -1, 10, 1, wxEXPAND );
+  pos_sizer->Add( posmidsizer, 1, wxEXPAND );
+  pos_sizer->Add( -1, 10, 1, wxEXPAND );
+  pos_sizer->Add( p1text, 0, wxALIGN_CENTER);
   top_sizer->Add( pos_sizer, 0, wxEXPAND | wxBOTTOM, 10 );
 
   // Chat stuff
@@ -134,13 +136,9 @@ void ServerDialog::ReLayout()
 {
   for( PosMap::iterator i = positions.begin(); i != positions.end(); i++ ) {
     wxControl* control = i->second->label;
-    wxSize s = control->GetBestSize();
-    control->SetSizeHints( s, s );
+    control->SetSizeHints( -1, -1 );
   }
   main_sizer->Layout();
-  main_sizer->SetSizeHints( this );
-  // TODO: Check why we must call this twice for the window to resize properly
-  // Maybe a bug in wxGTK 2.5.2?
   main_sizer->SetSizeHints( this );
 }
 
