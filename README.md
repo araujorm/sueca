@@ -27,7 +27,7 @@ make -j8
 
 On Linux, to cross-compile for Windows:
 ```
-make -f Makefile.mingw32 -j10
+make -f Makefile.mingw32 -j8
 ```
 
 
