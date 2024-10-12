@@ -119,7 +119,7 @@ void ScoreDialog::AddLine( wxString header, wxString s1, wxString s2,
                            wxStaticText** stxth )
 {
   wxFont fnt( *wxNORMAL_FONT );
-  fnt.SetWeight( fontw );
+  fnt.SetWeight( (enum wxFontWeight)fontw );
   wxStaticText *txth = new wxStaticText( this, wxID_ANY, header, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER );
   txth->SetFont( fnt );
   txth->SetForegroundColour( color );
