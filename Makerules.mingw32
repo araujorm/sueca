@@ -1,0 +1,20 @@
+include Makedefs.mingw32
+
+ # Automatic dependency generation
+sinclude $(DEPS)
+
+sueca.exe: $(OBJS) sueca_private.res
+	$(CXX) -o $@ $^ $(LDFLAGS)
+	$(STRIP) $@
+
+sueca_private.res: sueca_private.rc sueca_resources.rc
+	$(WINDRES) -i sueca_private.rc -I rc -o sueca_private.res -O coff
+
+# Implicit rules
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+%.d: %.cpp
+	set -e; $(CXX) -MM $(CXXFLAGS) $< \
+		| sed 's/\($*\)\.o[ :]*/\1.o $@ : /g' > $@; \
+		[ -s $@ ] || rm -f $@

@@ -1,0 +1,16 @@
+CXX = i686-w64-mingw32-g++
+STRIP = i686-w64-mingw32-strip
+WINDRES = i686-w64-mingw32-windres
+SRCS = main.cpp myframe.cpp cards.cpp mycanvas.cpp game.cpp player.cpp \
+	scoredialog.cpp trumphdialog.cpp prefsdialog.cpp smartplayer.cpp \
+	chatpanel.cpp serverhandler.cpp serverdialog.cpp netserverplayer.cpp \
+	netcommon.cpp remotedialog.cpp remotegame.cpp remotehandler.cpp
+WXCONFIG = /usr/i686-w64-mingw32/sys-root/mingw/bin/wx-config-3.0
+#CXXFLAGS = -g -Wall $(shell $(WXCONFIG) --static --cxxflags)
+CXXFLAGS = -O3 -Wall -fno-rtti -fno-exceptions -Wno-write-strings $(shell $(WXCONFIG) --static --cxxflags)
+LDFLAGS = -static $(shell $(WXCONFIG) --static --libs core,base,net)
+OBJS = $(SRCS:.cpp=.o)
+DEPS = $(SRCS:.cpp=.d)
+
+# If you are having dumb "Mismatch between the program and library build versions" due to g++ ABI version, uncomment the following line and change the ABI version to match the same as the library
+CXXFLAGS += -D__GXX_ABI_VERSION=1018
