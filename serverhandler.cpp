@@ -265,6 +265,7 @@ void ServerHandler::OnSocketEvent( wxSocketEvent& event )
 	    // (Re)send to the clients
 	    ToAll( wxString::Format( "say:%s:%s", who.c_str(), text.c_str() ) );
 	  }
+	  // TODO: chat while in game
 	  break;
 	}
       }

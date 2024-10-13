@@ -233,6 +233,7 @@ void RemoteHandler::OnSocketEvent( wxSocketEvent& event )
 		text += ":" + args[i];
 	      diag->chat->SayInChat( who, text );
 	    }
+	    // TODO: implement chat while in game
 	    break;
 	  }
 	else if( com->com == RESP_FIRST ) {
