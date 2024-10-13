@@ -101,14 +101,18 @@ void Sueca::EndGame()
   }
 }
 
+LocalPlayer* Sueca::GetLocalPlayer()
+{
+  return m_frame->canvas->GetLocalPlayer();
+}
+
 void Sueca::SetLocalPlayerName( const wxString& newname )
 {
   playername = newname;
   // Update on current game
   LocalPlayer* lp;
-  if( m_game && ( lp = m_frame->canvas->GetLocalPlayer() ) ) {
-    lp->SetName( newname.c_str() );
-    m_game->RefreshNames();
+  if( m_game && ( lp = GetLocalPlayer() ) ) {
+    m_game->SetPlayerName( lp, newname );
   }
 }
 

@@ -5,7 +5,8 @@ STRIP = strip
 SRCS = main.cpp myframe.cpp cards.cpp mycanvas.cpp game.cpp player.cpp \
 	scoredialog.cpp trumphdialog.cpp prefsdialog.cpp smartplayer.cpp \
 	chatpanel.cpp serverhandler.cpp serverdialog.cpp netserverplayer.cpp \
-	netcommon.cpp remotedialog.cpp remotegame.cpp remotehandler.cpp
+	netcommon.cpp remotedialog.cpp remotegame.cpp remotehandler.cpp \
+	hostedgame.cpp
 #remotehandler.cpp
 WXRELEASE = $(shell wx-config --release)
 #WXCONFIG = $(WXFLAVOR)-$(WXRELEASE)-config

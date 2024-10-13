@@ -204,11 +204,26 @@ void RemoteHandler::OnSocketEvent( wxSocketEvent& event )
 	    wxGetApp().GetFrame()->canvas->InvalidLocalMove();
 	    break;
 	  case RESP_NAME:  // Empty name means player has left
-	    if( diag && args.GetCount() > 2 ) {
-	      diag->SetPosition( args[2], args[1] );
-	      diag->ReLayout();
+	    if( args.GetCount() > 2 ) {
+	      if( diag ) {
+	        // In lobby
+	        diag->SetPosition( args[2], args[1] );
+	        diag->ReLayout();
+	      }
+	      else if ( game ) {
+	        // In-game
+	        PlayerMap::iterator plit = pmap.find( args[1] );
+	        if( plit == pmap.end() ) {
+		  // Invalid player identifier
+		  TerminateConnection();
+		  return;
+	        }
+		Player* player = plit->second;
+		// Ignore remote attempts to change our name
+		if ( player != wxGetApp().GetLocalPlayer() )
+		  game->SetPlayerName( player, args[2] );
+	      }
 	    }
-	    // TODO: Check if we are in a game
 	    break;
 	  case RESP_SAY:
 	    if( diag && args.GetCount() > 2 ) {

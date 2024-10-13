@@ -17,41 +17,25 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef _REMOTEGAME_HPP_
-#define _REMOTEGAME_HPP_ 1
+#ifndef _HOSTEDGAME_HPP_
+#define _HOSTEDGAME_HPP_ 1
 
 // Forward declarations
-class RemoteGame;
+class HostedGame;
 
 #include "game.hpp"
-#include "remotehandler.hpp"
 
-// Remote game engine class
-class RemoteGame: public Game
+// Hosted game engine class
+class HostedGame: public Game
 {
 public:
-  RemoteGame( LocalPlayer* p1,
-	      HumanPlayer* p2,
-	      HumanPlayer* p3,
-	      HumanPlayer* p4,
-	      MyCanvas *the_canvas,
-	      RemoteHandler* handler );
-  virtual ~RemoteGame();
+  HostedGame( Player* p1,
+	      Player* p2,
+	      Player* p3,
+	      Player* p4,
+	      MyCanvas *the_canvas
+  );
   virtual void SetPlayerName( Player* player, const wxString& newname );
-  // Called by the local player
-  virtual movestatus_t PlayMove( Player *player, Card *card );
-  // These are to be ignored
-  virtual void NewRound() {}
-  virtual void EndTurn() {}
-protected:
-  friend class RemoteHandler;
-  void PlayRemoteMove( Player *player, Card *card );
-  void NewRound( Card* trumph, Player* owner, CardList& localcards );
-  void EndTurn( Player* winner );
-private:
-  RemoteHandler* m_handler;
-  LocalPlayer* localplayer;
-  HumanPlayer* fake_players[3];
 };
 
-#endif // _REMOTEGAME_HPP_
+#endif // _HOSTEDGAME_HPP_

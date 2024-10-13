@@ -101,6 +101,7 @@ public:
   CardList& GetPlayed() const { return (CardList&)m_played; }
   Card* GetTrumph() const { return m_trumph; }
   bool ReplacePlayer( Player* oldplayer, Player* newplayer );
+  virtual void SetPlayerName( Player* player, const wxString& newname );
   void RefreshNames();
   void DisplayResults();
 

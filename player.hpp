@@ -153,6 +153,7 @@ public:
   void Remove( Card* card ) { GetHand().DeleteObject( card ); }
   CardList& GetHand() const { return (CardList&)m_hand; }
   void SetGamePos( GamePos* newpos );
+  GamePos* GetGamePos() const { return m_gamepos; }
   GamePos* GetGamePosCopy() const { return m_gamepos->Clone(); }
 protected:
   GamePos* m_gamepos;

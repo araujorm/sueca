@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <wx/checkbox.h>
 #include <wx/msgdlg.h>
 #include "main.hpp"
+#include "hostedgame.hpp"
 #include <wx/tokenzr.h>
 
 enum { ID_IP_CHECKBOX, ID_LISTEN_BUTTON };
@@ -249,7 +250,7 @@ void ServerDialog::OnBegin( wxCommandEvent& event )
   Player* p3 = GetPlayerForPos( "top" );
   Player* p4 = GetPlayerForPos( "left" );
   Sueca& app = wxGetApp();
-  app.NewGame( new Game( p1, p2, p3, p4, app.GetFrame()->canvas ), p1 );
+  app.NewGame( new HostedGame( p1, p2, p3, p4, app.GetFrame()->canvas ), p1 );
   Done( false );
 }
 

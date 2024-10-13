@@ -93,6 +93,15 @@ void ServerHandler::ToAll( const wxString& msg )
     SocketPrintln( node->GetData(), msg );
 }
 
+void ServerHandler::ToAllExcept( const wxString& msg, wxSocketBase* except )
+{
+  for( SockBaseList::Node* node = client_sockets.GetFirst(); node; node = node->GetNext() ) {
+    wxSocketBase* socket = node->GetData();
+    if ( socket != except )
+      SocketPrintln( socket, msg );
+  }
+}
+
 NetServerPlayer* ServerHandler::NewPlayer( wxSocketBase* socket,
 					   wxString& name )
 {
@@ -148,10 +157,15 @@ void ServerHandler::OnSocketEvent( wxSocketEvent& event )
 	diag->ReLayout();
       }
       Game* game = wxGetApp().GetGame();
-      if( game )
-	game->ReplacePlayer( player, wxGetApp().GetBotPlayer( player->GetGamePosCopy() ) );
-      // Tell other players
-      ToAll( wxString::Format( "name:%s:", player->GetNamePosStr().c_str() ) );
+      if( game ) {
+	Player* replacement = wxGetApp().GetBotPlayer( player->GetGamePosCopy() );
+	game->ReplacePlayer( player, replacement );
+	ToAll( wxString::Format( "name:%s:%s", player->GetNamePosStr().c_str(), replacement->GetName().c_str() ) );
+      }
+      else {
+	// In lobby, so send empty name
+	ToAll( wxString::Format( "name:%s:", player->GetNamePosStr().c_str() ) );
+      }
       delete player;  // Only destroys the socket we have already removed
     }
     break;
@@ -223,16 +237,21 @@ void ServerHandler::OnSocketEvent( wxSocketEvent& event )
 	    wxString& name = args[1];
 	    // Ignore invalid names
 	    if( ValidName( name ) ) {
-	      player->SetName( name );
 	      // Check if we are still on the server creation dialog
 	      Position* pos;
 	      if( diag && ( pos = diag->GetPlayerPosition( player ) ) ) {
-		pos->label->SetLabel( name );
-		diag->ReLayout();
-		wxString& identifier = pos->gpos->GetName();
-		ToAll( wxString::Format( "name:%s:%s", identifier.c_str(), name.c_str() ) );
+	        player->SetName( name );
+	        pos->label->SetLabel( name );
+	        diag->ReLayout();
 	      }
-	      // TODO: Check if we are in the middle of a game
+	      else {
+	        Game* game = wxGetApp().GetGame();
+	        if ( game ) {
+		  game->SetPlayerName( player, name );
+	        }
+              }
+	      // Propagate this player's name change to the other players
+	      ToAllExcept( wxString::Format( "name:%s:%s", player->GetGamePos()->GetName().c_str(), name.c_str() ), socket );
 	    }
 	  }
 	  break;

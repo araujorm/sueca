@@ -389,6 +389,12 @@ bool Game::ReplacePlayer( Player* oldplayer, Player* newplayer )
   return false;
 }
 
+void Game::SetPlayerName( Player* player, const wxString& newname )
+{
+  player->SetName( newname );
+  RefreshNames();
+}
+
 void Game::RefreshNames()
 {
   PlayerIterator* players = GetPlayers();

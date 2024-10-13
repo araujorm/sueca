@@ -119,3 +119,12 @@ void RemoteGame::EndTurn( Player* winner )
   m_played.Clear();
   turns_left--;
 }
+
+void RemoteGame::SetPlayerName( Player* player, const wxString& newname )
+{
+  if ( player == wxGetApp().GetLocalPlayer() ) {
+    // Inform server about our name change
+    m_handler->Send( "name:" + newname );
+  }
+  Game::SetPlayerName( player, newname );
+}

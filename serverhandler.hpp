@@ -53,6 +53,7 @@ public:
   void StopServer();
   void CloseClients();
   void ToAll( const wxString& msg );
+  void ToAllExcept( const wxString& msg, wxSocketBase* except );
   NetServerPlayer* NewPlayer( wxSocketBase* socket, wxString& name );
   void OnSocketEvent( wxSocketEvent& event );
   void OnServerEvent( wxSocketEvent& event );

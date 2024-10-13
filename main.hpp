@@ -65,6 +65,7 @@ public:
   void NewGame( Game* the_game, LocalPlayer* lp );
   void EndGame();
   wxString& GetLocalPlayerName() const { return (wxString&)playername; }
+  LocalPlayer* GetLocalPlayer();
   void SetLocalPlayerName( const wxString& newname );
   unsigned int GetUpdateDelay() const { return update_delay; }
   void SetUpdateDelay( int new_delay ) { update_delay = new_delay; }
