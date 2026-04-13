@@ -48,13 +48,22 @@ protected:
 	Player* trumphowner;
 	Card* trumph;
 	Card* played_card;
-	bool plhasnot[3][12];
+	bool plhasnot[3][4];
 	unsigned short released[3][4];
 	Player* left;
 	Player* partner;
 	Player* right;
 	plindex_t PlayerIndex( Player* player );
 	bool IsOut( int type_id, int suit_id );
+	// Helpers for play decisions
+	Player* CurrentWinner( const CardList* played, Card** best );
+	bool Beats( Card* card, Card* best );
+	Card* LowestBeater( CardList& candidates, Card* best );
+	Card* HighestValue( CardList& candidates );
+	Card* LowestValue( CardList& candidates );
+	Card* LowestNonTrumph();
+	Card* PlayFirst();
+	Card* PlayFollowing( const CardList* played );
 };
 
 #endif // _SMARTPLAYER_HPP_
