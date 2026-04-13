@@ -25,4 +25,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #define VERSION_STRING  SUECA_NAME " version " SUECA_VER
 #define PLAYER_NAME_MAX 32
 
+// Bot difficulty levels
+enum botlevel_t { BOT_DUMB = 0, BOT_SMART, BOT_EXPERT, BOT_RANDOM };
+
 #endif  // _DEFINITIONS_HPP_

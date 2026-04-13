@@ -20,6 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "main.hpp"
 #include "player.hpp"
 #include "smartplayer.hpp"
+#include "expertplayer.hpp"
 #include <wx/config.h>
 #include <wx/utils.h>
 
@@ -44,6 +45,9 @@ bool Sueca::OnInit()
 	config->Read( "Connect IP address", &connect_ip_address, wxEmptyString );
 	config->Read( "Player name", &playername, wxGetUserId() );
 	config->Read( "Update delay", (int*)&update_delay, 3 );
+	int stored_bot_level;
+	config->Read( "Bot level", &stored_bot_level, (int)BOT_SMART );
+	bot_level = (botlevel_t)stored_bot_level;
 	delete config;
 
 	servdlg = NULL;
@@ -74,6 +78,7 @@ void Sueca::PrepareExit()
 	config->Write( "Connect IP address", connect_ip_address );
 	config->Write( "Player name", playername );
 	config->Write( "Update delay", (int)update_delay );
+	config->Write( "Bot level", (int)bot_level );
 	delete config;
 }
 
@@ -97,6 +102,7 @@ void Sueca::EndGame()
 		m_frame->canvas->SetLocalPlayer( NULL );
 		m_game = NULL;
 		m_frame->SetStatusText("", 1);
+		m_frame->UpdateBotLevelStatus();
 		m_frame->Refresh();
 	}
 }
@@ -118,8 +124,17 @@ void Sueca::SetLocalPlayerName( const wxString& newname )
 
 Player* Sueca::GetBotPlayer( GamePos* gamepos )
 {
-	//return new DumbPlayer( gamepos );
-	return new SmartPlayer( gamepos );
+	botlevel_t level = bot_level;
+	if( level == BOT_RANDOM )
+		level = (botlevel_t)( (int)( 3.0 * rand() / ( RAND_MAX + 1.0 ) ) );
+	switch( level ) {
+	case BOT_DUMB:
+		return new DumbPlayer( gamepos );
+	case BOT_EXPERT:
+		return new ExpertPlayer( gamepos );
+	default:
+		return new SmartPlayer( gamepos );
+	}
 }
 
 void Sueca::OnFinishRemoteHandler( FinishRemoteHandlerEvt& event )

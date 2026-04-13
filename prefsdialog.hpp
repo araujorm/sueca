@@ -26,6 +26,7 @@ class PrefsDialog;
 #include <wx/dialog.h>
 #include <wx/textctrl.h>
 #include <wx/slider.h>
+#include <wx/choice.h>
 
 // Dialog with game options
 class PrefsDialog: public wxDialog
@@ -35,6 +36,7 @@ public:
 private:
 	wxTextCtrl* name_entry;
 	wxSlider* delay_entry;
+	wxChoice* bot_level_entry;
 	void OnOk( wxCommandEvent& event );
 	void Done( wxCommandEvent& event );
 	DECLARE_EVENT_TABLE();

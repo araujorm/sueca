@@ -69,6 +69,8 @@ public:
 	void SetLocalPlayerName( const wxString& newname );
 	unsigned int GetUpdateDelay() const { return update_delay; }
 	void SetUpdateDelay( int new_delay ) { update_delay = new_delay; }
+	botlevel_t GetBotLevel() const { return bot_level; }
+	void SetBotLevel( botlevel_t level ) { bot_level = level; }
 	Game* GetGame() const { return m_game; }
 	Player* GetBotPlayer( GamePos* gamepos );
 	void OnFinishRemoteHandler( FinishRemoteHandlerEvt& event );
@@ -76,6 +78,7 @@ private:
 	// Preferences not directly accessible
 	wxString playername;
 	unsigned int update_delay;
+	botlevel_t bot_level;
 
 	Game* m_game;
 	MyFrame* m_frame;

@@ -47,6 +47,19 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	delay_entry = new wxSlider( this, wxID_ANY, wxGetApp().GetUpdateDelay(), 1, 10, wxDefaultPosition, wxSize(100, wxID_ANY), wxSL_HORIZONTAL | wxSL_LABELS | wxSL_AUTOTICKS );
 	delay_sizer->Add( delay_entry, 0, wxALIGN_CENTER );
 
+	// Bot difficulty option
+	wxBoxSizer* bot_sizer = new wxBoxSizer( wxHORIZONTAL );
+	bot_sizer->Add( new wxStaticText( this, wxID_ANY, "Bot difficulty" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
+	wxString bot_choices[] = { "Dumb", "Smart", "Expert", "Mixed" };
+	bot_level_entry = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 4, bot_choices );
+	bot_level_entry->SetSelection( (int)wxGetApp().GetBotLevel() );
+	bot_level_entry->SetToolTip(
+	  "Dumb - plays any valid card, no strategy\n"
+	  "Smart - uses basic strategy and card tracking\n"
+	  "Expert - uses Monte Carlo simulation for best play\n"
+	  "Mixed - each bot gets a random difficulty" );
+	bot_sizer->Add( bot_level_entry, 0, wxALIGN_CENTER );
+
 	// Buttons
 	wxBoxSizer* button_sizer = new wxBoxSizer( wxHORIZONTAL );
 	wxButton* ok_button = new wxButton( this, wxID_OK, "OK" );
@@ -58,6 +71,7 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	wxBoxSizer* top_sizer = new wxBoxSizer( wxVERTICAL );
 	top_sizer->Add( name_sizer, 0, wxBOTTOM, 10 );
 	top_sizer->Add( delay_sizer, 0, wxBOTTOM, 10 );
+	top_sizer->Add( bot_sizer, 0, wxBOTTOM, 10 );
 	top_sizer->Add( button_sizer, 0, wxTOP | wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	// Invisible border
@@ -82,6 +96,14 @@ void PrefsDialog::OnOk( wxCommandEvent& event )
 
 	app.SetLocalPlayerName( newname );
 	app.SetUpdateDelay( delay_entry->GetValue() );
+	botlevel_t newlevel = (botlevel_t)bot_level_entry->GetSelection();
+	if( newlevel != app.GetBotLevel() ) {
+		app.SetBotLevel( newlevel );
+		if( app.GetGame() )
+			wxMessageBox( "Bot difficulty change will take effect\n"
+			  "when you start a new game.",
+			  "Note", wxOK | wxICON_INFORMATION );
+	}
 	Done( event );
 }
 
