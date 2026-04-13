@@ -241,6 +241,13 @@ GNU General Public License for more details.",
 
 void MyFrame::OnClose( wxCloseEvent& event )
 {
+	// Update dialog positions from live dialogs if game is running
+	Game* game = wxGetApp().GetGame();
+	if( game ) {
+		score_pos = game->score->GetPosition();
+		trumph_pos = game->trumphdlg->GetPosition();
+		lasttrick_pos = game->lasttrickdlg->GetPosition();
+	}
 	// Save window positions before closing
 	wxConfig* config = new wxConfig( SUECA_NAME );
 	wxPoint fpos = GetPosition();
@@ -255,6 +262,9 @@ void MyFrame::OnClose( wxCloseEvent& event )
 	config->Write( "Trumph y", trumph_pos.y );
 	config->Write( "Last trick x", lasttrick_pos.x );
 	config->Write( "Last trick y", lasttrick_pos.y );
+	config->Write( "View scores", viewscores );
+	config->Write( "View trumph", viewtrumph );
+	config->Write( "View last trick", viewlasttrick );
 	delete config;
 	Destroy();
 }

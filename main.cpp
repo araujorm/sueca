@@ -68,6 +68,10 @@ bool Sueca::OnInit()
 	config->Read( "Trumph y", &trumph_y, -1 );
 	config->Read( "Last trick x", &lasttrick_x, -1 );
 	config->Read( "Last trick y", &lasttrick_y, -1 );
+	bool view_scores, view_trumph, view_lasttrick;
+	config->Read( "View scores", &view_scores, false );
+	config->Read( "View trumph", &view_trumph, false );
+	config->Read( "View last trick", &view_lasttrick, false );
 	delete config;
 
 	servdlg = NULL;
@@ -83,6 +87,12 @@ bool Sueca::OnInit()
 	if( score_x >= 0 ) m_frame->score_pos = wxPoint( score_x, score_y );
 	if( trumph_x >= 0 ) m_frame->trumph_pos = wxPoint( trumph_x, trumph_y );
 	if( lasttrick_x >= 0 ) m_frame->lasttrick_pos = wxPoint( lasttrick_x, lasttrick_y );
+	m_frame->viewscores = view_scores;
+	m_frame->viewtrumph = view_trumph;
+	m_frame->viewlasttrick = view_lasttrick;
+	m_frame->viewMenu->Check( ID_VIEW_SCORES, view_scores );
+	m_frame->viewMenu->Check( ID_VIEW_TRUMPH, view_trumph );
+	m_frame->viewMenu->Check( ID_VIEW_LASTTRICK, view_lasttrick );
 	m_frame->Show( TRUE );
 	SetTopWindow( m_frame );
 	return TRUE;
