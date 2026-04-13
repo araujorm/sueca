@@ -37,6 +37,7 @@ private:
 	wxTextCtrl* name_entry;
 	wxSlider* delay_entry;
 	wxChoice* bot_level_entry;
+	wxChoice* card_back_entry;
 	void OnOk( wxCommandEvent& event );
 	void Done( wxCommandEvent& event );
 	DECLARE_EVENT_TABLE();

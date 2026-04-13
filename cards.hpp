@@ -58,6 +58,9 @@ private:
 // Helper: load bitmap from embedded PNG data
 wxBitmap BitmapFromPNG( const unsigned char* data, unsigned int len );
 
+// Get card back PNG data by type
+void GetCardBackData( int back, const unsigned char** data, unsigned int* len );
+
 // Card suits
 enum cardsuit_t { CLUBS=0, DIAMONDS, SPADES, HEARTS, UNKNOWN_CARD_SUIT };
 #define SUITMIN CLUBS
@@ -127,6 +130,8 @@ public:
 	~Deck();
 	void Shuffle();
 	wxBitmap& GetFace() const { return (wxBitmap&)m_face; }
+	void SetFace( const unsigned char* data, unsigned int len )
+		{ m_face = BitmapFromPNG( data, len ); }
 private:
 	wxBitmap m_face;
 };

@@ -71,6 +71,8 @@ public:
 	void SetUpdateDelay( int new_delay ) { update_delay = new_delay; }
 	botlevel_t GetBotLevel() const { return bot_level; }
 	void SetBotLevel( botlevel_t level ) { bot_level = level; }
+	cardback_t GetCardBack() const { return card_back; }
+	void SetCardBack( cardback_t back );
 	Game* GetGame() const { return m_game; }
 	Player* GetBotPlayer( GamePos* gamepos );
 	void OnFinishRemoteHandler( FinishRemoteHandlerEvt& event );
@@ -79,6 +81,7 @@ private:
 	wxString playername;
 	unsigned int update_delay;
 	botlevel_t bot_level;
+	cardback_t card_back;
 
 	Game* m_game;
 	MyFrame* m_frame;

@@ -23,6 +23,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <wx/dcmemory.h>
 #include <wx/mstream.h>
 #include <wx/image.h>
+#include "main.hpp"
 
 #include <wx/listimpl.cpp>
 WX_DEFINE_LIST( CardList );
@@ -110,6 +111,7 @@ static CardType typeAce( ACE, "Ace", "A", 11 );
 #include "png/hearts.h"
 #include "png/spades.h"
 #include "png/b1fv.h"
+#include "png/b2fv.h"
 #include "png/c1.h"
 #include "png/c2.h"
 #include "png/c3.h"
@@ -151,6 +153,19 @@ static CardType typeAce( ACE, "Ace", "A", 11 );
 #include "png/sk.h"
 #include "png/sq.h"
 
+// Get card back PNG data by type
+void GetCardBackData( int back, const unsigned char** data, unsigned int* len )
+{
+	if( back == CARDBACK_RED ) {
+		*data = b2fv;
+		*len = b2fv_len;
+	}
+	else {
+		*data = b1fv;
+		*len = b1fv_len;
+	}
+}
+
 // Permanent card suits
 class SuitNul: public CardSuit
 {
@@ -174,14 +189,14 @@ public: SuitSpades(): CardSuit ( SPADES, "Spades", spades, spades_len ) {}
 };
 
 // Deck implementation
-#define DECK_FACE_DATA b1fv
-#define DECK_FACE_LEN b1fv_len
-
-Deck::Deck():
-	m_face( BitmapFromPNG( DECK_FACE_DATA, DECK_FACE_LEN ) )
+Deck::Deck()
 {
+	const unsigned char* face_data;
+	unsigned int face_len;
+	GetCardBackData( wxGetApp().GetCardBack(), &face_data, &face_len );
+	m_face = BitmapFromPNG( face_data, face_len );
 	SuitNul nulsuit;
-	nulcard = new Card( this, typeNul, nulsuit, DECK_FACE_DATA, DECK_FACE_LEN );
+	nulcard = new Card( this, typeNul, nulsuit, face_data, face_len );
 	CardSuit suits[] = {
 		SuitHearts(),
 		SuitClubs(),

@@ -28,4 +28,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 // Bot difficulty levels
 enum botlevel_t { BOT_DUMB = 0, BOT_SMART, BOT_EXPERT, BOT_RANDOM };
 
+// Card back designs
+enum cardback_t { CARDBACK_BLUE = 0, CARDBACK_RED };
+
 #endif  // _DEFINITIONS_HPP_

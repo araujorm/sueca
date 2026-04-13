@@ -60,6 +60,14 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	  "Mixed - each bot gets a random difficulty" );
 	bot_sizer->Add( bot_level_entry, 0, wxALIGN_CENTER );
 
+	// Card back option
+	wxBoxSizer* back_sizer = new wxBoxSizer( wxHORIZONTAL );
+	back_sizer->Add( new wxStaticText( this, wxID_ANY, "Card back" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
+	wxString back_choices[] = { "Blue", "Red" };
+	card_back_entry = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 2, back_choices );
+	card_back_entry->SetSelection( (int)wxGetApp().GetCardBack() );
+	back_sizer->Add( card_back_entry, 0, wxALIGN_CENTER );
+
 	// Buttons
 	wxBoxSizer* button_sizer = new wxBoxSizer( wxHORIZONTAL );
 	wxButton* ok_button = new wxButton( this, wxID_OK, "OK" );
@@ -72,6 +80,7 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	top_sizer->Add( name_sizer, 0, wxBOTTOM, 10 );
 	top_sizer->Add( delay_sizer, 0, wxBOTTOM, 10 );
 	top_sizer->Add( bot_sizer, 0, wxBOTTOM, 10 );
+	top_sizer->Add( back_sizer, 0, wxBOTTOM, 10 );
 	top_sizer->Add( button_sizer, 0, wxTOP | wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	// Invisible border
@@ -104,6 +113,7 @@ void PrefsDialog::OnOk( wxCommandEvent& event )
 			  "when you start a new game.",
 			  "Note", wxOK | wxICON_INFORMATION );
 	}
+	app.SetCardBack( (cardback_t)card_back_entry->GetSelection() );
 	Done( event );
 }
 

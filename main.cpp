@@ -51,6 +51,9 @@ bool Sueca::OnInit()
 	int stored_bot_level;
 	config->Read( "Bot level", &stored_bot_level, (int)BOT_SMART );
 	bot_level = (botlevel_t)stored_bot_level;
+	int stored_card_back;
+	config->Read( "Card back", &stored_card_back, (int)CARDBACK_BLUE );
+	card_back = (cardback_t)stored_card_back;
 	delete config;
 
 	servdlg = NULL;
@@ -82,6 +85,7 @@ void Sueca::PrepareExit()
 	config->Write( "Player name", playername );
 	config->Write( "Update delay", (int)update_delay );
 	config->Write( "Bot level", (int)bot_level );
+	config->Write( "Card back", (int)card_back );
 	delete config;
 }
 
@@ -139,6 +143,18 @@ Player* Sueca::GetBotPlayer( GamePos* gamepos )
 		return new ExpertPlayer( gamepos );
 	default:
 		return new SmartPlayer( gamepos );
+	}
+}
+
+void Sueca::SetCardBack( cardback_t back )
+{
+	card_back = back;
+	if( m_game ) {
+		const unsigned char* data;
+		unsigned int len;
+		GetCardBackData( back, &data, &len );
+		m_game->GetDeck().SetFace( data, len );
+		m_frame->canvas->Refresh();
 	}
 }
 
