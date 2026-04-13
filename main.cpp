@@ -108,6 +108,7 @@ void Sueca::EndGame()
 		m_frame->viewMenu->Enable( ID_VIEW_SCORES, false );
 		m_frame->viewMenu->Enable( ID_VIEW_LASTTRICK, false );
 		m_frame->gameMenu->Enable( wxID_CLOSE, false );
+		m_frame->canvas->ClearActivePlayer();
 		m_frame->canvas->SetLocalPlayer( NULL );
 		m_game = NULL;
 		m_frame->SetStatusText("", 1);
