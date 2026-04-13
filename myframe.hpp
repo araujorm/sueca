@@ -56,6 +56,7 @@ public:
 	void Help( wxCommandEvent& );
 	void About( wxCommandEvent& );
 	void OnClose( wxCloseEvent& );
+	void UpdateBotLevelStatus();
 private:
 	bool ProceedWithNewGame();
 	DECLARE_EVENT_TABLE();

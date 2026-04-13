@@ -112,6 +112,7 @@ MyFrame::MyFrame():
 	MyStatusBar* status = new MyStatusBar( this, wxID_ANY );
 	SetStatusBar( status );
 	status->SetStatusText( "Welcome!" );
+	UpdateBotLevelStatus();
 
 	main_sizer = new wxBoxSizer( wxVERTICAL );
 	canvas = new MyCanvas( this, wxID_ANY );
@@ -169,6 +170,7 @@ void MyFrame::OnEndGame( wxCommandEvent& event )
 void MyFrame::OnGamePrefs( wxCommandEvent& event )
 {
 	PrefsDialog( this ).ShowModal();
+	UpdateBotLevelStatus();
 }
 
 void MyFrame::OnViewScores( wxCommandEvent& event )
@@ -229,4 +231,13 @@ bool MyFrame::ProceedWithNewGame()
 	                 "Game in progress", wxYES_NO, this ) == wxNO )
 		return false;
 	return true;
+}
+
+static const char* bot_level_names[] = { "Dumb", "Smart", "Expert", "Mixed" };
+
+void MyFrame::UpdateBotLevelStatus()
+{
+	if( !wxGetApp().GetGame() )
+		SetStatusText( wxString::Format( "Bot: %s",
+		  bot_level_names[wxGetApp().GetBotLevel()] ), 1 );
 }
