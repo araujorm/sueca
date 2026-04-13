@@ -25,7 +25,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 WX_DEFINE_LIST( SockBaseList );
 WX_DEFINE_LIST( CommandList );
 
-char* freestr = "<free>";
+const char* freestr = "<free>";
 
 void SocketPrint( wxSocketBase* socket, const wxString& str )
 {

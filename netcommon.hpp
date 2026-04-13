@@ -40,7 +40,7 @@ public:
 		com( com_id ), args( argv ) {}
 };
 
-extern char* freestr;
+extern const char* freestr;
 
 WX_DECLARE_LIST( wxSocketBase, SockBaseList );
 WX_DECLARE_LIST( Command, CommandList );
