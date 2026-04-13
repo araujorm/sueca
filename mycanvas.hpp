@@ -123,6 +123,7 @@ public:
 	~MyCanvas();
 	void OnPaint( wxPaintEvent& event );
 	void OnEraseBackground( wxEraseEvent& event ) {}
+	void OnSize( wxSizeEvent& event );
 	void OnMouseEvent( wxMouseEvent& event );
 	void DrawShapes( wxDC& dc, const wxRect& region );
 	// Don't free the cards as they belong to a Deck
@@ -153,6 +154,9 @@ private:
 	wxBitmap m_buffer;
 	CardFlashTimer fltimer;
 	Card* lastclicked;
+	double m_scale;
+	int m_offset_x;
+	int m_offset_y;
 	wxBitmap m_arrows[4];
 	wxPoint m_arrow_pos;
 	int m_arrow_dir;

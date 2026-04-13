@@ -79,7 +79,7 @@ END_EVENT_TABLE();
 
 MyFrame::MyFrame():
 	wxFrame( NULL, wxID_ANY, "Sueca", wxDefaultPosition, wxDefaultSize,
-	         wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX) ),
+	         wxDEFAULT_FRAME_STYLE ),
 	viewscores( false ), score_pos( wxDefaultPosition ),
 	viewtrumph( false ), trumph_pos( wxDefaultPosition ),
 	viewlasttrick( false ), lasttrick_pos( wxDefaultPosition )
@@ -128,7 +128,7 @@ MyFrame::MyFrame():
 
 	main_sizer = new wxBoxSizer( wxVERTICAL );
 	canvas = new MyCanvas( this, wxID_ANY );
-	main_sizer->Add( canvas );
+	main_sizer->Add( canvas, 1, wxEXPAND );
 	SetSizer( main_sizer );
 	main_sizer->SetSizeHints( this );
 

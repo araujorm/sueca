@@ -107,7 +107,7 @@ void CardFlashTimer::Notify()
 		Card* card = m_canvas->flashing;
 		m_canvas->flashing = NULL;
 		card->ColorInvert( false );
-		m_canvas->RefreshRect( card->GetRect() );
+		m_canvas->Refresh();
 		m_canvas->Update();
 	}
 }
@@ -116,6 +116,7 @@ void CardFlashTimer::Notify()
 BEGIN_EVENT_TABLE( MyCanvas, wxPanel )
 	EVT_PAINT( MyCanvas::OnPaint )
 	EVT_ERASE_BACKGROUND( MyCanvas::OnEraseBackground )  // Prevent flickering
+	EVT_SIZE( MyCanvas::OnSize )
 	EVT_MOUSE_EVENTS( MyCanvas::OnMouseEvent )
 	// Card move events
 	EVT_CARD_MOVE( MyCanvas::OnCardMoveEvent )
@@ -128,7 +129,8 @@ MyCanvas::MyCanvas( wxFrame* parent, wxWindowID id ):
 	wxPanel( parent, id, wxDefaultPosition, wxDefaultSize, wxSUNKEN_BORDER ),
 	flashing( NULL ), statusbar( parent->GetStatusBar() ), m_localplayer( NULL ),
 	m_trumph( NULL ), m_buffer( MC_X_SIZE, MC_Y_SIZE ), fltimer( this ),
-	lastclicked( NULL ), m_arrow_dir( 0 ), m_arrow_visible( false )
+	lastclicked( NULL ), m_scale( 1.0 ), m_offset_x( 0 ), m_offset_y( 0 ),
+	m_arrow_dir( 0 ), m_arrow_visible( false )
 {
 
 	for( int i = 0; i < 4; i++ )
@@ -148,6 +150,23 @@ MyCanvas::MyCanvas( wxFrame* parent, wxWindowID id ):
 	m_arrows[3] = wxBitmap( arrow_img.Rotate90( false ) );         // down (P4, CCW)
 }
 
+void MyCanvas::OnSize( wxSizeEvent& event )
+{
+	wxSize sz = event.GetSize();
+	double sx = (double)sz.GetWidth() / MC_X_SIZE;
+	double sy = (double)sz.GetHeight() / MC_Y_SIZE;
+	m_scale = ( sx < sy ) ? sx : sy;
+	if( m_scale < 1.0 ) m_scale = 1.0;
+	int scaled_w = (int)( MC_X_SIZE * m_scale );
+	int scaled_h = (int)( MC_Y_SIZE * m_scale );
+	m_offset_x = ( sz.GetWidth() - scaled_w ) / 2;
+	m_offset_y = ( sz.GetHeight() - scaled_h ) / 2;
+	// Recreate buffer at physical size
+	m_buffer = wxBitmap( scaled_w, scaled_h );
+	Refresh();
+	event.Skip();
+}
+
 MyCanvas::~MyCanvas()
 {
 	ClearCards();
@@ -158,26 +177,28 @@ MyCanvas::~MyCanvas()
 void MyCanvas::OnPaint( wxPaintEvent &WXUNUSED(event) )
 {
 	wxPaintDC destdc( this );
-	PrepareDC( destdc );
-	wxMemoryDC m_dc;
-	m_dc.SelectObject( m_buffer );
-	m_dc.SetBackground( wxBrush( GetBackgroundColour(), wxBRUSHSTYLE_SOLID ) );
 
-	// Update all regions at once
-	wxRegion upd;
-	wxRegionIterator updi( GetUpdateRegion() );
-	while( updi ) {
-		upd.Union( updi.GetRect() );
-		updi++;
-	}
-	wxRect updrect = upd.GetBox();
-	//m_dc.BeginDrawing();
-	DrawShapes( m_dc, updrect );
-	destdc.Blit( updrect.GetX(), updrect.GetY(),
-	             updrect.GetWidth(), updrect.GetHeight(),
-	             & m_dc, updrect.GetX(), updrect.GetY() );
-	//m_dc.EndDrawing();
-	m_dc.SelectObject(wxNullBitmap);
+	// Draw everything to the physical-size buffer with scaling
+	wxMemoryDC bufdc;
+	bufdc.SelectObject( m_buffer );
+	bufdc.SetUserScale( m_scale, m_scale );
+	bufdc.SetBackground( wxBrush( GetBackgroundColour(), wxBRUSHSTYLE_SOLID ) );
+	wxRect fullrect( 0, 0, MC_X_SIZE, MC_Y_SIZE );
+	DrawShapes( bufdc, fullrect );
+	bufdc.SetUserScale( 1.0, 1.0 );
+	bufdc.SelectObject( wxNullBitmap );
+
+	// Clear the canvas background (for areas outside the scaled content)
+	destdc.SetBackground( wxBrush( GetBackgroundColour(), wxBRUSHSTYLE_SOLID ) );
+	destdc.Clear();
+
+	// Blit the buffer 1:1 to the canvas
+	int dest_w = (int)( MC_X_SIZE * m_scale );
+	int dest_h = (int)( MC_Y_SIZE * m_scale );
+	wxMemoryDC srcdc;
+	srcdc.SelectObject( m_buffer );
+	destdc.Blit( m_offset_x, m_offset_y, dest_w, dest_h, &srcdc, 0, 0 );
+	srcdc.SelectObject( wxNullBitmap );
 }
 
 void MyCanvas::OnMouseEvent( wxMouseEvent& event )
@@ -185,13 +206,17 @@ void MyCanvas::OnMouseEvent( wxMouseEvent& event )
 	static int pos;
 	static Card* raised = NULL;
 
+	// Convert physical mouse coordinates to logical
+	wxPoint lpt( (int)( ( event.GetX() - m_offset_x ) / m_scale ),
+	       (int)( ( event.GetY() - m_offset_y ) / m_scale ) );
+
 	if( event.LeftDClick() && m_trumph &&
-	    m_trumph->GetRect().Contains( event.GetPosition() ) ) {
+	    m_trumph->GetRect().Contains( lpt ) ) {
 		wxGetApp().GetFrame()->viewMenu->Check( ID_VIEW_TRUMPH, true );
 		wxGetApp().GetGame()->trumphdlg->Show( true );
 	}
 	else if( event.LeftDown() && m_localplayer ) {
-		Card *playcard = FindCard( event.GetPosition(), &pos );
+		Card *playcard = FindCard( lpt, &pos );
 		if( playcard && playcard->IsPlayable() )
 			switch( wxGetApp().GetGame()->PlayMove( m_localplayer, playcard ) ) {
 			case MOVE_TURN:
@@ -210,7 +235,7 @@ void MyCanvas::OnMouseEvent( wxMouseEvent& event )
 	}
 	if( event.RightDown() ) {
 		// Neat efect of raising a playable card
-		raised = FindCard( event.GetPosition(), &pos );
+		raised = FindCard( lpt, &pos );
 		if( raised ) {
 			if ( raised->GetTurned() || !raised->IsPlayable() )
 				raised = NULL;
@@ -218,7 +243,7 @@ void MyCanvas::OnMouseEvent( wxMouseEvent& event )
 				CaptureMouse();
 				m_displayList.DeleteObject( raised );
 				m_displayList.Insert( raised );
-				RefreshRect( raised->GetRect() );
+				Refresh();
 			}
 		}
 	}
@@ -227,17 +252,17 @@ void MyCanvas::OnMouseEvent( wxMouseEvent& event )
 		ReleaseMouse();
 		m_displayList.DeleteObject( raised );
 		m_displayList.Insert( pos, raised );
-		RefreshRect( raised->GetRect() );
+		Refresh();
 		raised = NULL;
 	}
 	else if( event.Moving() && !event.RightIsDown() ) {
 		// Display visible card names on status bar
-		Card* under = FindCard( event.GetPosition(), &pos );
+		Card* under = FindCard( lpt, &pos );
 		if( under ) {
 			if( !under->GetTurned() )
 				statusbar->SetStatusText( under->NameStr() );
 		}
-		else if( m_trumph && m_trumph->GetRect().Contains( event.GetPosition() ) )
+		else if( m_trumph && m_trumph->GetRect().Contains( lpt ) )
 			statusbar->SetStatusText( "Trumph: " + m_trumph->GetCardName() );
 		else
 			statusbar->SetStatusText( "" );
@@ -313,43 +338,40 @@ void MyCanvas::Add( Card* crd, int x, int y, bool turned ) {
 	crd->SetTurned( turned );
 	crd->SetPosition( wxPoint( x, y ) );
 	GetDisplayList().Insert( crd );
-	RefreshRect( crd->GetRect() );
+	Refresh();
 }
 
 void MyCanvas::Remove( Card* crd, bool update )
 {
-	wxRect updrect = crd->GetRect();
 	m_displayList.DeleteObject( crd );
 	if( update )
-		RefreshRect( updrect );
+		Refresh();
 }
 
 void MyCanvas::SetNameLabel( int playerno, Player* player )
 {
 	if( m_names[playerno] ) {
-		wxRect updrect = m_names[playerno]->GetRect();
 		delete m_names[playerno];
 		m_names[playerno] = NULL;
-		RefreshRect( updrect );
+		Refresh();
 	}
 	wxClientDC dc( this );
 	m_names[playerno] = new NameLabel( player, dc );
-	RefreshRect( m_names[playerno]->GetRect() );
+	Refresh();
 }
 
 void MyCanvas::SetTrumphLabel( Player* player, Card* card )
 {
 	if( m_trumph ) {
-		wxRect updrect = m_trumph->GetRect();
 		delete m_trumph;
 		m_trumph = NULL;
-		RefreshRect( updrect );
+		Refresh();
 	}
 	else
 		wxGetApp().GetFrame()->viewMenu->Enable( ID_VIEW_TRUMPH, true );
 	wxClientDC dc( this );
 	m_trumph = new TrumphLabel( player, card, dc );
-	RefreshRect( m_trumph->GetRect() );
+	Refresh();
 }
 
 void MyCanvas::SetActivePlayer( Player* player )
@@ -358,7 +380,7 @@ void MyCanvas::SetActivePlayer( Player* player )
 	if( m_arrow_visible ) {
 		wxSize sz( m_arrows[m_arrow_dir].GetWidth(),
 		           m_arrows[m_arrow_dir].GetHeight() );
-		RefreshRect( wxRect( m_arrow_pos, sz ) );
+		Refresh();
 	}
 	if( !player ) {
 		m_arrow_visible = false;
@@ -370,7 +392,7 @@ void MyCanvas::SetActivePlayer( Player* player )
 	              m_arrows[m_arrow_dir].GetHeight() );
 	m_arrow_pos = player->GetArrowPos( arrsz );
 	m_arrow_visible = true;
-	RefreshRect( wxRect( m_arrow_pos, arrsz ) );
+	Refresh();
 }
 
 void MyCanvas::ClearActivePlayer()
@@ -400,7 +422,7 @@ void MyCanvas::OnCardMoveEvent( CardMoveEvent& event )
 	if( oldpos != newpos ) {
 		event.card->SetPosition( newpos );
 		update_reg.Union( event.card->GetRect() );
-		RefreshRect( update_reg.GetBox() );
+		Refresh();
 		// Update all moving cards at once
 		if( ++event.moved >= event.inst ) {
 			unsigned int speed = wxGetApp().GetUpdateDelay();
@@ -436,7 +458,7 @@ void MyCanvas::FlashCard( Card* card )
 		flashing = card;
 		card->ColorInvert( true );
 		if( fltimer.Start( 250, wxTIMER_ONE_SHOT ) ) {
-			RefreshRect( card->GetRect() );
+			Refresh();
 			Update();
 		}
 		else {
