@@ -1,6 +1,6 @@
 /*
 sueca - An implementation of the Portuguese game "Sueca" in C++ and wxWidgets
-Copyright (C) 2003-2024 Rodrigo Araujo
+Copyright (C) 2003-2026 Rodrigo Araujo
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -200,7 +200,7 @@ void MyFrame::Help( wxCommandEvent& event )
 void MyFrame::About( wxCommandEvent& event )
 {
 	wxMessageDialog md( this, VERSION_STRING "\n\
-(C) 2003-2024 Rodrigo Araujo\n\
+(C) 2003-2026 Rodrigo Araujo\n\
 Card graphics by jfitz technologies - http://www.jfitz.com/\n\
 \n\
 This program is free software; you can redistribute it and/or modify\n\

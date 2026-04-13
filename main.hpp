@@ -1,6 +1,6 @@
 /*
 sueca - An implementation of the Portuguese game "Sueca" in C++ and wxWidgets
-Copyright (C) 2003-2024 Rodrigo Araujo
+Copyright (C) 2003-2026 Rodrigo Araujo
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
