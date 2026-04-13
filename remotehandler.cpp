@@ -247,6 +247,7 @@ void RemoteHandler::OnSocketEvent( wxSocketEvent& event )
 					m_authenticated = true;
 				}
 			}
+			delete comlist;
 		}
 		break;
 	default:

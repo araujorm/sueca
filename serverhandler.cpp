@@ -185,6 +185,7 @@ void ServerHandler::OnSocketEvent( wxSocketEvent& event )
 					}
 					// Either we are full or we have a clown here ;)
 					socket->Destroy();
+					delete comlist;
 					return;
 				}
 				switch( com->com ) {
@@ -274,6 +275,7 @@ void ServerHandler::OnSocketEvent( wxSocketEvent& event )
 					break;
 				}
 			}
+			delete comlist;
 		}
 		break;
 	default:
