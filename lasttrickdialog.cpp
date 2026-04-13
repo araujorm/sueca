@@ -67,17 +67,17 @@ void TrickPanel::SetCard( int pos, Card* card, const wxString& name,
 void TrickPanel::RecalcSize()
 {
 	wxClientDC dc( this );
-	dc.SetFont( *wxSMALL_FONT );
+	dc.SetFont( *wxNORMAL_FONT );
 
-	// Measure lateral name widths
-	wxCoord left_w = 0, right_w = 0, tw, th;
-	if( m_names[3].Length() > 0 ) {
-		dc.GetTextExtent( m_names[3], &tw, &th );
-		left_w = tw;
-	}
-	if( m_names[1].Length() > 0 ) {
-		dc.GetTextExtent( m_names[1], &tw, &th );
-		right_w = tw;
+	// Measure text height and lateral name widths
+	wxCoord left_w = 0, right_w = 0, text_h = 0, tw, th;
+	for( int i = 0; i < 4; i++ ) {
+		if( m_names[i].Length() > 0 ) {
+			dc.GetTextExtent( m_names[i], &tw, &th );
+			if( th > text_h ) text_h = th;
+			if( i == 3 ) left_w = tw;
+			if( i == 1 ) right_w = tw;
+		}
 	}
 
 	// Panel width: left name + gap + card cross + gap + right name + margins
@@ -94,7 +94,12 @@ void TrickPanel::RecalcSize()
 		}
 	}
 
-	wxSize sz( panel_w, LT_PANEL_H );
+	// Panel height: top name + gap + card cross + gap + bottom name + margins
+	int cross_h = LT_CARD_H * 2 + LT_GAP * 2;
+	int panel_h = LT_MIN_MARGIN + text_h + LT_NAME_GAP
+	              + cross_h + LT_NAME_GAP + text_h + LT_MIN_MARGIN;
+
+	wxSize sz( panel_w, panel_h );
 	SetMinSize( sz );
 	SetMaxSize( sz );
 	SetSize( sz );
@@ -114,7 +119,7 @@ void TrickPanel::OnPaint( wxPaintEvent& event )
 		wxPoint( cx - LT_GAP - LT_CARD_W, cy - LT_CARD_H / 2 )    // left
 	};
 
-	dc.SetFont( *wxSMALL_FONT );
+	dc.SetFont( *wxNORMAL_FONT );
 
 	for( int i = 0; i < 4; i++ ) {
 		if( !m_cards[i] )
@@ -158,7 +163,7 @@ void TrickPanel::OnPaint( wxPaintEvent& event )
 		}
 		else {
 			dc.SetTextForeground( *wxBLACK );
-			dc.SetFont( *wxSMALL_FONT );
+			dc.SetFont( *wxNORMAL_FONT );
 		}
 		dc.DrawText( m_names[i], namepos.x, namepos.y );
 	}
