@@ -217,9 +217,14 @@ void ServerHandler::OnSocketEvent( wxSocketEvent& event )
 				case COM_PLAY:
 					if( args.GetCount() > 1 ) {
 						Game* game = wxGetApp().GetGame();
-						Card* card = game->GetDeck().cardmap[args[1]];
+						if( !game )
+							break;
+						CardMap::iterator it = game->GetDeck().cardmap.find( args[1] );
+						if( it == game->GetDeck().cardmap.end() )
+							break;
+						Card* card = it->second;
 						// Ignore invalid card strings
-						if( game && card )
+						if( card )
 							switch( game->PlayMove( player, card ) ) {
 							case MOVE_INVALID:
 								SocketPrintln( socket, "invalid" );
