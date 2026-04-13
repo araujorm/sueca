@@ -46,7 +46,9 @@ CommandList* GetCommands( wxSocketBase* socket,
 	wxUint32 count;
 	char buf[1024];
 	// Get several lines
-	while( ( count = socket->Read( buf, sizeof( buf ) - 1 ).LastCount() ) &&
+	int total_commands = 0;
+	while( total_commands < 100 &&
+	       ( count = socket->Read( buf, sizeof( buf ) - 1 ).LastCount() ) &&
 	       ! socket->Error() ) {
 		buf[count] = 0;
 		bool incomplete = buf[count - 1] == '\n' ? false : true;
@@ -68,12 +70,16 @@ CommandList* GetCommands( wxSocketBase* socket,
 					while( argtkz.HasMoreTokens() )
 						arguments.Add( argtkz.GetNextToken() );
 					comlist->Append( new Command( it->second, arguments ) );
+					total_commands++;
 				}
 			}
 			reading = "";
 		}
-		if( incomplete )
+		if( incomplete ) {
 			reading += tkz.GetNextToken();
+			if( reading.Length() > 4096 )
+				reading = "";
+		}
 	}
 	return comlist;
 }
