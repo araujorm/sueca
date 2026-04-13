@@ -28,7 +28,7 @@ class MyFrame;
 #include <wx/menu.h>
 #include "mycanvas.hpp"
 
-enum { ID_GAME_PREFERENCES, ID_HOST_GAME, ID_CONNECT, ID_VIEW_SCORES, ID_VIEW_TRUMPH };
+enum { ID_GAME_PREFERENCES, ID_HOST_GAME, ID_CONNECT, ID_VIEW_SCORES, ID_VIEW_TRUMPH, ID_VIEW_LASTTRICK };
 
 // Main window
 class MyFrame: public wxFrame
@@ -39,6 +39,8 @@ public:
 	wxPoint score_pos;
 	bool viewtrumph;
 	wxPoint trumph_pos;
+	bool viewlasttrick;
+	wxPoint lasttrick_pos;
 	wxMenu* gameMenu;
 	wxMenu* viewMenu;
 	MyCanvas* canvas;
@@ -53,6 +55,7 @@ public:
 	void OnExit( wxCommandEvent& ) { Close(); }
 	void OnViewScores( wxCommandEvent& );
 	void OnViewTrumph( wxCommandEvent& );
+	void OnViewLastTrick( wxCommandEvent& );
 	void Help( wxCommandEvent& );
 	void About( wxCommandEvent& );
 	void OnClose( wxCloseEvent& );

@@ -63,6 +63,7 @@ BEGIN_EVENT_TABLE( MyFrame, wxFrame )
 	EVT_MENU( wxID_EXIT, MyFrame::OnExit )
 	EVT_MENU( ID_VIEW_SCORES, MyFrame::OnViewScores )
 	EVT_MENU( ID_VIEW_TRUMPH, MyFrame::OnViewTrumph )
+	EVT_MENU( ID_VIEW_LASTTRICK, MyFrame::OnViewLastTrick )
 	EVT_MENU( wxID_HELP_CONTENTS, MyFrame::Help )
 	EVT_MENU( wxID_ABOUT, MyFrame::About )
 	EVT_CLOSE( MyFrame::OnClose )
@@ -78,7 +79,8 @@ MyFrame::MyFrame():
 	wxFrame( NULL, wxID_ANY, "Sueca", wxDefaultPosition, wxDefaultSize,
 	         wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX) ),
 	viewscores( false ), score_pos( wxDefaultPosition ),
-	viewtrumph( false ), trumph_pos( wxDefaultPosition )
+	viewtrumph( false ), trumph_pos( wxDefaultPosition ),
+	viewlasttrick( false ), lasttrick_pos( wxDefaultPosition )
 {
 	SetIcon( wxICON( icon32 ) );
 
@@ -98,6 +100,8 @@ MyFrame::MyFrame():
 	viewMenu->Enable( ID_VIEW_SCORES, false );
 	viewMenu->AppendCheckItem( ID_VIEW_TRUMPH, "&Trumph\tCtrl-T", "Show current trumph card" );
 	viewMenu->Enable( ID_VIEW_TRUMPH, false );
+	viewMenu->AppendCheckItem( ID_VIEW_LASTTRICK, "&Last Trick\tCtrl-L", "Show last completed trick" );
+	viewMenu->Enable( ID_VIEW_LASTTRICK, false );
 
 	wxMenu* helpMenu = new wxMenu();
 	helpMenu->Append( wxID_HELP_CONTENTS, "&Contents\tF1", "Help contents" );
@@ -191,6 +195,14 @@ void MyFrame::OnViewTrumph( wxCommandEvent& event )
 	viewtrumph = event.IsChecked();
 	if( game )
 		game->trumphdlg->Show( viewtrumph );
+}
+
+void MyFrame::OnViewLastTrick( wxCommandEvent& event )
+{
+	Game *game = wxGetApp().GetGame();
+	viewlasttrick = event.IsChecked();
+	if( game )
+		game->lasttrickdlg->Show( viewlasttrick );
 }
 
 void MyFrame::Help( wxCommandEvent& event )

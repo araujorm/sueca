@@ -162,6 +162,9 @@ Game::Game( Player* p1,
 	// Trumph dialog
 	trumphdlg = new TrumphDialog( frame, frame->trumph_pos );
 	trumphdlg->Show( frame->viewtrumph );
+	// Last trick dialog
+	lasttrickdlg = new LastTrickDialog( frame, frame->lasttrick_pos );
+	lasttrickdlg->Show( frame->viewlasttrick );
 	// Data initialized, we now put the name labels on the canvas
 	// and on the dialogs
 	RefreshNames();
@@ -194,9 +197,11 @@ Game::~Game()
 	// Store dialog windows positions
 	frame->score_pos = score->GetPosition();
 	frame->trumph_pos = trumphdlg->GetPosition();
+	frame->lasttrick_pos = lasttrickdlg->GetPosition();
 	// Sane window closing
 	score->Close( TRUE );
 	trumphdlg->Close( TRUE );
+	lasttrickdlg->Close( TRUE );
 	running = NULL;
 }
 
@@ -261,6 +266,11 @@ void Game::EndTurn()
 	Player* winner = TurnWinner();
 	winner->GetTeam()->AddToCapt( m_played );
 	score->UpdateRoundResults();
+	// Update last trick dialog before informing players
+	PlayerIterator* trickplayers = GetPlayers();
+	trickplayers->SetCurrent( m_players->GetCurrent() );
+	lasttrickdlg->UpdateTrick( trickplayers, m_played, winner );
+	delete trickplayers;
 	// Inform players about the outcome (mainly for bot AI and network clients)
 	for( int i = 0; i < 4; i++ )
 		m_players->GetNext()->TurnEnd( winner, m_played );
@@ -406,6 +416,8 @@ void Game::RefreshNames()
 		trumphdlg->UpdateTrumph( m_trumph, trumph_owner );
 	if( score )
 		score->RefreshNames();
+	if( lasttrickdlg )
+		lasttrickdlg->RefitDialog();
 }
 
 void Game::DisplayResults()

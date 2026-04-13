@@ -88,6 +88,7 @@ void Sueca::NewGame( Game* the_game, LocalPlayer* lp )
 	m_frame->canvas->SetLocalPlayer( lp );
 	m_frame->viewMenu->Enable( ID_VIEW_TRUMPH, true );
 	m_frame->viewMenu->Enable( ID_VIEW_SCORES, true );
+	m_frame->viewMenu->Enable( ID_VIEW_LASTTRICK, true );
 	m_frame->gameMenu->Enable( wxID_CLOSE, true );
 	m_game->NewRound();
 }
@@ -98,6 +99,7 @@ void Sueca::EndGame()
 		delete m_game;
 		m_frame->viewMenu->Enable( ID_VIEW_TRUMPH, false );
 		m_frame->viewMenu->Enable( ID_VIEW_SCORES, false );
+		m_frame->viewMenu->Enable( ID_VIEW_LASTTRICK, false );
 		m_frame->gameMenu->Enable( wxID_CLOSE, false );
 		m_frame->canvas->SetLocalPlayer( NULL );
 		m_game = NULL;

@@ -32,6 +32,7 @@ class Game;
 #include "player.hpp"
 #include "scoredialog.hpp"
 #include "trumphdialog.hpp"
+#include "lasttrickdialog.hpp"
 
 // Circular player iterator node class
 class PlayerIteratorNode
@@ -82,6 +83,7 @@ class Game
 public:
 	ScoreDialog* score;
 	TrumphDialog* trumphdlg;
+	LastTrickDialog* lasttrickdlg;
 
 	Game( Player* p1,
 	      Player* p2,
