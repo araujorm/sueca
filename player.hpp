@@ -62,6 +62,8 @@ public:
 	virtual wxPoint PlayedCardPos() const = 0;
 	virtual wxPoint CollectPos() const = 0;
 	virtual wxPoint TrumphPos( wxSize& size ) const = 0;
+	virtual wxPoint ArrowPos( wxSize& size ) const = 0;
+	virtual int ArrowDir() const = 0;  // 0=left, 1=up, 2=right, 3=down
 	virtual GamePos* Clone() const = 0;
 protected:
 	void ResetCheck();
@@ -84,6 +86,8 @@ public:
 	wxPoint PlayedCardPos() const { return wxPoint( ( MC_X_SIZE - CARDBMP_W ) / 2, MC_Y_SIZE / 2 + PLAYED_CARD_GAP ); }
 	wxPoint CollectPos() const { return wxPoint( ( MC_X_SIZE - CARDBMP_W ) / 2, MC_Y_SIZE + CARDBMP_H ); }
 	wxPoint TrumphPos( wxSize& size ) const { return wxPoint( xstart + 9 * CARDBMP_INCR + CARDBMP_W + TRUMPH_GAP, ystart + CARDBMP_H - size.GetHeight() ); }
+	wxPoint ArrowPos( wxSize& size ) const { return wxPoint( xstart + 9 * CARDBMP_INCR + CARDBMP_W + 5, ystart + ( CARDBMP_H - size.GetHeight() ) / 2 ); }
+	int ArrowDir() const { return 0; }
 	GamePos* Clone() const { return new GamePosP1( *this ); }
 };
 
@@ -97,6 +101,8 @@ public:
 	wxPoint PlayedCardPos() const { return wxPoint( MC_X_SIZE / 2 + PLAYED_CARD_GAP, ( MC_Y_SIZE - CARDBMP_H ) / 2 ); }
 	wxPoint CollectPos() const { return wxPoint( MC_X_SIZE + CARDBMP_W, ( MC_Y_SIZE - CARDBMP_H ) / 2 ); }
 	wxPoint TrumphPos( wxSize& size ) const { return wxPoint( xstart + CARDBMP_W - size.GetWidth(), ystart - 9 * CARDBMP_INCR - TRUMPH_GAP - size.GetHeight() ); }
+	wxPoint ArrowPos( wxSize& size ) const { return wxPoint( xstart + ( CARDBMP_W - size.GetWidth() ) / 2, ystart - 9 * CARDBMP_INCR - size.GetHeight() - 5 ); }
+	int ArrowDir() const { return 3; }
 	GamePos* Clone() const { return new GamePosP2( *this ); }
 };
 
@@ -110,6 +116,8 @@ public:
 	wxPoint PlayedCardPos() const { return wxPoint( ( MC_X_SIZE - CARDBMP_W ) / 2, MC_Y_SIZE / 2 - PLAYED_CARD_GAP - CARDBMP_H ); }
 	wxPoint CollectPos() const { return wxPoint( ( MC_X_SIZE - CARDBMP_W ) / 2, - CARDBMP_H ); }
 	wxPoint TrumphPos( wxSize& size ) const { return wxPoint( xstart - 9 * CARDBMP_INCR - TRUMPH_GAP - size.GetWidth(), ystart ); }
+	wxPoint ArrowPos( wxSize& size ) const { return wxPoint( xstart - 9 * CARDBMP_INCR - size.GetWidth() - 5, ystart + ( CARDBMP_H - size.GetHeight() ) / 2 ); }
+	int ArrowDir() const { return 2; }
 	GamePos* Clone() const { return new GamePosP3( *this ); }
 };
 
@@ -123,6 +131,8 @@ public:
 	wxPoint PlayedCardPos() const { return wxPoint( MC_X_SIZE / 2 - PLAYED_CARD_GAP - CARDBMP_W, ( MC_Y_SIZE - CARDBMP_H ) / 2 ); }
 	wxPoint CollectPos() const { return wxPoint( - CARDBMP_W, ( MC_Y_SIZE - CARDBMP_H ) / 2 ); }
 	wxPoint TrumphPos( wxSize& size ) const { return wxPoint( xstart, ystart + 9 * CARDBMP_INCR + CARDBMP_H + TRUMPH_GAP ); }
+	wxPoint ArrowPos( wxSize& size ) const { return wxPoint( xstart + ( CARDBMP_W - size.GetWidth() ) / 2, ystart + 9 * CARDBMP_INCR + CARDBMP_H + 5 ); }
+	int ArrowDir() const { return 1; }
 	GamePos* Clone() const { return new GamePosP4( *this ); }
 };
 
@@ -145,6 +155,8 @@ public:
 	Team* GetTeam() { return m_team; }
 	bool AreCardsHidden() { return m_hidden_cards; }
 	wxPoint GetNamePos( wxSize labelsize ) { return m_gamepos->NamePosition( labelsize ); }
+	wxPoint GetArrowPos( wxSize arrowsize ) { return m_gamepos->ArrowPos( arrowsize ); }
+	int GetArrowDir() { return m_gamepos->ArrowDir(); }
 	wxPoint GetTrumphPos( wxSize labelsize ) { return m_gamepos->TrumphPos( labelsize ); }
 	wxString GetNamePosStr() const { return m_gamepos->GetName(); }
 	wxPoint GetPlayPos() { return m_gamepos->PlayedCardPos(); }

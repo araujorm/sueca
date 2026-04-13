@@ -139,6 +139,8 @@ public:
 	void SetTrumphLabel( Player* player, Card* card );
 	void OnCardMoveEvent( CardMoveEvent& event );
 	void MoveCardTo( Card* card, wxPoint destpos, bool raise = true );
+	void SetActivePlayer( Player* player );
+	void ClearActivePlayer();
 	void FlashCard( Card* card );
 	void NotTurnWarning();
 	void InvalidLocalMove( Card* card = NULL );
@@ -151,6 +153,10 @@ private:
 	wxBitmap m_buffer;
 	CardFlashTimer fltimer;
 	Card* lastclicked;
+	wxBitmap m_arrows[4];
+	wxPoint m_arrow_pos;
+	int m_arrow_dir;
+	bool m_arrow_visible;
 	DECLARE_EVENT_TABLE()
 };
 

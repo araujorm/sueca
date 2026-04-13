@@ -354,6 +354,9 @@ void Game::PassTurn( Player *player )
 	else
 		player = m_players->GetCurrent();
 
+	// Show active player arrow
+	canvas->SetActivePlayer( player );
+
 	playtime = true;
 	player->OnMyTurn( this, m_played );
 }

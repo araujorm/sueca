@@ -121,11 +121,14 @@ BEGIN_EVENT_TABLE( MyCanvas, wxPanel )
 	EVT_CARD_MOVE( MyCanvas::OnCardMoveEvent )
 END_EVENT_TABLE()
 
+#include <wx/mstream.h>
+#include "png/arrow.h"
+
 MyCanvas::MyCanvas( wxFrame* parent, wxWindowID id ):
 	wxPanel( parent, id, wxDefaultPosition, wxDefaultSize, wxSUNKEN_BORDER ),
 	flashing( NULL ), statusbar( parent->GetStatusBar() ), m_localplayer( NULL ),
 	m_trumph( NULL ), m_buffer( MC_X_SIZE, MC_Y_SIZE ), fltimer( this ),
-	lastclicked( NULL )
+	lastclicked( NULL ), m_arrow_dir( 0 ), m_arrow_visible( false )
 {
 
 	for( int i = 0; i < 4; i++ )
@@ -134,6 +137,15 @@ MyCanvas::MyCanvas( wxFrame* parent, wxWindowID id ):
 	ClearBackground();
 	SetCursor( wxCursor( wxCURSOR_ARROW ) );
 	SetMinSize( wxSize(MC_X_SIZE, MC_Y_SIZE) );
+
+	// Create arrow bitmaps for all 4 directions from the left-pointing base
+	wxMemoryInputStream arrow_stream( arrow, arrow_len );
+	wxImage arrow_img( arrow_stream, wxBITMAP_TYPE_PNG );
+	wxImage arrow_cw = arrow_img.Rotate90( true );
+	m_arrows[0] = wxBitmap( arrow_img );                          // left (P1)
+	m_arrows[1] = wxBitmap( arrow_cw );                            // up (P2, CW)
+	m_arrows[2] = wxBitmap( arrow_cw.Rotate90( true ) );           // right (P3, CW+CW)
+	m_arrows[3] = wxBitmap( arrow_img.Rotate90( false ) );         // down (P4, CCW)
 }
 
 MyCanvas::~MyCanvas()
@@ -254,6 +266,13 @@ void MyCanvas::DrawShapes( wxDC& dc, const wxRect& area )
 	// Trumph Label
 	if ( m_trumph && m_trumph->GetRect().Intersects( area ) )
 		m_trumph->Draw( dc );
+	// Active player arrow
+	if( m_arrow_visible ) {
+		wxBitmap& arr = m_arrows[m_arrow_dir];
+		wxRect arrrect( m_arrow_pos, wxSize( arr.GetWidth(), arr.GetHeight() ) );
+		if( arrrect.Intersects( area ) )
+			dc.DrawBitmap( arr, m_arrow_pos.x, m_arrow_pos.y, true );
+	}
 }
 
 void MyCanvas::ClearNames()
@@ -331,6 +350,32 @@ void MyCanvas::SetTrumphLabel( Player* player, Card* card )
 	wxClientDC dc( this );
 	m_trumph = new TrumphLabel( player, card, dc );
 	RefreshRect( m_trumph->GetRect() );
+}
+
+void MyCanvas::SetActivePlayer( Player* player )
+{
+	// Clear old arrow
+	if( m_arrow_visible ) {
+		wxSize sz( m_arrows[m_arrow_dir].GetWidth(),
+		           m_arrows[m_arrow_dir].GetHeight() );
+		RefreshRect( wxRect( m_arrow_pos, sz ) );
+	}
+	if( !player ) {
+		m_arrow_visible = false;
+		return;
+	}
+	// Set new arrow
+	m_arrow_dir = player->GetArrowDir();
+	wxSize arrsz( m_arrows[m_arrow_dir].GetWidth(),
+	              m_arrows[m_arrow_dir].GetHeight() );
+	m_arrow_pos = player->GetArrowPos( arrsz );
+	m_arrow_visible = true;
+	RefreshRect( wxRect( m_arrow_pos, arrsz ) );
+}
+
+void MyCanvas::ClearActivePlayer()
+{
+	SetActivePlayer( NULL );
 }
 
 #define STOP_PREC 5e-1
