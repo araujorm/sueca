@@ -54,6 +54,20 @@ bool Sueca::OnInit()
 	int stored_card_back;
 	config->Read( "Card back", &stored_card_back, (int)CARDBACK_BLUE );
 	card_back = (cardback_t)stored_card_back;
+
+	// Window positions and sizes
+	int frame_x, frame_y, frame_w, frame_h;
+	config->Read( "Frame x", &frame_x, -1 );
+	config->Read( "Frame y", &frame_y, -1 );
+	config->Read( "Frame w", &frame_w, -1 );
+	config->Read( "Frame h", &frame_h, -1 );
+	int score_x, score_y, trumph_x, trumph_y, lasttrick_x, lasttrick_y;
+	config->Read( "Score x", &score_x, -1 );
+	config->Read( "Score y", &score_y, -1 );
+	config->Read( "Trumph x", &trumph_x, -1 );
+	config->Read( "Trumph y", &trumph_y, -1 );
+	config->Read( "Last trick x", &lasttrick_x, -1 );
+	config->Read( "Last trick y", &lasttrick_y, -1 );
 	delete config;
 
 	servdlg = NULL;
@@ -62,6 +76,13 @@ bool Sueca::OnInit()
 
 	m_game = NULL;
 	m_frame = new MyFrame();
+	if( frame_x >= 0 && frame_y >= 0 )
+		m_frame->SetPosition( wxPoint( frame_x, frame_y ) );
+	if( frame_w > 0 && frame_h > 0 )
+		m_frame->SetSize( frame_w, frame_h );
+	if( score_x >= 0 ) m_frame->score_pos = wxPoint( score_x, score_y );
+	if( trumph_x >= 0 ) m_frame->trumph_pos = wxPoint( trumph_x, trumph_y );
+	if( lasttrick_x >= 0 ) m_frame->lasttrick_pos = wxPoint( lasttrick_x, lasttrick_y );
 	m_frame->Show( TRUE );
 	SetTopWindow( m_frame );
 	return TRUE;

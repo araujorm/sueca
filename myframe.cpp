@@ -19,6 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "myframe.hpp"
 #include <wx/msgdlg.h>
+#include <wx/config.h>
 #include "prefsdialog.hpp"
 #include "cards.hpp"
 #include "main.hpp"
@@ -240,7 +241,21 @@ GNU General Public License for more details.",
 
 void MyFrame::OnClose( wxCloseEvent& event )
 {
-//  event.Veto();
+	// Save window positions before closing
+	wxConfig* config = new wxConfig( SUECA_NAME );
+	wxPoint fpos = GetPosition();
+	wxSize fsz = GetSize();
+	config->Write( "Frame x", fpos.x );
+	config->Write( "Frame y", fpos.y );
+	config->Write( "Frame w", fsz.GetWidth() );
+	config->Write( "Frame h", fsz.GetHeight() );
+	config->Write( "Score x", score_pos.x );
+	config->Write( "Score y", score_pos.y );
+	config->Write( "Trumph x", trumph_pos.x );
+	config->Write( "Trumph y", trumph_pos.y );
+	config->Write( "Last trick x", lasttrick_pos.x );
+	config->Write( "Last trick y", lasttrick_pos.y );
+	delete config;
 	Destroy();
 }
 
