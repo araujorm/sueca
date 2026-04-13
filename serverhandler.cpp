@@ -267,6 +267,8 @@ void ServerHandler::OnSocketEvent( wxSocketEvent& event )
 						wxString text = args[1];
 						for( size_t i = 2; i < args.GetCount(); i++ )
 							text += ":" + args[i];
+						if( text.Length() > 512 )
+							text.Truncate( 512 );
 						diag->chat->SayInChat( who, text );
 						// (Re)send to the clients
 						ToAll( wxString::Format( "say:%s:%s", who.c_str(), text.c_str() ) );
