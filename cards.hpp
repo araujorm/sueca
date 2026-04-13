@@ -55,6 +55,9 @@ private:
 	unsigned short m_value;
 };
 
+// Helper: load bitmap from embedded PNG data
+wxBitmap BitmapFromPNG( const unsigned char* data, unsigned int len );
+
 // Card suits
 enum cardsuit_t { CLUBS=0, DIAMONDS, SPADES, HEARTS, UNKNOWN_CARD_SUIT };
 #define SUITMIN CLUBS
@@ -63,7 +66,7 @@ class CardSuit
 {
 public:
 	CardSuit( cardsuit_t id );  // For nul type
-	CardSuit( cardsuit_t id, char* name, char* xpmdata[] );
+	CardSuit( cardsuit_t id, char* name, const unsigned char* pngdata, unsigned int pnglen );
 	cardsuit_t GetId() const { return m_id; }
 	char* GetName() const { return m_name; }
 	wxBitmap& GetBitmap() const { return (wxBitmap&)m_bitmap; }
@@ -81,7 +84,8 @@ private:
 class Card
 {
 public:
-	Card( Deck *deck, CardType& type, CardSuit& suit, char* xpmdata[] );
+	Card( Deck *deck, CardType& type, CardSuit& suit,
+	      const unsigned char* pngdata, unsigned int pnglen );
 	wxString NameStr();
 	wxString ShortStr();
 	bool GetTurned() { return m_turned; }

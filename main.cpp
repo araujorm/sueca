@@ -36,6 +36,9 @@ bool Sueca::OnInit()
 	// Random seed initialization
 	srand( time( NULL ) );
 
+	// Initialize image handlers for PNG support
+	wxInitAllImageHandlers();
+
 	// Get stored preferences
 	wxConfig* config = new wxConfig( SUECA_NAME );
 	// Default preferences go here

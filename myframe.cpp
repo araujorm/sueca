@@ -20,6 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "myframe.hpp"
 #include <wx/msgdlg.h>
 #include "prefsdialog.hpp"
+#include "cards.hpp"
 #include "main.hpp"
 
 // Derive a status bar for handling any mouse events on it
@@ -70,9 +71,10 @@ BEGIN_EVENT_TABLE( MyFrame, wxFrame )
 END_EVENT_TABLE();
 
 // In windows the icon is included in a windows resource file
-// On other platforms we use this xpm
+// On other platforms we load it from embedded PNG
 #ifndef __WXMSW__
-#include "icons/icon32.xpm"
+#include <wx/mstream.h>
+#include "icons/icon32.h"
 #endif
 
 MyFrame::MyFrame():
@@ -82,7 +84,13 @@ MyFrame::MyFrame():
 	viewtrumph( false ), trumph_pos( wxDefaultPosition ),
 	viewlasttrick( false ), lasttrick_pos( wxDefaultPosition )
 {
+#ifdef __WXMSW__
 	SetIcon( wxICON( icon32 ) );
+#else
+	wxIcon appicon;
+	appicon.CopyFromBitmap( BitmapFromPNG( icon32, icon32_len ) );
+	SetIcon( appicon );
+#endif
 
 	gameMenu = new wxMenu();
 	gameMenu->Append( wxID_NEW, "&New single player\tF2", "Start a new game against computer players" );

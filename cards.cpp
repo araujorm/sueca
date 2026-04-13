@@ -21,9 +21,19 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <ctime>  // time()
 #include "cards.hpp"
 #include <wx/dcmemory.h>
+#include <wx/mstream.h>
+#include <wx/image.h>
 
 #include <wx/listimpl.cpp>
 WX_DEFINE_LIST( CardList );
+
+// Helper: load bitmap from embedded PNG data
+wxBitmap BitmapFromPNG( const unsigned char* data, unsigned int len )
+{
+	wxMemoryInputStream stream( data, len );
+	wxImage img( stream, wxBITMAP_TYPE_PNG );
+	return wxBitmap( img );
+}
 
 // Card type implementation
 CardType::CardType( cardtype_t id, char* name, char *shortname, short value ):
@@ -32,13 +42,15 @@ CardType::CardType( cardtype_t id, char* name, char *shortname, short value ):
 // Card suit implementation
 CardSuit::CardSuit( cardsuit_t id ):
 	m_id( id ), m_name ( "" ), m_bitmap( wxNullBitmap ) {}
-CardSuit::CardSuit( cardsuit_t id, char* name, char* xpmdata[] ):
-	m_id( id ), m_name ( name ), m_bitmap( xpmdata ) {}
+CardSuit::CardSuit( cardsuit_t id, char* name, const unsigned char* pngdata, unsigned int pnglen ):
+	m_id( id ), m_name ( name ), m_bitmap( BitmapFromPNG( pngdata, pnglen ) ) {}
 
 // Card implementation
-Card::Card( Deck *deck, CardType& type, CardSuit& suit, char** xpmdata):
+Card::Card( Deck *deck, CardType& type, CardSuit& suit,
+            const unsigned char* pngdata, unsigned int pnglen ):
 	m_deck( deck ), m_type( type ), m_suit( suit ), m_turned( false ),
-	m_playable( false ), m_bitmap( xpmdata ), blitop( wxCOPY ) {}
+	m_playable( false ), m_bitmap( BitmapFromPNG( pngdata, pnglen ) ),
+	blitop( wxCOPY ) {}
 
 wxString Card::NameStr()
 {
@@ -92,109 +104,84 @@ static CardType typeKing( KING, "King", "K", 4 );
 static CardType typeSeven( SEVEN, "Seven", "7", 10 );
 static CardType typeAce( ACE, "Ace", "A", 11 );
 
+// Embedded PNG data
+#include "png/clubs.h"
+#include "png/diamonds.h"
+#include "png/hearts.h"
+#include "png/spades.h"
+#include "png/b1fv.h"
+#include "png/c1.h"
+#include "png/c2.h"
+#include "png/c3.h"
+#include "png/c4.h"
+#include "png/c5.h"
+#include "png/c6.h"
+#include "png/c7.h"
+#include "png/cj.h"
+#include "png/ck.h"
+#include "png/cq.h"
+#include "png/d1.h"
+#include "png/d2.h"
+#include "png/d3.h"
+#include "png/d4.h"
+#include "png/d5.h"
+#include "png/d6.h"
+#include "png/d7.h"
+#include "png/dj.h"
+#include "png/dk.h"
+#include "png/dq.h"
+#include "png/h1.h"
+#include "png/h2.h"
+#include "png/h3.h"
+#include "png/h4.h"
+#include "png/h5.h"
+#include "png/h6.h"
+#include "png/h7.h"
+#include "png/hj.h"
+#include "png/hk.h"
+#include "png/hq.h"
+#include "png/s1.h"
+#include "png/s2.h"
+#include "png/s3.h"
+#include "png/s4.h"
+#include "png/s5.h"
+#include "png/s6.h"
+#include "png/s7.h"
+#include "png/sj.h"
+#include "png/sk.h"
+#include "png/sq.h"
+
 // Permanent card suits
 class SuitNul: public CardSuit
 {
 public: SuitNul(): CardSuit( UNKNOWN_CARD_SUIT ) {}
 };
-#include "xpm_cards/clubs.xpm"
 class SuitClubs: public CardSuit
 {
-public: SuitClubs(): CardSuit( CLUBS, "Clubs", clubs_xpm ) {}
+public: SuitClubs(): CardSuit( CLUBS, "Clubs", clubs, clubs_len ) {}
 };
-#include "xpm_cards/diamonds.xpm"
 class SuitDiamonds: public CardSuit
 {
-public: SuitDiamonds(): CardSuit( DIAMONDS, "Diamonds", diamonds_xpm ) {}
+public: SuitDiamonds(): CardSuit( DIAMONDS, "Diamonds", diamonds, diamonds_len ) {}
 };
-#include "xpm_cards/hearts.xpm"
 class SuitHearts: public CardSuit
 {
-public: SuitHearts(): CardSuit( HEARTS, "Hearts", hearts_xpm ) {}
+public: SuitHearts(): CardSuit( HEARTS, "Hearts", hearts, hearts_len ) {}
 };
-#include "xpm_cards/spades.xpm"
 class SuitSpades: public CardSuit
 {
-public: SuitSpades(): CardSuit ( SPADES, "Spades", spades_xpm ) {}
+public: SuitSpades(): CardSuit ( SPADES, "Spades", spades, spades_len ) {}
 };
 
 // Deck implementation
-//#include "xpm_cards/b1fh.xpm"
-// TODO: Add more faces
-#include "xpm_cards/b1fv.xpm"
-#define DECK_FACE b1fv
-/*
-#include "xpm_cards/b1pb.xpm"
-#include "xpm_cards/b1pl.xpm"
-#include "xpm_cards/b1pr.xpm"
-#include "xpm_cards/b1pt.xpm"
-#include "xpm_cards/b2fh.xpm"
-#include "xpm_cards/b2fv.xpm"
-#include "xpm_cards/b2pb.xpm"
-#include "xpm_cards/b2pl.xpm"
-#include "xpm_cards/b2pr.xpm"
-#include "xpm_cards/b2pt.xpm"
-#include "xpm_cards/c10.xpm"
-*/
-#include "xpm_cards/c1.xpm"
-#include "xpm_cards/c2.xpm"
-#include "xpm_cards/c3.xpm"
-#include "xpm_cards/c4.xpm"
-#include "xpm_cards/c5.xpm"
-#include "xpm_cards/c6.xpm"
-#include "xpm_cards/c7.xpm"
-//#include "xpm_cards/c8.xpm"
-//#include "xpm_cards/c9.xpm"
-#include "xpm_cards/cj.xpm"
-#include "xpm_cards/ck.xpm"
-#include "xpm_cards/cq.xpm"
-//#include "xpm_cards/d10.xpm"
-#include "xpm_cards/d1.xpm"
-#include "xpm_cards/d2.xpm"
-#include "xpm_cards/d3.xpm"
-#include "xpm_cards/d4.xpm"
-#include "xpm_cards/d5.xpm"
-#include "xpm_cards/d6.xpm"
-#include "xpm_cards/d7.xpm"
-//#include "xpm_cards/d8.xpm"
-//#include "xpm_cards/d9.xpm"
-#include "xpm_cards/dj.xpm"
-#include "xpm_cards/dk.xpm"
-#include "xpm_cards/dq.xpm"
-//#include "xpm_cards/ec.xpm"
-//#include "xpm_cards/h10.xpm"
-#include "xpm_cards/h1.xpm"
-#include "xpm_cards/h2.xpm"
-#include "xpm_cards/h3.xpm"
-#include "xpm_cards/h4.xpm"
-#include "xpm_cards/h5.xpm"
-#include "xpm_cards/h6.xpm"
-#include "xpm_cards/h7.xpm"
-//#include "xpm_cards/h8.xpm"
-//#include "xpm_cards/h9.xpm"
-#include "xpm_cards/hj.xpm"
-#include "xpm_cards/hk.xpm"
-#include "xpm_cards/hq.xpm"
-//#include "xpm_cards/jb.xpm"
-//#include "xpm_cards/jr.xpm"
-//#include "xpm_cards/s10.xpm"
-#include "xpm_cards/s1.xpm"
-#include "xpm_cards/s2.xpm"
-#include "xpm_cards/s3.xpm"
-#include "xpm_cards/s4.xpm"
-#include "xpm_cards/s5.xpm"
-#include "xpm_cards/s6.xpm"
-#include "xpm_cards/s7.xpm"
-//#include "xpm_cards/s8.xpm"
-//#include "xpm_cards/s9.xpm"
-#include "xpm_cards/sj.xpm"
-#include "xpm_cards/sk.xpm"
-#include "xpm_cards/sq.xpm"
+#define DECK_FACE_DATA b1fv
+#define DECK_FACE_LEN b1fv_len
+
 Deck::Deck():
-	m_face( DECK_FACE )
+	m_face( BitmapFromPNG( DECK_FACE_DATA, DECK_FACE_LEN ) )
 {
 	SuitNul nulsuit;
-	nulcard = new Card( this, typeNul, nulsuit, DECK_FACE );
+	nulcard = new Card( this, typeNul, nulsuit, DECK_FACE_DATA, DECK_FACE_LEN );
 	CardSuit suits[] = {
 		SuitHearts(),
 		SuitClubs(),
@@ -213,16 +200,33 @@ Deck::Deck():
 		typeSeven,
 		typeAce
 	};
-	char** xpms[4][10] = {
-		{ h2, h3, h4, h5, h6, hq, hj, hk, h7, h1 },
-		{ c2, c3, c4, c5, c6, cq, cj, ck, c7, c1 },
-		{ d2, d3, d4, d5, d6, dq, dj, dk, d7, d1 },
-		{ s2, s3, s4, s5, s6, sq, sj, sk, s7, s1 }
+	struct { const unsigned char* data; unsigned int len; } pngs[4][10] = {
+		{ {h2, h2_len}, {h3, h3_len},
+		  {h4, h4_len}, {h5, h5_len},
+		  {h6, h6_len}, {hq, hq_len},
+		  {hj, hj_len}, {hk, hk_len},
+		  {h7, h7_len}, {h1, h1_len} },
+		{ {c2, c2_len}, {c3, c3_len},
+		  {c4, c4_len}, {c5, c5_len},
+		  {c6, c6_len}, {cq, cq_len},
+		  {cj, cj_len}, {ck, ck_len},
+		  {c7, c7_len}, {c1, c1_len} },
+		{ {d2, d2_len}, {d3, d3_len},
+		  {d4, d4_len}, {d5, d5_len},
+		  {d6, d6_len}, {dq, dq_len},
+		  {dj, dj_len}, {dk, dk_len},
+		  {d7, d7_len}, {d1, d1_len} },
+		{ {s2, s2_len}, {s3, s3_len},
+		  {s4, s4_len}, {s5, s5_len},
+		  {s6, s6_len}, {sq, sq_len},
+		  {sj, sj_len}, {sk, sk_len},
+		  {s7, s7_len}, {s1, s1_len} }
 	};
 	int n = 0;
 	for( int s = 0; s < 4; s++ )
 		for( int t = 0; t < 10; t++ ) {
-			Card* card = new Card( this, types[t], suits[s], xpms[s][t] );
+			Card* card = new Card( this, types[t], suits[s],
+			                       pngs[s][t].data, pngs[s][t].len );
 			cards[n++] = card;
 			cardmap[card->ShortStr()] = card;
 		}

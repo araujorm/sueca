@@ -3,12 +3,12 @@ Dependencies
 
 For compiling on Fedora:
 ```
-sudo dnf install wxGTK-devel make gcc-c++
+sudo dnf install wxGTK-devel make gcc-c++ xxd
 ```
 
 For cross-compiling on Fedora for Windows:
 ```
-sudo dnf install make mingw32-gcc-c++ mingw32-wxWidgets3-static mingw32-libpng-static mingw32-libjpeg-turbo-static mingw32-libtiff-static mingw32-zlib-static
+sudo dnf install make mingw32-gcc-c++ mingw32-wxWidgets3-static mingw32-libpng-static mingw32-libjpeg-turbo-static mingw32-libtiff-static mingw32-zlib-static xxd
 ```
 
 

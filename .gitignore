@@ -2,3 +2,5 @@
 *.d
 sueca
 sueca.exe
+png/*.h
+icons/*.h

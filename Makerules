@@ -11,7 +11,13 @@ sueca: $(OBJS)
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-%.d: %.cpp
+png/%.h: png/%.png
+	xxd -i -n $* $< > $@
+
+icons/%.h: icons/%.png
+	xxd -i -n $* $< > $@
+
+%.d: %.cpp $(PNG_HEADERS) $(ICON_HEADERS)
 	set -e; $(CXX) -MM $(CXXFLAGS) $< \
 		| sed 's/\($*\)\.o[ :]*/\1.o $@ : /g' > $@; \
 		[ -s $@ ] || rm -f $@

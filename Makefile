@@ -5,7 +5,7 @@ include Makedefs
 all: Makefile
 	$(MAKE) -f Makerules sueca
 clean:
-	$(RM) $(OBJS) $(DEPS) *~ sueca core core.[0-9]*
+	$(RM) $(OBJS) $(DEPS) $(PNG_HEADERS) $(ICON_HEADERS) *~ sueca core core.[0-9]*
 
 backup: PROJBASE="$(shell basename $(CURDIR))"
 backup: clean
