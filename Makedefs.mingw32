@@ -9,4 +9,4 @@ CXXFLAGS = -O3 -Wall -fno-rtti -fno-exceptions -Wno-write-strings $(shell $(WXCO
 LDFLAGS = -static $(shell $(WXCONFIG) --static --libs core,base,net)
 
 # If you are having dumb "Mismatch between the program and library build versions" due to g++ ABI version, uncomment the following line and change the ABI version to match the same as the library
-CXXFLAGS += -D__GXX_ABI_VERSION=1018
+#CXXFLAGS += -D__GXX_ABI_VERSION=1018
