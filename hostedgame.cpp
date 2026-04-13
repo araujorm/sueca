@@ -23,18 +23,18 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // Hosted game class implementation
 HostedGame::HostedGame( Player* p1,
-			Player* p2,
-			Player* p3,
-			Player* p4,
-			MyCanvas *the_canvas):
-  Game( p1, p2, p3, p4, the_canvas ) {}
+                        Player* p2,
+                        Player* p3,
+                        Player* p4,
+                        MyCanvas *the_canvas):
+	Game( p1, p2, p3, p4, the_canvas ) {}
 
 void HostedGame::SetPlayerName( Player* player, const wxString& newname )
 {
-  ServerHandler* handler;
-  if ( player == wxGetApp().GetLocalPlayer() && ( handler = wxGetApp().servhandler ) ) {
-    // Inform client players about our name change
-    handler->ToAll( wxString::Format( "name:%s:%s", player->GetGamePos()->GetName().c_str(), newname.c_str() ) );
-  }
-  Game::SetPlayerName( player, newname );
+	ServerHandler* handler;
+	if ( player == wxGetApp().GetLocalPlayer() && ( handler = wxGetApp().servhandler ) ) {
+		// Inform client players about our name change
+		handler->ToAll( wxString::Format( "name:%s:%s", player->GetGamePos()->GetName().c_str(), newname.c_str() ) );
+	}
+	Game::SetPlayerName( player, newname );
 }

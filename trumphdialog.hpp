@@ -33,16 +33,16 @@ class TrumphDialog;
 class TrumphDialog: public wxDialog
 {
 public:
-  wxStaticBitmap* bmp;
-  wxStaticText* text;
-  TrumphDialog( wxWindow* parent, wxPoint& pos );
-  void UpdateTrumph( Card* trumph, Player* owner );
-  void OnButton( wxCommandEvent& event ) { Close(); }
-  void OnClose( wxCloseEvent& event );
+	wxStaticBitmap* bmp;
+	wxStaticText* text;
+	TrumphDialog( wxWindow* parent, wxPoint& pos );
+	void UpdateTrumph( Card* trumph, Player* owner );
+	void OnButton( wxCommandEvent& event ) { Close(); }
+	void OnClose( wxCloseEvent& event );
 private:
-  wxBitmap empty_bmp;
-  wxBoxSizer* top_sizer;
-  DECLARE_EVENT_TABLE();
+	wxBitmap empty_bmp;
+	wxBoxSizer* top_sizer;
+	DECLARE_EVENT_TABLE();
 };
 
 #endif // _TRUMPHDIALOG_HPP_

@@ -37,10 +37,10 @@ enum { ID_RADIOBUTTON_P1, ID_RADIOBUTTON_P2, ID_RADIOBUTTON_P3, ID_RADIOBUTTON_P
 class RemotePosition
 {
 public:
-  wxString name;
-  wxRadioButton* button;
-  RemotePosition( wxString initname, wxRadioButton* initbutton ):
-    name( initname ), button( initbutton ) {}
+	wxString name;
+	wxRadioButton* button;
+	RemotePosition( wxString initname, wxRadioButton* initbutton ):
+		name( initname ), button( initbutton ) {}
 };
 
 WX_DECLARE_STRING_HASH_MAP( RemotePosition*, RemPosMap );
@@ -49,32 +49,32 @@ WX_DECLARE_STRING_HASH_MAP( RemotePosition*, RemPosMap );
 class RemoteDialog: public wxDialog
 {
 public:
-  RemoteDialog( wxWindow* parent );
-  void ReLayout();
+	RemoteDialog( wxWindow* parent );
+	void ReLayout();
 protected:
-  friend class RemoteHandler;
-  wxRadioButton* invisible;
-  RemotePosition* posarray[ID_RADIOBUTTON_P4+1];
-  RemPosMap positions;
-  ChatPanel* chat;
-  wxWindowList disconnectedlist;
-  wxWindowList connectedlist;
-  void ConnectionEndWarn( wxString message );
-  void NoConnectionState();
-  RemotePosition* SetPosition( wxString& name, const wxString& key );
+	friend class RemoteHandler;
+	wxRadioButton* invisible;
+	RemotePosition* posarray[ID_RADIOBUTTON_P4+1];
+	RemPosMap positions;
+	ChatPanel* chat;
+	wxWindowList disconnectedlist;
+	wxWindowList connectedlist;
+	void ConnectionEndWarn( wxString message );
+	void NoConnectionState();
+	RemotePosition* SetPosition( wxString& name, const wxString& key );
 private:
-  RemoteHandler* handler;
-  wxBoxSizer* main_sizer;
-  wxTextCtrl* ip_entry;
-  wxTextCtrl* port_entry;
-  wxButton* connect_button;
-  void OnSelectPosition( wxCommandEvent& event );
-  void OnConnect( wxCommandEvent& event );
-  void OnCancel( wxCommandEvent& event ) { Done(); }
-  void OnClose( wxCloseEvent& event ) { Done(); }
-  void Done( bool cancel = true );
-  void OnChatMessage( ChatPanelMsgEvt& event );
-  DECLARE_EVENT_TABLE();
+	RemoteHandler* handler;
+	wxBoxSizer* main_sizer;
+	wxTextCtrl* ip_entry;
+	wxTextCtrl* port_entry;
+	wxButton* connect_button;
+	void OnSelectPosition( wxCommandEvent& event );
+	void OnConnect( wxCommandEvent& event );
+	void OnCancel( wxCommandEvent& event ) { Done(); }
+	void OnClose( wxCloseEvent& event ) { Done(); }
+	void Done( bool cancel = true );
+	void OnChatMessage( ChatPanelMsgEvt& event );
+	DECLARE_EVENT_TABLE();
 };
 
 #endif // _REMOTEDIALOG_HPP_

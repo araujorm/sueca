@@ -31,13 +31,13 @@ class PrefsDialog;
 class PrefsDialog: public wxDialog
 {
 public:
-  PrefsDialog( wxWindow* parent );
+	PrefsDialog( wxWindow* parent );
 private:
-  wxTextCtrl* name_entry;
-  wxSlider* delay_entry;
-  void OnOk( wxCommandEvent& event );
-  void Done( wxCommandEvent& event );
-  DECLARE_EVENT_TABLE();
+	wxTextCtrl* name_entry;
+	wxSlider* delay_entry;
+	void OnOk( wxCommandEvent& event );
+	void Done( wxCommandEvent& event );
+	DECLARE_EVENT_TABLE();
 };
 
 #endif // _PREFSDIALOG_HPP_

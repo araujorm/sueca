@@ -34,10 +34,10 @@ enum { SOCKET_ID, SERVER_ID };
 class Command
 {
 public:
-  int com;
-  wxArrayString args;
-  Command( int com_id, wxArrayString& argv ):
-    com( com_id ), args( argv ) {}
+	int com;
+	wxArrayString args;
+	Command( int com_id, wxArrayString& argv ):
+		com( com_id ), args( argv ) {}
 };
 
 extern char* freestr;

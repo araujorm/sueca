@@ -32,7 +32,7 @@ class Sueca;
 #endif
 
 #ifndef WX_PRECOMP
-  #include <wx/wx.h>
+	#include <wx/wx.h>
 #endif
 */
 
@@ -47,39 +47,39 @@ class Sueca;
 class Sueca: public wxApp
 {
 public:
-  // Some preferences go here
-  bool use_bound_ip_address;
-  wxString bound_ip_address;
-  wxString connect_ip_address;
-  unsigned int ip_port;
+	// Some preferences go here
+	bool use_bound_ip_address;
+	wxString bound_ip_address;
+	wxString connect_ip_address;
+	unsigned int ip_port;
 
-  ServerDialog* servdlg;
-  RemoteDialog* rmtdlg;
-  ServerHandler* servhandler;
+	ServerDialog* servdlg;
+	RemoteDialog* rmtdlg;
+	ServerHandler* servhandler;
 
-  virtual bool OnInit();
-  virtual int OnExit();
-  void OnEndSession( wxCloseEvent& event ) { PrepareExit(); }
-  void PrepareExit();
-  MyFrame* GetFrame() const { return m_frame; }
-  void NewGame( Game* the_game, LocalPlayer* lp );
-  void EndGame();
-  wxString& GetLocalPlayerName() const { return (wxString&)playername; }
-  LocalPlayer* GetLocalPlayer();
-  void SetLocalPlayerName( const wxString& newname );
-  unsigned int GetUpdateDelay() const { return update_delay; }
-  void SetUpdateDelay( int new_delay ) { update_delay = new_delay; }
-  Game* GetGame() const { return m_game; }
-  Player* GetBotPlayer( GamePos* gamepos );
-  void OnFinishRemoteHandler( FinishRemoteHandlerEvt& event );
+	virtual bool OnInit();
+	virtual int OnExit();
+	void OnEndSession( wxCloseEvent& event ) { PrepareExit(); }
+	void PrepareExit();
+	MyFrame* GetFrame() const { return m_frame; }
+	void NewGame( Game* the_game, LocalPlayer* lp );
+	void EndGame();
+	wxString& GetLocalPlayerName() const { return (wxString&)playername; }
+	LocalPlayer* GetLocalPlayer();
+	void SetLocalPlayerName( const wxString& newname );
+	unsigned int GetUpdateDelay() const { return update_delay; }
+	void SetUpdateDelay( int new_delay ) { update_delay = new_delay; }
+	Game* GetGame() const { return m_game; }
+	Player* GetBotPlayer( GamePos* gamepos );
+	void OnFinishRemoteHandler( FinishRemoteHandlerEvt& event );
 private:
-  // Preferences not directly accessible
-  wxString playername;
-  unsigned int update_delay;
+	// Preferences not directly accessible
+	wxString playername;
+	unsigned int update_delay;
 
-  Game* m_game;
-  MyFrame* m_frame;
-  DECLARE_EVENT_TABLE();
+	Game* m_game;
+	MyFrame* m_frame;
+	DECLARE_EVENT_TABLE();
 };
 
 DECLARE_APP(Sueca);

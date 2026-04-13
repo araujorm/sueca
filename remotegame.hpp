@@ -30,28 +30,28 @@ class RemoteGame;
 class RemoteGame: public Game
 {
 public:
-  RemoteGame( LocalPlayer* p1,
-	      HumanPlayer* p2,
-	      HumanPlayer* p3,
-	      HumanPlayer* p4,
-	      MyCanvas *the_canvas,
-	      RemoteHandler* handler );
-  virtual ~RemoteGame();
-  virtual void SetPlayerName( Player* player, const wxString& newname );
-  // Called by the local player
-  virtual movestatus_t PlayMove( Player *player, Card *card );
-  // These are to be ignored
-  virtual void NewRound() {}
-  virtual void EndTurn() {}
+	RemoteGame( LocalPlayer* p1,
+	            HumanPlayer* p2,
+	            HumanPlayer* p3,
+	            HumanPlayer* p4,
+	            MyCanvas *the_canvas,
+	            RemoteHandler* handler );
+	virtual ~RemoteGame();
+	virtual void SetPlayerName( Player* player, const wxString& newname );
+	// Called by the local player
+	virtual movestatus_t PlayMove( Player *player, Card *card );
+	// These are to be ignored
+	virtual void NewRound() {}
+	virtual void EndTurn() {}
 protected:
-  friend class RemoteHandler;
-  void PlayRemoteMove( Player *player, Card *card );
-  void NewRound( Card* trumph, Player* owner, CardList& localcards );
-  void EndTurn( Player* winner );
+	friend class RemoteHandler;
+	void PlayRemoteMove( Player *player, Card *card );
+	void NewRound( Card* trumph, Player* owner, CardList& localcards );
+	void EndTurn( Player* winner );
 private:
-  RemoteHandler* m_handler;
-  LocalPlayer* localplayer;
-  HumanPlayer* fake_players[3];
+	RemoteHandler* m_handler;
+	LocalPlayer* localplayer;
+	HumanPlayer* fake_players[3];
 };
 
 #endif // _REMOTEGAME_HPP_

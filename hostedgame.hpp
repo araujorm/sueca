@@ -29,13 +29,13 @@ class HostedGame;
 class HostedGame: public Game
 {
 public:
-  HostedGame( Player* p1,
-	      Player* p2,
-	      Player* p3,
-	      Player* p4,
-	      MyCanvas *the_canvas
-  );
-  virtual void SetPlayerName( Player* player, const wxString& newname );
+	HostedGame( Player* p1,
+	            Player* p2,
+	            Player* p3,
+	            Player* p4,
+	            MyCanvas *the_canvas
+	);
+	virtual void SetPlayerName( Player* player, const wxString& newname );
 };
 
 #endif // _HOSTEDGAME_HPP_
