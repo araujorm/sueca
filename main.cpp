@@ -44,7 +44,7 @@ bool Sueca::OnInit()
 	config->Read( "IP port", (int*)&ip_port, 45678 );
 	config->Read( "Connect IP address", &connect_ip_address, wxEmptyString );
 	config->Read( "Player name", &playername, wxGetUserId() );
-	config->Read( "Update delay", (int*)&update_delay, 3 );
+	config->Read( "Update delay", (int*)&update_delay, 8 );
 	int stored_bot_level;
 	config->Read( "Bot level", &stored_bot_level, (int)BOT_SMART );
 	bot_level = (botlevel_t)stored_bot_level;

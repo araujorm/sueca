@@ -358,9 +358,12 @@ void MyCanvas::OnCardMoveEvent( CardMoveEvent& event )
 		RefreshRect( update_reg.GetBox() );
 		// Update all moving cards at once
 		if( ++event.moved >= event.inst ) {
-			if( ++event.skipped >= wxGetApp().GetUpdateDelay() ) {
-				// TODO: check this delay
-				for( unsigned int i = 0; i < 50000; i++ );
+			unsigned int speed = wxGetApp().GetUpdateDelay();
+			if( speed >= 10 ) {
+				event.skipped = 0;
+			}
+			else if( ++event.skipped >= speed ) {
+				wxMilliSleep( 5 );
 				Update();
 				event.skipped = 0;
 			}
