@@ -313,20 +313,37 @@ Card* SmartPlayer::PlayFollowing( const CardList* played )
 		}
 	}
 
-	// Case: can't follow suit
+	// Case: can't follow suit, partner is winning.
+	// Mirror the "can follow suit" logic above: only dump a high-value
+	// card when partner's win is reasonably safe - we're the last to
+	// play, or partner's card is an ace, a 7, or a trump (hard for a
+	// remaining opponent to beat). Otherwise an opponent still to play
+	// could capture the trick and we don't want to hand them extra
+	// points, so play the cheapest non-trump instead.
 	if( partner_winning ) {
-		// Partner is winning - don't trump! Dump highest value non-trump
-		Card* dump = NULL;
-		for( int s = SUITMIN; s <= SUITMAX; s++ ) {
-			if( s == trumphsuit || bysuit[s].GetCount() == 0 )
+		bool dump_high = we_are_last ||
+		                 best->GetType().GetId() == ACE ||
+		                 best->GetType().GetId() == SEVEN ||
+		                 best->GetSuit().GetId() == trumphsuit;
+		if( dump_high ) {
+			Card* dump = NULL;
+			for( int s = SUITMIN; s <= SUITMAX; s++ ) {
+				if( s == trumphsuit || bysuit[s].GetCount() == 0 )
 	continue;
-			Card* high = HighestValue( bysuit[s] );
-			if( high && ( !dump ||
-			              high->GetType().GetValue() > dump->GetType().GetValue() ) )
+				Card* high = HighestValue( bysuit[s] );
+				if( high && ( !dump ||
+				              high->GetType().GetValue() >
+				                dump->GetType().GetValue() ) )
 	dump = high;
+			}
+			if( dump )
+				return dump;
 		}
-		if( dump )
-			return dump;
+		else {
+			Card* low = LowestNonTrumph();
+			if( low )
+				return low;
+		}
 		// Only trumps left - play lowest trump
 		return LowestValue( bysuit[trumphsuit] );
 	}
