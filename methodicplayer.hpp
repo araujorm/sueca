@@ -43,13 +43,16 @@ class MethodicPlayer: public SmartPlayer
 public:
 	MethodicPlayer( GamePos* gamepos );
 	Card* PlayCard( const CardList* played );
-private:
+protected:
 	int SimulateGame( Card* mycard, const CardList* played,
 	                  Card** simhands, int* simsizes );
 	bool SampleWorld( Card** simhands, int* simsizes );
-	// Heuristic play for simulation - knows about teams and trumps
-	Card* SimPlayCard( Card* hand[], int handsize, const CardList& trick,
-	                   cardsuit_t trumphsuit, bool our_team );
+	// Simulator play policy. Virtual so subclasses can supply a richer
+	// heuristic (ExpertPlayer does this to sharpen the Monte Carlo
+	// evaluation without touching the surrounding PIMC machinery).
+	virtual Card* SimPlayCard( Card* hand[], int handsize,
+	                           const CardList& trick,
+	                           cardsuit_t trumphsuit, bool our_team );
 	// Determine winner position and card in a 4-card trick
 	int SimTrickWinner( const CardList& trick, cardsuit_t trumphsuit );
 	int SimTrickPoints( const CardList& trick );
