@@ -54,6 +54,7 @@ public:
 	void OnClose( wxCloseEvent& event );
 	void RefreshNames();
 private:
+	bool m_no_focus;  // re-entry guard for ShowWithoutActivating
 	unsigned int round;
 	unsigned short displayed;
 	wxBoxSizer* top_sizer;

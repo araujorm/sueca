@@ -165,14 +165,6 @@ Game::Game( Player* p1,
 	// Last trick dialog
 	lasttrickdlg = new LastTrickDialog( frame, frame->lasttrick_pos );
 	lasttrickdlg->Show( frame->viewlasttrick );
-	// Showing modeless dialogs at game start can pull keyboard focus
-	// away from the main frame on some window managers, leaving menu
-	// shortcuts unresponsive until the user clicks back on it. Raise
-	// the frame and re-grab focus so shortcuts keep working.
-	if( frame->viewscores || frame->viewtrumph || frame->viewlasttrick ) {
-		frame->Raise();
-		frame->SetFocus();
-	}
 	// Data initialized, we now put the name labels on the canvas
 	// and on the dialogs
 	RefreshNames();

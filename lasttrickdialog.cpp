@@ -177,7 +177,8 @@ END_EVENT_TABLE();
 
 LastTrickDialog::LastTrickDialog( wxWindow* parent, wxPoint& pos ):
 	wxDialog( parent, wxID_ANY, wxString( "Last Trick" ), pos,
-	          wxDefaultSize, wxDEFAULT_DIALOG_STYLE & ~wxRESIZE_BORDER )
+	          wxDefaultSize, wxDEFAULT_DIALOG_STYLE & ~wxRESIZE_BORDER ),
+	m_no_focus( false )
 {
 	m_panel = new TrickPanel( this );
 
@@ -224,6 +225,22 @@ void LastTrickDialog::RefitDialog()
 	m_panel->RecalcSize();
 	m_top_sizer->SetSizeHints( this );
 	m_top_sizer->Fit( this );
+}
+
+bool LastTrickDialog::Show( bool show )
+{
+	// ShowWithoutActivating() internally calls Show() via virtual
+	// dispatch; without the guard we'd re-enter this override and
+	// recurse until the stack overflows.
+	if( m_no_focus )
+		return wxDialog::Show( show );
+	if( show ) {
+		m_no_focus = true;
+		ShowWithoutActivating();
+		m_no_focus = false;
+		return true;
+	}
+	return wxDialog::Show( false );
 }
 
 void LastTrickDialog::OnClose( wxCloseEvent& event )

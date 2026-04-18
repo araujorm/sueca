@@ -55,9 +55,11 @@ public:
 	void UpdateTrick( PlayerIterator* players, const CardList& played,
 	                  Player* winner );
 	void RefitDialog();
+	bool Show( bool show = true );
 	void OnButton( wxCommandEvent& event ) { Close(); }
 	void OnClose( wxCloseEvent& event );
 private:
+	bool m_no_focus;  // re-entry guard for ShowWithoutActivating
 	TrickPanel* m_panel;
 	wxStaticText* m_winner_text;
 	wxBoxSizer* m_top_sizer;

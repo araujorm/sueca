@@ -32,7 +32,8 @@ END_EVENT_TABLE();
 static char* no_trumph_str = "No trumph set";
 
 TrumphDialog::TrumphDialog( wxWindow* parent, wxPoint& pos ):
-	wxDialog( parent, wxID_ANY, wxString( "Trumph" ), pos ), empty_bmp( 1, 1 )
+	wxDialog( parent, wxID_ANY, wxString( "Trumph" ), pos ),
+	m_no_focus( false ), empty_bmp( 1, 1 )
 {
 	bmp = new wxStaticBitmap( this, wxID_ANY, empty_bmp );
 	text = new wxStaticText( this, wxID_ANY, no_trumph_str, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER );
@@ -62,6 +63,22 @@ void TrumphDialog::UpdateTrumph( Card* trumph, Player* owner )
 	bmp->SetBitmap( dispbmp );
 	text->SetLabel( txtstr );
 	top_sizer->SetSizeHints( this );
+}
+
+bool TrumphDialog::Show( bool show )
+{
+	// ShowWithoutActivating() internally calls Show() via virtual
+	// dispatch; without the guard we'd re-enter this override and
+	// recurse until the stack overflows.
+	if( m_no_focus )
+		return wxDialog::Show( show );
+	if( show ) {
+		m_no_focus = true;
+		ShowWithoutActivating();
+		m_no_focus = false;
+		return true;
+	}
+	return wxDialog::Show( false );
 }
 
 void TrumphDialog::OnClose( wxCloseEvent& event )

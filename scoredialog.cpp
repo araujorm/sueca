@@ -31,7 +31,8 @@ BEGIN_EVENT_TABLE( ScoreDialog, wxDialog )
 END_EVENT_TABLE();
 
 ScoreDialog::ScoreDialog( wxWindow* parent, Team* nteam1, Team* nteam2, wxPoint& pos ):
-	wxDialog( parent, wxID_ANY, wxString( "Game scores" ), pos ), round( 1 ), displayed( 0 ),
+	wxDialog( parent, wxID_ANY, wxString( "Game scores" ), pos ),
+	m_no_focus( false ), round( 1 ), displayed( 0 ),
 	team1points( NULL ), team2points( NULL ), roundlabel( NULL ),
 	new_round( true ), team1( nteam1 ), team2( nteam2 )
 {
@@ -99,9 +100,23 @@ void ScoreDialog::UpdateRoundResults( const wxString& s1, const wxString& s2,
 
 bool ScoreDialog::Show( bool show )
 {
-	if( show )
+	// ShowWithoutActivating() internally calls Show() via virtual
+	// dispatch - without the guard we'd re-enter this override and
+	// recurse until the stack overflows. The flag lets the inner call
+	// go straight to the base wxDialog::Show.
+	if( m_no_focus )
+		return wxDialog::Show( show );
+	if( show ) {
 		UpdateRoundResults( "", "", true );
-	return wxDialog::Show( show );
+		// Prevent the dialog from stealing keyboard focus from the main
+		// frame - menu shortcuts stay responsive without the user
+		// having to click back on the main window.
+		m_no_focus = true;
+		ShowWithoutActivating();
+		m_no_focus = false;
+		return true;
+	}
+	return wxDialog::Show( false );
 }
 
 void ScoreDialog::SetEndRoundResults()

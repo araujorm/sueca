@@ -37,9 +37,11 @@ public:
 	wxStaticText* text;
 	TrumphDialog( wxWindow* parent, wxPoint& pos );
 	void UpdateTrumph( Card* trumph, Player* owner );
+	bool Show( bool show = true );
 	void OnButton( wxCommandEvent& event ) { Close(); }
 	void OnClose( wxCloseEvent& event );
 private:
+	bool m_no_focus;  // re-entry guard for ShowWithoutActivating
 	wxBitmap empty_bmp;
 	wxBoxSizer* top_sizer;
 	DECLARE_EVENT_TABLE();
