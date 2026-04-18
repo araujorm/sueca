@@ -204,38 +204,71 @@ Card* SmartPlayer::LowestNonTrumph()
 	return result;
 }
 
-// Strategy when we are the first to play
+// Strategy when we are the first to play (leading the trick).
+//
+// Leading is the most strategic moment in sueca: we choose which suit to
+// engage and a bad choice throws point cards away. Scoring recap: ace 11,
+// 7 (bisca) 10, K 4, J 3, Q 2, others 0. The sueca ranking from highest
+// to lowest is: A > 7 > K > J > Q > 6 > 5 > 4 > 3 > 2.
+//
+// Two rules of thumb drive this heuristic:
+//
+//   1. Cash winners: if we have a card guaranteed to win this trick
+//      (ace, or the 7 when the ace of that suit is already out), lead it
+//      and bank the points for our team.
+//
+//   2. Otherwise lead cheap: if we don't have a sure winner, lead a
+//      worthless card (value 0, typically 2/3/4/5/6) so that even if we
+//      lose the trick the opponents gain at most a couple of points. A
+//      cardinal sin of sueca is leading a point card into an unprotected
+//      suit - it will be captured.
+//
+// Cashing is always safe in the trump suit (a trump can't be trumped),
+// but for non-trump suits we guard against having our ace/bisca chopped
+// off by an opponent who is already void of that suit:
+//   - plhasnot[opp][suit]: we observed the opponent discarding on this
+//     suit before, so they can trump;
+//   - n_out[suit] > 6: more than 6 of the 10 cards of the suit are out,
+//     so someone being void is likely.
+// Non-trump cashing is tried before trump cashing so we keep our trump
+// winners for moments where they are most valuable (e.g. trumping an
+// opponent's ace later in the game).
 Card* SmartPlayer::PlayFirst()
 {
 	cardsuit_t trumphsuit = trumph->GetSuit().GetId();
 
-	// Try our best non-trump cards first
+	// 1. Non-trump suits: cash the ace, or the 7 when the ace is out.
+	// Apply void-risk filters to avoid being trumped.
 	for( int s = SUITMIN; s <= SUITMAX; s++ ) {
 		if( s == trumphsuit || bysuit[s].GetCount() == 0 )
 			continue;
-		// Skip suits where opponents have shown they don't have it (they'd trump)
 		if( plhasnot[SBOT_LEFT][s] || plhasnot[SBOT_RIGHT][s] )
 			continue;
-		// Skip suits where many cards are already out (less predictable)
 		if( n_out[s] > 6 )
 			continue;
-		CardList::Node* node = bysuit[s].GetLast();
-		if( node ) {
-			Card* card = node->GetData();
-			// Play ace if we have it
-			if( card->GetType().GetId() == ACE )
-	return card;
-			// Play 7 if ace of this suit is already out
-			if( card->GetType().GetId() == SEVEN && IsOut( ACE, s ) )
-	return card;
-		}
+		Card* highest = bysuit[s].GetLast()->GetData();
+		if( highest->GetType().GetId() == ACE )
+			return highest;
+		if( highest->GetType().GetId() == SEVEN && IsOut( ACE, s ) )
+			return highest;
 	}
 
-	// Try leading with a trump if we have one
-	if( bysuit[trumphsuit].GetCount() > 0 )
-		return bysuit[trumphsuit].GetLast()->GetData();
+	// 2. Trump suit: same cash idea without void-risk filters. A trump
+	// lead can't be chopped - anyone holding trump must follow suit, and
+	// nothing else beats trump.
+	if( bysuit[trumphsuit].GetCount() > 0 ) {
+		Card* highest = bysuit[trumphsuit].GetLast()->GetData();
+		if( highest->GetType().GetId() == ACE )
+			return highest;
+		if( highest->GetType().GetId() == SEVEN &&
+		    IsOut( ACE, trumphsuit ) )
+			return highest;
+	}
 
-	// Fall back: play the lowest value card we have
+	// 3. No guaranteed winner - lead the cheapest card. LowestNonTrumph
+	// picks the lowest-value card across all non-trump suits (preferring
+	// value-0 cards: 2/3/4/5/6). Only if our hand is all trumps do we
+	// lead the cheapest trump.
 	Card* lowest = LowestNonTrumph();
 	if( lowest )
 		return lowest;
