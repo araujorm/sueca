@@ -18,12 +18,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #include <cstdlib>
-#include "expertplayer.hpp"
+#include "methodicplayer.hpp"
 
-ExpertPlayer::ExpertPlayer( GamePos* gamepos ):
+MethodicPlayer::MethodicPlayer( GamePos* gamepos ):
 	SmartPlayer( gamepos ) {}
 
-bool ExpertPlayer::SimBeats( Card* card, Card* best, cardsuit_t trumphsuit )
+bool MethodicPlayer::SimBeats( Card* card, Card* best, cardsuit_t trumphsuit )
 {
 	if( card->GetSuit().GetId() == trumphsuit &&
 	    best->GetSuit().GetId() != trumphsuit )
@@ -34,7 +34,7 @@ bool ExpertPlayer::SimBeats( Card* card, Card* best, cardsuit_t trumphsuit )
 	return false;
 }
 
-int ExpertPlayer::SimTrickWinner( const CardList& trick, cardsuit_t trumphsuit )
+int MethodicPlayer::SimTrickWinner( const CardList& trick, cardsuit_t trumphsuit )
 {
 	CardList::Node* node = trick.GetFirst();
 	Card* best = node->GetData();
@@ -49,7 +49,7 @@ int ExpertPlayer::SimTrickWinner( const CardList& trick, cardsuit_t trumphsuit )
 	return winpos;
 }
 
-int ExpertPlayer::SimTrickPoints( const CardList& trick )
+int MethodicPlayer::SimTrickPoints( const CardList& trick )
 {
 	int pts = 0;
 	CardList::Node* node = trick.GetFirst();
@@ -62,7 +62,7 @@ int ExpertPlayer::SimTrickPoints( const CardList& trick )
 
 // Heuristic play for simulated players.
 // our_team: true if this simulated player is on our team (us or partner).
-Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
+Card* MethodicPlayer::SimPlayCard( Card* hand[], int handsize,
                                  const CardList& trick,
                                  cardsuit_t trumphsuit, bool our_team )
 {
@@ -73,11 +73,41 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 	int pick_idx = -1;
 
 	if( !first ) {
-		// Leading: play highest card (aces first)
+		// Leading in the simulation.
+		//
+		// A credible leading policy is essential: Monte Carlo averages
+		// final team scores across many sampled worlds, and unrealistic
+		// simulated leads skew the evaluation (simulated players dumping
+		// aces and biscas as leads inflates our projected score and
+		// hides the real cost of making a bad lead ourselves).
+		//
+		// The policy:
+		//   - If the hand contains an ace, lead it. It's a guaranteed
+		//     winner of its suit; the risk of being trumped by a void
+		//     opponent is captured naturally by averaging across worlds.
+		//   - Otherwise lead the lowest-value card (preferring value-0
+		//     cards 2/3/4/5/6, tie-broken by card rank) so that losing
+		//     the trick costs as little as possible.
+		// We don't cash the 7 (bisca) here because the simulator doesn't
+		// carry the global "is the ace out?" signal needed to do it
+		// safely, and leading a bisca into an unprotected suit is a
+		// cardinal sin.
 		for( int i = 0; i < handsize; i++ ) {
-			if( pick_idx < 0 ||
-			    hand[i]->GetType() > hand[pick_idx]->GetType() )
+			if( hand[i]->GetType().GetId() == ACE ) {
 				pick_idx = i;
+				break;
+			}
+		}
+		if( pick_idx < 0 ) {
+			for( int i = 0; i < handsize; i++ ) {
+				if( pick_idx < 0 ||
+				    hand[i]->GetType().GetValue() <
+				      hand[pick_idx]->GetType().GetValue() ||
+				    ( hand[i]->GetType().GetValue() ==
+				        hand[pick_idx]->GetType().GetValue() &&
+				      hand[i]->GetType() < hand[pick_idx]->GetType() ) )
+					pick_idx = i;
+			}
 		}
 	}
 	else {
@@ -219,7 +249,7 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 	return result;
 }
 
-bool ExpertPlayer::SampleWorld( Card** simhands, int* simsizes )
+bool MethodicPlayer::SampleWorld( Card** simhands, int* simsizes )
 {
 	// Collect unknown cards: not in our hand and not played
 	Card* unknown[40];
@@ -291,7 +321,7 @@ bool ExpertPlayer::SampleWorld( Card** simhands, int* simsizes )
 // Players: 0=right(opp), 1=partner, 2=left(opp), 3=us
 // Turn order: 3 -> 0 -> 1 -> 2 -> 3 ...
 // Our team: 1 and 3.
-int ExpertPlayer::SimulateGame( Card* mycard, const CardList* played,
+int MethodicPlayer::SimulateGame( Card* mycard, const CardList* played,
                                 Card** simhands, int* simsizes )
 {
 	cardsuit_t trumphsuit = trumph->GetSuit().GetId();
@@ -391,7 +421,7 @@ int ExpertPlayer::SimulateGame( Card* mycard, const CardList* played,
 	return team_points;
 }
 
-Card* ExpertPlayer::PlayCard( const CardList* played )
+Card* MethodicPlayer::PlayCard( const CardList* played )
 {
 	// If only one valid card, play it immediately
 	CardList valid;

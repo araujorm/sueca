@@ -17,24 +17,31 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef _EXPERTPLAYER_HPP_
-#define _EXPERTPLAYER_HPP_ 1
+#ifndef _METHODICPLAYER_HPP_
+#define _METHODICPLAYER_HPP_ 1
 
 // Forward declarations
-class ExpertPlayer;
+class MethodicPlayer;
 
 #include "smartplayer.hpp"
 
 #define PIMC_WORLDS 100
 
-// Expert player: uses Perfect Information Monte Carlo sampling
+// Methodic player: Perfect Information Monte Carlo (PIMC) with a simple,
+// rule-based simulator. "Textbook" approach - trusts the law of large
+// numbers. For each of our valid moves we sample many possible worlds
+// (random distributions of the cards we don't know) and, in each world,
+// simulate the rest of the game with a naive but plausible policy for
+// every player. The move whose sampled average team score is highest
+// wins.
+//
 // Players in simulation: 0=right(opp), 1=partner, 2=left(opp), 3=us
 // Turn order: 3 -> 0 -> 1 -> 2 -> 3 ...
 // Our team: 1 and 3. Their team: 0 and 2.
-class ExpertPlayer: public SmartPlayer
+class MethodicPlayer: public SmartPlayer
 {
 public:
-	ExpertPlayer( GamePos* gamepos );
+	MethodicPlayer( GamePos* gamepos );
 	Card* PlayCard( const CardList* played );
 private:
 	int SimulateGame( Card* mycard, const CardList* played,
@@ -50,4 +57,4 @@ private:
 	bool SimBeats( Card* card, Card* best, cardsuit_t trumphsuit );
 };
 
-#endif // _EXPERTPLAYER_HPP_
+#endif // _METHODICPLAYER_HPP_

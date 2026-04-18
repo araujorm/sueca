@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "main.hpp"
 #include "player.hpp"
 #include "smartplayer.hpp"
-#include "expertplayer.hpp"
+#include "methodicplayer.hpp"
 #include <wx/config.h>
 #include <wx/utils.h>
 
@@ -183,7 +183,9 @@ Player* Sueca::GetBotPlayer( GamePos* gamepos )
 	case BOT_DUMB:
 		return new DumbPlayer( gamepos );
 	case BOT_EXPERT:
-		return new ExpertPlayer( gamepos );
+		// Placeholder: the new blended ExpertPlayer is introduced in a
+		// later commit. For now BOT_EXPERT falls back to MethodicPlayer.
+		return new MethodicPlayer( gamepos );
 	default:
 		return new SmartPlayer( gamepos );
 	}
