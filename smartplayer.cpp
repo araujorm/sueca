@@ -237,13 +237,60 @@ Card* SmartPlayer::LowestNonTrumph()
 // to hold the ace until it becomes useless. The observed-void filter
 // still applies, because a known trump threat doesn't go away just
 // because time is running short.
-// Non-trump cashing is tried before trump cashing so we keep our trump
-// winners for moments where they are most valuable (e.g. trumping an
-// opponent's ace later in the game).
+// Non-trump cashing is normally tried before trump cashing so we keep
+// our trump winners for moments where they are most valuable (e.g.
+// trumping an opponent's ace later in the game). That ordering is
+// inverted in one specific case - see the "destrunfe" block below.
 Card* SmartPlayer::PlayFirst()
 {
 	cardsuit_t trumphsuit = trumph->GetSuit().GetId();
 	bool endgame = GetHand().GetCount() <= 3;
+
+	// Count cashable side winners (aces, or 7s with the ace already out)
+	// in non-trump suits, applying the same void-risk filters the cash
+	// loop below will use. Two or more such winners trigger the
+	// "destrunfe" (pulling trumps) strategy.
+	int side_winners = 0;
+	for( int s = SUITMIN; s <= SUITMAX; s++ ) {
+		if( s == trumphsuit || bysuit[s].GetCount() == 0 )
+			continue;
+		if( plhasnot[SBOT_LEFT][s] || plhasnot[SBOT_RIGHT][s] )
+			continue;
+		if( !endgame && n_out[s] > 7 )
+			continue;
+		Card* highest = bysuit[s].GetLast()->GetData();
+		if( highest->GetType().GetId() == ACE )
+			side_winners++;
+		else if( highest->GetType().GetId() == SEVEN && IsOut( ACE, s ) )
+			side_winners++;
+	}
+
+	// "Destrunfe" (pulling trumps): when two or more side winners are
+	// waiting to be cashed and the round still has enough tricks for the
+	// effect to pay off, try to clear opponents' trumps first so those
+	// side winners become safer on the next rounds.
+	//   - If we hold a trump winner (ace, or 7 with the trump ace out),
+	//     cash it: scores immediately and pulls one trump from every
+	//     other player.
+	//   - Otherwise, if we're loaded with trumps (4+), lead our cheapest
+	//     trump. We'll likely lose this trick but opponents have to burn
+	//     a trump each, and our side winners stop being trumpable soon
+	//     after.
+	// The endgame guard keeps the strategy out of the last three tricks,
+	// where there isn't enough runway for the effect to pay back.
+	if( !endgame && side_winners >= 2 ) {
+		int our_trumps = bysuit[trumphsuit].GetCount();
+		if( our_trumps > 0 ) {
+			Card* highest = bysuit[trumphsuit].GetLast()->GetData();
+			if( highest->GetType().GetId() == ACE )
+				return highest;
+			if( highest->GetType().GetId() == SEVEN &&
+			    IsOut( ACE, trumphsuit ) )
+				return highest;
+			if( our_trumps >= 4 )
+				return LowestValue( bysuit[trumphsuit] );
+		}
+	}
 
 	// 1. Non-trump suits: cash the ace, or the 7 when the ace is out.
 	// Apply void-risk filters to avoid being trumped.
