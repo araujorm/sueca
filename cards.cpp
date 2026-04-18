@@ -51,7 +51,7 @@ Card::Card( Deck *deck, CardType& type, CardSuit& suit,
             const unsigned char* pngdata, unsigned int pnglen ):
 	m_deck( deck ), m_type( type ), m_suit( suit ), m_turned( false ),
 	m_playable( false ), m_bitmap( BitmapFromPNG( pngdata, pnglen ) ),
-	blitop( wxCOPY ) {}
+	m_inverted( false ) {}
 
 wxString Card::NameStr()
 {
@@ -73,14 +73,16 @@ bool Card::HitTest( const wxPoint& pt ) const
 
 bool Card::Draw( wxDC& dc )
 {
-	wxBitmap bitmap = m_turned ? m_deck->GetFace() : GetBitmap();
+	// Pick the bitmap to draw: the deck's back if the card is turned
+	// down, otherwise the face - possibly the pre-computed color-negated
+	// face while a flash is active.
+	wxBitmap bitmap = m_turned ? m_deck->GetFace() :
+	                  ( m_inverted ? m_bitmap_inverted : m_bitmap );
 	if( bitmap.Ok() ) {
 		wxMemoryDC memDC;
 		memDC.SelectObject( bitmap );
-
 		dc.Blit( m_pos.x, m_pos.y, bitmap.GetWidth(), bitmap.GetHeight(),
-		         & memDC, 0, 0, blitop, TRUE );
-
+		         & memDC, 0, 0, wxCOPY, TRUE );
 		return TRUE;
 	}
 	else
@@ -89,7 +91,22 @@ bool Card::Draw( wxDC& dc )
 
 void Card::ColorInvert( bool inverted )
 {
-	blitop = inverted ? wxSRC_INVERT : wxCOPY;
+	m_inverted = inverted;
+	// Build the inverted bitmap on first use. Historically this effect
+	// was done by blitting with wxSRC_INVERT, but on modern backends
+	// (GTK3/Cairo in particular) raster ops other than wxCOPY are not
+	// reliably supported, so we pre-compute the negated face and swap
+	// it in during the flash.
+	if( inverted && ! m_bitmap_inverted.IsOk() && m_bitmap.IsOk() ) {
+		wxImage img = m_bitmap.ConvertToImage();
+		unsigned char* rgb = img.GetData();
+		int n = img.GetWidth() * img.GetHeight() * 3;
+		for( int i = 0; i < n; i++ )
+			rgb[i] = 255 - rgb[i];
+		// Alpha channel (if any) is left untouched - we only invert
+		// colour, not transparency.
+		m_bitmap_inverted = wxBitmap( img );
+	}
 }
 
 // Permanent card types

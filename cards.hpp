@@ -111,8 +111,13 @@ private:
 	bool m_turned;
 	bool m_playable;
 	wxBitmap m_bitmap;
+	// Color-negated face, used during the invalid-move flash. Built
+	// lazily on the first flash because on some wx backends (notably
+	// GTK3/Cairo) the raster-op approach to inverting at blit time is
+	// not reliably supported.
+	wxBitmap m_bitmap_inverted;
+	bool m_inverted;
 	wxPoint m_pos;
-	wxRasterOperationMode blitop;
 };
 
 // List of Cards
