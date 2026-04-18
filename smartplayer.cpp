@@ -138,20 +138,29 @@ bool SmartPlayer::Beats( Card* card, Card* best )
 	return false;
 }
 
-// Find the lowest card in 'candidates' that beats 'best'
+// Pick a card from 'candidates' that beats 'best'. If the ace of the
+// relevant suit is one of our beaters, prefer it over the cheaper
+// alternatives: playing the ace now banks 11 points we could
+// otherwise lose to a later bad turn of events, and it makes any 7 of
+// the same suit we still hold a guaranteed winner (ace-out) from then
+// on. Only when the ace is not a beater do we fall back to the
+// cheapest beater by rank, so we keep stronger cards for later tricks.
 Card* SmartPlayer::LowestBeater( CardList& candidates, Card* best )
 {
 	Card* result = NULL;
+	Card* ace = NULL;
 	CardList::Node* node = candidates.GetFirst();
 	while( node ) {
 		Card* card = node->GetData();
 		if( Beats( card, best ) ) {
+			if( card->GetType().GetId() == ACE )
+	ace = card;
 			if( !result || card->GetType() < result->GetType() )
 	result = card;
 		}
 		node = node->GetNext();
 	}
-	return result;
+	return ace ? ace : result;
 }
 
 // Find the highest value card in a list (prefer 7=10, A=11, K=4, etc.)
