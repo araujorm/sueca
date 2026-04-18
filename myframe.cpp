@@ -279,7 +279,7 @@ bool MyFrame::ProceedWithNewGame()
 }
 
 static const char* bot_level_names[BOT_LEVEL_COUNT] =
-  { "Dumb", "Smart", "Expert" };
+  { "Dumb", "Methodic", "Smart", "Expert" };
 
 void MyFrame::UpdateBotLevelStatus()
 {

@@ -182,6 +182,8 @@ Player* Sueca::GetBotPlayer( GamePos* gamepos )
 	switch( level ) {
 	case BOT_DUMB:
 		return new DumbPlayer( gamepos );
+	case BOT_METHODIC:
+		return new MethodicPlayer( gamepos );
 	case BOT_EXPERT:
 		// Placeholder: the new blended ExpertPlayer is introduced in a
 		// later commit. For now BOT_EXPERT falls back to MethodicPlayer.

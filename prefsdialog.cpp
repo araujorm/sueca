@@ -53,13 +53,18 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	wxBoxSizer* bot_sizer = new wxBoxSizer( wxHORIZONTAL );
 	bot_sizer->Add( new wxStaticText( this, wxID_ANY, "Bot difficulty" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
 	static const wxString bot_labels[BOT_LEVEL_COUNT] =
-	  { "Dumb", "Smart", "Expert" };
+	  { "Dumb", "Methodic", "Smart", "Expert" };
 	static const wxString bot_tooltips[BOT_LEVEL_COUNT] = {
 	  "Plays any valid card, no strategy.\n"
 	  "At least one level must stay selected.",
-	  "Uses basic strategy and card tracking.\n"
+	  "Uses Monte Carlo simulation with a simple rule-based\n"
+	  "heuristic for each simulated play.\n"
 	  "At least one level must stay selected.",
-	  "Uses Monte Carlo simulation for best play.\n"
+	  "Uses rule-based strategy with card tracking and\n"
+	  "observational memory of other players.\n"
+	  "At least one level must stay selected.",
+	  "Blends Monte Carlo simulation with the rule-based\n"
+	  "heuristics of the Smart level for the strongest play.\n"
 	  "At least one level must stay selected."
 	};
 	for( int l = 0; l < BOT_LEVEL_COUNT; l++ ) {

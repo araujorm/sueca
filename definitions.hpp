@@ -25,12 +25,22 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #define VERSION_STRING  SUECA_NAME " version " SUECA_VER
 #define PLAYER_NAME_MAX 32
 
-// Bot difficulty levels
-enum botlevel_t { BOT_DUMB = 0, BOT_SMART, BOT_EXPERT, BOT_LEVEL_COUNT };
+// Bot difficulty levels, ordered by expected strength from weakest to
+// strongest: Dumb (random), Methodic (Monte Carlo with simple heuristics),
+// Smart (rule-based with card tracking), Expert (Monte Carlo blended with
+// Smart heuristics).
+enum botlevel_t {
+	BOT_DUMB = 0,
+	BOT_METHODIC,
+	BOT_SMART,
+	BOT_EXPERT,
+	BOT_LEVEL_COUNT
+};
 
 // Bitmask flags for enabled bot levels (one or more may be active)
 #define BOT_FLAG( lvl )  ( 1 << ( lvl ) )
-#define BOT_FLAGS_ALL    ( BOT_FLAG( BOT_DUMB ) | BOT_FLAG( BOT_SMART ) | BOT_FLAG( BOT_EXPERT ) )
+#define BOT_FLAGS_ALL    ( BOT_FLAG( BOT_DUMB ) | BOT_FLAG( BOT_METHODIC ) | \
+                           BOT_FLAG( BOT_SMART ) | BOT_FLAG( BOT_EXPERT ) )
 
 // Card back designs
 enum cardback_t { CARDBACK_BLUE = 0, CARDBACK_RED };
