@@ -227,15 +227,23 @@ Card* SmartPlayer::LowestNonTrumph()
 // but for non-trump suits we guard against having our ace/bisca chopped
 // off by an opponent who is already void of that suit:
 //   - plhasnot[opp][suit]: we observed the opponent discarding on this
-//     suit before, so they can trump;
-//   - n_out[suit] > 6: more than 6 of the 10 cards of the suit are out,
-//     so someone being void is likely.
+//     suit before, so they can trump - a hard rule;
+//   - n_out[suit] > 7: more than 7 of the 10 cards of the suit are out,
+//     so someone being void is likely - a soft probability heuristic.
+// The soft heuristic is dropped once we enter the endgame (3 or fewer
+// cards in hand): an uncashed ace that stays in hand will likely be
+// forced out on a trick we didn't pick, capturing no points - it's
+// better to attempt the cash even under slightly higher void risk than
+// to hold the ace until it becomes useless. The observed-void filter
+// still applies, because a known trump threat doesn't go away just
+// because time is running short.
 // Non-trump cashing is tried before trump cashing so we keep our trump
 // winners for moments where they are most valuable (e.g. trumping an
 // opponent's ace later in the game).
 Card* SmartPlayer::PlayFirst()
 {
 	cardsuit_t trumphsuit = trumph->GetSuit().GetId();
+	bool endgame = GetHand().GetCount() <= 3;
 
 	// 1. Non-trump suits: cash the ace, or the 7 when the ace is out.
 	// Apply void-risk filters to avoid being trumped.
@@ -244,7 +252,7 @@ Card* SmartPlayer::PlayFirst()
 			continue;
 		if( plhasnot[SBOT_LEFT][s] || plhasnot[SBOT_RIGHT][s] )
 			continue;
-		if( n_out[s] > 6 )
+		if( !endgame && n_out[s] > 7 )
 			continue;
 		Card* highest = bysuit[s].GetLast()->GetData();
 		if( highest->GetType().GetId() == ACE )
