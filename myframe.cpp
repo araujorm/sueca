@@ -241,8 +241,18 @@ GNU General Public License for more details.",
 
 void MyFrame::OnClose( wxCloseEvent& event )
 {
-	// Update dialog positions from live dialogs if game is running
 	Game* game = wxGetApp().GetGame();
+	// Confirm before exiting mid-game. Skip the prompt when the close
+	// cannot be vetoed (system shutdown, logout) so we don't block the
+	// session from ending.
+	if( game && event.CanVeto() &&
+	    wxMessageBox( "A game is in progress. Do you really want to exit?",
+	                  "Game in progress",
+	                  wxYES_NO | wxICON_QUESTION, this ) == wxNO ) {
+		event.Veto();
+		return;
+	}
+	// Update dialog positions from live dialogs if game is running
 	if( game ) {
 		score_pos = game->score->GetPosition();
 		trumph_pos = game->trumphdlg->GetPosition();
