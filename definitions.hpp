@@ -26,7 +26,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #define PLAYER_NAME_MAX 32
 
 // Bot difficulty levels
-enum botlevel_t { BOT_DUMB = 0, BOT_SMART, BOT_EXPERT, BOT_RANDOM };
+enum botlevel_t { BOT_DUMB = 0, BOT_SMART, BOT_EXPERT, BOT_LEVEL_COUNT };
+
+// Bitmask flags for enabled bot levels (one or more may be active)
+#define BOT_FLAG( lvl )  ( 1 << ( lvl ) )
+#define BOT_FLAGS_ALL    ( BOT_FLAG( BOT_DUMB ) | BOT_FLAG( BOT_SMART ) | BOT_FLAG( BOT_EXPERT ) )
 
 // Card back designs
 enum cardback_t { CARDBACK_BLUE = 0, CARDBACK_RED };

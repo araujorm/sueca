@@ -47,18 +47,30 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	delay_entry = new wxSlider( this, wxID_ANY, wxGetApp().GetUpdateDelay(), 1, 10, wxDefaultPosition, wxSize(100, wxID_ANY), wxSL_HORIZONTAL | wxSL_LABELS | wxSL_AUTOTICKS );
 	delay_sizer->Add( delay_entry, 0, wxALIGN_CENTER );
 
-	// Bot difficulty option
+	// Bot difficulty options: one or more levels can be enabled. When more
+	// than one is checked, each bot picks a level at random among them.
+	int current_mask = wxGetApp().GetBotLevels();
 	wxBoxSizer* bot_sizer = new wxBoxSizer( wxHORIZONTAL );
 	bot_sizer->Add( new wxStaticText( this, wxID_ANY, "Bot difficulty" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
-	wxString bot_choices[] = { "Dumb", "Smart", "Expert", "Mixed" };
-	bot_level_entry = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 4, bot_choices );
-	bot_level_entry->SetSelection( (int)wxGetApp().GetBotLevel() );
-	bot_level_entry->SetToolTip(
-	  "Dumb - plays any valid card, no strategy\n"
-	  "Smart - uses basic strategy and card tracking\n"
-	  "Expert - uses Monte Carlo simulation for best play\n"
-	  "Mixed - each bot gets a random difficulty" );
-	bot_sizer->Add( bot_level_entry, 0, wxALIGN_CENTER );
+	static const wxString bot_labels[BOT_LEVEL_COUNT] =
+	  { "Dumb", "Smart", "Expert" };
+	static const wxString bot_tooltips[BOT_LEVEL_COUNT] = {
+	  "Plays any valid card, no strategy.\n"
+	  "At least one level must stay selected.",
+	  "Uses basic strategy and card tracking.\n"
+	  "At least one level must stay selected.",
+	  "Uses Monte Carlo simulation for best play.\n"
+	  "At least one level must stay selected."
+	};
+	for( int l = 0; l < BOT_LEVEL_COUNT; l++ ) {
+		bot_level_checks[l] = new wxCheckBox( this, wxID_ANY, bot_labels[l] );
+		bot_level_checks[l]->SetValue( ( current_mask & BOT_FLAG( l ) ) != 0 );
+		bot_level_checks[l]->SetToolTip( bot_tooltips[l] );
+		bot_level_checks[l]->Bind( wxEVT_CHECKBOX,
+		                           &PrefsDialog::OnBotLevelCheck, this );
+		bot_sizer->Add( bot_level_checks[l], 0, wxALIGN_CENTER | wxRIGHT, 5 );
+	}
+	UpdateBotLevelEnableState();
 
 	// Card back option
 	wxBoxSizer* back_sizer = new wxBoxSizer( wxHORIZONTAL );
@@ -105,9 +117,16 @@ void PrefsDialog::OnOk( wxCommandEvent& event )
 
 	app.SetLocalPlayerName( newname );
 	app.SetUpdateDelay( delay_entry->GetValue() );
-	botlevel_t newlevel = (botlevel_t)bot_level_entry->GetSelection();
-	if( newlevel != app.GetBotLevel() ) {
-		app.SetBotLevel( newlevel );
+	int newmask = 0;
+	for( int l = 0; l < BOT_LEVEL_COUNT; l++ )
+		if( bot_level_checks[l]->GetValue() )
+			newmask |= BOT_FLAG( l );
+	// Failsafe: guarantee at least one level stays enabled, even if the UI
+	// constraint was bypassed.
+	if( newmask == 0 )
+		newmask = BOT_FLAG( BOT_SMART );
+	if( newmask != app.GetBotLevels() ) {
+		app.SetBotLevels( newmask );
 		if( app.GetGame() )
 			wxMessageBox( "Bot difficulty change will take effect\n"
 			  "when you start a new game.",
@@ -115,6 +134,27 @@ void PrefsDialog::OnOk( wxCommandEvent& event )
 	}
 	app.SetCardBack( (cardback_t)card_back_entry->GetSelection() );
 	Done( event );
+}
+
+void PrefsDialog::OnBotLevelCheck( wxCommandEvent& WXUNUSED( event ) )
+{
+	UpdateBotLevelEnableState();
+}
+
+// If exactly one level is checked, disable that checkbox so the user can't
+// leave the dialog with zero levels enabled. Re-enable all others once more
+// than one is checked.
+void PrefsDialog::UpdateBotLevelEnableState()
+{
+	int checked_count = 0, last_checked = -1;
+	for( int l = 0; l < BOT_LEVEL_COUNT; l++ )
+		if( bot_level_checks[l]->GetValue() ) {
+			checked_count++;
+			last_checked = l;
+		}
+	for( int l = 0; l < BOT_LEVEL_COUNT; l++ )
+		bot_level_checks[l]->Enable(
+		  ! ( checked_count == 1 && l == last_checked ) );
 }
 
 void PrefsDialog::Done( wxCommandEvent& event )

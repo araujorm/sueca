@@ -69,8 +69,8 @@ public:
 	void SetLocalPlayerName( const wxString& newname );
 	unsigned int GetUpdateDelay() const { return update_delay; }
 	void SetUpdateDelay( int new_delay ) { update_delay = new_delay; }
-	botlevel_t GetBotLevel() const { return bot_level; }
-	void SetBotLevel( botlevel_t level ) { bot_level = level; }
+	int GetBotLevels() const { return bot_levels; }
+	void SetBotLevels( int mask ) { bot_levels = mask; }
 	cardback_t GetCardBack() const { return card_back; }
 	void SetCardBack( cardback_t back );
 	Game* GetGame() const { return m_game; }
@@ -80,7 +80,7 @@ private:
 	// Preferences not directly accessible
 	wxString playername;
 	unsigned int update_delay;
-	botlevel_t bot_level;
+	int bot_levels;
 	cardback_t card_back;
 
 	Game* m_game;

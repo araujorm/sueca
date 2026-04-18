@@ -48,9 +48,11 @@ bool Sueca::OnInit()
 	config->Read( "Connect IP address", &connect_ip_address, wxEmptyString );
 	config->Read( "Player name", &playername, wxGetUserId() );
 	config->Read( "Update delay", (int*)&update_delay, 8 );
-	int stored_bot_level;
-	config->Read( "Bot level", &stored_bot_level, (int)BOT_SMART );
-	bot_level = (botlevel_t)stored_bot_level;
+	config->Read( "Bot levels", &bot_levels, BOT_FLAGS_ALL );
+	// Defensive: if the stored mask has no valid bits (corrupted config or
+	// manual edit), fall back to all levels allowed.
+	if( ! ( bot_levels & BOT_FLAGS_ALL ) )
+		bot_levels = BOT_FLAGS_ALL;
 	int stored_card_back;
 	config->Read( "Card back", &stored_card_back, (int)CARDBACK_BLUE );
 	card_back = (cardback_t)stored_card_back;
@@ -115,7 +117,7 @@ void Sueca::PrepareExit()
 	config->Write( "Connect IP address", connect_ip_address );
 	config->Write( "Player name", playername );
 	config->Write( "Update delay", (int)update_delay );
-	config->Write( "Bot level", (int)bot_level );
+	config->Write( "Bot levels", bot_levels );
 	config->Write( "Card back", (int)card_back );
 	delete config;
 }
@@ -165,9 +167,18 @@ void Sueca::SetLocalPlayerName( const wxString& newname )
 
 Player* Sueca::GetBotPlayer( GamePos* gamepos )
 {
-	botlevel_t level = bot_level;
-	if( level == BOT_RANDOM )
-		level = (botlevel_t)( (int)( 3.0 * rand() / ( RAND_MAX + 1.0 ) ) );
+	// Collect currently enabled levels from the bitmask and pick one uniformly
+	// at random. When a single level is enabled, that's the only option.
+	botlevel_t enabled[BOT_LEVEL_COUNT];
+	int n_enabled = 0;
+	for( int l = 0; l < BOT_LEVEL_COUNT; l++ )
+		if( bot_levels & BOT_FLAG( l ) )
+			enabled[n_enabled++] = (botlevel_t)l;
+	// Failsafe if no level is enabled (should not happen via the UI)
+	if( n_enabled == 0 )
+		enabled[n_enabled++] = BOT_SMART;
+	botlevel_t level =
+	  enabled[(int)( (double)n_enabled * rand() / ( RAND_MAX + 1.0 ) )];
 	switch( level ) {
 	case BOT_DUMB:
 		return new DumbPlayer( gamepos );

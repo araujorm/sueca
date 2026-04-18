@@ -278,11 +278,20 @@ bool MyFrame::ProceedWithNewGame()
 	return true;
 }
 
-static const char* bot_level_names[] = { "Dumb", "Smart", "Expert", "Mixed" };
+static const char* bot_level_names[BOT_LEVEL_COUNT] =
+  { "Dumb", "Smart", "Expert" };
 
 void MyFrame::UpdateBotLevelStatus()
 {
-	if( !wxGetApp().GetGame() )
-		SetStatusText( wxString::Format( "Bot: %s",
-		  bot_level_names[wxGetApp().GetBotLevel()] ), 1 );
+	if( wxGetApp().GetGame() )
+		return;
+	int mask = wxGetApp().GetBotLevels();
+	int count = 0, only = -1;
+	for( int l = 0; l < BOT_LEVEL_COUNT; l++ )
+		if( mask & BOT_FLAG( l ) ) {
+			count++;
+			only = l;
+		}
+	const char* name = ( count == 1 ) ? bot_level_names[only] : "Mixed";
+	SetStatusText( wxString::Format( "Bot: %s", name ), 1 );
 }
