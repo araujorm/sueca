@@ -96,6 +96,21 @@ void ObservingBot::TurnEnd( const Player* winner, const CardList& played )
 		}
 		players->GetNext();
 	}
+	// Count-based deduction: a suit has 10 cards total. Whatever isn't in
+	// our hand and hasn't been played is spread among the three other
+	// players - if that number drops to zero we can conclude all of them
+	// are void of the suit, even without having observed the discard yet.
+	// Setting plhasnot for all three tightens both the rule-based filters
+	// (cash decisions, partner-winning safety checks, ...) and the PIMC
+	// world sampler, which is the point of this bot "remembering" the
+	// cards that have come out.
+	for( int s = SUITMIN; s <= SUITMAX; s++ ) {
+		if( 10 - n_out[s] - (int)bysuit[s].GetCount() <= 0 ) {
+			plhasnot[SBOT_RIGHT][s] = true;
+			plhasnot[SBOT_PARTNER][s] = true;
+			plhasnot[SBOT_LEFT][s] = true;
+		}
+	}
 }
 
 // Determine current trick winner and the winning card
