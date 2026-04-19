@@ -492,6 +492,32 @@ Card* MethodicPlayer::PlayCard( const CardList* played )
 				}
 			}
 		}
+
+		// Trumph threat prune: any trump candidate that the still-
+		// unplayed trumph-owning adversary would capture with their
+		// trumph is strictly worse than discarding a non-trump - we'd
+		// lose the trick either way, but giving up a trump makes it
+		// worse. Drop such trumps from the PIMC pool as long as there
+		// is a non-trump alternative left to play. (If our only legal
+		// plays are threatened trumps - e.g. we must follow a trump
+		// lead - we don't prune, because we have no alternative.)
+		bool has_non_trump_alt = false;
+		for( CardList::Node* m = valid.GetFirst(); m; m = m->GetNext() )
+			if( m->GetData()->GetSuit().GetId() != trumphsuit ) {
+				has_non_trump_alt = true;
+				break;
+			}
+		if( has_non_trump_alt ) {
+			CardList::Node* m = valid.GetFirst();
+			while( m ) {
+				Card* c = m->GetData();
+				CardList::Node* next = m->GetNext();
+				if( c->GetSuit().GetId() == trumphsuit &&
+				    TrumphThreatensCandidate( c, *played ) )
+					valid.DeleteNode( m );
+				m = next;
+			}
+		}
 	}
 	if( valid.GetCount() == 1 ) {
 		played_card = valid.GetFirst()->GetData();
