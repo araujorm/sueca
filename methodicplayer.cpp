@@ -265,6 +265,24 @@ bool MethodicPlayer::SampleWorld( Card** simhands, int* simsizes )
 	int each = GetHand().GetCount();
 	simsizes[0] = simsizes[1] = simsizes[2] = each;
 
+	// Pre-place the trumph card in its known owner's hand. The trumph
+	// is revealed to everyone at deal time, so every world should have
+	// it there until it's actually played. Without this the sampler
+	// would distribute the trumph at random, skewing the simulation.
+	int pre_counts[3] = { 0, 0, 0 };
+	if( trumph && trumphowner != this && ! out.Find( trumph ) ) {
+		plindex_t pli = PlayerIndex( trumphowner );
+		if( pli != SBOT_THIS ) {
+			simhands[pli * 10 + 0] = trumph;
+			pre_counts[pli] = 1;
+			for( int i = 0; i < n_unknown; i++ )
+				if( unknown[i] == trumph ) {
+					unknown[i] = unknown[--n_unknown];
+					break;
+				}
+		}
+	}
+
 	// Shuffle unknown cards
 	for( int i = n_unknown - 1; i > 0; i-- ) {
 		int j = (int)( (double)( i + 1 ) * rand() / ( RAND_MAX + 1.0 ) );
@@ -284,7 +302,7 @@ bool MethodicPlayer::SampleWorld( Card** simhands, int* simsizes )
 			}
 		}
 
-		int counts[3] = { 0, 0, 0 };
+		int counts[3] = { pre_counts[0], pre_counts[1], pre_counts[2] };
 		bool ok = true;
 
 		for( int i = 0; i < n_unknown && ok; i++ ) {
@@ -309,10 +327,10 @@ bool MethodicPlayer::SampleWorld( Card** simhands, int* simsizes )
 			return true;
 	}
 
-	// Fallback: ignore constraints
+	// Fallback: ignore plhasnot but keep the trumph placement
 	int idx = 0;
 	for( int p = 0; p < 3; p++ )
-		for( int i = 0; i < each && idx < n_unknown; i++ )
+		for( int i = pre_counts[p]; i < each && idx < n_unknown; i++ )
 			simhands[p * 10 + i] = unknown[idx++];
 	return true;
 }
