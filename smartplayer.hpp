@@ -58,6 +58,11 @@ protected:
 	// Helpers for play decisions
 	Player* CurrentWinner( const CardList* played, Card** best );
 	bool Beats( Card* card, Card* best );
+	// Detect whether the trumph card (public info) is still held by an
+	// adversary who hasn't played yet in the current trick and would
+	// beat 'candidate' with it.
+	bool TrumphThreatensCandidate( Card* candidate,
+	                               const CardList& played );
 	Card* LowestBeater( CardList& candidates, Card* best );
 	Card* HighestValue( CardList& candidates );
 	Card* LowestValue( CardList& candidates );

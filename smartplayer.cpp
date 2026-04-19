@@ -123,6 +123,43 @@ Player* SmartPlayer::CurrentWinner( const CardList* played, Card** best )
 	return winner;
 }
 
+// Would the still-unplayed adversary holding the trumph capture our
+// 'candidate' with it? The trumph is public information: we know its
+// identity and owner, and while it isn't in 'out' it's sitting in
+// that owner's hand. If the owner is an adversary who hasn't yet
+// played in the current trick and the trumph beats 'candidate', then
+// the adversary will over-play our card for a trick we'd otherwise
+// have won. Useful for deciding whether to invest a trump now or
+// discard and wait.
+bool SmartPlayer::TrumphThreatensCandidate( Card* candidate,
+                                            const CardList& played )
+{
+	if( !trumph || !candidate )
+		return false;
+	// Trumph already played? (Present in our 'out' list.)
+	if( out.Find( trumph ) )
+		return false;
+	// Owner is a partner / ourselves - not a threat.
+	if( trumphowner != left && trumphowner != right )
+		return false;
+	// Did the owner already play in this trick?
+	PlayerIterator* pit = thegame->GetPlayers();
+	pit->SetCurrent( turnstarter );
+	Player* p = turnstarter;
+	CardList::Node* n = played.GetFirst();
+	while( n ) {
+		if( p == trumphowner ) {
+			delete pit;
+			return false;
+		}
+		p = pit->GetNext();
+		n = n->GetNext();
+	}
+	delete pit;
+	// Still to play; would their trumph capture our candidate?
+	return Beats( trumph, candidate );
+}
+
 // Does 'card' beat 'best' considering trumps?
 bool SmartPlayer::Beats( Card* card, Card* best )
 {
@@ -421,16 +458,24 @@ Card* SmartPlayer::PlayFollowing( const CardList* played )
 		return LowestValue( bysuit[trumphsuit] );
 	}
 
-	// Adversary is winning and we can't follow suit - consider trumping
+	// Adversary is winning and we can't follow suit - consider trumping.
+	// In both "they haven't trumped" and "over-trump" paths, skip the
+	// trump play if an unplayed adversary holds the trumph card and it
+	// would capture what we'd play - better to discard than feed them
+	// a trump.
 	if( bysuit[trumphsuit].GetCount() > 0 ) {
 		if( best->GetSuit().GetId() != trumphsuit ) {
 			// They haven't trumped - play lowest trump to win
-			return bysuit[trumphsuit].GetFirst()->GetData();
+			Card* low = bysuit[trumphsuit].GetFirst()->GetData();
+			if( !TrumphThreatensCandidate( low, *played ) )
+				return low;
 		}
-		// They already trumped - try to over-trump
-		Card* over = LowestBeater( bysuit[trumphsuit], best );
-		if( over )
-			return over;
+		else {
+			// They already trumped - try to over-trump
+			Card* over = LowestBeater( bysuit[trumphsuit], best );
+			if( over && !TrumphThreatensCandidate( over, *played ) )
+				return over;
+		}
 	}
 
 	// Can't win - discard lowest value card
