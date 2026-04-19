@@ -138,22 +138,31 @@ bool SmartPlayer::Beats( Card* card, Card* best )
 	return false;
 }
 
-// Pick a card from 'candidates' that beats 'best'. If the ace of the
-// relevant suit is one of our beaters, prefer it over the cheaper
-// alternatives: playing the ace now banks 11 points we could
-// otherwise lose to a later bad turn of events, and it makes any 7 of
-// the same suit we still hold a guaranteed winner (ace-out) from then
-// on. Only when the ace is not a beater do we fall back to the
-// cheapest beater by rank, so we keep stronger cards for later tricks.
+// Pick a card from 'candidates' that beats 'best'.
+//
+// For non-trump suits, if the ace is among our beaters prefer it:
+// playing it now banks 11 points we could otherwise lose to a later
+// bad turn of events (a void opponent trumping, the suit never coming
+// back), and it makes any 7 of the same suit we still hold a
+// guaranteed winner from then on.
+//
+// For the trump suit the preference flips: the ace of trumps is
+// unbeatable by definition, it can't be chopped later, and it's the
+// single most useful card to hold back for a guaranteed win on a
+// future trick - so over-trumping with a cheaper trump is the
+// preferred play. This matches common Sueca practice ("cortar com o
+// mais baixo que chegue").
 Card* SmartPlayer::LowestBeater( CardList& candidates, Card* best )
 {
+	cardsuit_t trumphsuit = trumph->GetSuit().GetId();
 	Card* result = NULL;
 	Card* ace = NULL;
 	CardList::Node* node = candidates.GetFirst();
 	while( node ) {
 		Card* card = node->GetData();
 		if( Beats( card, best ) ) {
-			if( card->GetType().GetId() == ACE )
+			if( card->GetType().GetId() == ACE &&
+			    card->GetSuit().GetId() != trumphsuit )
 	ace = card;
 			if( !result || card->GetType() < result->GetType() )
 	result = card;
