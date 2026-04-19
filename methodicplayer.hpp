@@ -54,9 +54,16 @@ protected:
 	// Simulator play policy. Virtual so subclasses can supply a richer
 	// heuristic (ExpertPlayer does this to sharpen the Monte Carlo
 	// evaluation without touching the surrounding PIMC machinery).
+	// sim_out accumulates every card played during the simulation so far
+	// (starting from the observed real-game 'out' list), and lead_slot
+	// tells the policy which sim slot led the current trick - together
+	// they let a subclass know things like "has the ace of this suit
+	// come out during the simulation?" or "is the trumph owner still to
+	// play?" without peeking into anyone else's sim hand.
 	virtual Card* SimPlayCard( Card* hand[], int handsize,
 	                           const CardList& trick,
-	                           cardsuit_t trumphsuit, bool our_team );
+	                           cardsuit_t trumphsuit, bool our_team,
+	                           const CardList& sim_out, int lead_slot );
 	// Determine winner position and card in a 4-card trick
 	int SimTrickWinner( const CardList& trick, cardsuit_t trumphsuit );
 	int SimTrickPoints( const CardList& trick );

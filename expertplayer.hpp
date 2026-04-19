@@ -48,7 +48,8 @@ public:
 protected:
 	Card* SimPlayCard( Card* hand[], int handsize,
 	                   const CardList& trick,
-	                   cardsuit_t trumphsuit, bool our_team );
+	                   cardsuit_t trumphsuit, bool our_team,
+	                   const CardList& sim_out, int lead_slot );
 };
 
 #endif // _EXPERTPLAYER_HPP_

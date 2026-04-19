@@ -57,23 +57,71 @@ ExpertPlayer::ExpertPlayer( GamePos* gamepos ):
 //       the cheapest trump that beats them. Otherwise discard the
 //       lowest-value non-trump (or cheapest trump if only trumps
 //       remain).
+// Helper used by ExpertPlayer::SimPlayCard: has (type_id, suit_id)
+// been played during the ongoing simulated round?
+static bool SimOutHas( const CardList& sim_out, int type_id, int suit_id )
+{
+	CardList::Node* n = sim_out.GetFirst();
+	while( n ) {
+		Card* c = n->GetData();
+		if( c->GetType().GetId() == type_id &&
+		    c->GetSuit().GetId() == suit_id )
+			return true;
+		n = n->GetNext();
+	}
+	return false;
+}
+
 Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
                                  const CardList& trick,
-                                 cardsuit_t trumphsuit, bool our_team )
+                                 cardsuit_t trumphsuit, bool our_team,
+                                 const CardList& sim_out, int lead_slot )
 {
 	(void)our_team;  // teams are derived from trick position below
 	if( handsize == 0 )
 		return NULL;
 
+	// Trumph-threat context: identify where the trumph card sits in the
+	// sim so we can avoid committing trumps the unplayed trumph owner
+	// would capture. owner_slot is this sim world's player slot for the
+	// trumph owner (3 = us).
+	int current_slot = ( lead_slot + (int)trick.GetCount() ) % 4;
+	int owner_slot;
+	if( trumphowner == this )
+		owner_slot = 3;
+	else
+		owner_slot = (int)PlayerIndex( trumphowner );
+	bool trumph_alive = trumph && !sim_out.Find( trumph );
+	int owner_trick_pos = ( owner_slot - lead_slot + 4 ) % 4;
+	bool owner_unplayed_in_trick =
+	  owner_trick_pos >= (int)trick.GetCount();
+	bool trumph_threatens_us =
+	  trumph_alive &&
+	  owner_slot != current_slot &&
+	  ( ( owner_slot % 2 ) != ( current_slot % 2 ) ) &&
+	  owner_unplayed_in_trick;
+
 	CardList::Node* first = trick.GetFirst();
 	int pick_idx = -1;
 
 	if( !first ) {
-		// Leading - see strategy summary above.
+		// Leading - see strategy summary above. Cash an ace if we have
+		// one; otherwise cash the 7 of any suit whose ace has already
+		// come out in this simulated round (the 7 is then a guaranteed
+		// winner); otherwise lead the lowest-value card.
 		for( int i = 0; i < handsize; i++ ) {
 			if( hand[i]->GetType().GetId() == ACE ) {
 				pick_idx = i;
 				break;
+			}
+		}
+		if( pick_idx < 0 ) {
+			for( int i = 0; i < handsize; i++ ) {
+				if( hand[i]->GetType().GetId() == SEVEN &&
+				    SimOutHas( sim_out, ACE, hand[i]->GetSuit().GetId() ) ) {
+					pick_idx = i;
+					break;
+				}
 			}
 		}
 		if( pick_idx < 0 ) {
@@ -204,7 +252,11 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 				}
 			}
 			else {
-				// Opponent winning - attempt to trump.
+				// Opponent winning - attempt to trump. If the unplayed
+				// trumph holder is in the adversary team and their
+				// trumph would beat the trump we'd commit, skip the
+				// trump (a non-trump discard is preferable to feeding
+				// them a trump).
 				if( best->GetSuit().GetId() != trumphsuit ) {
 					// They haven't trumped - cheapest trump wins.
 					for( int i = 0; i < handsize; i++ ) {
@@ -215,6 +267,9 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 						      hand[pick_idx]->GetType() )
 							pick_idx = i;
 					}
+					if( pick_idx >= 0 && trumph_threatens_us &&
+					    SimBeats( trumph, hand[pick_idx], trumphsuit ) )
+						pick_idx = -1;
 				}
 				else {
 					// They trumped - cheapest trump that over-trumps.
@@ -228,6 +283,9 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 								pick_idx = i;
 						}
 					}
+					if( pick_idx >= 0 && trumph_threatens_us &&
+					    SimBeats( trumph, hand[pick_idx], trumphsuit ) )
+						pick_idx = -1;
 				}
 				// Can't win - discard lowest-value non-trump.
 				if( pick_idx < 0 ) {

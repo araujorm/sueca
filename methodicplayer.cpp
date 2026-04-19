@@ -62,10 +62,15 @@ int MethodicPlayer::SimTrickPoints( const CardList& trick )
 
 // Heuristic play for simulated players.
 // our_team: true if this simulated player is on our team (us or partner).
+// sim_out and lead_slot are available to more elaborate overrides; the
+// Methodic policy is intentionally naive and ignores them.
 Card* MethodicPlayer::SimPlayCard( Card* hand[], int handsize,
                                  const CardList& trick,
-                                 cardsuit_t trumphsuit, bool our_team )
+                                 cardsuit_t trumphsuit, bool our_team,
+                                 const CardList& sim_out, int lead_slot )
 {
+	(void)sim_out;
+	(void)lead_slot;
 	if( handsize == 0 )
 		return NULL;
 
@@ -385,6 +390,18 @@ int MethodicPlayer::SimulateGame( Card* mycard, const CardList* played,
 	for( int i = 0; i < 4; i++ )
 		cur_order[i] = ( lead_player + i ) % 4;
 
+	// sim_out starts with every card we've actually seen played in the
+	// real game and grows with every card we play inside the simulation.
+	// Together with lead_slot it lets the per-player policy see sim-
+	// specific state (e.g. "has the ace of this suit come out yet in
+	// this simulated future?") without exposing other players' hands.
+	CardList sim_out;
+	CardList::Node* onode = out.GetFirst();
+	while( onode ) {
+		sim_out.Append( onode->GetData() );
+		onode = onode->GetNext();
+	}
+
 	// Finish current turn: we already decided mycard, simulate the rest
 	CardList curtrick;
 	CardList::Node* pnode = played->GetFirst();
@@ -394,11 +411,14 @@ int MethodicPlayer::SimulateGame( Card* mycard, const CardList* played,
 	}
 	curtrick.Append( mycard );
 
+	int lead_slot = cur_order[0];
+
 	// Remaining players in this turn play after us
 	for( int i = n_played + 1; i < 4; i++ ) {
 		int p = cur_order[i];
 		bool our_team = ( p == 1 || p == 3 );
-		Card* c = SimPlayCard( hands[p], hsizes[p], curtrick, trumphsuit, our_team );
+		Card* c = SimPlayCard( hands[p], hsizes[p], curtrick, trumphsuit,
+		                       our_team, sim_out, lead_slot );
 		if( c ) {
 			hsizes[p]--;
 			curtrick.Append( c );
@@ -410,6 +430,14 @@ int MethodicPlayer::SimulateGame( Card* mycard, const CardList* played,
 	int winner = cur_order[winpos];
 	if( winner == 1 || winner == 3 )
 		team_points += SimTrickPoints( curtrick );
+	// Move the whole trick into sim_out - these cards are no longer in
+	// anyone's sim hand and the policy should know that for the rest of
+	// the simulated round.
+	CardList::Node* tnode = curtrick.GetFirst();
+	while( tnode ) {
+		sim_out.Append( tnode->GetData() );
+		tnode = tnode->GetNext();
+	}
 
 	// Remaining tricks: winner leads
 	int tricks_left = hsizes[3];
@@ -418,12 +446,14 @@ int MethodicPlayer::SimulateGame( Card* mycard, const CardList* played,
 		int order[4];
 		for( int i = 0; i < 4; i++ )
 			order[i] = ( winner + i ) % 4;
+		lead_slot = order[0];
 
 		CardList simtrick;
 		for( int i = 0; i < 4; i++ ) {
 			int p = order[i];
 			bool our_team = ( p == 1 || p == 3 );
-			Card* c = SimPlayCard( hands[p], hsizes[p], simtrick, trumphsuit, our_team );
+			Card* c = SimPlayCard( hands[p], hsizes[p], simtrick, trumphsuit,
+			                       our_team, sim_out, lead_slot );
 			if( c ) {
 				hsizes[p]--;
 				simtrick.Append( c );
@@ -434,6 +464,11 @@ int MethodicPlayer::SimulateGame( Card* mycard, const CardList* played,
 		winner = order[winpos];
 		if( winner == 1 || winner == 3 )
 			team_points += SimTrickPoints( simtrick );
+		CardList::Node* st = simtrick.GetFirst();
+		while( st ) {
+			sim_out.Append( st->GetData() );
+			st = st->GetNext();
+		}
 	}
 
 	return team_points;
