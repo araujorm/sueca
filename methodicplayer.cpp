@@ -21,7 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "methodicplayer.hpp"
 
 MethodicPlayer::MethodicPlayer( GamePos* gamepos ):
-	SmartPlayer( gamepos ) {}
+	ObservingBot( gamepos ) {}
 
 bool MethodicPlayer::SimBeats( Card* card, Card* best, cardsuit_t trumphsuit )
 {

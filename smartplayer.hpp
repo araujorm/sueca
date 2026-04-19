@@ -23,53 +23,20 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 // Forward declarations
 class SmartPlayer;
 
-#include "player.hpp"
-#include "cards.hpp"
+#include "observingbot.hpp"
 
-// Smart player: tries to be a good player
-enum plindex_t { SBOT_RIGHT = 0, SBOT_PARTNER, SBOT_LEFT, SBOT_THIS };
-class SmartPlayer: public BotPlayer
+// Smart player: rule-based decisions on top of the observational state
+// tracked by ObservingBot. Leads and follows with targeted heuristics
+// (cash aces, save the trump ace, dump high to partner's winners,
+// etc.) without running any simulation.
+class SmartPlayer: public ObservingBot
 {
 public:
 	SmartPlayer( GamePos* gamepos );
-	~SmartPlayer();
-	void NewGame( Game* game );
-	void NewRound( Card* newtrumph, Player* newowner );
-	void NewTurn( Player* starter );
-	void TurnEnd( const Player* winner, const CardList& played );
 	Card* PlayCard( const CardList* played );
 protected:
-	Game* thegame;
-	PlayerIterator* players;
-	Player* turnstarter;
-	CardList out;
-	int n_out[4];
-	CardList bysuit[4];
-	Player* trumphowner;
-	Card* trumph;
-	Card* played_card;
-	bool plhasnot[3][4];
-	unsigned short released[3][4];
-	Player* left;
-	Player* partner;
-	Player* right;
-	plindex_t PlayerIndex( Player* player );
-	bool IsOut( int type_id, int suit_id );
-	// Helpers for play decisions
-	Player* CurrentWinner( const CardList* played, Card** best );
-	bool Beats( Card* card, Card* best );
-	// Detect whether the trumph card (public info) is still held by an
-	// adversary who hasn't played yet in the current trick and would
-	// beat 'candidate' with it.
-	bool TrumphThreatensCandidate( Card* candidate,
-	                               const CardList& played );
-	Card* LowestBeater( CardList& candidates, Card* best );
-	Card* HighestValue( CardList& candidates );
-	Card* LowestValue( CardList& candidates );
-	Card* LowestNonTrumph();
 	Card* PlayFirst();
 	Card* PlayFollowing( const CardList* played );
 };
 
 #endif // _SMARTPLAYER_HPP_
-
