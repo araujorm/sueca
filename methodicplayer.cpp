@@ -437,6 +437,49 @@ Card* MethodicPlayer::PlayCard( const CardList* played )
 		return played_card;
 	}
 
+	// Prune strictly-dominated candidates before running PIMC so the
+	// simulation budget is spent differentiating real alternatives.
+	//
+	// Over-trumping: when a non-trump lead has already been trumped by
+	// another player and we can over-trump with several of our trumps,
+	// all those cards win exactly the same trick against the same
+	// opponents' cards. The cheapest of them is strictly better - we
+	// win this trick and keep the higher trumps for later - so drop
+	// the other over-trumpers from the PIMC candidate set.
+	if( played->GetCount() > 0 ) {
+		cardsuit_t leadsuit =
+		  played->GetFirst()->GetData()->GetSuit().GetId();
+		cardsuit_t trumphsuit = trumph->GetSuit().GetId();
+		Card* best;
+		CurrentWinner( played, &best );
+		if( leadsuit != trumphsuit &&
+		    best->GetSuit().GetId() == trumphsuit ) {
+			Card* cheapest = NULL;
+			for( CardList::Node* m = valid.GetFirst(); m; m = m->GetNext() ) {
+				Card* c = m->GetData();
+				if( c->GetSuit().GetId() == trumphsuit &&
+				    Beats( c, best ) &&
+				    ( !cheapest || c->GetType() < cheapest->GetType() ) )
+					cheapest = c;
+			}
+			if( cheapest ) {
+				CardList::Node* m = valid.GetFirst();
+				while( m ) {
+					Card* c = m->GetData();
+					CardList::Node* next = m->GetNext();
+					if( c->GetSuit().GetId() == trumphsuit &&
+					    Beats( c, best ) && c != cheapest )
+						valid.DeleteNode( m );
+					m = next;
+				}
+			}
+		}
+	}
+	if( valid.GetCount() == 1 ) {
+		played_card = valid.GetFirst()->GetData();
+		return played_card;
+	}
+
 	// PIMC: for each valid card, simulate many random worlds
 	Card* best_card = NULL;
 	int best_score = -1;
