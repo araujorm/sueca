@@ -6,6 +6,7 @@ all: Makefile
 	$(MAKE) -f Makerules sueca
 clean:
 	$(RM) $(OBJS) $(DEPS) $(PNG_HEADERS) $(ICON_HEADERS) *~ sueca core core.[0-9]*
+	$(RM) -r mo
 
 backup: PROJBASE="$(shell basename $(CURDIR))"
 backup: clean

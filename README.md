@@ -3,12 +3,12 @@ Dependencies
 
 For compiling on Fedora:
 ```
-sudo dnf install wxGTK-devel make gcc-c++ xxd
+sudo dnf install wxGTK-devel make gcc-c++ xxd gettext
 ```
 
 For cross-compiling on Fedora for Windows:
 ```
-sudo dnf install make mingw32-gcc-c++ mingw32-wxWidgets3-static mingw32-libpng-static mingw32-libjpeg-turbo-static mingw32-libtiff-static mingw32-zlib-static xxd
+sudo dnf install make mingw32-gcc-c++ mingw32-wxWidgets3-static mingw32-libpng-static mingw32-libjpeg-turbo-static mingw32-libtiff-static mingw32-zlib-static xxd gettext
 ```
 
 
@@ -37,3 +37,9 @@ Running
 Execute the produced executable:
 - On Linux: `sueca`
 - On Windows: `sueca.exe`
+
+
+Translations
+------------
+
+Translations are in `po/*.po`. After changing source strings, run `make update-po` to refresh them. To add a language, copy `po/sueca.pot` to `po/<locale>.po` and translate.

@@ -17,36 +17,21 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef _PREFSDIALOG_HPP_
-#define _PREFSDIALOG_HPP_ 1
+#include "lang.hpp"
+#include <wx/intl.h>
 
-// Forward declarations
-class PrefsDialog;
-
-#include <wx/dialog.h>
-#include <wx/textctrl.h>
-#include <wx/slider.h>
-#include <wx/choice.h>
-#include <wx/checkbox.h>
-#include "definitions.hpp"
-
-// Dialog with game options
-class PrefsDialog: public wxDialog
-{
-public:
-	PrefsDialog( wxWindow* parent );
-private:
-	wxTextCtrl* name_entry;
-	wxSlider* delay_entry;
-	wxCheckBox* bot_level_checks[BOT_LEVEL_COUNT];
-	wxChoice* card_back_entry;
-	wxChoice* language_entry;
-	void OnOk( wxCommandEvent& event );
-	void OnBotLevelCheck( wxCommandEvent& event );
-	void UpdateBotLevelEnableState();
-	void Done( wxCommandEvent& event );
-	DECLARE_EVENT_TABLE();
+// "Same as system" is shown first as a meta-option; English is the
+// source language and is always available without a catalogue. Every
+// other entry must have a matching po/<locale>.po committed - add the
+// entry here in the same commit that introduces the translation, in
+// alphabetical order by native name. The native-name labels are
+// intentionally NOT marked for translation: each language labels
+// itself in its own script, so the user always sees the list in
+// whatever language is native to each entry. Only the "Same as
+// system" label is translated, via _() at display time in the
+// preferences dialog.
+const LangEntry kSuecaLanguages[] = {
+	{ wxLANGUAGE_DEFAULT, "Same as system" },
+	{ wxLANGUAGE_ENGLISH, "English" },
+	{ -2, 0 }  // sentinel
 };
-
-#endif // _PREFSDIALOG_HPP_
-

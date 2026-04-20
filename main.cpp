@@ -23,6 +23,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "methodicplayer.hpp"
 #include "expertplayer.hpp"
 #include <wx/config.h>
+#include <wx/filename.h>
+#include <wx/stdpaths.h>
 #include <wx/utils.h>
 
 IMPLEMENT_APP( Sueca );
@@ -39,6 +41,39 @@ bool Sueca::OnInit()
 
 	// Initialize image handlers for PNG support
 	wxInitAllImageHandlers();
+
+	// UI language setup. Read the user's choice (wxLANGUAGE_DEFAULT
+	// means "same as system locale") and bring up wxLocale before the
+	// main frame is built so menu labels, dialog texts and everything
+	// else passes through the 'sueca' message catalogue.
+	{
+		wxConfig cfg( SUECA_NAME );
+		cfg.Read( "Language", &language, (int)wxLANGUAGE_DEFAULT );
+	}
+	locale = new wxLocale();
+	// wx emits a log warning when asked for a language it considers
+	// unavailable on the system; swallow that so a missing locale data
+	// file doesn't pop a dialog on every launch.
+	{
+		wxLogNull suppress_locale_warnings;
+		// wxLocale::Init can't be called twice on the same object (it
+		// asserts on m_initialized), so on failure we throw the partial
+		// locale away and create a fresh one for the default fallback.
+		if( ! locale->Init( language, wxLOCALE_DONT_LOAD_DEFAULT ) ) {
+			delete locale;
+			locale = new wxLocale();
+			locale->Init( wxLANGUAGE_DEFAULT, wxLOCALE_DONT_LOAD_DEFAULT );
+		}
+	}
+	// Look up 'sueca.mo' under ./mo/<lang>/LC_MESSAGES/ relative to the
+	// binary first (portable install), falling back to wx's standard
+	// paths (system-wide /usr/share/locale/...).
+	{
+		wxFileName exe( wxStandardPaths::Get().GetExecutablePath() );
+		wxLocale::AddCatalogLookupPathPrefix(
+		  exe.GetPath() + wxFileName::GetPathSeparator() + "mo" );
+	}
+	locale->AddCatalog( SUECA_NAME );
 
 	// Get stored preferences
 	wxConfig* config = new wxConfig( SUECA_NAME );
@@ -120,7 +155,10 @@ void Sueca::PrepareExit()
 	config->Write( "Update delay", (int)update_delay );
 	config->Write( "Bot levels", bot_levels );
 	config->Write( "Card back", (int)card_back );
+	config->Write( "Language", language );
 	delete config;
+	delete locale;
+	locale = NULL;
 }
 
 void Sueca::NewGame( Game* the_game, LocalPlayer* lp )

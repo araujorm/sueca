@@ -37,6 +37,7 @@ class Sueca;
 */
 
 #include <wx/app.h>
+#include <wx/intl.h>
 #include "definitions.hpp"
 #include "myframe.hpp"
 #include "serverhandler.hpp"
@@ -76,12 +77,19 @@ public:
 	Game* GetGame() const { return m_game; }
 	Player* GetBotPlayer( GamePos* gamepos );
 	void OnFinishRemoteHandler( FinishRemoteHandlerEvt& event );
+	// UI language. Stored as a wxLANGUAGE_* value
+	// (wxLANGUAGE_DEFAULT meaning "follow the system locale"). Changes
+	// take effect on the next application start.
+	int GetLanguage() const { return language; }
+	void SetLanguage( int lang ) { language = lang; }
 private:
 	// Preferences not directly accessible
 	wxString playername;
 	unsigned int update_delay;
 	int bot_levels;
 	cardback_t card_back;
+	int language;
+	wxLocale* locale;
 
 	Game* m_game;
 	MyFrame* m_frame;

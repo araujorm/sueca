@@ -22,8 +22,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <wx/stattext.h>
 #include <wx/button.h>
 #include <wx/msgdlg.h>
+#include <wx/intl.h>
 #include "main.hpp"
 #include "netcommon.hpp"
+#include "lang.hpp"
 
 // Preferences dialog implementation
 BEGIN_EVENT_TABLE( PrefsDialog, wxDialog )
@@ -85,6 +87,29 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	card_back_entry->SetSelection( (int)wxGetApp().GetCardBack() );
 	back_sizer->Add( card_back_entry, 0, wxALIGN_CENTER );
 
+	// Language option: "Same as system" first (translated), then every
+	// supported language in its own native name. Changing this requires
+	// restarting the application for catalogue reload to take effect.
+	wxBoxSizer* lang_sizer = new wxBoxSizer( wxHORIZONTAL );
+	lang_sizer->Add( new wxStaticText( this, wxID_ANY, "Language" ),
+	                 0, wxRIGHT | wxALIGN_CENTER, 5 );
+	language_entry = new wxChoice( this, wxID_ANY );
+	int current_lang = wxGetApp().GetLanguage();
+	int selected_lang_idx = 0;
+	for( int i = 0; kSuecaLanguages[i].native_name; i++ ) {
+		wxString label;
+		if( kSuecaLanguages[i].code == wxLANGUAGE_DEFAULT )
+			label = _( "Same as system" );
+		else
+			label = wxString::FromUTF8( kSuecaLanguages[i].native_name );
+		language_entry->Append( label );
+		if( kSuecaLanguages[i].code == current_lang )
+			selected_lang_idx = i;
+	}
+	language_entry->SetSelection( selected_lang_idx );
+	language_entry->SetToolTip( _( "Takes effect on next application start." ) );
+	lang_sizer->Add( language_entry, 0, wxALIGN_CENTER );
+
 	// Buttons
 	wxBoxSizer* button_sizer = new wxBoxSizer( wxHORIZONTAL );
 	wxButton* ok_button = new wxButton( this, wxID_OK, "OK" );
@@ -98,6 +123,7 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	top_sizer->Add( delay_sizer, 0, wxBOTTOM, 10 );
 	top_sizer->Add( bot_sizer, 0, wxBOTTOM, 10 );
 	top_sizer->Add( back_sizer, 0, wxBOTTOM, 10 );
+	top_sizer->Add( lang_sizer, 0, wxBOTTOM, 10 );
 	top_sizer->Add( button_sizer, 0, wxTOP | wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	// Invisible border
@@ -138,6 +164,16 @@ void PrefsDialog::OnOk( wxCommandEvent& event )
 			  "Note", wxOK | wxICON_INFORMATION );
 	}
 	app.SetCardBack( (cardback_t)card_back_entry->GetSelection() );
+	int lang_idx = language_entry->GetSelection();
+	if( lang_idx >= 0 ) {
+		int new_lang = kSuecaLanguages[lang_idx].code;
+		if( new_lang != app.GetLanguage() ) {
+			app.SetLanguage( new_lang );
+			wxMessageBox( _( "The language change will take effect the "
+			                 "next time Sueca is started." ),
+			              _( "Language" ), wxOK | wxICON_INFORMATION );
+		}
+	}
 	Done( event );
 }
 

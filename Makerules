@@ -3,8 +3,8 @@ include Makedefs
  # Automatic dependency generation
 sinclude $(DEPS)
 
-sueca: $(OBJS)
-	$(CXX) $(LDFLAGS) $^ -o $@
+sueca: $(OBJS) $(MO_FILES)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $@
 	$(STRIP) $@
 
 # Implicit rules
@@ -21,3 +21,32 @@ icons/%.h: icons/%.png
 	set -e; $(CXX) -MM $(CXXFLAGS) $< \
 		| sed 's/\($*\)\.o[ :]*/\1.o $@ : /g' > $@; \
 		[ -s $@ ] || rm -f $@
+
+# --- Translations -----------------------------------------------------
+# Strings are marked in the source with _("...") (runtime lookup) or
+# wxTRANSLATE("...") (static context). xgettext extracts them into
+# po/sueca.pot; each po/<locale>.po is kept in sync manually (or via
+# `make update-po`) and msgfmt compiles it into the matching .mo under
+# mo/<locale>/LC_MESSAGES/ at build time.
+
+po/sueca.pot: $(SRCS) $(HEADERS)
+	@mkdir -p po
+	xgettext --from-code=UTF-8 --language=C++ \
+		--keyword=_ --keyword=wxTRANSLATE \
+		--package-name=sueca --copyright-holder="Rodrigo Araujo" \
+		--msgid-bugs-address="$(BUGS_ADDRESS)" \
+		-o $@ $(SRCS) $(HEADERS)
+
+# Merge newly extracted messages back into every existing translation
+# without losing already-translated entries. Explicit target: run
+# `make update-po` after changing source strings.
+.PHONY: update-po
+update-po: po/sueca.pot
+	@for po in $(PO_FILES); do \
+		echo "msgmerge $$po"; \
+		msgmerge --update --backup=none --quiet $$po po/sueca.pot; \
+	done
+
+mo/%/LC_MESSAGES/sueca.mo: po/%.po
+	@mkdir -p $(dir $@)
+	msgfmt -o $@ $<
