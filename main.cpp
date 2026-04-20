@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "smartplayer.hpp"
 #include "methodicplayer.hpp"
 #include "expertplayer.hpp"
+#include "catalogloader.hpp"
 #include <wx/config.h>
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
@@ -65,14 +66,22 @@ bool Sueca::OnInit()
 			locale->Init( wxLANGUAGE_DEFAULT, wxLOCALE_DONT_LOAD_DEFAULT );
 		}
 	}
-	// Look up 'sueca.mo' under ./mo/<lang>/LC_MESSAGES/ relative to the
-	// binary first (portable install), falling back to wx's standard
-	// paths (system-wide /usr/share/locale/...).
+#ifndef SUECA_EMBED_ONLY
+	// Non-static builds also consult the filesystem (e.g. rpm/deb
+	// packaging dropping .mo files under /usr/share/locale/...), with
+	// mo/ alongside the binary as an additional prefix. Static builds
+	// intentionally skip this so the embedded catalogues are the sole
+	// source of truth.
 	{
 		wxFileName exe( wxStandardPaths::Get().GetExecutablePath() );
 		wxLocale::AddCatalogLookupPathPrefix(
 		  exe.GetPath() + wxFileName::GetPathSeparator() + "mo" );
 	}
+#endif
+	// SuecaCatalogLoader serves catalogues baked into the binary (via
+	// xxd) and - on non-static builds - falls through to the filesystem
+	// loader above.
+	wxTranslations::Get()->SetLoader( new SuecaCatalogLoader() );
 	locale->AddCatalog( SUECA_NAME );
 
 	// Get stored preferences

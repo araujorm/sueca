@@ -42,4 +42,4 @@ Execute the produced executable:
 Translations
 ------------
 
-Translations are in `po/*.po`. After changing source strings, run `make update-po` to refresh them. To add a language, copy `po/sueca.pot` to `po/<locale>.po` and translate.
+Translations are in `po/*.po`. Each is compiled and embedded in the binary at build time, so no `.mo` files are shipped alongside the executable. After changing source strings run `make update-po` to refresh them. To add a language, copy `po/sueca.pot` to `po/<locale>.po` and translate.

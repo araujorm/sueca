@@ -1,10 +1,10 @@
 SRCS = main.cpp myframe.cpp cards.cpp mycanvas.cpp game.cpp player.cpp \
 	scoredialog.cpp trumphdialog.cpp prefsdialog.cpp observingbot.cpp \
 	smartplayer.cpp methodicplayer.cpp expertplayer.cpp smarttactics.cpp \
-	lang.cpp lasttrickdialog.cpp \
+	lang.cpp catalogloader.cpp lasttrickdialog.cpp \
 	chatpanel.cpp serverhandler.cpp serverdialog.cpp netserverplayer.cpp \
 	netcommon.cpp remotedialog.cpp remotegame.cpp remotehandler.cpp \
-	hostedgame.cpp
+	hostedgame.cpp embedded_mo.cpp
 HEADERS = $(wildcard *.hpp)
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
@@ -16,6 +16,11 @@ ICON_HEADERS = icons/icon32.h
 BUGS_ADDRESS = https://github.com/araujorm/sueca/issues
 
 # Translations: list of locales whose .po files live under po/ and
-# compile to mo/<locale>/LC_MESSAGES/sueca.mo at build time.
+# compile to mo/<locale>/LC_MESSAGES/sueca.mo at build time. Each .mo
+# is then xxd-converted into mo/<locale>.h; mo/embedded_mo.cpp
+# aggregates all of them into a lookup table that the binary links
+# directly so the translations ship inside the executable.
 PO_FILES = $(wildcard po/*.po)
-MO_FILES = $(patsubst po/%.po,mo/%/LC_MESSAGES/sueca.mo,$(PO_FILES))
+LOCALE_IDS = $(basename $(notdir $(PO_FILES)))
+MO_FILES = $(patsubst %,mo/%/LC_MESSAGES/sueca.mo,$(LOCALE_IDS))
+MO_HEADERS = $(patsubst %,mo/%.h,$(LOCALE_IDS))

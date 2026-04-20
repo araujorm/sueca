@@ -8,3 +8,4 @@ icons/*.h
 # compiling the .po files; committed .po files are the source of truth.
 po/sueca.pot
 mo/
+embedded_mo.cpp
