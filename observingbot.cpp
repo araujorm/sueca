@@ -172,6 +172,18 @@ bool ObservingBot::TrumphThreatensCandidate( Card* candidate,
 	return Beats( trumph, candidate );
 }
 
+// Is the public trumph card still in play, sitting in an adversary's
+// hand, and worth at least one point? Several lead-time decisions
+// hinge on this (notably: don't cash the ace of trumps as a lead when
+// an adversary's trumph is a point card - the ace is more valuable as
+// the eventual over-trump that captures it).
+bool ObservingBot::AdversaryHoldsValuableTrumph()
+{
+	return trumph && ! out.Find( trumph ) &&
+	       ( trumphowner == left || trumphowner == right ) &&
+	       trumph->GetType().GetValue() > 0;
+}
+
 // Does 'card' beat 'best' considering trumps?
 bool ObservingBot::Beats( Card* card, Card* best )
 {

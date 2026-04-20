@@ -554,6 +554,31 @@ Card* MethodicPlayer::PlayCard( const CardList* played )
 			}
 		}
 	}
+	// Save-the-ace-of-trumps lead filter: when we're the leader and an
+	// adversary still holds a point-bearing trumph card, leading the ace
+	// of trumps transfers trump control to them (they follow with a low
+	// trump and their trumph becomes the top remaining trump). The ace
+	// is worth far more as an over-trump that captures that trumph later,
+	// so drop it from the PIMC lead candidates as long as we have another
+	// card to lead. Endgame plays cash the ace unconditionally - then
+	// there's no "later" to save it for.
+	bool endgame = GetHand().GetCount() <= 3;
+	if( played->GetCount() == 0 && !endgame &&
+	    AdversaryHoldsValuableTrumph() ) {
+		cardsuit_t ts = trumph->GetSuit().GetId();
+		Card* ace_trump = NULL;
+		bool has_other = false;
+		for( CardList::Node* m = valid.GetFirst(); m; m = m->GetNext() ) {
+			Card* c = m->GetData();
+			if( c->GetSuit().GetId() == ts &&
+			    c->GetType().GetId() == ACE )
+				ace_trump = c;
+			else
+				has_other = true;
+		}
+		if( ace_trump && has_other )
+			valid.DeleteObject( ace_trump );
+	}
 	if( valid.GetCount() == 1 ) {
 		played_card = valid.GetFirst()->GetData();
 		return played_card;

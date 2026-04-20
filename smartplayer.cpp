@@ -129,9 +129,18 @@ Card* SmartPlayer::PlayFirst()
 	// 2. Trump suit: same cash idea without void-risk filters. A trump
 	// lead can't be chopped - anyone holding trump must follow suit, and
 	// nothing else beats trump.
+	//
+	// One caveat: if an adversary still holds the public trumph card and
+	// it's worth points (the 7, K, J, or Q of trumps), our ace of trumps
+	// is worth far more as an over-trump than as a lead. Cashing it now
+	// lets the adversary save the point-bearing trumph (they just play
+	// a lower trump to follow our ace) and become the top remaining
+	// trump. Save the ace in that case, except in endgame where we
+	// can't afford to hold on to it.
 	if( bysuit[trumphsuit].GetCount() > 0 ) {
 		Card* highest = bysuit[trumphsuit].GetLast()->GetData();
-		if( highest->GetType().GetId() == ACE )
+		bool save_trump_ace = !endgame && AdversaryHoldsValuableTrumph();
+		if( highest->GetType().GetId() == ACE && !save_trump_ace )
 			return highest;
 		if( highest->GetType().GetId() == SEVEN &&
 		    IsOut( ACE, trumphsuit ) )

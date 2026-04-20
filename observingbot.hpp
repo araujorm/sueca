@@ -71,6 +71,11 @@ protected:
 	// beat 'candidate' with it.
 	bool TrumphThreatensCandidate( Card* candidate,
 	                               const CardList& played );
+	// Is the public trumph card still in an adversary's hand and worth
+	// points (7, K, J or Q of trumps)? When true, our ace of trumps is
+	// much more valuable as an over-trump that captures the trumph than
+	// as a lead - saving it is the right call outside of endgame.
+	bool AdversaryHoldsValuableTrumph();
 	Card* LowestBeater( CardList& candidates, Card* best );
 	Card* HighestValue( CardList& candidates );
 	Card* LowestValue( CardList& candidates );
