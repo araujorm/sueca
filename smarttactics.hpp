@@ -44,6 +44,46 @@ namespace smarttactics {
 // to an opponent who could still take the trick.
 bool ShouldDumpHigh( Card* best, bool we_are_last, cardsuit_t trumphsuit );
 
+// ---------------------------------------------------------------------
+// Array-shaped selectors. The Expert simulator works on Card* hand[]
+// arrays for speed (CardList would allocate per sim world); these
+// mirror the CardList-based helpers on ObservingBot but in index form
+// so the simulator can swap-remove at the chosen index.
+// All return -1 when no card matches the filter.
+// ---------------------------------------------------------------------
+
+// Index of the lowest-ranked card of 'suit' in hand[] that beats 'best'
+// (same "trump beats non-trump, or higher same-suit" rule the game
+// uses). Used for cheapest-beater-style play in the simulator.
+int LowestBeaterInSuit( Card** hand, int handsize, cardsuit_t suit,
+                        Card* best, cardsuit_t trumphsuit );
+
+// Index of the card of 'suit' with the lowest point value (tie-broken
+// by lowest rank).
+int LowestValueInSuit( Card** hand, int handsize, cardsuit_t suit );
+
+// Index of the card of 'suit' with the highest point value (tie-broken
+// by highest rank).
+int HighestValueInSuit( Card** hand, int handsize, cardsuit_t suit );
+
+// Index of the non-trump card with the lowest point value (tie-broken
+// by lowest rank). Useful for "discard the cheapest" decisions.
+int LowestValueNonTrump( Card** hand, int handsize, cardsuit_t trumphsuit );
+
+// Index of the non-trump card with the highest point value (tie-broken
+// by highest rank). Useful for "dump high to partner's trick" when not
+// following suit.
+int HighestValueNonTrump( Card** hand, int handsize, cardsuit_t trumphsuit );
+
+// Index of the lowest-ranked card of 'suit' in hand[], regardless of
+// point value. Useful for "cheapest trump to win" style plays.
+int LowestTypeInSuit( Card** hand, int handsize, cardsuit_t suit );
+
+// Index of the lowest-ranked card in hand[], regardless of suit. The
+// simulator's last-ditch "we only have trumps, play the cheapest
+// anyway" path.
+int LowestType( Card** hand, int handsize );
+
 } // namespace smarttactics
 
 #endif // _SMARTTACTICS_HPP_

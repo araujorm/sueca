@@ -125,17 +125,11 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 				}
 			}
 		}
-		if( pick_idx < 0 ) {
-			for( int i = 0; i < handsize; i++ ) {
-				if( pick_idx < 0 ||
-				    hand[i]->GetType().GetValue() <
-				      hand[pick_idx]->GetType().GetValue() ||
-				    ( hand[i]->GetType().GetValue() ==
-				        hand[pick_idx]->GetType().GetValue() &&
-				      hand[i]->GetType() < hand[pick_idx]->GetType() ) )
-					pick_idx = i;
-			}
-		}
+		if( pick_idx < 0 )
+			pick_idx = smarttactics::LowestValueNonTrump(
+			  hand, handsize, trumphsuit );
+		if( pick_idx < 0 )
+			pick_idx = smarttactics::LowestType( hand, handsize );
 	}
 	else {
 		cardsuit_t leadsuit = first->GetData()->GetSuit().GetId();
@@ -170,61 +164,21 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 				// Dump high only when partner's win is safe. Otherwise
 				// stay cheap so that if an opponent still beats partner
 				// we don't hand them extra points.
-				bool dump_high = smarttactics::ShouldDumpHigh(
-				  best, we_are_last, trumphsuit );
-				for( int i = 0; i < handsize; i++ ) {
-					if( hand[i]->GetSuit().GetId() != leadsuit )
-						continue;
-					if( pick_idx < 0 ) {
-						pick_idx = i;
-						continue;
-					}
-					if( dump_high ) {
-						if( hand[i]->GetType().GetValue() >
-						    hand[pick_idx]->GetType().GetValue() )
-							pick_idx = i;
-					}
-					else {
-						if( hand[i]->GetType().GetValue() <
-						      hand[pick_idx]->GetType().GetValue() ||
-						    ( hand[i]->GetType().GetValue() ==
-						        hand[pick_idx]->GetType().GetValue() &&
-						      hand[i]->GetType() <
-						        hand[pick_idx]->GetType() ) )
-							pick_idx = i;
-					}
-				}
+				pick_idx = smarttactics::ShouldDumpHigh(
+				             best, we_are_last, trumphsuit ) ?
+				  smarttactics::HighestValueInSuit(
+				    hand, handsize, leadsuit ) :
+				  smarttactics::LowestValueInSuit(
+				    hand, handsize, leadsuit );
 			}
 			else {
 				// Opponent winning - cheapest beater, or lowest-value if
 				// we can't beat.
-				int beater_idx = -1;
-				for( int i = 0; i < handsize; i++ ) {
-					if( hand[i]->GetSuit().GetId() != leadsuit )
-						continue;
-					if( SimBeats( hand[i], best, trumphsuit ) ) {
-						if( beater_idx < 0 ||
-						    hand[i]->GetType() <
-						      hand[beater_idx]->GetType() )
-							beater_idx = i;
-					}
-				}
-				if( beater_idx >= 0 )
-					pick_idx = beater_idx;
-				else {
-					for( int i = 0; i < handsize; i++ ) {
-						if( hand[i]->GetSuit().GetId() != leadsuit )
-							continue;
-						if( pick_idx < 0 ||
-						    hand[i]->GetType().GetValue() <
-						      hand[pick_idx]->GetType().GetValue() ||
-						    ( hand[i]->GetType().GetValue() ==
-						        hand[pick_idx]->GetType().GetValue() &&
-						      hand[i]->GetType() <
-						        hand[pick_idx]->GetType() ) )
-							pick_idx = i;
-					}
-				}
+				pick_idx = smarttactics::LowestBeaterInSuit(
+				  hand, handsize, leadsuit, best, trumphsuit );
+				if( pick_idx < 0 )
+					pick_idx = smarttactics::LowestValueInSuit(
+					  hand, handsize, leadsuit );
 			}
 		}
 		else {
@@ -232,23 +186,12 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 			if( partner_winning ) {
 				// Don't trump - dump highest-value non-trump to feed
 				// partner's trick with points.
-				for( int i = 0; i < handsize; i++ ) {
-					if( hand[i]->GetSuit().GetId() == trumphsuit )
-						continue;
-					if( pick_idx < 0 ||
-					    hand[i]->GetType().GetValue() >
-					      hand[pick_idx]->GetType().GetValue() )
-						pick_idx = i;
-				}
+				pick_idx = smarttactics::HighestValueNonTrump(
+				  hand, handsize, trumphsuit );
 				// Only trumps left - play cheapest trump.
-				if( pick_idx < 0 ) {
-					for( int i = 0; i < handsize; i++ ) {
-						if( pick_idx < 0 ||
-						    hand[i]->GetType() <
-						      hand[pick_idx]->GetType() )
-							pick_idx = i;
-					}
-				}
+				if( pick_idx < 0 )
+					pick_idx = smarttactics::LowestType(
+					  hand, handsize );
 			}
 			else {
 				// Opponent winning - attempt to trump. If the unplayed
@@ -258,58 +201,25 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 				// them a trump).
 				if( best->GetSuit().GetId() != trumphsuit ) {
 					// They haven't trumped - cheapest trump wins.
-					for( int i = 0; i < handsize; i++ ) {
-						if( hand[i]->GetSuit().GetId() != trumphsuit )
-							continue;
-						if( pick_idx < 0 ||
-						    hand[i]->GetType() <
-						      hand[pick_idx]->GetType() )
-							pick_idx = i;
-					}
-					if( pick_idx >= 0 && trumph_threatens_us &&
-					    SimBeats( trumph, hand[pick_idx], trumphsuit ) )
-						pick_idx = -1;
+					pick_idx = smarttactics::LowestTypeInSuit(
+					  hand, handsize, trumphsuit );
 				}
 				else {
 					// They trumped - cheapest trump that over-trumps.
-					for( int i = 0; i < handsize; i++ ) {
-						if( hand[i]->GetSuit().GetId() != trumphsuit )
-							continue;
-						if( SimBeats( hand[i], best, trumphsuit ) ) {
-							if( pick_idx < 0 ||
-							    hand[i]->GetType() <
-							      hand[pick_idx]->GetType() )
-								pick_idx = i;
-						}
-					}
-					if( pick_idx >= 0 && trumph_threatens_us &&
-					    SimBeats( trumph, hand[pick_idx], trumphsuit ) )
-						pick_idx = -1;
+					pick_idx = smarttactics::LowestBeaterInSuit(
+					  hand, handsize, trumphsuit, best, trumphsuit );
 				}
+				if( pick_idx >= 0 && trumph_threatens_us &&
+				    SimBeats( trumph, hand[pick_idx], trumphsuit ) )
+					pick_idx = -1;
 				// Can't win - discard lowest-value non-trump.
-				if( pick_idx < 0 ) {
-					for( int i = 0; i < handsize; i++ ) {
-						if( hand[i]->GetSuit().GetId() == trumphsuit )
-							continue;
-						if( pick_idx < 0 ||
-						    hand[i]->GetType().GetValue() <
-						      hand[pick_idx]->GetType().GetValue() ||
-						    ( hand[i]->GetType().GetValue() ==
-						        hand[pick_idx]->GetType().GetValue() &&
-						      hand[i]->GetType() <
-						        hand[pick_idx]->GetType() ) )
-							pick_idx = i;
-					}
-				}
+				if( pick_idx < 0 )
+					pick_idx = smarttactics::LowestValueNonTrump(
+					  hand, handsize, trumphsuit );
 				// Only trumps remain - cheapest trump.
-				if( pick_idx < 0 ) {
-					for( int i = 0; i < handsize; i++ ) {
-						if( pick_idx < 0 ||
-						    hand[i]->GetType() <
-						      hand[pick_idx]->GetType() )
-							pick_idx = i;
-					}
-				}
+				if( pick_idx < 0 )
+					pick_idx = smarttactics::LowestType(
+					  hand, handsize );
 			}
 		}
 	}
