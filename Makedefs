@@ -9,5 +9,5 @@ WXRELEASE = $(shell wx-config --release)
 #WXCONFIG = $(WXFLAVOR)-$(WXRELEASE)-config
 WXCONFIG = wx-config
 #CXXFLAGS = -g -Wall $(shell $(WXCONFIG) --cxxflags)
-CXXFLAGS = -O3 -Wall -fno-rtti -fno-exceptions -Wno-write-strings $(shell $(WXCONFIG) --cxxflags)
-LDFLAGS = $(shell $(WXCONFIG) --libs)
+CXXFLAGS = -O3 -Wall -fno-rtti -fno-exceptions -Wno-write-strings -ffunction-sections -fdata-sections $(shell $(WXCONFIG) --cxxflags)
+LDFLAGS = -Wl,--gc-sections $(shell $(WXCONFIG) --libs)

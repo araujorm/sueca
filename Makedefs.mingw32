@@ -5,8 +5,8 @@ STRIP = i686-w64-mingw32-strip
 WINDRES = i686-w64-mingw32-windres
 WXCONFIG = /usr/i686-w64-mingw32/sys-root/mingw/bin/wx-config-3.0
 #CXXFLAGS = -g -Wall $(shell $(WXCONFIG) --static --cxxflags)
-CXXFLAGS = -O3 -Wall -fno-rtti -fno-exceptions -Wno-write-strings -DSUECA_EMBED_ONLY $(shell $(WXCONFIG) --static --cxxflags)
-LDFLAGS = -static $(shell $(WXCONFIG) --static --libs core,base,net)
+CXXFLAGS = -O3 -Wall -fno-rtti -fno-exceptions -Wno-write-strings -ffunction-sections -fdata-sections -DSUECA_EMBED_ONLY $(shell $(WXCONFIG) --static --cxxflags)
+LDFLAGS = -static -Wl,--gc-sections $(shell $(WXCONFIG) --static --libs core,base,net)
 
 # If you are having dumb "Mismatch between the program and library build versions" due to g++ ABI version, uncomment the following line and change the ABI version to match the same as the library
 #CXXFLAGS += -D__GXX_ABI_VERSION=1018
