@@ -18,6 +18,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #include <cstdlib>  // For abs()
+#include <wx/intl.h>
 #include "game.hpp"
 #include "main.hpp"
 
@@ -172,7 +173,7 @@ Game::Game( Player* p1,
 	for( int i = 0; i < 4; i++ )
 		m_players->GetNext()->NewGame( this );
 	// Initial round result
-	frame->SetStatusText( "First Round", 1 );
+	frame->SetStatusText( _( "First Round" ), 1 );
 	// Make sure we focus on game window
 	frame->SetFocus();
 }
@@ -287,7 +288,10 @@ void Game::EndTurn()
 	m_players->SetCurrent( winner );
 }
 
-const wxString tiedstr( "(T)" );
+// "Tied" marker shown in the score dialog for a drawn round. Kept as
+// a single-character bracketed tag so the score dialog layout stays
+// stable across translations.
+static inline wxString TiedStr() { return _( "(T)" ); }
 
 unsigned short Game::CalcWonGames( Team** win )
 {
@@ -295,8 +299,8 @@ unsigned short Game::CalcWonGames( Team** win )
 	int dif = team1->GetRoundPoints() - team2->GetRoundPoints();
 	if( dif == 0 ) {  // Tied game
 		multiplier *= 2;
-		team1->SetWonStr( tiedstr );
-		team2->SetWonStr( tiedstr );
+		team1->SetWonStr( TiedStr() );
+		team2->SetWonStr( TiedStr() );
 		*win = NULL;
 		return 0;
 	}
@@ -333,11 +337,12 @@ void Game::PassTurn( Player *player )
 		wxString showstr;
 		unsigned short vict;
 		if( ( vict = CalcWonGames( &winner ) ) == 0 )
-			showstr = wxString( "Last Round: tied" );
+			showstr = _( "Last Round: tied" );
 		else
-			showstr = wxString::Format( "Last Round: %hu for %s/%s", vict,
-			                             winner->GetP1()->GetName().c_str(),
-			                             winner->GetP2()->GetName().c_str() );
+			showstr = wxString::Format( _( "Last Round: %hu for %s/%s" ),
+			                             vict,
+			                             winner->GetP1()->GetName(),
+			                             winner->GetP2()->GetName() );
 		wxGetApp().GetFrame()->SetStatusText( showstr, 1 );
 		score->SetEndRoundResults();
 		NewRound();

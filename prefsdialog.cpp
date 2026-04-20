@@ -34,18 +34,18 @@ BEGIN_EVENT_TABLE( PrefsDialog, wxDialog )
 END_EVENT_TABLE();
 
 PrefsDialog::PrefsDialog( wxWindow* parent ):
-	wxDialog( parent, wxID_ANY, wxString( "Game Preferences" ) )
+	wxDialog( parent, wxID_ANY, _( "Game Preferences" ) )
 {
 	// Name entry
 	wxBoxSizer* name_sizer = new wxBoxSizer( wxHORIZONTAL );
-	name_sizer->Add( new wxStaticText( this, wxID_ANY, "Player name" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
+	name_sizer->Add( new wxStaticText( this, wxID_ANY, _( "Player name" ) ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
 	name_entry = new wxTextCtrl( this, wxID_ANY, wxGetApp().GetLocalPlayerName() );
 	name_entry->SetMaxLength( PLAYER_NAME_MAX );
 	name_sizer->Add( name_entry, 0, wxALIGN_CENTER );
 
 	// Card speed option
 	wxBoxSizer* delay_sizer = new wxBoxSizer( wxHORIZONTAL );
-	delay_sizer->Add( new wxStaticText( this, wxID_ANY, "Card movement speed" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
+	delay_sizer->Add( new wxStaticText( this, wxID_ANY, _( "Card movement speed" ) ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
 	delay_entry = new wxSlider( this, wxID_ANY, wxGetApp().GetUpdateDelay(), 1, 10, wxDefaultPosition, wxSize(100, wxID_ANY), wxSL_HORIZONTAL | wxSL_LABELS | wxSL_AUTOTICKS );
 	delay_sizer->Add( delay_entry, 0, wxALIGN_CENTER );
 
@@ -53,26 +53,34 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	// than one is checked, each bot picks a level at random among them.
 	int current_mask = wxGetApp().GetBotLevels();
 	wxBoxSizer* bot_sizer = new wxBoxSizer( wxHORIZONTAL );
-	bot_sizer->Add( new wxStaticText( this, wxID_ANY, "Bot difficulty" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
-	static const wxString bot_labels[BOT_LEVEL_COUNT] =
-	  { "Dumb", "Methodic", "Smart", "Expert" };
-	static const wxString bot_tooltips[BOT_LEVEL_COUNT] = {
-	  "Plays any valid card, no strategy.\n"
-	  "At least one level must stay selected.",
-	  "Uses Monte Carlo simulation with a simple rule-based\n"
-	  "heuristic for each simulated play.\n"
-	  "At least one level must stay selected.",
-	  "Uses rule-based strategy with card tracking and\n"
-	  "observational memory of other players.\n"
-	  "At least one level must stay selected.",
-	  "Blends Monte Carlo simulation with the rule-based\n"
-	  "heuristics of the Smart level for the strongest play.\n"
-	  "At least one level must stay selected."
+	bot_sizer->Add( new wxStaticText( this, wxID_ANY, _( "Bot difficulty" ) ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
+	// Tagged with wxTRANSLATE so xgettext picks them up; wxGetTranslation
+	// converts them at runtime. Must match the level names shown on the
+	// status bar.
+	static const char* bot_labels[BOT_LEVEL_COUNT] = {
+	  wxTRANSLATE( "Dumb" ),
+	  wxTRANSLATE( "Methodic" ),
+	  wxTRANSLATE( "Smart" ),
+	  wxTRANSLATE( "Expert" )
+	};
+	static const char* bot_tooltips[BOT_LEVEL_COUNT] = {
+	  wxTRANSLATE( "Plays any valid card, no strategy.\n"
+	               "At least one level must stay selected." ),
+	  wxTRANSLATE( "Uses Monte Carlo simulation with a simple rule-based\n"
+	               "heuristic for each simulated play.\n"
+	               "At least one level must stay selected." ),
+	  wxTRANSLATE( "Uses rule-based strategy with card tracking and\n"
+	               "observational memory of other players.\n"
+	               "At least one level must stay selected." ),
+	  wxTRANSLATE( "Blends Monte Carlo simulation with the rule-based\n"
+	               "heuristics of the Smart level for the strongest play.\n"
+	               "At least one level must stay selected." )
 	};
 	for( int l = 0; l < BOT_LEVEL_COUNT; l++ ) {
-		bot_level_checks[l] = new wxCheckBox( this, wxID_ANY, bot_labels[l] );
+		bot_level_checks[l] = new wxCheckBox( this, wxID_ANY,
+		  wxGetTranslation( bot_labels[l] ) );
 		bot_level_checks[l]->SetValue( ( current_mask & BOT_FLAG( l ) ) != 0 );
-		bot_level_checks[l]->SetToolTip( bot_tooltips[l] );
+		bot_level_checks[l]->SetToolTip( wxGetTranslation( bot_tooltips[l] ) );
 		bot_level_checks[l]->Bind( wxEVT_CHECKBOX,
 		                           &PrefsDialog::OnBotLevelCheck, this );
 		bot_sizer->Add( bot_level_checks[l], 0, wxALIGN_CENTER | wxRIGHT, 5 );
@@ -81,8 +89,8 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 
 	// Card back option
 	wxBoxSizer* back_sizer = new wxBoxSizer( wxHORIZONTAL );
-	back_sizer->Add( new wxStaticText( this, wxID_ANY, "Card back" ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
-	wxString back_choices[] = { "Blue", "Red" };
+	back_sizer->Add( new wxStaticText( this, wxID_ANY, _( "Card back" ) ), 0, wxRIGHT | wxALIGN_CENTER, 5 );
+	wxString back_choices[] = { _( "Blue" ), _( "Red" ) };
 	card_back_entry = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 2, back_choices );
 	card_back_entry->SetSelection( (int)wxGetApp().GetCardBack() );
 	back_sizer->Add( card_back_entry, 0, wxALIGN_CENTER );
@@ -91,7 +99,7 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 	// supported language in its own native name. Changing this requires
 	// restarting the application for catalogue reload to take effect.
 	wxBoxSizer* lang_sizer = new wxBoxSizer( wxHORIZONTAL );
-	lang_sizer->Add( new wxStaticText( this, wxID_ANY, "Language" ),
+	lang_sizer->Add( new wxStaticText( this, wxID_ANY, _( "Language" ) ),
 	                 0, wxRIGHT | wxALIGN_CENTER, 5 );
 	language_entry = new wxChoice( this, wxID_ANY );
 	int current_lang = wxGetApp().GetLanguage();
@@ -112,10 +120,10 @@ PrefsDialog::PrefsDialog( wxWindow* parent ):
 
 	// Buttons
 	wxBoxSizer* button_sizer = new wxBoxSizer( wxHORIZONTAL );
-	wxButton* ok_button = new wxButton( this, wxID_OK, "OK" );
+	wxButton* ok_button = new wxButton( this, wxID_OK, _( "OK" ) );
 	button_sizer->Add( ok_button );
 	button_sizer->Add( 10, 1 );
-	button_sizer->Add( new wxButton( this, wxID_CANCEL, "Cancel" ) );
+	button_sizer->Add( new wxButton( this, wxID_CANCEL, _( "Cancel" ) ) );
 
 	// Put all this on top sizer
 	wxBoxSizer* top_sizer = new wxBoxSizer( wxVERTICAL );
@@ -142,7 +150,7 @@ void PrefsDialog::OnOk( wxCommandEvent& event )
 
 	wxString newname = name_entry->GetValue();
 	if( ! ValidName( newname ) ) {
-		wxMessageBox( "Invalid name.", "Error", wxOK | wxICON_ERROR );
+		wxMessageBox( _( "Invalid name." ), _( "Error" ), wxOK | wxICON_ERROR );
 		return;
 	}
 
@@ -159,9 +167,9 @@ void PrefsDialog::OnOk( wxCommandEvent& event )
 	if( newmask != app.GetBotLevels() ) {
 		app.SetBotLevels( newmask );
 		if( app.GetGame() )
-			wxMessageBox( "Bot difficulty change will take effect\n"
-			  "when you start a new game.",
-			  "Note", wxOK | wxICON_INFORMATION );
+			wxMessageBox( _( "Bot difficulty change will take effect\n"
+			                 "when you start a new game." ),
+			  _( "Note" ), wxOK | wxICON_INFORMATION );
 	}
 	app.SetCardBack( (cardback_t)card_back_entry->GetSelection() );
 	int lang_idx = language_entry->GetSelection();

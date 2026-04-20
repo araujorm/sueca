@@ -23,6 +23,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <wx/dcmemory.h>
 #include <wx/mstream.h>
 #include <wx/image.h>
+#include <wx/intl.h>
 #include "main.hpp"
 
 #include <wx/listimpl.cpp>
@@ -55,8 +56,15 @@ Card::Card( Deck *deck, CardType& type, CardSuit& suit,
 
 wxString Card::NameStr()
 {
-	return ( wxString( m_type.GetName() ) + wxString( " of " ) +
-	         wxString( m_suit.GetName() ) );
+	// Type and suit names are stored as their English source form
+	// (tagged with wxTRANSLATE where defined). Translate on the fly so
+	// the same card shows the player's preferred language everywhere
+	// (status bar, trumph dialog, last trick dialog, ...). The "%s of
+	// %s" template is also translated so languages with different word
+	// order can reshape it naturally.
+	return wxString::Format( _( "%s of %s" ),
+	  wxGetTranslation( m_type.GetName() ),
+	  wxGetTranslation( m_suit.GetName() ) );
 }
 
 wxString Card::ShortStr()
@@ -109,18 +117,22 @@ void Card::ColorInvert( bool inverted )
 	}
 }
 
-// Permanent card types
+// Permanent card types. Long names are tagged with wxTRANSLATE so
+// xgettext picks them up; wxGetTranslation is applied when the card
+// is displayed (see Card::NameStr). Short names stay plain ASCII -
+// they're also used in the network protocol and must not change per
+// locale.
 static CardType typeNul( UNKNOWN_CARD_TYPE, "", "", 0 );
-static CardType typeTwo( TWO, "Two", "2", 0 );
-static CardType typeThree( THREE, "Three", "3", 0 );
-static CardType typeFour( FOUR, "Four", "4", 0 );
-static CardType typeFive( FIVE, "Five", "5", 0 );
-static CardType typeSix( SIX, "Six", "6", 0 );
-static CardType typeQueen( QUEEN, "Queen", "Q", 2 );
-static CardType typeJack( JACK, "Jack", "J", 3 );
-static CardType typeKing( KING, "King", "K", 4 );
-static CardType typeSeven( SEVEN, "Seven", "7", 10 );
-static CardType typeAce( ACE, "Ace", "A", 11 );
+static CardType typeTwo( TWO, wxTRANSLATE( "Two" ), "2", 0 );
+static CardType typeThree( THREE, wxTRANSLATE( "Three" ), "3", 0 );
+static CardType typeFour( FOUR, wxTRANSLATE( "Four" ), "4", 0 );
+static CardType typeFive( FIVE, wxTRANSLATE( "Five" ), "5", 0 );
+static CardType typeSix( SIX, wxTRANSLATE( "Six" ), "6", 0 );
+static CardType typeQueen( QUEEN, wxTRANSLATE( "Queen" ), "Q", 2 );
+static CardType typeJack( JACK, wxTRANSLATE( "Jack" ), "J", 3 );
+static CardType typeKing( KING, wxTRANSLATE( "King" ), "K", 4 );
+static CardType typeSeven( SEVEN, wxTRANSLATE( "Seven" ), "7", 10 );
+static CardType typeAce( ACE, wxTRANSLATE( "Ace" ), "A", 11 );
 
 // Embedded PNG data
 #include "png/clubs.h"
@@ -188,21 +200,26 @@ class SuitNul: public CardSuit
 {
 public: SuitNul(): CardSuit( UNKNOWN_CARD_SUIT ) {}
 };
+// Suit names also go through wxTRANSLATE + wxGetTranslation in
+// Card::NameStr. The single-character short name derived from the
+// first letter is used in the network protocol and therefore stays
+// English at all times (and the same goes for the other ASCII short
+// names of types above).
 class SuitClubs: public CardSuit
 {
-public: SuitClubs(): CardSuit( CLUBS, "Clubs", clubs, clubs_len ) {}
+public: SuitClubs(): CardSuit( CLUBS, wxTRANSLATE( "Clubs" ), clubs, clubs_len ) {}
 };
 class SuitDiamonds: public CardSuit
 {
-public: SuitDiamonds(): CardSuit( DIAMONDS, "Diamonds", diamonds, diamonds_len ) {}
+public: SuitDiamonds(): CardSuit( DIAMONDS, wxTRANSLATE( "Diamonds" ), diamonds, diamonds_len ) {}
 };
 class SuitHearts: public CardSuit
 {
-public: SuitHearts(): CardSuit( HEARTS, "Hearts", hearts, hearts_len ) {}
+public: SuitHearts(): CardSuit( HEARTS, wxTRANSLATE( "Hearts" ), hearts, hearts_len ) {}
 };
 class SuitSpades: public CardSuit
 {
-public: SuitSpades(): CardSuit ( SPADES, "Spades", spades, spades_len ) {}
+public: SuitSpades(): CardSuit ( SPADES, wxTRANSLATE( "Spades" ), spades, spades_len ) {}
 };
 
 // Deck implementation

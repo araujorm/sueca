@@ -19,6 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "scoredialog.hpp"
 #include <wx/button.h>
+#include <wx/intl.h>
 #include "main.hpp"
 
 #include <wx/listimpl.cpp>
@@ -31,7 +32,7 @@ BEGIN_EVENT_TABLE( ScoreDialog, wxDialog )
 END_EVENT_TABLE();
 
 ScoreDialog::ScoreDialog( wxWindow* parent, Team* nteam1, Team* nteam2, wxPoint& pos ):
-	wxDialog( parent, wxID_ANY, wxString( "Game scores" ), pos ),
+	wxDialog( parent, wxID_ANY, _( "Game scores" ), pos ),
 	m_no_focus( false ), round( 1 ), displayed( 0 ),
 	team1points( NULL ), team2points( NULL ), roundlabel( NULL ),
 	new_round( true ), team1( nteam1 ), team2( nteam2 )
@@ -40,14 +41,14 @@ ScoreDialog::ScoreDialog( wxWindow* parent, Team* nteam1, Team* nteam2, wxPoint&
 	AddLine( "", team1->GetP1()->GetName() + "\n" + team1->GetP2()->GetName(),
 	         team2->GetP1()->GetName() + "\n" + team2->GetP2()->GetName(),
 	         wxFONTWEIGHT_BOLD, *wxBLACK, wxALIGN_CENTER, &team1text, &team2text );
-	AddLine( "Victories", wxString::Format( "%hu", team1->GetWon() ),
+	AddLine( _( "Victories" ), wxString::Format( "%hu", team1->GetWon() ),
 	         wxString::Format( "%hu", team2->GetWon() ),
 	         wxFONTWEIGHT_BOLD, *wxRED, wxALIGN_RIGHT, &team1won, &team2won );
 	top_sizer = new wxBoxSizer( wxVERTICAL );
 	top_sizer->Add( 1, 5 );
 	top_sizer->Add( gridsz, 0, wxLEFT | wxRIGHT, 20 );
 	top_sizer->Add( 1, 10 );
-	top_sizer->Add( new wxButton( this, wxID_ANY, "Close" ), 0, wxALIGN_CENTER );
+	top_sizer->Add( new wxButton( this, wxID_ANY, _( "Close" ) ), 0, wxALIGN_CENTER );
 	top_sizer->Add( 1, 5 );
 	SetSizer( top_sizer );  // Fit is called in UpdateRoundResults()
 }
@@ -83,7 +84,7 @@ void ScoreDialog::UpdateRoundResults( const wxString& s1, const wxString& s2,
 			gridsz->Layout();
 			displayed = 1;
 		}
-		AddLine( wxString::Format( "Round %u", round ),
+		AddLine( wxString::Format( _( "Round %u" ), round ),
 		         t1points, t2points, wxFONTWEIGHT_BOLD, *wxBLUE,
 		         wxALIGN_RIGHT, &team1points, &team2points, &roundlabel );
 		oldobjs.Append( roundlabel );

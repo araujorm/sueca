@@ -20,6 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "remotehandler.hpp"
 #include "main.hpp"
 #include <wx/msgdlg.h>
+#include <wx/intl.h>
 
 DEFINE_EVENT_TYPE( FINISH_REMOTE_HANDLER_TYPE );
 
@@ -78,13 +79,14 @@ void RemoteHandler::TerminateConnection()
 	RemoteDialog* diag = wxGetApp().rmtdlg;
 	if( diag ) {
 		if( m_connected )
-			diag->ConnectionEndWarn( "Connection lost.");
+			diag->ConnectionEndWarn( _( "Connection lost." ) );
 		else
-			diag->ConnectionEndWarn( "Connection failed.");
+			diag->ConnectionEndWarn( _( "Connection failed." ) );
 		SetSocket( NULL );
 	}
 	else if( m_connected ) {
-		wxMessageBox( "Connection lost.", "Game Aborted", wxOK | wxICON_EXCLAMATION );
+		wxMessageBox( _( "Connection lost." ), _( "Game Aborted" ),
+		              wxOK | wxICON_EXCLAMATION );
 		wxGetApp().EndGame();
 	}
 }
@@ -98,8 +100,8 @@ void RemoteHandler::OnSocketEvent( wxSocketEvent& event )
 			// Enable connected related controls
 			for( wxWindowList::Node* node = diag->connectedlist.GetFirst(); node; node = node->GetNext() )
 				node->GetData()->Enable( true );
-			diag->chat->Write( "*** Connection established.");
-			diag->connect_button->SetLabel( "Disc&onnect" );
+			diag->chat->Write( _( "*** Connection established." ) );
+			diag->connect_button->SetLabel( _( "Disc&onnect" ) );
 			diag->ReLayout();
 		}
 		m_connected = true;

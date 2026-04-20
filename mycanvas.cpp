@@ -20,6 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <cmath>
 #include "mycanvas.hpp"
 #include <wx/gdicmn.h>
+#include <wx/intl.h>
 #include "myevents.hpp"
 #include "main.hpp"
 
@@ -263,7 +264,9 @@ void MyCanvas::OnMouseEvent( wxMouseEvent& event )
 				statusbar->SetStatusText( under->NameStr() );
 		}
 		else if( m_trumph && m_trumph->GetRect().Contains( lpt ) )
-			statusbar->SetStatusText( "Trumph: " + m_trumph->GetCardName() );
+			statusbar->SetStatusText(
+			  wxString::Format( _( "Trumph: %s" ),
+			                    m_trumph->GetCardName() ) );
 		else
 			statusbar->SetStatusText( "" );
 	}
@@ -472,13 +475,13 @@ void MyCanvas::FlashCard( Card* card )
 
 void MyCanvas::NotTurnWarning()
 {
-	statusbar->SetStatusText( "It's not your turn!" );
+	statusbar->SetStatusText( _( "It's not your turn!" ) );
 }
 
 void MyCanvas::InvalidLocalMove( Card* card )
 {
 	if( card || ( card = lastclicked ) ) {
-		statusbar->SetStatusText( "Invalid move!" );
+		statusbar->SetStatusText( _( "Invalid move!" ) );
 		FlashCard( card );
 	}
 }

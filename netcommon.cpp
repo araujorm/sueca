@@ -20,12 +20,19 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "netcommon.hpp"
 #include <wx/listimpl.cpp>
 #include <wx/tokenzr.h>
+#include <wx/intl.h>
 #include "definitions.hpp"
 
 WX_DEFINE_LIST( SockBaseList );
 WX_DEFINE_LIST( CommandList );
 
-const char* freestr = "<free>";
+// Display-only label for an empty network game slot. Lives here
+// because it's consumed by both server and remote dialogs. Pure UI
+// string - never sent on the wire.
+wxString FreeStr()
+{
+	return _( "<free>" );
+}
 
 void SocketPrint( wxSocketBase* socket, const wxString& str )
 {

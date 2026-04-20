@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <wx/textctrl.h>
 #include <wx/stattext.h>
 #include <wx/msgdlg.h>
+#include <wx/intl.h>
 #include "main.hpp"
 
 // Remote connection dialog implementation
@@ -33,11 +34,12 @@ BEGIN_EVENT_TABLE( RemoteDialog, wxDialog )
 	EVT_CHAT_PANEL_MESSAGE( RemoteDialog::OnChatMessage )
 END_EVENT_TABLE();
 
-const char* noconnstr = "<not connected>";
-const char* connect_caption = "C&onnect";
+// Placeholder label for a position slot before the server has told us
+// who's there. UI-only, translated at runtime.
+static inline wxString NoConnStr() { return _( "<not connected>" ); }
 
 RemoteDialog::RemoteDialog( wxWindow* parent ):
-	wxDialog( parent, wxID_ANY, wxString( "Connect to remote game" ) ), positions( 4 )
+	wxDialog( parent, wxID_ANY, _( "Connect to remote game" ) ), positions( 4 )
 {
 	Sueca& app = wxGetApp();
 	app.rmtdlg = this;
@@ -47,7 +49,7 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
 
 	// IP entry
 	wxBoxSizer* ip_sizer = new wxBoxSizer( wxHORIZONTAL );
-	wxStaticText* ip_text = new wxStaticText( this, wxID_ANY, "Host address");
+	wxStaticText* ip_text = new wxStaticText( this, wxID_ANY, _( "Host address" ) );
 	ip_sizer->Add( ip_text, 0, wxRIGHT | wxALIGN_CENTER, 5 );
 	disconnectedlist.Append( ip_text );
 	ip_entry = new wxTextCtrl( this, wxID_ANY, app.connect_ip_address, wxDefaultPosition, wxSize( 120, wxID_ANY ) );
@@ -55,7 +57,7 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
 	disconnectedlist.Append( ip_entry );
 
 	// Port entry
-	wxStaticText* port_text = new wxStaticText( this, wxID_ANY, "Port");
+	wxStaticText* port_text = new wxStaticText( this, wxID_ANY, _( "Port" ) );
 	ip_sizer->Add( port_text, 0, wxRIGHT | wxALIGN_CENTER, 5 );
 	disconnectedlist.Append( port_text );
 	port_entry = new wxTextCtrl( this, wxID_ANY, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 60, wxID_ANY ) );
@@ -64,22 +66,22 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
 	top_sizer->Add( ip_sizer, 0, wxBOTTOM, 10 );
 
 	// Positions
-	wxStaticBox* pos_box = new wxStaticBox( this, wxID_ANY, "Player positions" );
+	wxStaticBox* pos_box = new wxStaticBox( this, wxID_ANY, _( "Player positions" ) );
 	wxStaticBoxSizer* pos_sizer =
 	  new wxStaticBoxSizer( pos_box, wxVERTICAL );
 	invisible = new wxRadioButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
 	invisible->Show( false );
 	invisible->SetValue( true );
-	wxRadioButton* p1button = new wxRadioButton( this, ID_RADIOBUTTON_P1, noconnstr );
+	wxRadioButton* p1button = new wxRadioButton( this, ID_RADIOBUTTON_P1, NoConnStr() );
 	p1button->Enable( false );
 	connectedlist.Append( p1button );
-	wxRadioButton* p2button = new wxRadioButton( this, ID_RADIOBUTTON_P2, noconnstr );
+	wxRadioButton* p2button = new wxRadioButton( this, ID_RADIOBUTTON_P2, NoConnStr() );
 	p2button->Enable( false );
 	connectedlist.Append( p2button );
-	wxRadioButton* p3button = new wxRadioButton( this, ID_RADIOBUTTON_P3, noconnstr );
+	wxRadioButton* p3button = new wxRadioButton( this, ID_RADIOBUTTON_P3, NoConnStr() );
 	p3button->Enable( false );
 	connectedlist.Append( p3button );
-	wxRadioButton* p4button = new wxRadioButton( this, ID_RADIOBUTTON_P4, noconnstr );
+	wxRadioButton* p4button = new wxRadioButton( this, ID_RADIOBUTTON_P4, NoConnStr() );
 	p4button->Enable( false );
 	connectedlist.Append( p4button );
 	wxBoxSizer* posmidsizer = new wxBoxSizer( wxHORIZONTAL );
@@ -94,7 +96,7 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
 	top_sizer->Add( pos_sizer, 0, wxEXPAND | wxBOTTOM, 10 );
 
 	// Chat stuff
-	wxStaticBox* chat_box = new wxStaticBox( this, wxID_ANY, "Chat" );
+	wxStaticBox* chat_box = new wxStaticBox( this, wxID_ANY, _( "Chat" ) );
 	chat_box->Enable( false );
 	connectedlist.Append( chat_box );
 	chat = new ChatPanel( this );
@@ -107,9 +109,9 @@ RemoteDialog::RemoteDialog( wxWindow* parent ):
 
 	// Buttons
 	wxBoxSizer* button_sizer = new wxBoxSizer( wxHORIZONTAL );
-	connect_button = new wxButton( this, wxID_OK, connect_caption );
+	connect_button = new wxButton( this, wxID_OK, _( "C&onnect" ) );
 	button_sizer->Add( connect_button, 0, wxRIGHT, 10 );
-	button_sizer->Add( new wxButton( this, wxID_CANCEL, "&Cancel" ) );
+	button_sizer->Add( new wxButton( this, wxID_CANCEL, _( "&Cancel" ) ) );
 	top_sizer->Add( button_sizer, 0, wxTOP | wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	// Invisible border
@@ -147,8 +149,8 @@ void RemoteDialog::OnSelectPosition( wxCommandEvent& event )
 
 void RemoteDialog::ConnectionEndWarn( wxString message )
 {
-	wxMessageBox( message, "Error", wxOK | wxICON_EXCLAMATION );
-	chat->Write( wxString::Format( "*** %s", message.c_str() ) );
+	wxMessageBox( message, _( "Error" ), wxOK | wxICON_EXCLAMATION );
+	chat->Write( wxString::Format( "*** %s", message ) );
 	NoConnectionState();
 }
 
@@ -163,9 +165,9 @@ void RemoteDialog::NoConnectionState()
 		node->GetData()->Enable( false );
 	for( int i = ID_RADIOBUTTON_P1; i <= ID_RADIOBUTTON_P4; i++ ) {
 		wxRadioButton* button = posarray[i]->button;
-		button->SetLabel( noconnstr );
+		button->SetLabel( NoConnStr() );
 	}
-	connect_button->SetLabel( connect_caption );
+	connect_button->SetLabel( _( "C&onnect" ) );
 	ReLayout();
 }
 
@@ -174,10 +176,10 @@ void RemoteDialog::OnConnect( wxCommandEvent& event )
 	if( handler->GetSocket() ) {
 		if( handler->IsConnected() )
 			// Disconnect
-			chat->Write( "*** Disconnected." );
+			chat->Write( _( "*** Disconnected." ) );
 		else
 			// Stop
-			chat->Write( "*** Connection aborted." );
+			chat->Write( _( "*** Connection aborted." ) );
 		handler->SetSocket( NULL );
 		NoConnectionState();
 	}
@@ -190,13 +192,13 @@ void RemoteDialog::OnConnect( wxCommandEvent& event )
 		host.Trim( true );
 		host.Trim( false );
 		if( ! host.Len() ) {
-			wxMessageBox( "Invalid address.", "Error", wxOK | wxICON_ERROR );
+			wxMessageBox( _( "Invalid address." ), _( "Error" ), wxOK | wxICON_ERROR );
 			return;
 		}
 		// Check port
 		unsigned long newport;
 		if( !port_entry->GetValue().ToULong( &newport ) || !newport || newport > PORT_MAX ) {
-			wxMessageBox( "Invalid port.", "Error", wxOK | wxICON_ERROR );
+			wxMessageBox( _( "Invalid port." ), _( "Error" ), wxOK | wxICON_ERROR );
 			return;
 		}
 		app.connect_ip_address = host;
@@ -214,8 +216,9 @@ void RemoteDialog::OnConnect( wxCommandEvent& event )
 		// We're now trying to connect, so disable connection related controls
 		for( wxWindowList::Node* node = disconnectedlist.GetFirst(); node; node = node->GetNext() )
 			node->GetData()->Enable( false );
-		chat->Write( wxString::Format( "*** Connecting to %s:%hu...", host.c_str(), short(newport) ) );
-		connect_button->SetLabel( "St&op" );
+		chat->Write( wxString::Format( _( "*** Connecting to %s:%hu..." ),
+		                               host, short(newport) ) );
+		connect_button->SetLabel( _( "St&op" ) );
 	}
 }
 
@@ -248,7 +251,7 @@ RemotePosition* RemoteDialog::SetPosition( wxString& name, const wxString& key )
 		pos->button->Enable( false );
 	}
 	else {
-		pos->button->SetLabel( freestr );
+		pos->button->SetLabel( FreeStr() );
 		pos->button->Enable( true );
 	}
 	return pos;

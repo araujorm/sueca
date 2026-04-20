@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <wx/sizer.h>
 #include <wx/dcclient.h>
 #include <wx/dcmemory.h>
+#include <wx/intl.h>
 #include "main.hpp"
 
 // Card cross layout constants
@@ -176,19 +177,19 @@ BEGIN_EVENT_TABLE( LastTrickDialog, wxDialog )
 END_EVENT_TABLE();
 
 LastTrickDialog::LastTrickDialog( wxWindow* parent, wxPoint& pos ):
-	wxDialog( parent, wxID_ANY, wxString( "Last Trick" ), pos,
+	wxDialog( parent, wxID_ANY, _( "Last Trick" ), pos,
 	          wxDefaultSize, wxDEFAULT_DIALOG_STYLE & ~wxRESIZE_BORDER ),
 	m_no_focus( false )
 {
 	m_panel = new TrickPanel( this );
 
-	m_winner_text = new wxStaticText( this, wxID_ANY, "No trick yet",
+	m_winner_text = new wxStaticText( this, wxID_ANY, _( "No trick yet" ),
 	  wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER );
 
 	m_top_sizer = new wxBoxSizer( wxVERTICAL );
 	m_top_sizer->Add( m_panel, 0, wxALIGN_CENTER | wxALL, 10 );
 	m_top_sizer->Add( m_winner_text, 0, wxALIGN_CENTER | wxBOTTOM, 5 );
-	m_top_sizer->Add( new wxButton( this, wxID_ANY, "Close" ), 0,
+	m_top_sizer->Add( new wxButton( this, wxID_ANY, _( "Close" ) ), 0,
 	                wxALIGN_CENTER | wxBOTTOM, 10 );
 	SetSizer( m_top_sizer );
 	m_top_sizer->Fit( this );
@@ -215,7 +216,8 @@ void LastTrickDialog::UpdateTrick( PlayerIterator* players,
 		players->GetNext();
 	}
 
-	m_winner_text->SetLabel( "Won by " + winner->GetName() );
+	m_winner_text->SetLabel(
+	  wxString::Format( _( "Won by %s" ), winner->GetName() ) );
 	RefitDialog();
 	m_panel->Refresh();
 }

@@ -18,6 +18,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #include "chatpanel.hpp"
+#include <wx/intl.h>
 #include "main.hpp"
 
 DEFINE_EVENT_TYPE( CHAT_PANEL_MESSAGE_TYPE )
@@ -42,7 +43,7 @@ ChatPanel::ChatPanel( wxWindow* parent ):
 	// Chat window
 	chat_text = new ChatControl( this, wxID_ANY, "", wxDefaultPosition, wxSize( -1, 100 ), wxTE_READONLY | wxTE_MULTILINE );
 	send_text = new wxTextCtrl( this, ID_SENDTEXT, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER );
-	wxButton* send_button = new wxButton( this, ID_SEND, "S&end" );
+	wxButton* send_button = new wxButton( this, ID_SEND, _( "S&end" ) );
 	wxBoxSizer* send_sizer = new wxBoxSizer( wxHORIZONTAL );
 	send_sizer->Add( send_text, 1 );
 	send_sizer->Add( send_button );

@@ -40,7 +40,9 @@ public:
 		com( com_id ), args( argv ) {}
 };
 
-extern const char* freestr;
+// Display-only label for an empty player slot. Localised - never sent
+// on the wire.
+wxString FreeStr();
 
 WX_DECLARE_LIST( wxSocketBase, SockBaseList );
 WX_DECLARE_LIST( Command, CommandList );

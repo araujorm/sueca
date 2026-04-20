@@ -20,6 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "myframe.hpp"
 #include <wx/msgdlg.h>
 #include <wx/config.h>
+#include <wx/intl.h>
 #include "prefsdialog.hpp"
 #include "cards.hpp"
 #include "main.hpp"
@@ -94,37 +95,37 @@ MyFrame::MyFrame():
 #endif
 
 	gameMenu = new wxMenu();
-	gameMenu->Append( wxID_NEW, "&New single player\tF2", "Start a new game against computer players" );
-	gameMenu->Append( ID_HOST_GAME, "&Host network game", "Start a network game" );
-	gameMenu->Append( ID_CONNECT, "&Connect to network game", "Connect to a remote game" );
-	gameMenu->Append( wxID_CLOSE, "&End Game", "End current game" );
+	gameMenu->Append( wxID_NEW, _( "&New single player\tF2" ), _( "Start a new game against computer players" ) );
+	gameMenu->Append( ID_HOST_GAME, _( "&Host network game" ), _( "Start a network game" ) );
+	gameMenu->Append( ID_CONNECT, _( "&Connect to network game" ), _( "Connect to a remote game" ) );
+	gameMenu->Append( wxID_CLOSE, _( "&End Game" ), _( "End current game" ) );
 	gameMenu->Enable( wxID_CLOSE, false );
 	gameMenu->AppendSeparator();
-	gameMenu->Append( ID_GAME_PREFERENCES, "&Preferences", "Set game preferences" );
+	gameMenu->Append( ID_GAME_PREFERENCES, _( "&Preferences" ), _( "Set game preferences" ) );
 	gameMenu->AppendSeparator();
-	gameMenu->Append( wxID_EXIT, "&Exit\tCtrl-Q", "Exit program" );
+	gameMenu->Append( wxID_EXIT, _( "&Exit\tCtrl-Q" ), _( "Exit program" ) );
 
 	viewMenu = new wxMenu();
-	viewMenu->AppendCheckItem( ID_VIEW_SCORES, "&Scores\tCtrl-S", "Show current game scores" );
+	viewMenu->AppendCheckItem( ID_VIEW_SCORES, _( "&Scores\tCtrl-S" ), _( "Show current game scores" ) );
 	viewMenu->Enable( ID_VIEW_SCORES, false );
-	viewMenu->AppendCheckItem( ID_VIEW_TRUMPH, "&Trumph\tCtrl-T", "Show current trumph card" );
+	viewMenu->AppendCheckItem( ID_VIEW_TRUMPH, _( "&Trumph\tCtrl-T" ), _( "Show current trumph card" ) );
 	viewMenu->Enable( ID_VIEW_TRUMPH, false );
-	viewMenu->AppendCheckItem( ID_VIEW_LASTTRICK, "&Last Trick\tCtrl-L", "Show last completed trick" );
+	viewMenu->AppendCheckItem( ID_VIEW_LASTTRICK, _( "&Last Trick\tCtrl-L" ), _( "Show last completed trick" ) );
 	viewMenu->Enable( ID_VIEW_LASTTRICK, false );
 
 	wxMenu* helpMenu = new wxMenu();
-	helpMenu->Append( wxID_HELP_CONTENTS, "&Contents\tF1", "Help contents" );
-	helpMenu->Append( wxID_ABOUT, "&About", "About this game" );
+	helpMenu->Append( wxID_HELP_CONTENTS, _( "&Contents\tF1" ), _( "Help contents" ) );
+	helpMenu->Append( wxID_ABOUT, _( "&About" ), _( "About this game" ) );
 
 	wxMenuBar* mymenubar = new wxMenuBar();
-	mymenubar->Append( gameMenu, "&Game" );
-	mymenubar->Append( viewMenu, "&View" );
-	mymenubar->Append( helpMenu, "&Help" );
+	mymenubar->Append( gameMenu, _( "&Game" ) );
+	mymenubar->Append( viewMenu, _( "&View" ) );
+	mymenubar->Append( helpMenu, _( "&Help" ) );
 	SetMenuBar( mymenubar );
 
 	MyStatusBar* status = new MyStatusBar( this, wxID_ANY );
 	SetStatusBar( status );
-	status->SetStatusText( "Welcome!" );
+	status->SetStatusText( _( "Welcome!" ) );
 	UpdateBotLevelStatus();
 
 	main_sizer = new wxBoxSizer( wxVERTICAL );
@@ -173,8 +174,8 @@ void MyFrame::OnConnectToGame( wxCommandEvent& event )
 void MyFrame::OnEndGame( wxCommandEvent& event )
 {
 	if( wxGetApp().GetGame() ) {
-		if(wxMessageBox("Are you sure?",
-		                "End game", wxYES_NO, this ) == wxNO )
+		if(wxMessageBox( _( "Are you sure?" ),
+		                _( "End game" ), wxYES_NO, this ) == wxNO )
 			return;
 		wxGetApp().EndGame();
 	}
@@ -216,26 +217,27 @@ void MyFrame::OnViewLastTrick( wxCommandEvent& event )
 
 void MyFrame::Help( wxCommandEvent& event )
 {
-	wxMessageDialog msg( this,"Not implemented yet." );
+	wxMessageDialog msg( this, _( "Not implemented yet." ) );
 	msg.ShowModal();
 }
 
 void MyFrame::About( wxCommandEvent& event )
 {
-	wxMessageDialog md( this, VERSION_STRING "\n\
-(C) 2003-2026 Rodrigo Araujo\n\
-Card graphics by jfitz technologies - http://www.jfitz.com/\n\
-\n\
-This program is free software; you can redistribute it and/or modify\n\
-it under the terms of the GNU General Public License as published by\n\
-the Free Software Foundation; either version 2 of the License, or\n\
-(at your option) any later version.\n\
-\n\
-This program is distributed in the hope that it will be useful,\n\
-but WITHOUT ANY WARRANTY; without even the implied warranty of\n\
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n\
-GNU General Public License for more details.",
-                      "About this game", wxOK );
+	wxMessageDialog md( this,
+	  wxString( VERSION_STRING "\n" ) +
+	  _( "(C) 2003-2026 Rodrigo Araujo\n"
+	     "Card graphics by jfitz technologies - http://www.jfitz.com/\n"
+	     "\n"
+	     "This program is free software; you can redistribute it and/or modify\n"
+	     "it under the terms of the GNU General Public License as published by\n"
+	     "the Free Software Foundation; either version 2 of the License, or\n"
+	     "(at your option) any later version.\n"
+	     "\n"
+	     "This program is distributed in the hope that it will be useful,\n"
+	     "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+	     "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+	     "GNU General Public License for more details." ),
+	  _( "About this game" ), wxOK );
 	md.ShowModal();
 }
 
@@ -246,8 +248,8 @@ void MyFrame::OnClose( wxCloseEvent& event )
 	// cannot be vetoed (system shutdown, logout) so we don't block the
 	// session from ending.
 	if( game && event.CanVeto() &&
-	    wxMessageBox( "A game is in progress. Do you really want to exit?",
-	                  "Game in progress",
+	    wxMessageBox( _( "A game is in progress. Do you really want to exit?" ),
+	                  _( "Game in progress" ),
 	                  wxYES_NO | wxICON_QUESTION, this ) == wxNO ) {
 		event.Veto();
 		return;
@@ -282,14 +284,21 @@ void MyFrame::OnClose( wxCloseEvent& event )
 bool MyFrame::ProceedWithNewGame()
 {
 	if( wxGetApp().GetGame() &&
-	    wxMessageBox("End current game and start a new one?",
-	                 "Game in progress", wxYES_NO, this ) == wxNO )
+	    wxMessageBox( _( "End current game and start a new one?" ),
+	                 _( "Game in progress" ), wxYES_NO, this ) == wxNO )
 		return false;
 	return true;
 }
 
-static const char* bot_level_names[BOT_LEVEL_COUNT] =
-  { "Dumb", "Methodic", "Smart", "Expert" };
+// Tagged for extraction so translators can localise the bot-difficulty
+// labels that show up on the status bar (same strings the preferences
+// dialog uses for the checkboxes).
+static const char* bot_level_names[BOT_LEVEL_COUNT] = {
+	wxTRANSLATE( "Dumb" ),
+	wxTRANSLATE( "Methodic" ),
+	wxTRANSLATE( "Smart" ),
+	wxTRANSLATE( "Expert" )
+};
 
 void MyFrame::UpdateBotLevelStatus()
 {
@@ -302,6 +311,7 @@ void MyFrame::UpdateBotLevelStatus()
 			count++;
 			only = l;
 		}
-	const char* name = ( count == 1 ) ? bot_level_names[only] : "Mixed";
-	SetStatusText( wxString::Format( "Bot: %s", name ), 1 );
+	wxString name = ( count == 1 ) ?
+	  wxGetTranslation( bot_level_names[only] ) : _( "Mixed" );
+	SetStatusText( wxString::Format( _( "Bot: %s" ), name ), 1 );
 }

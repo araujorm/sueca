@@ -21,13 +21,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <wx/statbox.h>
 #include <wx/checkbox.h>
 #include <wx/msgdlg.h>
+#include <wx/intl.h>
 #include "main.hpp"
 #include "hostedgame.hpp"
 #include <wx/tokenzr.h>
 
 enum { ID_IP_CHECKBOX, ID_LISTEN_BUTTON };
-
-const char* listen_caption = "&Listen";
 
 // Server creation dialog implementation
 BEGIN_EVENT_TABLE( ServerDialog, wxDialog )
@@ -40,7 +39,7 @@ BEGIN_EVENT_TABLE( ServerDialog, wxDialog )
 END_EVENT_TABLE();
 
 ServerDialog::ServerDialog( wxWindow* parent ):
-	wxDialog( parent, wxID_ANY, wxString( "Host network game" ) ),
+	wxDialog( parent, wxID_ANY, _( "Host network game" ) ),
 	positions( 3 )
 {
 	Sueca& app = wxGetApp();
@@ -50,7 +49,7 @@ ServerDialog::ServerDialog( wxWindow* parent ):
 
 	// IP entry
 	wxBoxSizer* ip_sizer = new wxBoxSizer( wxHORIZONTAL );
-	wxCheckBox* ip_checkbox = new wxCheckBox( this, ID_IP_CHECKBOX, "Bind to specific &IP address(es)" );
+	wxCheckBox* ip_checkbox = new wxCheckBox( this, ID_IP_CHECKBOX, _( "Bind to specific &IP address(es)" ) );
 	ip_enabled = app.use_bound_ip_address;
 	ip_checkbox->SetValue( ip_enabled );
 	ip_sizer->Add( ip_checkbox, 0, wxRIGHT | wxALIGN_CENTER, 5 );
@@ -60,13 +59,13 @@ ServerDialog::ServerDialog( wxWindow* parent ):
 	ip_sizer->Add( ip_entry, 0, wxALIGN_CENTER );
 	disconnectedlist.Append( ip_entry );
 	top_sizer->Add( ip_sizer );
-	wxStaticText* ip_hint_text = new wxStaticText( this, wxID_ANY, "(separate with ; if more than one)" );
+	wxStaticText* ip_hint_text = new wxStaticText( this, wxID_ANY, _( "(separate with ; if more than one)" ) );
 	top_sizer->Add( ip_hint_text, 0, wxBOTTOM | wxALIGN_CENTER, 10 );
 	disconnectedlist.Append( ip_hint_text );
 
 	// Port entry
 	wxBoxSizer* port_sizer = new wxBoxSizer( wxHORIZONTAL );
-	wxStaticText* port_text = new wxStaticText( this, wxID_ANY, "Port");
+	wxStaticText* port_text = new wxStaticText( this, wxID_ANY, _( "Port" ) );
 	port_sizer->Add( port_text, 0, wxRIGHT | wxALIGN_CENTER, 5 );
 	disconnectedlist.Append( port_text );
 	port_entry = new wxTextCtrl( this, wxID_ANY, wxString::Format( "%u", app.ip_port ), wxDefaultPosition, wxSize( 60, wxID_ANY ) );
@@ -75,15 +74,15 @@ ServerDialog::ServerDialog( wxWindow* parent ):
 	top_sizer->Add( port_sizer, 0, wxBOTTOM, 10 );
 
 	// Positions
-	wxStaticBox* pos_box = new wxStaticBox( this, wxID_ANY, "Player positions" );
+	wxStaticBox* pos_box = new wxStaticBox( this, wxID_ANY, _( "Player positions" ) );
 	wxStaticBoxSizer* pos_sizer =
 	  new wxStaticBoxSizer( pos_box, wxVERTICAL );
 	wxStaticText* p1text = new wxStaticText( this, wxID_ANY, app.GetLocalPlayerName(), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
-	wxStaticText* p2text = new wxStaticText( this, wxID_ANY, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT );
+	wxStaticText* p2text = new wxStaticText( this, wxID_ANY, FreeStr(), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT );
 	p2text->Enable( false );
-	wxStaticText* p3text = new wxStaticText( this, wxID_ANY, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
+	wxStaticText* p3text = new wxStaticText( this, wxID_ANY, FreeStr(), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 	p3text->Enable( false );
-	wxStaticText* p4text = new wxStaticText( this, wxID_ANY, freestr, wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT );
+	wxStaticText* p4text = new wxStaticText( this, wxID_ANY, FreeStr(), wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT );
 	p4text->Enable( false );
 	wxBoxSizer* posmidsizer = new wxBoxSizer( wxHORIZONTAL );
 	posmidsizer->Add( p4text, 0, wxALIGN_CENTER );
@@ -97,7 +96,7 @@ ServerDialog::ServerDialog( wxWindow* parent ):
 	top_sizer->Add( pos_sizer, 0, wxEXPAND | wxBOTTOM, 10 );
 
 	// Chat stuff
-	wxStaticBox* chat_box = new wxStaticBox( this, wxID_ANY, "Chat" );
+	wxStaticBox* chat_box = new wxStaticBox( this, wxID_ANY, _( "Chat" ) );
 	chat_box->Enable( false );
 	connectedlist.Append( chat_box );
 	chat = new ChatPanel( this );
@@ -110,12 +109,12 @@ ServerDialog::ServerDialog( wxWindow* parent ):
 
 	// Buttons
 	wxBoxSizer* button_sizer = new wxBoxSizer( wxHORIZONTAL );
-	listen_button = new wxButton( this, ID_LISTEN_BUTTON, listen_caption );
+	listen_button = new wxButton( this, ID_LISTEN_BUTTON, _( "&Listen" ) );
 	button_sizer->Add( listen_button, 0, wxRIGHT, 10 );
-	ok_button = new wxButton( this, wxID_OK, "&Begin" );
+	ok_button = new wxButton( this, wxID_OK, _( "&Begin" ) );
 	ok_button->Enable( false );
 	button_sizer->Add( ok_button, 0, wxRIGHT, 10 );
-	button_sizer->Add( new wxButton( this, wxID_CANCEL, "&Cancel" ) );
+	button_sizer->Add( new wxButton( this, wxID_CANCEL, _( "&Cancel" ) ) );
 	top_sizer->Add( button_sizer, 0, wxTOP | wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	// Invisible border
@@ -157,7 +156,7 @@ void ServerDialog::EndListen()
 		node->GetData()->Enable( true );
 	// Correct state of ip_entry
 	ip_entry->Enable( ip_enabled );
-	listen_button->SetLabel( listen_caption );
+	listen_button->SetLabel( _( "&Listen" ) );
 	// Disable connected controls if no client is connected
 	if( ! wxGetApp().servhandler->client_sockets.GetCount() )
 		for( wxWindowList::Node* node = connectedlist.GetFirst(); node; node = node->GetNext() )
@@ -170,7 +169,7 @@ void ServerDialog::OnListen( wxCommandEvent& event )
 	if( servhandler->serv_sockets.GetCount() ) {
 		servhandler->StopServer();
 		EndListen();
-		chat->Write( "*** Stopped listening." );
+		chat->Write( _( "*** Stopped listening." ) );
 	}
 	else {
 		// Keep settings as we apply them
@@ -178,7 +177,7 @@ void ServerDialog::OnListen( wxCommandEvent& event )
 		// Check port
 		unsigned long newport;
 		if( !port_entry->GetValue().ToULong( &newport ) || !newport || newport > PORT_MAX ) {
-			wxMessageBox( "Invalid port.", "Error", wxOK | wxICON_ERROR );
+			wxMessageBox( _( "Invalid port." ), _( "Error" ), wxOK | wxICON_ERROR );
 			return;
 		}
 		app.ip_port = newport;
@@ -200,21 +199,27 @@ void ServerDialog::OnListen( wxCommandEvent& event )
 				addr.Hostname( token );
 				if( ! servhandler->StartServer( addr ) ) {
 					failed = true;
-					failmsg += wxString::Format("%s%s:%hu", failmsg.Len() ? ", " : "", token.c_str(), addr.Service() );
+					failmsg += wxString::Format( "%s%s:%hu",
+					  failmsg.Len() ? ", " : "",
+					  token, addr.Service() );
 				}
 			}
 			if( ! servhandler->serv_sockets.GetCount() ) {
 				failed = true;
-				failmsg = "if you want to bind to a specific IP address please specify it";
+				failmsg = _( "if you want to bind to a specific IP address please specify it" );
 			}
 		}
 		else
 			if( ( failed = ! servhandler->StartServer( addr ) ) )
-				failmsg = wxString::Format( "port %lu", newport );
+				failmsg = wxString::Format( _( "port %lu" ), newport );
 
 		if( failed ) {
 			servhandler->StopServer();
-			wxMessageBox( wxString::Format( "Could not listen for connections%s.", failmsg.Len() ? wxString::Format( " (%s)", failmsg.c_str() ).c_str() : "" ), "Error", wxOK | wxICON_ERROR );
+			wxString msg = failmsg.Len() ?
+			  wxString::Format( _( "Could not listen for connections (%s)." ),
+			                    failmsg ) :
+			  _( "Could not listen for connections." );
+			wxMessageBox( msg, _( "Error" ), wxOK | wxICON_ERROR );
 			return;
 		}
 
@@ -225,8 +230,8 @@ void ServerDialog::OnListen( wxCommandEvent& event )
 		for( wxWindowList::Node* node = connectedlist.GetFirst(); node; node = node->GetNext() )
 			node->GetData()->Enable( true );
 
-		listen_button->SetLabel( "&Stop" );
-		chat->Write( "*** Started listening." );
+		listen_button->SetLabel( _( "&Stop" ) );
+		chat->Write( _( "*** Started listening." ) );
 	}
 }
 
@@ -325,7 +330,7 @@ void ServerDialog::SetPosition( Position* pos, NetServerPlayer* pl )
 		pos->label->Enable( true );
 	}
 	else {
-		pos->label->SetLabel( freestr );
+		pos->label->SetLabel( FreeStr() );
 		pos->label->Enable( false );
 	}
 	pos->player = pl;
