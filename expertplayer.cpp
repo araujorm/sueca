@@ -18,6 +18,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #include "expertplayer.hpp"
+#include "smarttactics.hpp"
 
 ExpertPlayer::ExpertPlayer( GamePos* gamepos ):
 	MethodicPlayer( gamepos ) {}
@@ -169,10 +170,8 @@ Card* ExpertPlayer::SimPlayCard( Card* hand[], int handsize,
 				// Dump high only when partner's win is safe. Otherwise
 				// stay cheap so that if an opponent still beats partner
 				// we don't hand them extra points.
-				bool dump_high = we_are_last ||
-				  best->GetType().GetId() == ACE ||
-				  best->GetType().GetId() == SEVEN ||
-				  best->GetSuit().GetId() == trumphsuit;
+				bool dump_high = smarttactics::ShouldDumpHigh(
+				  best, we_are_last, trumphsuit );
 				for( int i = 0; i < handsize; i++ ) {
 					if( hand[i]->GetSuit().GetId() != leadsuit )
 						continue;

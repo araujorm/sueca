@@ -18,6 +18,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #include "smartplayer.hpp"
+#include "smarttactics.hpp"
 
 SmartPlayer::SmartPlayer( GamePos* gamepos ):
 	ObservingBot( gamepos ) {}
@@ -171,19 +172,13 @@ Card* SmartPlayer::PlayFollowing( const CardList* played )
 	// Case: we can follow suit
 	if( bysuit[firstsuit].GetCount() > 0 ) {
 		if( partner_winning ) {
-			// Partner is winning - dump points to help the team
-			if( we_are_last ) {
-	// We're last, safe to dump highest value
-	return HighestValue( bysuit[firstsuit] );
-			}
-			// Not last - one adversary still plays, be a bit careful
-			// If partner's card is very strong (ace/7 of trumps, or ace of suit),
-			// dump points; otherwise play conservatively
-			if( best->GetType().GetId() >= SEVEN ||
-			    best->GetSuit().GetId() == trumphsuit )
-	return HighestValue( bysuit[firstsuit] );
-			else
-	return LowestValue( bysuit[firstsuit] );
+			// Partner is winning - dump points if the win looks safe,
+			// otherwise play a cheap card in case an opponent still to
+			// play can capture the trick.
+			return smarttactics::ShouldDumpHigh(
+			         best, we_are_last, trumphsuit ) ?
+			       HighestValue( bysuit[firstsuit] ) :
+			       LowestValue( bysuit[firstsuit] );
 		}
 		else {
 			// Adversary is winning - try to beat them
@@ -197,17 +192,11 @@ Card* SmartPlayer::PlayFollowing( const CardList* played )
 
 	// Case: can't follow suit, partner is winning.
 	// Mirror the "can follow suit" logic above: only dump a high-value
-	// card when partner's win is reasonably safe - we're the last to
-	// play, or partner's card is an ace, a 7, or a trump (hard for a
-	// remaining opponent to beat). Otherwise an opponent still to play
-	// could capture the trick and we don't want to hand them extra
-	// points, so play the cheapest non-trump instead.
+	// card when partner's win is reasonably safe. Otherwise an opponent
+	// still to play could capture the trick and we don't want to hand
+	// them extra points, so play the cheapest non-trump instead.
 	if( partner_winning ) {
-		bool dump_high = we_are_last ||
-		                 best->GetType().GetId() == ACE ||
-		                 best->GetType().GetId() == SEVEN ||
-		                 best->GetSuit().GetId() == trumphsuit;
-		if( dump_high ) {
+		if( smarttactics::ShouldDumpHigh( best, we_are_last, trumphsuit ) ) {
 			Card* dump = NULL;
 			for( int s = SUITMIN; s <= SUITMAX; s++ ) {
 				if( s == trumphsuit || bysuit[s].GetCount() == 0 )

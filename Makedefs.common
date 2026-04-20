@@ -1,6 +1,7 @@
 SRCS = main.cpp myframe.cpp cards.cpp mycanvas.cpp game.cpp player.cpp \
 	scoredialog.cpp trumphdialog.cpp prefsdialog.cpp observingbot.cpp \
-	smartplayer.cpp methodicplayer.cpp expertplayer.cpp lasttrickdialog.cpp \
+	smartplayer.cpp methodicplayer.cpp expertplayer.cpp smarttactics.cpp \
+	lasttrickdialog.cpp \
 	chatpanel.cpp serverhandler.cpp serverdialog.cpp netserverplayer.cpp \
 	netcommon.cpp remotedialog.cpp remotegame.cpp remotehandler.cpp \
 	hostedgame.cpp
