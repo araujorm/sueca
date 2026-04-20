@@ -283,6 +283,26 @@ Card* ObservingBot::LowestNonTrumph()
 	return result;
 }
 
+// Find the highest value non-trump card in hand (symmetric counterpart
+// of LowestNonTrumph). Used when we want to dump valuable cards onto
+// partner's winning trick.
+Card* ObservingBot::HighestNonTrumph()
+{
+	cardsuit_t trumphsuit = trumph->GetSuit().GetId();
+	Card* result = NULL;
+	for( int s = SUITMIN; s <= SUITMAX; s++ ) {
+		if( s == trumphsuit )
+			continue;
+		Card* high = HighestValue( bysuit[s] );
+		if( high && ( !result ||
+		              high->GetType().GetValue() > result->GetType().GetValue() ||
+		              ( high->GetType().GetValue() == result->GetType().GetValue() &&
+		                high->GetType() > result->GetType() ) ) )
+			result = high;
+	}
+	return result;
+}
+
 plindex_t ObservingBot::PlayerIndex( Player* player )
 {
 	if( player == left )

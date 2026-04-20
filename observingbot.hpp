@@ -80,6 +80,7 @@ protected:
 	Card* HighestValue( CardList& candidates );
 	Card* LowestValue( CardList& candidates );
 	Card* LowestNonTrumph();
+	Card* HighestNonTrumph();
 };
 
 #endif // _OBSERVINGBOT_HPP_

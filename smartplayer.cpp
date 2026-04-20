@@ -196,25 +196,11 @@ Card* SmartPlayer::PlayFollowing( const CardList* played )
 	// still to play could capture the trick and we don't want to hand
 	// them extra points, so play the cheapest non-trump instead.
 	if( partner_winning ) {
-		if( smarttactics::ShouldDumpHigh( best, we_are_last, trumphsuit ) ) {
-			Card* dump = NULL;
-			for( int s = SUITMIN; s <= SUITMAX; s++ ) {
-				if( s == trumphsuit || bysuit[s].GetCount() == 0 )
-	continue;
-				Card* high = HighestValue( bysuit[s] );
-				if( high && ( !dump ||
-				              high->GetType().GetValue() >
-				                dump->GetType().GetValue() ) )
-	dump = high;
-			}
-			if( dump )
-				return dump;
-		}
-		else {
-			Card* low = LowestNonTrumph();
-			if( low )
-				return low;
-		}
+		Card* dump = smarttactics::ShouldDumpHigh(
+		               best, we_are_last, trumphsuit ) ?
+		  HighestNonTrumph() : LowestNonTrumph();
+		if( dump )
+			return dump;
 		// Only trumps left - play lowest trump
 		return LowestValue( bysuit[trumphsuit] );
 	}
