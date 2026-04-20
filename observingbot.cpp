@@ -303,6 +303,15 @@ Card* ObservingBot::HighestNonTrumph()
 	return result;
 }
 
+// Cheapest trump card in hand, or NULL if we have none. Convenience
+// wrapper - every trump has a distinct rank and value-0 trumps tie on
+// value, so LowestValue tiebreaks on rank and lands on the 2 of trumps
+// first, the 3 of trumps next, etc.
+Card* ObservingBot::LowestTrump()
+{
+	return LowestValue( bysuit[trumph->GetSuit().GetId()] );
+}
+
 plindex_t ObservingBot::PlayerIndex( Player* player )
 {
 	if( player == left )

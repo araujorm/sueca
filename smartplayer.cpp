@@ -107,7 +107,7 @@ Card* SmartPlayer::PlayFirst()
 			    IsOut( ACE, trumphsuit ) )
 				return highest;
 			if( our_trumps >= 4 )
-				return LowestValue( bysuit[trumphsuit] );
+				return LowestTrump();
 		}
 	}
 
@@ -155,7 +155,7 @@ Card* SmartPlayer::PlayFirst()
 	Card* lowest = LowestNonTrumph();
 	if( lowest )
 		return lowest;
-	return LowestValue( bysuit[trumphsuit] );
+	return LowestTrump();
 }
 
 // Strategy when we are not the first to play
@@ -202,7 +202,7 @@ Card* SmartPlayer::PlayFollowing( const CardList* played )
 		if( dump )
 			return dump;
 		// Only trumps left - play lowest trump
-		return LowestValue( bysuit[trumphsuit] );
+		return LowestTrump();
 	}
 
 	// Adversary is winning and we can't follow suit - consider trumping.
@@ -229,7 +229,7 @@ Card* SmartPlayer::PlayFollowing( const CardList* played )
 	Card* discard = LowestNonTrumph();
 	if( discard )
 		return discard;
-	return LowestValue( bysuit[trumphsuit] );
+	return LowestTrump();
 }
 
 Card* SmartPlayer::PlayCard( const CardList* played )

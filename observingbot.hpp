@@ -81,6 +81,9 @@ protected:
 	Card* LowestValue( CardList& candidates );
 	Card* LowestNonTrumph();
 	Card* HighestNonTrumph();
+	// Cheapest trump in hand, or NULL if we hold no trumps. Wraps
+	// LowestValue(bysuit[trumphsuit]) so callers can express intent.
+	Card* LowestTrump();
 };
 
 #endif // _OBSERVINGBOT_HPP_
