@@ -1,0 +1,581 @@
+# Vietnamese translation for sueca.
+# Copyright (C) 2003-2026 Rodrigo Araujo
+# This file is distributed under the same license as the sueca package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sueca\n"
+"Report-Msgid-Bugs-To: https://github.com/araujorm/sueca/issues\n"
+"POT-Creation-Date: 2026-04-20 02:37+0100\n"
+"PO-Revision-Date: 2026-05-03 12:00+0100\n"
+"Last-Translator: Rodrigo Araujo\n"
+"Language-Team: Vietnamese\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: myframe.cpp:98
+msgid "&New single player\tF2"
+msgstr "Trận đơn &mới\tF2"
+
+#: myframe.cpp:98
+msgid "Start a new game against computer players"
+msgstr "Bắt đầu trận mới đấu với bot"
+
+#: myframe.cpp:99
+msgid "&Host network game"
+msgstr "&Tạo trận mạng"
+
+#: myframe.cpp:99
+msgid "Start a network game"
+msgstr "Bắt đầu trận mạng"
+
+#: myframe.cpp:100
+msgid "&Connect to network game"
+msgstr "&Kết nối tới trận mạng"
+
+#: myframe.cpp:100
+msgid "Connect to a remote game"
+msgstr "Kết nối tới trận từ xa"
+
+#: myframe.cpp:101
+msgid "&End Game"
+msgstr "&Kết thúc trận"
+
+#: myframe.cpp:101
+msgid "End current game"
+msgstr "Kết thúc trận hiện tại"
+
+#: myframe.cpp:104
+msgid "&Preferences"
+msgstr "&Tùy chọn"
+
+#: myframe.cpp:104
+msgid "Set game preferences"
+msgstr "Đặt tùy chọn trò chơi"
+
+#: myframe.cpp:106
+msgid "&Exit\tCtrl-Q"
+msgstr "T&hoát\tCtrl-Q"
+
+#: myframe.cpp:106
+msgid "Exit program"
+msgstr "Thoát chương trình"
+
+#: myframe.cpp:109
+msgid "&Scores\tCtrl-S"
+msgstr "&Điểm số\tCtrl-S"
+
+#: myframe.cpp:109
+msgid "Show current game scores"
+msgstr "Hiển thị điểm của trận hiện tại"
+
+#: myframe.cpp:111
+msgid "&Trumph\tCtrl-T"
+msgstr "&Bài chủ\tCtrl-T"
+
+#: myframe.cpp:111
+msgid "Show current trumph card"
+msgstr "Hiển thị quân bài chủ hiện tại"
+
+#: myframe.cpp:113
+msgid "&Last Trick\tCtrl-L"
+msgstr "&Lượt cuối\tCtrl-L"
+
+#: myframe.cpp:113
+msgid "Show last completed trick"
+msgstr "Hiển thị lượt vừa hoàn thành"
+
+#: myframe.cpp:117
+msgid "&Contents\tF1"
+msgstr "&Mục lục\tF1"
+
+#: myframe.cpp:117
+msgid "Help contents"
+msgstr "Mục lục trợ giúp"
+
+#: myframe.cpp:118
+msgid "&About"
+msgstr "&Giới thiệu"
+
+#: myframe.cpp:118 myframe.cpp:240
+msgid "About this game"
+msgstr "Giới thiệu trò chơi này"
+
+#: myframe.cpp:121
+msgid "&Game"
+msgstr "&Trò chơi"
+
+#: myframe.cpp:122
+msgid "&View"
+msgstr "&Xem"
+
+#: myframe.cpp:123
+msgid "&Help"
+msgstr "Trợ &giúp"
+
+#: myframe.cpp:128
+msgid "Welcome!"
+msgstr "Chào mừng!"
+
+#: myframe.cpp:177
+msgid "Are you sure?"
+msgstr "Bạn có chắc không?"
+
+#: myframe.cpp:178
+msgid "End game"
+msgstr "Kết thúc trận"
+
+#: myframe.cpp:220
+msgid "Not implemented yet."
+msgstr "Chưa triển khai."
+
+#: myframe.cpp:228
+msgid ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Card graphics by jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details."
+msgstr ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Đồ họa quân bài bởi jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"Chương trình này là phần mềm tự do; bạn có thể phân phối lại và/hoặc\n"
+"chỉnh sửa nó theo các điều khoản của Giấy phép Công cộng GNU do Tổ chức\n"
+"Phần mềm Tự do công bố; hoặc Phiên bản 2 của Giấy phép, hoặc (tùy chọn\n"
+"của bạn) bất kỳ phiên bản nào sau đó.\n"
+"\n"
+"Chương trình này được phân phối với hy vọng rằng nó sẽ hữu ích,\n"
+"nhưng KHÔNG CÓ BẤT KỲ BẢO ĐẢM NÀO; ngay cả không có bảo đảm ngụ ý về\n"
+"KHẢ NĂNG THƯƠNG MẠI hoặc PHÙ HỢP CHO MỘT MỤC ĐÍCH CỤ THỂ. Xem Giấy phép\n"
+"Công cộng GNU để biết thêm chi tiết."
+
+#: myframe.cpp:251
+msgid "A game is in progress. Do you really want to exit?"
+msgstr "Một trận đang diễn ra. Bạn thực sự muốn thoát?"
+
+#: myframe.cpp:252 myframe.cpp:288
+msgid "Game in progress"
+msgstr "Trận đang diễn ra"
+
+#: myframe.cpp:287
+msgid "End current game and start a new one?"
+msgstr "Kết thúc trận hiện tại và bắt đầu trận mới?"
+
+#: myframe.cpp:297 prefsdialog.cpp:61
+msgid "Dumb"
+msgstr "Ngốc"
+
+#: myframe.cpp:298 prefsdialog.cpp:62
+msgid "Methodic"
+msgstr "Có phương pháp"
+
+#: myframe.cpp:299 prefsdialog.cpp:63
+msgid "Smart"
+msgstr "Thông minh"
+
+#: myframe.cpp:300 prefsdialog.cpp:64
+msgid "Expert"
+msgstr "Chuyên gia"
+
+#: myframe.cpp:315
+msgid "Mixed"
+msgstr "Hỗn hợp"
+
+#: myframe.cpp:316
+#, c-format
+msgid "Bot: %s"
+msgstr "Bot: %s"
+
+#: cards.cpp:65
+#, c-format
+msgid "%s of %s"
+msgstr "%s %s"
+
+#: cards.cpp:126
+msgid "Two"
+msgstr "Hai"
+
+#: cards.cpp:127
+msgid "Three"
+msgstr "Ba"
+
+#: cards.cpp:128
+msgid "Four"
+msgstr "Bốn"
+
+#: cards.cpp:129
+msgid "Five"
+msgstr "Năm"
+
+#: cards.cpp:130
+msgid "Six"
+msgstr "Sáu"
+
+#: cards.cpp:131
+msgid "Queen"
+msgstr "Đầm"
+
+#: cards.cpp:132
+msgid "Jack"
+msgstr "Bồi"
+
+#: cards.cpp:133
+msgid "King"
+msgstr "Già"
+
+#: cards.cpp:134
+msgid "Seven"
+msgstr "Bảy"
+
+#: cards.cpp:135
+msgid "Ace"
+msgstr "Át"
+
+#: cards.cpp:210
+msgid "Clubs"
+msgstr "Tép"
+
+#: cards.cpp:214
+msgid "Diamonds"
+msgstr "Rô"
+
+#: cards.cpp:218
+msgid "Hearts"
+msgstr "Cơ"
+
+#: cards.cpp:222
+msgid "Spades"
+msgstr "Bích"
+
+#: mycanvas.cpp:268
+#, c-format
+msgid "Trumph: %s"
+msgstr "Bài chủ: %s"
+
+#: mycanvas.cpp:478
+msgid "It's not your turn!"
+msgstr "Không phải lượt của bạn!"
+
+#: mycanvas.cpp:484
+msgid "Invalid move!"
+msgstr "Nước đi không hợp lệ!"
+
+#: game.cpp:176
+msgid "First Round"
+msgstr "Vòng đầu tiên"
+
+#: game.cpp:294
+msgid "(T)"
+msgstr "(H)"
+
+#: game.cpp:340
+msgid "Last Round: tied"
+msgstr "Vòng cuối: hòa"
+
+#: game.cpp:342
+#, c-format
+msgid "Last Round: %hu for %s/%s"
+msgstr "Vòng cuối: %hu cho %s/%s"
+
+#: scoredialog.cpp:35
+msgid "Game scores"
+msgstr "Điểm số"
+
+#: scoredialog.cpp:44
+msgid "Victories"
+msgstr "Chiến thắng"
+
+#: scoredialog.cpp:51 trumphdialog.cpp:44 lasttrickdialog.cpp:192
+msgid "Close"
+msgstr "Đóng"
+
+#: scoredialog.cpp:87
+#, c-format
+msgid "Round %u"
+msgstr "Vòng %u"
+
+#: trumphdialog.cpp:34
+msgid "Trumph"
+msgstr "Bài chủ"
+
+#: trumphdialog.cpp:38 trumphdialog.cpp:56
+msgid "No trumph set"
+msgstr "Chưa đặt bài chủ"
+
+#: trumphdialog.cpp:60
+#, c-format
+msgid ""
+"%s\n"
+"Owned by %s"
+msgstr ""
+"%s\n"
+"Thuộc về %s"
+
+#: prefsdialog.cpp:37
+msgid "Game Preferences"
+msgstr "Tùy chọn trò chơi"
+
+#: prefsdialog.cpp:41
+msgid "Player name"
+msgstr "Tên người chơi"
+
+#: prefsdialog.cpp:48
+msgid "Card movement speed"
+msgstr "Tốc độ di chuyển quân bài"
+
+#: prefsdialog.cpp:56
+msgid "Bot difficulty"
+msgstr "Độ khó của bot"
+
+#: prefsdialog.cpp:67
+msgid ""
+"Plays any valid card, no strategy.\n"
+"At least one level must stay selected."
+msgstr ""
+"Chơi bất kỳ quân bài hợp lệ nào, không có chiến lược.\n"
+"Ít nhất một mức độ phải được chọn."
+
+#: prefsdialog.cpp:69
+msgid ""
+"Uses Monte Carlo simulation with a simple rule-based\n"
+"heuristic for each simulated play.\n"
+"At least one level must stay selected."
+msgstr ""
+"Sử dụng mô phỏng Monte Carlo với một phương pháp đơn giản\n"
+"dựa trên quy tắc cho mỗi lượt chơi mô phỏng.\n"
+"Ít nhất một mức độ phải được chọn."
+
+#: prefsdialog.cpp:72
+msgid ""
+"Uses rule-based strategy with card tracking and\n"
+"observational memory of other players.\n"
+"At least one level must stay selected."
+msgstr ""
+"Sử dụng chiến lược dựa trên quy tắc với theo dõi quân bài\n"
+"và bộ nhớ quan sát các người chơi khác.\n"
+"Ít nhất một mức độ phải được chọn."
+
+#: prefsdialog.cpp:75
+msgid ""
+"Blends Monte Carlo simulation with the rule-based\n"
+"heuristics of the Smart level for the strongest play.\n"
+"At least one level must stay selected."
+msgstr ""
+"Kết hợp mô phỏng Monte Carlo với các phương pháp dựa trên\n"
+"quy tắc của mức Thông minh để có lối chơi mạnh nhất.\n"
+"Ít nhất một mức độ phải được chọn."
+
+#: prefsdialog.cpp:92
+msgid "Card back"
+msgstr "Mặt sau quân bài"
+
+#: prefsdialog.cpp:93
+msgid "Blue"
+msgstr "Xanh"
+
+#: prefsdialog.cpp:93
+msgid "Red"
+msgstr "Đỏ"
+
+#: prefsdialog.cpp:102 prefsdialog.cpp:182
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+#: prefsdialog.cpp:110
+msgid "Same as system"
+msgstr "Giống hệ thống"
+
+#: prefsdialog.cpp:118
+msgid "Takes effect on next application start."
+msgstr "Có hiệu lực ở lần khởi động ứng dụng tiếp theo."
+
+#: prefsdialog.cpp:123
+msgid "OK"
+msgstr "OK"
+
+#: prefsdialog.cpp:126
+msgid "Cancel"
+msgstr "Hủy"
+
+#: prefsdialog.cpp:153
+msgid "Invalid name."
+msgstr "Tên không hợp lệ."
+
+#: prefsdialog.cpp:153 serverdialog.cpp:180 serverdialog.cpp:222
+#: remotedialog.cpp:152 remotedialog.cpp:195 remotedialog.cpp:201
+msgid "Error"
+msgstr "Lỗi"
+
+#: prefsdialog.cpp:170
+msgid ""
+"Bot difficulty change will take effect\n"
+"when you start a new game."
+msgstr ""
+"Thay đổi độ khó của bot sẽ có hiệu lực\n"
+"khi bạn bắt đầu trận mới."
+
+#: prefsdialog.cpp:172
+msgid "Note"
+msgstr "Ghi chú"
+
+#: prefsdialog.cpp:180
+msgid "The language change will take effect the next time Sueca is started."
+msgstr "Thay đổi ngôn ngữ sẽ có hiệu lực ở lần khởi động Sueca tiếp theo."
+
+#: lasttrickdialog.cpp:180
+msgid "Last Trick"
+msgstr "Lượt cuối"
+
+#: lasttrickdialog.cpp:186
+msgid "No trick yet"
+msgstr "Chưa có lượt nào"
+
+#: lasttrickdialog.cpp:220
+#, c-format
+msgid "Won by %s"
+msgstr "%s thắng"
+
+#: chatpanel.cpp:46
+msgid "S&end"
+msgstr "&Gửi"
+
+#: serverdialog.cpp:42
+msgid "Host network game"
+msgstr "Tạo trận mạng"
+
+#: serverdialog.cpp:52
+msgid "Bind to specific &IP address(es)"
+msgstr "Liên kết tới địa chỉ &IP cụ thể"
+
+#: serverdialog.cpp:62
+msgid "(separate with ; if more than one)"
+msgstr "(phân tách bằng ; nếu có nhiều hơn một)"
+
+#: serverdialog.cpp:68 remotedialog.cpp:60
+msgid "Port"
+msgstr "Cổng"
+
+#: serverdialog.cpp:77 remotedialog.cpp:69
+msgid "Player positions"
+msgstr "Vị trí người chơi"
+
+#: serverdialog.cpp:99 remotedialog.cpp:99
+msgid "Chat"
+msgstr "Trò chuyện"
+
+#: serverdialog.cpp:112 serverdialog.cpp:159
+msgid "&Listen"
+msgstr "&Lắng nghe"
+
+#: serverdialog.cpp:114
+msgid "&Begin"
+msgstr "&Bắt đầu"
+
+#: serverdialog.cpp:117 remotedialog.cpp:114
+msgid "&Cancel"
+msgstr "&Hủy"
+
+#: serverdialog.cpp:172
+msgid "*** Stopped listening."
+msgstr "*** Đã ngừng lắng nghe."
+
+#: serverdialog.cpp:180 remotedialog.cpp:201
+msgid "Invalid port."
+msgstr "Cổng không hợp lệ."
+
+#: serverdialog.cpp:209
+msgid "if you want to bind to a specific IP address please specify it"
+msgstr "nếu bạn muốn liên kết tới một địa chỉ IP cụ thể, vui lòng chỉ định"
+
+#: serverdialog.cpp:214
+#, c-format
+msgid "port %lu"
+msgstr "cổng %lu"
+
+#: serverdialog.cpp:219
+#, c-format
+msgid "Could not listen for connections (%s)."
+msgstr "Không thể lắng nghe kết nối (%s)."
+
+#: serverdialog.cpp:221
+msgid "Could not listen for connections."
+msgstr "Không thể lắng nghe kết nối."
+
+#: serverdialog.cpp:233
+msgid "&Stop"
+msgstr "&Dừng"
+
+#: serverdialog.cpp:234
+msgid "*** Started listening."
+msgstr "*** Đã bắt đầu lắng nghe."
+
+#: netcommon.cpp:34
+msgid "<free>"
+msgstr "<trống>"
+
+#: remotedialog.cpp:39
+msgid "<not connected>"
+msgstr "<chưa kết nối>"
+
+#: remotedialog.cpp:42
+msgid "Connect to remote game"
+msgstr "Kết nối tới trận từ xa"
+
+#: remotedialog.cpp:52
+msgid "Host address"
+msgstr "Địa chỉ máy chủ"
+
+#: remotedialog.cpp:112 remotedialog.cpp:170
+msgid "C&onnect"
+msgstr "&Kết nối"
+
+#: remotedialog.cpp:179
+msgid "*** Disconnected."
+msgstr "*** Đã ngắt kết nối."
+
+#: remotedialog.cpp:182
+msgid "*** Connection aborted."
+msgstr "*** Kết nối bị gián đoạn."
+
+#: remotedialog.cpp:195
+msgid "Invalid address."
+msgstr "Địa chỉ không hợp lệ."
+
+#: remotedialog.cpp:219
+#, c-format
+msgid "*** Connecting to %s:%hu..."
+msgstr "*** Đang kết nối tới %s:%hu..."
+
+#: remotedialog.cpp:221
+msgid "St&op"
+msgstr "&Dừng"
+
+#: remotehandler.cpp:82 remotehandler.cpp:88
+msgid "Connection lost."
+msgstr "Mất kết nối."
+
+#: remotehandler.cpp:84
+msgid "Connection failed."
+msgstr "Kết nối thất bại."
+
+#: remotehandler.cpp:88
+msgid "Game Aborted"
+msgstr "Trận bị hủy"
+
+#: remotehandler.cpp:103
+msgid "*** Connection established."
+msgstr "*** Đã thiết lập kết nối."
+
+#: remotehandler.cpp:104
+msgid "Disc&onnect"
+msgstr "&Ngắt kết nối"
