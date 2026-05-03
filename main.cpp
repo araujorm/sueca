@@ -82,6 +82,17 @@ bool Sueca::OnInit()
 	// xxd) and - on non-static builds - falls through to the filesystem
 	// loader above.
 	wxTranslations::Get()->SetLoader( new SuecaCatalogLoader() );
+	// Force the catalogue lookup to use the user's chosen language
+	// instead of letting wxTranslations fall back to the system
+	// preferred language (which would pick e.g. en_GB on a Portuguese
+	// install where the user explicitly chose Spanish in the prefs).
+	// For wxLANGUAGE_DEFAULT we leave the auto-detect path alone.
+	if( language != wxLANGUAGE_DEFAULT ) {
+		const wxLanguageInfo* info =
+		  wxLocale::GetLanguageInfo( language );
+		if( info )
+			wxTranslations::Get()->SetLanguage( info->CanonicalName );
+	}
 	locale->AddCatalog( SUECA_NAME );
 
 	// Get stored preferences
