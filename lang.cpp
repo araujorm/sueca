@@ -55,5 +55,6 @@ const LangEntry kSuecaLanguages[] = {
 	{ wxLANGUAGE_URDU,                  "اردو" },
 	{ wxLANGUAGE_HINDI,                 "हिन्दी" },
 	{ wxLANGUAGE_MARATHI,               "मराठी" },
+	{ wxLANGUAGE_BENGALI,               "বাংলা" },
 	{ -2, 0 }  // sentinel
 };
