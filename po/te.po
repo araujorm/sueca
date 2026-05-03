@@ -1,0 +1,581 @@
+# Telugu translation for sueca.
+# Copyright (C) 2003-2026 Rodrigo Araujo
+# This file is distributed under the same license as the sueca package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sueca\n"
+"Report-Msgid-Bugs-To: https://github.com/araujorm/sueca/issues\n"
+"POT-Creation-Date: 2026-04-20 02:37+0100\n"
+"PO-Revision-Date: 2026-05-03 12:00+0100\n"
+"Last-Translator: Rodrigo Araujo\n"
+"Language-Team: Telugu\n"
+"Language: te\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: myframe.cpp:98
+msgid "&New single player\tF2"
+msgstr "&కొత్త ఒంటరి ఆట\tF2"
+
+#: myframe.cpp:98
+msgid "Start a new game against computer players"
+msgstr "బోట్‌లకు వ్యతిరేకంగా కొత్త ఆట ప్రారంభించండి"
+
+#: myframe.cpp:99
+msgid "&Host network game"
+msgstr "&నెట్‌వర్క్ ఆట సృష్టించండి"
+
+#: myframe.cpp:99
+msgid "Start a network game"
+msgstr "నెట్‌వర్క్ ఆట ప్రారంభించండి"
+
+#: myframe.cpp:100
+msgid "&Connect to network game"
+msgstr "నెట్‌వర్క్ ఆటకు &కనెక్ట్ చేయండి"
+
+#: myframe.cpp:100
+msgid "Connect to a remote game"
+msgstr "రిమోట్ ఆటకు కనెక్ట్ చేయండి"
+
+#: myframe.cpp:101
+msgid "&End Game"
+msgstr "&ఆట ముగించండి"
+
+#: myframe.cpp:101
+msgid "End current game"
+msgstr "ప్రస్తుత ఆటను ముగించండి"
+
+#: myframe.cpp:104
+msgid "&Preferences"
+msgstr "&ప్రాధాన్యతలు"
+
+#: myframe.cpp:104
+msgid "Set game preferences"
+msgstr "ఆట ప్రాధాన్యతలను సెట్ చేయండి"
+
+#: myframe.cpp:106
+msgid "&Exit\tCtrl-Q"
+msgstr "&నిష్క్రమించు\tCtrl-Q"
+
+#: myframe.cpp:106
+msgid "Exit program"
+msgstr "ప్రోగ్రామ్ నుండి నిష్క్రమించండి"
+
+#: myframe.cpp:109
+msgid "&Scores\tCtrl-S"
+msgstr "&స్కోర్లు\tCtrl-S"
+
+#: myframe.cpp:109
+msgid "Show current game scores"
+msgstr "ప్రస్తుత ఆట స్కోర్లను చూపించు"
+
+#: myframe.cpp:111
+msgid "&Trumph\tCtrl-T"
+msgstr "&ట్రంప్\tCtrl-T"
+
+#: myframe.cpp:111
+msgid "Show current trumph card"
+msgstr "ప్రస్తుత ట్రంప్ కార్డ్‌ను చూపించు"
+
+#: myframe.cpp:113
+msgid "&Last Trick\tCtrl-L"
+msgstr "చివరి &రౌండ్\tCtrl-L"
+
+#: myframe.cpp:113
+msgid "Show last completed trick"
+msgstr "చివరి పూర్తయిన రౌండ్‌ను చూపించు"
+
+#: myframe.cpp:117
+msgid "&Contents\tF1"
+msgstr "&విషయాలు\tF1"
+
+#: myframe.cpp:117
+msgid "Help contents"
+msgstr "సహాయ విషయాలు"
+
+#: myframe.cpp:118
+msgid "&About"
+msgstr "&గురించి"
+
+#: myframe.cpp:118 myframe.cpp:240
+msgid "About this game"
+msgstr "ఈ ఆట గురించి"
+
+#: myframe.cpp:121
+msgid "&Game"
+msgstr "&ఆట"
+
+#: myframe.cpp:122
+msgid "&View"
+msgstr "&వీక్షించండి"
+
+#: myframe.cpp:123
+msgid "&Help"
+msgstr "&సహాయం"
+
+#: myframe.cpp:128
+msgid "Welcome!"
+msgstr "స్వాగతం!"
+
+#: myframe.cpp:177
+msgid "Are you sure?"
+msgstr "మీరు ఖచ్చితంగా ఉన్నారా?"
+
+#: myframe.cpp:178
+msgid "End game"
+msgstr "ఆట ముగించండి"
+
+#: myframe.cpp:220
+msgid "Not implemented yet."
+msgstr "ఇంకా అమలు చేయబడలేదు."
+
+#: myframe.cpp:228
+msgid ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Card graphics by jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details."
+msgstr ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"కార్డ్ గ్రాఫిక్స్ jfitz technologies ద్వారా - http://www.jfitz.com/\n"
+"\n"
+"ఈ ప్రోగ్రామ్ ఉచిత సాఫ్ట్‌వేర్; ఫ్రీ సాఫ్ట్‌వేర్ ఫౌండేషన్ ప్రచురించిన\n"
+"GNU జనరల్ పబ్లిక్ లైసెన్స్ యొక్క వెర్షన్ 2 లేదా (మీ ఎంపిక ప్రకారం)\n"
+"ఏదైనా తదుపరి వెర్షన్ నిబంధనల ప్రకారం దీన్ని పునఃపంపిణీ మరియు/లేదా\n"
+"సవరించవచ్చు.\n"
+"\n"
+"ఈ ప్రోగ్రామ్ ఉపయోగకరంగా ఉంటుందనే ఆశతో పంపిణీ చేయబడింది,\n"
+"కానీ ఎటువంటి హామీ లేకుండా; విక్రయయోగ్యత లేదా ఒక నిర్దిష్ట\n"
+"ప్రయోజనానికి అనుకూలత యొక్క అంతర్గత హామీ కూడా లేకుండా.\n"
+"మరిన్ని వివరాల కోసం GNU జనరల్ పబ్లిక్ లైసెన్స్‌ను చూడండి."
+
+#: myframe.cpp:251
+msgid "A game is in progress. Do you really want to exit?"
+msgstr "ఒక ఆట జరుగుతోంది. మీరు నిజంగా నిష్క్రమించాలనుకుంటున్నారా?"
+
+#: myframe.cpp:252 myframe.cpp:288
+msgid "Game in progress"
+msgstr "ఆట జరుగుతోంది"
+
+#: myframe.cpp:287
+msgid "End current game and start a new one?"
+msgstr "ప్రస్తుత ఆటను ముగించి కొత్తది ప్రారంభించాలా?"
+
+#: myframe.cpp:297 prefsdialog.cpp:61
+msgid "Dumb"
+msgstr "అమాయక"
+
+#: myframe.cpp:298 prefsdialog.cpp:62
+msgid "Methodic"
+msgstr "క్రమబద్ధ"
+
+#: myframe.cpp:299 prefsdialog.cpp:63
+msgid "Smart"
+msgstr "తెలివైన"
+
+#: myframe.cpp:300 prefsdialog.cpp:64
+msgid "Expert"
+msgstr "నిపుణుడు"
+
+#: myframe.cpp:315
+msgid "Mixed"
+msgstr "మిశ్రమ"
+
+#: myframe.cpp:316
+#, c-format
+msgid "Bot: %s"
+msgstr "బోట్: %s"
+
+#: cards.cpp:65
+#, c-format
+msgid "%s of %s"
+msgstr "%s %s"
+
+#: cards.cpp:126
+msgid "Two"
+msgstr "రెండు"
+
+#: cards.cpp:127
+msgid "Three"
+msgstr "మూడు"
+
+#: cards.cpp:128
+msgid "Four"
+msgstr "నాలుగు"
+
+#: cards.cpp:129
+msgid "Five"
+msgstr "ఐదు"
+
+#: cards.cpp:130
+msgid "Six"
+msgstr "ఆరు"
+
+#: cards.cpp:131
+msgid "Queen"
+msgstr "రాణి"
+
+#: cards.cpp:132
+msgid "Jack"
+msgstr "జాక్"
+
+#: cards.cpp:133
+msgid "King"
+msgstr "రాజు"
+
+#: cards.cpp:134
+msgid "Seven"
+msgstr "ఏడు"
+
+#: cards.cpp:135
+msgid "Ace"
+msgstr "ఏస్"
+
+#: cards.cpp:210
+msgid "Clubs"
+msgstr "క్లబ్స్"
+
+#: cards.cpp:214
+msgid "Diamonds"
+msgstr "డైమండ్"
+
+#: cards.cpp:218
+msgid "Hearts"
+msgstr "హార్ట్"
+
+#: cards.cpp:222
+msgid "Spades"
+msgstr "స్పేడ్"
+
+#: mycanvas.cpp:268
+#, c-format
+msgid "Trumph: %s"
+msgstr "ట్రంప్: %s"
+
+#: mycanvas.cpp:478
+msgid "It's not your turn!"
+msgstr "ఇది మీ వంతు కాదు!"
+
+#: mycanvas.cpp:484
+msgid "Invalid move!"
+msgstr "చెల్లని ఎత్తు!"
+
+#: game.cpp:176
+msgid "First Round"
+msgstr "మొదటి రౌండ్"
+
+#: game.cpp:294
+msgid "(T)"
+msgstr "(స)"
+
+#: game.cpp:340
+msgid "Last Round: tied"
+msgstr "చివరి రౌండ్: సమం"
+
+#: game.cpp:342
+#, c-format
+msgid "Last Round: %hu for %s/%s"
+msgstr "చివరి రౌండ్: %s/%sకి %hu"
+
+#: scoredialog.cpp:35
+msgid "Game scores"
+msgstr "స్కోర్లు"
+
+#: scoredialog.cpp:44
+msgid "Victories"
+msgstr "విజయాలు"
+
+#: scoredialog.cpp:51 trumphdialog.cpp:44 lasttrickdialog.cpp:192
+msgid "Close"
+msgstr "మూసివేయి"
+
+#: scoredialog.cpp:87
+#, c-format
+msgid "Round %u"
+msgstr "రౌండ్ %u"
+
+#: trumphdialog.cpp:34
+msgid "Trumph"
+msgstr "ట్రంప్"
+
+#: trumphdialog.cpp:38 trumphdialog.cpp:56
+msgid "No trumph set"
+msgstr "ట్రంప్ సెట్ చేయబడలేదు"
+
+#: trumphdialog.cpp:60
+#, c-format
+msgid ""
+"%s\n"
+"Owned by %s"
+msgstr ""
+"%s\n"
+"%sకు చెందినది"
+
+#: prefsdialog.cpp:37
+msgid "Game Preferences"
+msgstr "ఆట ప్రాధాన్యతలు"
+
+#: prefsdialog.cpp:41
+msgid "Player name"
+msgstr "ఆటగాడి పేరు"
+
+#: prefsdialog.cpp:48
+msgid "Card movement speed"
+msgstr "కార్డ్ కదలిక వేగం"
+
+#: prefsdialog.cpp:56
+msgid "Bot difficulty"
+msgstr "బోట్ కష్టం"
+
+#: prefsdialog.cpp:67
+msgid ""
+"Plays any valid card, no strategy.\n"
+"At least one level must stay selected."
+msgstr ""
+"వ్యూహం లేకుండా ఏదైనా చెల్లుబాటయ్యే కార్డ్‌ను ఆడుతుంది.\n"
+"కనీసం ఒక స్థాయి ఎంపికలో ఉండాలి."
+
+#: prefsdialog.cpp:69
+msgid ""
+"Uses Monte Carlo simulation with a simple rule-based\n"
+"heuristic for each simulated play.\n"
+"At least one level must stay selected."
+msgstr ""
+"ప్రతి అనుకరించబడిన ఆటకు సరళమైన నియమ ఆధారిత\n"
+"హ్యూరిస్టిక్‌తో మోంటే కార్లో అనుకరణను ఉపయోగిస్తుంది.\n"
+"కనీసం ఒక స్థాయి ఎంపికలో ఉండాలి."
+
+#: prefsdialog.cpp:72
+msgid ""
+"Uses rule-based strategy with card tracking and\n"
+"observational memory of other players.\n"
+"At least one level must stay selected."
+msgstr ""
+"కార్డ్ ట్రాకింగ్ మరియు ఇతర ఆటగాళ్ల పరిశీలన\n"
+"జ్ఞాపకంతో నియమ ఆధారిత వ్యూహాన్ని ఉపయోగిస్తుంది.\n"
+"కనీసం ఒక స్థాయి ఎంపికలో ఉండాలి."
+
+#: prefsdialog.cpp:75
+msgid ""
+"Blends Monte Carlo simulation with the rule-based\n"
+"heuristics of the Smart level for the strongest play.\n"
+"At least one level must stay selected."
+msgstr ""
+"బలమైన ఆట కోసం మోంటే కార్లో అనుకరణను తెలివైన\n"
+"స్థాయి యొక్క నియమ ఆధారిత హ్యూరిస్టిక్స్‌తో మిళితం చేస్తుంది.\n"
+"కనీసం ఒక స్థాయి ఎంపికలో ఉండాలి."
+
+#: prefsdialog.cpp:92
+msgid "Card back"
+msgstr "కార్డ్ వెనుక"
+
+#: prefsdialog.cpp:93
+msgid "Blue"
+msgstr "నీలం"
+
+#: prefsdialog.cpp:93
+msgid "Red"
+msgstr "ఎరుపు"
+
+#: prefsdialog.cpp:102 prefsdialog.cpp:182
+msgid "Language"
+msgstr "భాష"
+
+#: prefsdialog.cpp:110
+msgid "Same as system"
+msgstr "సిస్టమ్ లాగే"
+
+#: prefsdialog.cpp:118
+msgid "Takes effect on next application start."
+msgstr "తదుపరి అప్లికేషన్ ప్రారంభంలో అమల్లోకి వస్తుంది."
+
+#: prefsdialog.cpp:123
+msgid "OK"
+msgstr "సరే"
+
+#: prefsdialog.cpp:126
+msgid "Cancel"
+msgstr "రద్దు"
+
+#: prefsdialog.cpp:153
+msgid "Invalid name."
+msgstr "చెల్లని పేరు."
+
+#: prefsdialog.cpp:153 serverdialog.cpp:180 serverdialog.cpp:222
+#: remotedialog.cpp:152 remotedialog.cpp:195 remotedialog.cpp:201
+msgid "Error"
+msgstr "లోపం"
+
+#: prefsdialog.cpp:170
+msgid ""
+"Bot difficulty change will take effect\n"
+"when you start a new game."
+msgstr ""
+"బోట్ కష్టం మార్పు కొత్త ఆటను ప్రారంభించినప్పుడు\n"
+"అమల్లోకి వస్తుంది."
+
+#: prefsdialog.cpp:172
+msgid "Note"
+msgstr "గమనిక"
+
+#: prefsdialog.cpp:180
+msgid "The language change will take effect the next time Sueca is started."
+msgstr "భాష మార్పు తదుపరి Sueca ప్రారంభంలో అమల్లోకి వస్తుంది."
+
+#: lasttrickdialog.cpp:180
+msgid "Last Trick"
+msgstr "చివరి రౌండ్"
+
+#: lasttrickdialog.cpp:186
+msgid "No trick yet"
+msgstr "ఇంకా రౌండ్ లేదు"
+
+#: lasttrickdialog.cpp:220
+#, c-format
+msgid "Won by %s"
+msgstr "%s గెలిచారు"
+
+#: chatpanel.cpp:46
+msgid "S&end"
+msgstr "&పంపండి"
+
+#: serverdialog.cpp:42
+msgid "Host network game"
+msgstr "నెట్‌వర్క్ ఆట సృష్టించండి"
+
+#: serverdialog.cpp:52
+msgid "Bind to specific &IP address(es)"
+msgstr "నిర్దిష్ట &IP చిరునామాలకు బైండ్ చేయండి"
+
+#: serverdialog.cpp:62
+msgid "(separate with ; if more than one)"
+msgstr "(ఒకటి కంటే ఎక్కువ ఉంటే ; తో వేరు చేయండి)"
+
+#: serverdialog.cpp:68 remotedialog.cpp:60
+msgid "Port"
+msgstr "పోర్ట్"
+
+#: serverdialog.cpp:77 remotedialog.cpp:69
+msgid "Player positions"
+msgstr "ఆటగాళ్ల స్థానాలు"
+
+#: serverdialog.cpp:99 remotedialog.cpp:99
+msgid "Chat"
+msgstr "చాట్"
+
+#: serverdialog.cpp:112 serverdialog.cpp:159
+msgid "&Listen"
+msgstr "&వినండి"
+
+#: serverdialog.cpp:114
+msgid "&Begin"
+msgstr "&ప్రారంభించు"
+
+#: serverdialog.cpp:117 remotedialog.cpp:114
+msgid "&Cancel"
+msgstr "&రద్దు"
+
+#: serverdialog.cpp:172
+msgid "*** Stopped listening."
+msgstr "*** వినడం రద్దు చేయబడింది."
+
+#: serverdialog.cpp:180 remotedialog.cpp:201
+msgid "Invalid port."
+msgstr "చెల్లని పోర్ట్."
+
+#: serverdialog.cpp:209
+msgid "if you want to bind to a specific IP address please specify it"
+msgstr "మీరు నిర్దిష్ట IP చిరునామాకు బైండ్ చేయాలనుకుంటే దయచేసి దాన్ని పేర్కొనండి"
+
+#: serverdialog.cpp:214
+#, c-format
+msgid "port %lu"
+msgstr "పోర్ట్ %lu"
+
+#: serverdialog.cpp:219
+#, c-format
+msgid "Could not listen for connections (%s)."
+msgstr "కనెక్షన్ల కోసం వినలేకపోయింది (%s)."
+
+#: serverdialog.cpp:221
+msgid "Could not listen for connections."
+msgstr "కనెక్షన్ల కోసం వినలేకపోయింది."
+
+#: serverdialog.cpp:233
+msgid "&Stop"
+msgstr "&ఆపండి"
+
+#: serverdialog.cpp:234
+msgid "*** Started listening."
+msgstr "*** వినడం ప్రారంభమైంది."
+
+#: netcommon.cpp:34
+msgid "<free>"
+msgstr "<ఖాళీ>"
+
+#: remotedialog.cpp:39
+msgid "<not connected>"
+msgstr "<కనెక్ట్ కాలేదు>"
+
+#: remotedialog.cpp:42
+msgid "Connect to remote game"
+msgstr "రిమోట్ ఆటకు కనెక్ట్ చేయండి"
+
+#: remotedialog.cpp:52
+msgid "Host address"
+msgstr "సర్వర్ చిరునామా"
+
+#: remotedialog.cpp:112 remotedialog.cpp:170
+msgid "C&onnect"
+msgstr "&కనెక్ట్"
+
+#: remotedialog.cpp:179
+msgid "*** Disconnected."
+msgstr "*** డిస్‌కనెక్ట్ చేయబడింది."
+
+#: remotedialog.cpp:182
+msgid "*** Connection aborted."
+msgstr "*** కనెక్షన్ నిలిపివేయబడింది."
+
+#: remotedialog.cpp:195
+msgid "Invalid address."
+msgstr "చెల్లని చిరునామా."
+
+#: remotedialog.cpp:219
+#, c-format
+msgid "*** Connecting to %s:%hu..."
+msgstr "*** %s:%huకు కనెక్ట్ అవుతోంది..."
+
+#: remotedialog.cpp:221
+msgid "St&op"
+msgstr "&ఆపండి"
+
+#: remotehandler.cpp:82 remotehandler.cpp:88
+msgid "Connection lost."
+msgstr "కనెక్షన్ కోల్పోయింది."
+
+#: remotehandler.cpp:84
+msgid "Connection failed."
+msgstr "కనెక్షన్ విఫలమైంది."
+
+#: remotehandler.cpp:88
+msgid "Game Aborted"
+msgstr "ఆట నిలిపివేయబడింది"
+
+#: remotehandler.cpp:103
+msgid "*** Connection established."
+msgstr "*** కనెక్షన్ ఏర్పడింది."
+
+#: remotehandler.cpp:104
+msgid "Disc&onnect"
+msgstr "&డిస్‌కనెక్ట్"
