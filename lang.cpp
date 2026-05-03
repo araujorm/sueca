@@ -62,5 +62,6 @@ const LangEntry kSuecaLanguages[] = {
 	{ wxLANGUAGE_THAI,                  "ไทย" },
 	{ wxLANGUAGE_CHINESE_SIMPLIFIED,    "中文 (简体)" },
 	{ wxLANGUAGE_JAPANESE,              "日本語" },
+	{ wxLANGUAGE_KOREAN,                "한국어" },
 	{ -2, 0 }  // sentinel
 };

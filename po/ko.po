@@ -1,0 +1,579 @@
+# Korean translation for sueca.
+# Copyright (C) 2003-2026 Rodrigo Araujo
+# This file is distributed under the same license as the sueca package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sueca\n"
+"Report-Msgid-Bugs-To: https://github.com/araujorm/sueca/issues\n"
+"POT-Creation-Date: 2026-04-20 02:37+0100\n"
+"PO-Revision-Date: 2026-05-03 12:00+0100\n"
+"Last-Translator: Rodrigo Araujo\n"
+"Language-Team: Korean\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: myframe.cpp:98
+msgid "&New single player\tF2"
+msgstr "새 싱글 플레이어(&N)\tF2"
+
+#: myframe.cpp:98
+msgid "Start a new game against computer players"
+msgstr "봇과의 새 게임 시작"
+
+#: myframe.cpp:99
+msgid "&Host network game"
+msgstr "네트워크 게임 만들기(&H)"
+
+#: myframe.cpp:99
+msgid "Start a network game"
+msgstr "네트워크 게임 시작"
+
+#: myframe.cpp:100
+msgid "&Connect to network game"
+msgstr "네트워크 게임에 연결(&C)"
+
+#: myframe.cpp:100
+msgid "Connect to a remote game"
+msgstr "원격 게임에 연결"
+
+#: myframe.cpp:101
+msgid "&End Game"
+msgstr "게임 종료(&E)"
+
+#: myframe.cpp:101
+msgid "End current game"
+msgstr "현재 게임 종료"
+
+#: myframe.cpp:104
+msgid "&Preferences"
+msgstr "환경 설정(&P)"
+
+#: myframe.cpp:104
+msgid "Set game preferences"
+msgstr "게임 환경 설정"
+
+#: myframe.cpp:106
+msgid "&Exit\tCtrl-Q"
+msgstr "종료(&X)\tCtrl-Q"
+
+#: myframe.cpp:106
+msgid "Exit program"
+msgstr "프로그램 종료"
+
+#: myframe.cpp:109
+msgid "&Scores\tCtrl-S"
+msgstr "점수(&S)\tCtrl-S"
+
+#: myframe.cpp:109
+msgid "Show current game scores"
+msgstr "현재 게임 점수 표시"
+
+#: myframe.cpp:111
+msgid "&Trumph\tCtrl-T"
+msgstr "으뜸패(&T)\tCtrl-T"
+
+#: myframe.cpp:111
+msgid "Show current trumph card"
+msgstr "현재 으뜸패 카드 표시"
+
+#: myframe.cpp:113
+msgid "&Last Trick\tCtrl-L"
+msgstr "마지막 라운드(&L)\tCtrl-L"
+
+#: myframe.cpp:113
+msgid "Show last completed trick"
+msgstr "마지막으로 완료된 라운드 표시"
+
+#: myframe.cpp:117
+msgid "&Contents\tF1"
+msgstr "목차(&C)\tF1"
+
+#: myframe.cpp:117
+msgid "Help contents"
+msgstr "도움말 목차"
+
+#: myframe.cpp:118
+msgid "&About"
+msgstr "정보(&A)"
+
+#: myframe.cpp:118 myframe.cpp:240
+msgid "About this game"
+msgstr "이 게임 정보"
+
+#: myframe.cpp:121
+msgid "&Game"
+msgstr "게임(&G)"
+
+#: myframe.cpp:122
+msgid "&View"
+msgstr "보기(&V)"
+
+#: myframe.cpp:123
+msgid "&Help"
+msgstr "도움말(&H)"
+
+#: myframe.cpp:128
+msgid "Welcome!"
+msgstr "환영합니다!"
+
+#: myframe.cpp:177
+msgid "Are you sure?"
+msgstr "확실합니까?"
+
+#: myframe.cpp:178
+msgid "End game"
+msgstr "게임 종료"
+
+#: myframe.cpp:220
+msgid "Not implemented yet."
+msgstr "아직 구현되지 않았습니다."
+
+#: myframe.cpp:228
+msgid ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Card graphics by jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details."
+msgstr ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"카드 그래픽은 jfitz technologies 제공 - http://www.jfitz.com/\n"
+"\n"
+"이 프로그램은 자유 소프트웨어입니다. 자유 소프트웨어 재단에서 발행한\n"
+"GNU 일반 공중 사용 허가서 제2판이나 (당신의 선택에 따라) 그 후의\n"
+"어떠한 판의 조건 하에서 재배포 및/또는 수정할 수 있습니다.\n"
+"\n"
+"이 프로그램은 유용하리라는 희망에서 배포되지만 어떠한 보증도 없습니다.\n"
+"상품성이나 특정 목적에의 적합성에 대한 묵시적 보증조차 없습니다.\n"
+"자세한 내용은 GNU 일반 공중 사용 허가서를 참조하십시오."
+
+#: myframe.cpp:251
+msgid "A game is in progress. Do you really want to exit?"
+msgstr "게임이 진행 중입니다. 정말 종료하시겠습니까?"
+
+#: myframe.cpp:252 myframe.cpp:288
+msgid "Game in progress"
+msgstr "게임 진행 중"
+
+#: myframe.cpp:287
+msgid "End current game and start a new one?"
+msgstr "현재 게임을 종료하고 새 게임을 시작하시겠습니까?"
+
+#: myframe.cpp:297 prefsdialog.cpp:61
+msgid "Dumb"
+msgstr "멍청"
+
+#: myframe.cpp:298 prefsdialog.cpp:62
+msgid "Methodic"
+msgstr "체계적"
+
+#: myframe.cpp:299 prefsdialog.cpp:63
+msgid "Smart"
+msgstr "똑똑"
+
+#: myframe.cpp:300 prefsdialog.cpp:64
+msgid "Expert"
+msgstr "전문가"
+
+#: myframe.cpp:315
+msgid "Mixed"
+msgstr "혼합"
+
+#: myframe.cpp:316
+#, c-format
+msgid "Bot: %s"
+msgstr "봇: %s"
+
+#: cards.cpp:65
+#, c-format
+msgid "%s of %s"
+msgstr "%2$s %1$s"
+
+#: cards.cpp:126
+msgid "Two"
+msgstr "2"
+
+#: cards.cpp:127
+msgid "Three"
+msgstr "3"
+
+#: cards.cpp:128
+msgid "Four"
+msgstr "4"
+
+#: cards.cpp:129
+msgid "Five"
+msgstr "5"
+
+#: cards.cpp:130
+msgid "Six"
+msgstr "6"
+
+#: cards.cpp:131
+msgid "Queen"
+msgstr "퀸"
+
+#: cards.cpp:132
+msgid "Jack"
+msgstr "잭"
+
+#: cards.cpp:133
+msgid "King"
+msgstr "킹"
+
+#: cards.cpp:134
+msgid "Seven"
+msgstr "7"
+
+#: cards.cpp:135
+msgid "Ace"
+msgstr "에이스"
+
+#: cards.cpp:210
+msgid "Clubs"
+msgstr "클로버"
+
+#: cards.cpp:214
+msgid "Diamonds"
+msgstr "다이아"
+
+#: cards.cpp:218
+msgid "Hearts"
+msgstr "하트"
+
+#: cards.cpp:222
+msgid "Spades"
+msgstr "스페이드"
+
+#: mycanvas.cpp:268
+#, c-format
+msgid "Trumph: %s"
+msgstr "으뜸패: %s"
+
+#: mycanvas.cpp:478
+msgid "It's not your turn!"
+msgstr "당신의 차례가 아닙니다!"
+
+#: mycanvas.cpp:484
+msgid "Invalid move!"
+msgstr "유효하지 않은 수입니다!"
+
+#: game.cpp:176
+msgid "First Round"
+msgstr "첫 번째 라운드"
+
+#: game.cpp:294
+msgid "(T)"
+msgstr "(무)"
+
+#: game.cpp:340
+msgid "Last Round: tied"
+msgstr "마지막 라운드: 무승부"
+
+#: game.cpp:342
+#, c-format
+msgid "Last Round: %hu for %s/%s"
+msgstr "마지막 라운드: %s/%s에 %hu"
+
+#: scoredialog.cpp:35
+msgid "Game scores"
+msgstr "점수"
+
+#: scoredialog.cpp:44
+msgid "Victories"
+msgstr "승리 횟수"
+
+#: scoredialog.cpp:51 trumphdialog.cpp:44 lasttrickdialog.cpp:192
+msgid "Close"
+msgstr "닫기"
+
+#: scoredialog.cpp:87
+#, c-format
+msgid "Round %u"
+msgstr "라운드 %u"
+
+#: trumphdialog.cpp:34
+msgid "Trumph"
+msgstr "으뜸패"
+
+#: trumphdialog.cpp:38 trumphdialog.cpp:56
+msgid "No trumph set"
+msgstr "으뜸패가 설정되지 않음"
+
+#: trumphdialog.cpp:60
+#, c-format
+msgid ""
+"%s\n"
+"Owned by %s"
+msgstr ""
+"%s\n"
+"%s 소유"
+
+#: prefsdialog.cpp:37
+msgid "Game Preferences"
+msgstr "게임 환경 설정"
+
+#: prefsdialog.cpp:41
+msgid "Player name"
+msgstr "플레이어 이름"
+
+#: prefsdialog.cpp:48
+msgid "Card movement speed"
+msgstr "카드 이동 속도"
+
+#: prefsdialog.cpp:56
+msgid "Bot difficulty"
+msgstr "봇 난이도"
+
+#: prefsdialog.cpp:67
+msgid ""
+"Plays any valid card, no strategy.\n"
+"At least one level must stay selected."
+msgstr ""
+"전략 없이 유효한 카드를 아무거나 냅니다.\n"
+"최소한 하나의 레벨이 선택되어 있어야 합니다."
+
+#: prefsdialog.cpp:69
+msgid ""
+"Uses Monte Carlo simulation with a simple rule-based\n"
+"heuristic for each simulated play.\n"
+"At least one level must stay selected."
+msgstr ""
+"각 시뮬레이션된 플레이에 대해 간단한 규칙 기반\n"
+"휴리스틱을 사용한 몬테카를로 시뮬레이션을 사용합니다.\n"
+"최소한 하나의 레벨이 선택되어 있어야 합니다."
+
+#: prefsdialog.cpp:72
+msgid ""
+"Uses rule-based strategy with card tracking and\n"
+"observational memory of other players.\n"
+"At least one level must stay selected."
+msgstr ""
+"카드 추적 및 다른 플레이어의 관찰 메모리를\n"
+"이용한 규칙 기반 전략을 사용합니다.\n"
+"최소한 하나의 레벨이 선택되어 있어야 합니다."
+
+#: prefsdialog.cpp:75
+msgid ""
+"Blends Monte Carlo simulation with the rule-based\n"
+"heuristics of the Smart level for the strongest play.\n"
+"At least one level must stay selected."
+msgstr ""
+"가장 강한 플레이를 위해 몬테카를로 시뮬레이션과\n"
+"똑똑 레벨의 규칙 기반 휴리스틱을 결합합니다.\n"
+"최소한 하나의 레벨이 선택되어 있어야 합니다."
+
+#: prefsdialog.cpp:92
+msgid "Card back"
+msgstr "카드 뒷면"
+
+#: prefsdialog.cpp:93
+msgid "Blue"
+msgstr "파랑"
+
+#: prefsdialog.cpp:93
+msgid "Red"
+msgstr "빨강"
+
+#: prefsdialog.cpp:102 prefsdialog.cpp:182
+msgid "Language"
+msgstr "언어"
+
+#: prefsdialog.cpp:110
+msgid "Same as system"
+msgstr "시스템과 동일"
+
+#: prefsdialog.cpp:118
+msgid "Takes effect on next application start."
+msgstr "다음 애플리케이션 시작 시 적용됩니다."
+
+#: prefsdialog.cpp:123
+msgid "OK"
+msgstr "확인"
+
+#: prefsdialog.cpp:126
+msgid "Cancel"
+msgstr "취소"
+
+#: prefsdialog.cpp:153
+msgid "Invalid name."
+msgstr "유효하지 않은 이름입니다."
+
+#: prefsdialog.cpp:153 serverdialog.cpp:180 serverdialog.cpp:222
+#: remotedialog.cpp:152 remotedialog.cpp:195 remotedialog.cpp:201
+msgid "Error"
+msgstr "오류"
+
+#: prefsdialog.cpp:170
+msgid ""
+"Bot difficulty change will take effect\n"
+"when you start a new game."
+msgstr ""
+"봇 난이도 변경은 새 게임을\n"
+"시작할 때 적용됩니다."
+
+#: prefsdialog.cpp:172
+msgid "Note"
+msgstr "참고"
+
+#: prefsdialog.cpp:180
+msgid "The language change will take effect the next time Sueca is started."
+msgstr "언어 변경은 다음 Sueca 시작 시 적용됩니다."
+
+#: lasttrickdialog.cpp:180
+msgid "Last Trick"
+msgstr "마지막 라운드"
+
+#: lasttrickdialog.cpp:186
+msgid "No trick yet"
+msgstr "아직 라운드 없음"
+
+#: lasttrickdialog.cpp:220
+#, c-format
+msgid "Won by %s"
+msgstr "%s가 승리"
+
+#: chatpanel.cpp:46
+msgid "S&end"
+msgstr "보내기(&E)"
+
+#: serverdialog.cpp:42
+msgid "Host network game"
+msgstr "네트워크 게임 만들기"
+
+#: serverdialog.cpp:52
+msgid "Bind to specific &IP address(es)"
+msgstr "특정 &IP 주소에 바인딩"
+
+#: serverdialog.cpp:62
+msgid "(separate with ; if more than one)"
+msgstr "(여러 개인 경우 ; 로 구분)"
+
+#: serverdialog.cpp:68 remotedialog.cpp:60
+msgid "Port"
+msgstr "포트"
+
+#: serverdialog.cpp:77 remotedialog.cpp:69
+msgid "Player positions"
+msgstr "플레이어 위치"
+
+#: serverdialog.cpp:99 remotedialog.cpp:99
+msgid "Chat"
+msgstr "채팅"
+
+#: serverdialog.cpp:112 serverdialog.cpp:159
+msgid "&Listen"
+msgstr "수신(&L)"
+
+#: serverdialog.cpp:114
+msgid "&Begin"
+msgstr "시작(&B)"
+
+#: serverdialog.cpp:117 remotedialog.cpp:114
+msgid "&Cancel"
+msgstr "취소(&C)"
+
+#: serverdialog.cpp:172
+msgid "*** Stopped listening."
+msgstr "*** 수신이 취소되었습니다."
+
+#: serverdialog.cpp:180 remotedialog.cpp:201
+msgid "Invalid port."
+msgstr "유효하지 않은 포트입니다."
+
+#: serverdialog.cpp:209
+msgid "if you want to bind to a specific IP address please specify it"
+msgstr "특정 IP 주소에 바인딩하려면 지정해 주십시오"
+
+#: serverdialog.cpp:214
+#, c-format
+msgid "port %lu"
+msgstr "포트 %lu"
+
+#: serverdialog.cpp:219
+#, c-format
+msgid "Could not listen for connections (%s)."
+msgstr "연결을 수신할 수 없습니다 (%s)."
+
+#: serverdialog.cpp:221
+msgid "Could not listen for connections."
+msgstr "연결을 수신할 수 없습니다."
+
+#: serverdialog.cpp:233
+msgid "&Stop"
+msgstr "중지(&S)"
+
+#: serverdialog.cpp:234
+msgid "*** Started listening."
+msgstr "*** 수신이 시작되었습니다."
+
+#: netcommon.cpp:34
+msgid "<free>"
+msgstr "<비어 있음>"
+
+#: remotedialog.cpp:39
+msgid "<not connected>"
+msgstr "<연결되지 않음>"
+
+#: remotedialog.cpp:42
+msgid "Connect to remote game"
+msgstr "원격 게임에 연결"
+
+#: remotedialog.cpp:52
+msgid "Host address"
+msgstr "서버 주소"
+
+#: remotedialog.cpp:112 remotedialog.cpp:170
+msgid "C&onnect"
+msgstr "연결(&O)"
+
+#: remotedialog.cpp:179
+msgid "*** Disconnected."
+msgstr "*** 연결이 끊겼습니다."
+
+#: remotedialog.cpp:182
+msgid "*** Connection aborted."
+msgstr "*** 연결이 중단되었습니다."
+
+#: remotedialog.cpp:195
+msgid "Invalid address."
+msgstr "유효하지 않은 주소입니다."
+
+#: remotedialog.cpp:219
+#, c-format
+msgid "*** Connecting to %s:%hu..."
+msgstr "*** %s:%hu에 연결 중..."
+
+#: remotedialog.cpp:221
+msgid "St&op"
+msgstr "중지(&O)"
+
+#: remotehandler.cpp:82 remotehandler.cpp:88
+msgid "Connection lost."
+msgstr "연결이 끊어졌습니다."
+
+#: remotehandler.cpp:84
+msgid "Connection failed."
+msgstr "연결 실패."
+
+#: remotehandler.cpp:88
+msgid "Game Aborted"
+msgstr "게임 중단됨"
+
+#: remotehandler.cpp:103
+msgid "*** Connection established."
+msgstr "*** 연결이 설정되었습니다."
+
+#: remotehandler.cpp:104
+msgid "Disc&onnect"
+msgstr "연결 해제(&O)"
