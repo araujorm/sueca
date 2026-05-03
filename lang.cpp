@@ -52,5 +52,6 @@ const LangEntry kSuecaLanguages[] = {
 	{ wxLANGUAGE_UKRAINIAN,             "Українська" },
 	{ wxLANGUAGE_ARABIC,                "العربية" },
 	{ wxLANGUAGE_FARSI,                 "فارسی" },
+	{ wxLANGUAGE_URDU,                  "اردو" },
 	{ -2, 0 }  // sentinel
 };
