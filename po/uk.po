@@ -1,0 +1,581 @@
+# Ukrainian translation for sueca.
+# Copyright (C) 2003-2026 Rodrigo Araujo
+# This file is distributed under the same license as the sueca package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sueca\n"
+"Report-Msgid-Bugs-To: https://github.com/araujorm/sueca/issues\n"
+"POT-Creation-Date: 2026-04-20 02:37+0100\n"
+"PO-Revision-Date: 2026-05-03 12:00+0100\n"
+"Last-Translator: Rodrigo Araujo\n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: myframe.cpp:98
+msgid "&New single player\tF2"
+msgstr "&Нова одиночна гра\tF2"
+
+#: myframe.cpp:98
+msgid "Start a new game against computer players"
+msgstr "Почати нову гру проти ботів"
+
+#: myframe.cpp:99
+msgid "&Host network game"
+msgstr "&Створити мережеву гру"
+
+#: myframe.cpp:99
+msgid "Start a network game"
+msgstr "Почати мережеву гру"
+
+#: myframe.cpp:100
+msgid "&Connect to network game"
+msgstr "&З'єднатися з мережевою грою"
+
+#: myframe.cpp:100
+msgid "Connect to a remote game"
+msgstr "З'єднатися з віддаленою грою"
+
+#: myframe.cpp:101
+msgid "&End Game"
+msgstr "&Завершити гру"
+
+#: myframe.cpp:101
+msgid "End current game"
+msgstr "Завершити поточну гру"
+
+#: myframe.cpp:104
+msgid "&Preferences"
+msgstr "&Налаштування"
+
+#: myframe.cpp:104
+msgid "Set game preferences"
+msgstr "Встановити налаштування гри"
+
+#: myframe.cpp:106
+msgid "&Exit\tCtrl-Q"
+msgstr "&Вихід\tCtrl-Q"
+
+#: myframe.cpp:106
+msgid "Exit program"
+msgstr "Вийти з програми"
+
+#: myframe.cpp:109
+msgid "&Scores\tCtrl-S"
+msgstr "&Очки\tCtrl-S"
+
+#: myframe.cpp:109
+msgid "Show current game scores"
+msgstr "Показати очки поточної гри"
+
+#: myframe.cpp:111
+msgid "&Trumph\tCtrl-T"
+msgstr "&Козир\tCtrl-T"
+
+#: myframe.cpp:111
+msgid "Show current trumph card"
+msgstr "Показати поточну козирну карту"
+
+#: myframe.cpp:113
+msgid "&Last Trick\tCtrl-L"
+msgstr "О&стання взятка\tCtrl-L"
+
+#: myframe.cpp:113
+msgid "Show last completed trick"
+msgstr "Показати останню завершену взятку"
+
+#: myframe.cpp:117
+msgid "&Contents\tF1"
+msgstr "&Зміст\tF1"
+
+#: myframe.cpp:117
+msgid "Help contents"
+msgstr "Зміст довідки"
+
+#: myframe.cpp:118
+msgid "&About"
+msgstr "&Про"
+
+#: myframe.cpp:118 myframe.cpp:240
+msgid "About this game"
+msgstr "Про цю гру"
+
+#: myframe.cpp:121
+msgid "&Game"
+msgstr "&Гра"
+
+#: myframe.cpp:122
+msgid "&View"
+msgstr "&Вигляд"
+
+#: myframe.cpp:123
+msgid "&Help"
+msgstr "&Довідка"
+
+#: myframe.cpp:128
+msgid "Welcome!"
+msgstr "Ласкаво просимо!"
+
+#: myframe.cpp:177
+msgid "Are you sure?"
+msgstr "Ви впевнені?"
+
+#: myframe.cpp:178
+msgid "End game"
+msgstr "Завершити гру"
+
+#: myframe.cpp:220
+msgid "Not implemented yet."
+msgstr "Ще не реалізовано."
+
+#: myframe.cpp:228
+msgid ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Card graphics by jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details."
+msgstr ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Графіка карт від jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"Ця програма є вільним програмним забезпеченням; ви можете поширювати\n"
+"її та/або модифікувати на умовах Загальної громадської ліцензії GNU,\n"
+"опублікованої Free Software Foundation; версії 2 цієї ліцензії або\n"
+"(на ваш вибір) будь-якої пізнішої версії.\n"
+"\n"
+"Ця програма поширюється у надії, що буде корисною, але БЕЗ БУДЬ-ЯКИХ\n"
+"ГАРАНТІЙ; навіть без неявної гарантії ПРИДАТНОСТІ ДЛЯ ПРОДАЖУ або\n"
+"ПРИДАТНОСТІ ДЛЯ КОНКРЕТНОЇ МЕТИ. Дивіться Загальну громадську ліцензію\n"
+"GNU для отримання додаткових деталей."
+
+#: myframe.cpp:251
+msgid "A game is in progress. Do you really want to exit?"
+msgstr "Гра триває. Ви справді хочете вийти?"
+
+#: myframe.cpp:252 myframe.cpp:288
+msgid "Game in progress"
+msgstr "Гра триває"
+
+#: myframe.cpp:287
+msgid "End current game and start a new one?"
+msgstr "Завершити поточну гру та розпочати нову?"
+
+#: myframe.cpp:297 prefsdialog.cpp:61
+msgid "Dumb"
+msgstr "Дурний"
+
+#: myframe.cpp:298 prefsdialog.cpp:62
+msgid "Methodic"
+msgstr "Методичний"
+
+#: myframe.cpp:299 prefsdialog.cpp:63
+msgid "Smart"
+msgstr "Розумний"
+
+#: myframe.cpp:300 prefsdialog.cpp:64
+msgid "Expert"
+msgstr "Експерт"
+
+#: myframe.cpp:315
+msgid "Mixed"
+msgstr "Змішаний"
+
+#: myframe.cpp:316
+#, c-format
+msgid "Bot: %s"
+msgstr "Бот: %s"
+
+#: cards.cpp:65
+#, c-format
+msgid "%s of %s"
+msgstr "%s %s"
+
+#: cards.cpp:126
+msgid "Two"
+msgstr "Двійка"
+
+#: cards.cpp:127
+msgid "Three"
+msgstr "Трійка"
+
+#: cards.cpp:128
+msgid "Four"
+msgstr "Четвірка"
+
+#: cards.cpp:129
+msgid "Five"
+msgstr "П'ятірка"
+
+#: cards.cpp:130
+msgid "Six"
+msgstr "Шістка"
+
+#: cards.cpp:131
+msgid "Queen"
+msgstr "Дама"
+
+#: cards.cpp:132
+msgid "Jack"
+msgstr "Валет"
+
+#: cards.cpp:133
+msgid "King"
+msgstr "Король"
+
+#: cards.cpp:134
+msgid "Seven"
+msgstr "Сімка"
+
+#: cards.cpp:135
+msgid "Ace"
+msgstr "Туз"
+
+#: cards.cpp:210
+msgid "Clubs"
+msgstr "Хрести"
+
+#: cards.cpp:214
+msgid "Diamonds"
+msgstr "Бубни"
+
+#: cards.cpp:218
+msgid "Hearts"
+msgstr "Чирва"
+
+#: cards.cpp:222
+msgid "Spades"
+msgstr "Піки"
+
+#: mycanvas.cpp:268
+#, c-format
+msgid "Trumph: %s"
+msgstr "Козир: %s"
+
+#: mycanvas.cpp:478
+msgid "It's not your turn!"
+msgstr "Не ваш хід!"
+
+#: mycanvas.cpp:484
+msgid "Invalid move!"
+msgstr "Недійсний хід!"
+
+#: game.cpp:176
+msgid "First Round"
+msgstr "Перший раунд"
+
+#: game.cpp:294
+msgid "(T)"
+msgstr "(Н)"
+
+#: game.cpp:340
+msgid "Last Round: tied"
+msgstr "Останній раунд: нічия"
+
+#: game.cpp:342
+#, c-format
+msgid "Last Round: %hu for %s/%s"
+msgstr "Останній раунд: %hu для %s/%s"
+
+#: scoredialog.cpp:35
+msgid "Game scores"
+msgstr "Очки"
+
+#: scoredialog.cpp:44
+msgid "Victories"
+msgstr "Перемоги"
+
+#: scoredialog.cpp:51 trumphdialog.cpp:44 lasttrickdialog.cpp:192
+msgid "Close"
+msgstr "Закрити"
+
+#: scoredialog.cpp:87
+#, c-format
+msgid "Round %u"
+msgstr "Раунд %u"
+
+#: trumphdialog.cpp:34
+msgid "Trumph"
+msgstr "Козир"
+
+#: trumphdialog.cpp:38 trumphdialog.cpp:56
+msgid "No trumph set"
+msgstr "Козир не встановлено"
+
+#: trumphdialog.cpp:60
+#, c-format
+msgid ""
+"%s\n"
+"Owned by %s"
+msgstr ""
+"%s\n"
+"Належить %s"
+
+#: prefsdialog.cpp:37
+msgid "Game Preferences"
+msgstr "Налаштування гри"
+
+#: prefsdialog.cpp:41
+msgid "Player name"
+msgstr "Ім'я гравця"
+
+#: prefsdialog.cpp:48
+msgid "Card movement speed"
+msgstr "Швидкість руху карт"
+
+#: prefsdialog.cpp:56
+msgid "Bot difficulty"
+msgstr "Складність ботів"
+
+#: prefsdialog.cpp:67
+msgid ""
+"Plays any valid card, no strategy.\n"
+"At least one level must stay selected."
+msgstr ""
+"Грає будь-якою дійсною картою, без стратегії.\n"
+"Має залишитися обраним щонайменше один рівень."
+
+#: prefsdialog.cpp:69
+msgid ""
+"Uses Monte Carlo simulation with a simple rule-based\n"
+"heuristic for each simulated play.\n"
+"At least one level must stay selected."
+msgstr ""
+"Використовує моделювання Монте-Карло з простою евристикою\n"
+"на основі правил для кожного змодельованого ходу.\n"
+"Має залишитися обраним щонайменше один рівень."
+
+#: prefsdialog.cpp:72
+msgid ""
+"Uses rule-based strategy with card tracking and\n"
+"observational memory of other players.\n"
+"At least one level must stay selected."
+msgstr ""
+"Використовує стратегію на основі правил з відстеженням карт\n"
+"та спостережною пам'яттю інших гравців.\n"
+"Має залишитися обраним щонайменше один рівень."
+
+#: prefsdialog.cpp:75
+msgid ""
+"Blends Monte Carlo simulation with the rule-based\n"
+"heuristics of the Smart level for the strongest play.\n"
+"At least one level must stay selected."
+msgstr ""
+"Поєднує моделювання Монте-Карло з евристиками на основі правил\n"
+"рівня Розумний для найсильнішої гри.\n"
+"Має залишитися обраним щонайменше один рівень."
+
+#: prefsdialog.cpp:92
+msgid "Card back"
+msgstr "Сорочка карт"
+
+#: prefsdialog.cpp:93
+msgid "Blue"
+msgstr "Синя"
+
+#: prefsdialog.cpp:93
+msgid "Red"
+msgstr "Червона"
+
+#: prefsdialog.cpp:102 prefsdialog.cpp:182
+msgid "Language"
+msgstr "Мова"
+
+#: prefsdialog.cpp:110
+msgid "Same as system"
+msgstr "Як у системі"
+
+#: prefsdialog.cpp:118
+msgid "Takes effect on next application start."
+msgstr "Застосовується при наступному запуску програми."
+
+#: prefsdialog.cpp:123
+msgid "OK"
+msgstr "OK"
+
+#: prefsdialog.cpp:126
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: prefsdialog.cpp:153
+msgid "Invalid name."
+msgstr "Недійсне ім'я."
+
+#: prefsdialog.cpp:153 serverdialog.cpp:180 serverdialog.cpp:222
+#: remotedialog.cpp:152 remotedialog.cpp:195 remotedialog.cpp:201
+msgid "Error"
+msgstr "Помилка"
+
+#: prefsdialog.cpp:170
+msgid ""
+"Bot difficulty change will take effect\n"
+"when you start a new game."
+msgstr ""
+"Зміна складності ботів застосовується\n"
+"при початку нової гри."
+
+#: prefsdialog.cpp:172
+msgid "Note"
+msgstr "Примітка"
+
+#: prefsdialog.cpp:180
+msgid "The language change will take effect the next time Sueca is started."
+msgstr "Зміна мови застосовується при наступному запуску Sueca."
+
+#: lasttrickdialog.cpp:180
+msgid "Last Trick"
+msgstr "Остання взятка"
+
+#: lasttrickdialog.cpp:186
+msgid "No trick yet"
+msgstr "Ще немає взятки"
+
+#: lasttrickdialog.cpp:220
+#, c-format
+msgid "Won by %s"
+msgstr "Виграв %s"
+
+#: chatpanel.cpp:46
+msgid "S&end"
+msgstr "&Надіслати"
+
+#: serverdialog.cpp:42
+msgid "Host network game"
+msgstr "Створити мережеву гру"
+
+#: serverdialog.cpp:52
+msgid "Bind to specific &IP address(es)"
+msgstr "Прив'язати до певних &IP-адрес"
+
+#: serverdialog.cpp:62
+msgid "(separate with ; if more than one)"
+msgstr "(розділяйте ; якщо більше однієї)"
+
+#: serverdialog.cpp:68 remotedialog.cpp:60
+msgid "Port"
+msgstr "Порт"
+
+#: serverdialog.cpp:77 remotedialog.cpp:69
+msgid "Player positions"
+msgstr "Позиції гравців"
+
+#: serverdialog.cpp:99 remotedialog.cpp:99
+msgid "Chat"
+msgstr "Чат"
+
+#: serverdialog.cpp:112 serverdialog.cpp:159
+msgid "&Listen"
+msgstr "&Слухати"
+
+#: serverdialog.cpp:114
+msgid "&Begin"
+msgstr "&Розпочати"
+
+#: serverdialog.cpp:117 remotedialog.cpp:114
+msgid "&Cancel"
+msgstr "&Скасувати"
+
+#: serverdialog.cpp:172
+msgid "*** Stopped listening."
+msgstr "*** Прослуховування скасовано."
+
+#: serverdialog.cpp:180 remotedialog.cpp:201
+msgid "Invalid port."
+msgstr "Недійсний порт."
+
+#: serverdialog.cpp:209
+msgid "if you want to bind to a specific IP address please specify it"
+msgstr "якщо ви хочете прив'язати до певної IP-адреси, вкажіть її"
+
+#: serverdialog.cpp:214
+#, c-format
+msgid "port %lu"
+msgstr "порт %lu"
+
+#: serverdialog.cpp:219
+#, c-format
+msgid "Could not listen for connections (%s)."
+msgstr "Не вдалося слухати з'єднання (%s)."
+
+#: serverdialog.cpp:221
+msgid "Could not listen for connections."
+msgstr "Не вдалося слухати з'єднання."
+
+#: serverdialog.cpp:233
+msgid "&Stop"
+msgstr "&Зупинити"
+
+#: serverdialog.cpp:234
+msgid "*** Started listening."
+msgstr "*** Прослуховування розпочато."
+
+#: netcommon.cpp:34
+msgid "<free>"
+msgstr "<вільне>"
+
+#: remotedialog.cpp:39
+msgid "<not connected>"
+msgstr "<не з'єднано>"
+
+#: remotedialog.cpp:42
+msgid "Connect to remote game"
+msgstr "З'єднатися з віддаленою грою"
+
+#: remotedialog.cpp:52
+msgid "Host address"
+msgstr "Адреса сервера"
+
+#: remotedialog.cpp:112 remotedialog.cpp:170
+msgid "C&onnect"
+msgstr "&З'єднатися"
+
+#: remotedialog.cpp:179
+msgid "*** Disconnected."
+msgstr "*** Від'єднано."
+
+#: remotedialog.cpp:182
+msgid "*** Connection aborted."
+msgstr "*** З'єднання перервано."
+
+#: remotedialog.cpp:195
+msgid "Invalid address."
+msgstr "Недійсна адреса."
+
+#: remotedialog.cpp:219
+#, c-format
+msgid "*** Connecting to %s:%hu..."
+msgstr "*** З'єднання з %s:%hu..."
+
+#: remotedialog.cpp:221
+msgid "St&op"
+msgstr "&Зупинити"
+
+#: remotehandler.cpp:82 remotehandler.cpp:88
+msgid "Connection lost."
+msgstr "З'єднання втрачено."
+
+#: remotehandler.cpp:84
+msgid "Connection failed."
+msgstr "Не вдалося з'єднатися."
+
+#: remotehandler.cpp:88
+msgid "Game Aborted"
+msgstr "Гру перервано"
+
+#: remotehandler.cpp:103
+msgid "*** Connection established."
+msgstr "*** З'єднання встановлено."
+
+#: remotehandler.cpp:104
+msgid "Disc&onnect"
+msgstr "&Від'єднатися"
