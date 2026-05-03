@@ -31,8 +31,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 // system" label is translated, via _() at display time in the
 // preferences dialog.
 const LangEntry kSuecaLanguages[] = {
-	{ wxLANGUAGE_DEFAULT,    "Same as system" },
-	{ wxLANGUAGE_ENGLISH,    "English" },
+	{ wxLANGUAGE_DEFAULT,             "Same as system" },
+	{ wxLANGUAGE_ENGLISH,             "English" },
+	{ wxLANGUAGE_SPANISH,             "Español (España)" },
 	{ wxLANGUAGE_PORTUGUESE_PORTUGAL, "Português (Portugal)" },
 	{ -2, 0 }  // sentinel
 };
