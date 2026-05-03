@@ -59,5 +59,6 @@ const LangEntry kSuecaLanguages[] = {
 	{ wxLANGUAGE_PUNJABI,               "ਪੰਜਾਬੀ" },
 	{ wxLANGUAGE_TAMIL,                 "தமிழ்" },
 	{ wxLANGUAGE_TELUGU,                "తెలుగు" },
+	{ wxLANGUAGE_THAI,                  "ไทย" },
 	{ -2, 0 }  // sentinel
 };
