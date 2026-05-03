@@ -32,6 +32,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 // preferences dialog.
 const LangEntry kSuecaLanguages[] = {
 	{ wxLANGUAGE_DEFAULT,             "Same as system" },
+	{ wxLANGUAGE_GERMAN,              "Deutsch" },
 	{ wxLANGUAGE_ENGLISH,             "English" },
 	{ wxLANGUAGE_SPANISH,             "Español (España)" },
 	{ wxLANGUAGE_SPANISH_LATIN_AMERICA, "Español (Latinoamérica)" },
