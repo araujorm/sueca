@@ -1,0 +1,579 @@
+# Japanese translation for sueca.
+# Copyright (C) 2003-2026 Rodrigo Araujo
+# This file is distributed under the same license as the sueca package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sueca\n"
+"Report-Msgid-Bugs-To: https://github.com/araujorm/sueca/issues\n"
+"POT-Creation-Date: 2026-04-20 02:37+0100\n"
+"PO-Revision-Date: 2026-05-03 12:00+0100\n"
+"Last-Translator: Rodrigo Araujo\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: myframe.cpp:98
+msgid "&New single player\tF2"
+msgstr "新しい一人プレイ(&N)\tF2"
+
+#: myframe.cpp:98
+msgid "Start a new game against computer players"
+msgstr "ボット相手に新しいゲームを始める"
+
+#: myframe.cpp:99
+msgid "&Host network game"
+msgstr "ネットワークゲームを作成(&H)"
+
+#: myframe.cpp:99
+msgid "Start a network game"
+msgstr "ネットワークゲームを始める"
+
+#: myframe.cpp:100
+msgid "&Connect to network game"
+msgstr "ネットワークゲームに接続(&C)"
+
+#: myframe.cpp:100
+msgid "Connect to a remote game"
+msgstr "リモートゲームに接続"
+
+#: myframe.cpp:101
+msgid "&End Game"
+msgstr "ゲーム終了(&E)"
+
+#: myframe.cpp:101
+msgid "End current game"
+msgstr "現在のゲームを終了"
+
+#: myframe.cpp:104
+msgid "&Preferences"
+msgstr "環境設定(&P)"
+
+#: myframe.cpp:104
+msgid "Set game preferences"
+msgstr "ゲームの環境設定をする"
+
+#: myframe.cpp:106
+msgid "&Exit\tCtrl-Q"
+msgstr "終了(&X)\tCtrl-Q"
+
+#: myframe.cpp:106
+msgid "Exit program"
+msgstr "プログラムを終了"
+
+#: myframe.cpp:109
+msgid "&Scores\tCtrl-S"
+msgstr "得点(&S)\tCtrl-S"
+
+#: myframe.cpp:109
+msgid "Show current game scores"
+msgstr "現在のゲームの得点を表示"
+
+#: myframe.cpp:111
+msgid "&Trumph\tCtrl-T"
+msgstr "切り札(&T)\tCtrl-T"
+
+#: myframe.cpp:111
+msgid "Show current trumph card"
+msgstr "現在の切り札カードを表示"
+
+#: myframe.cpp:113
+msgid "&Last Trick\tCtrl-L"
+msgstr "前のトリック(&L)\tCtrl-L"
+
+#: myframe.cpp:113
+msgid "Show last completed trick"
+msgstr "前回完了したトリックを表示"
+
+#: myframe.cpp:117
+msgid "&Contents\tF1"
+msgstr "目次(&C)\tF1"
+
+#: myframe.cpp:117
+msgid "Help contents"
+msgstr "ヘルプの目次"
+
+#: myframe.cpp:118
+msgid "&About"
+msgstr "情報(&A)"
+
+#: myframe.cpp:118 myframe.cpp:240
+msgid "About this game"
+msgstr "このゲームについて"
+
+#: myframe.cpp:121
+msgid "&Game"
+msgstr "ゲーム(&G)"
+
+#: myframe.cpp:122
+msgid "&View"
+msgstr "表示(&V)"
+
+#: myframe.cpp:123
+msgid "&Help"
+msgstr "ヘルプ(&H)"
+
+#: myframe.cpp:128
+msgid "Welcome!"
+msgstr "ようこそ!"
+
+#: myframe.cpp:177
+msgid "Are you sure?"
+msgstr "本当によろしいですか?"
+
+#: myframe.cpp:178
+msgid "End game"
+msgstr "ゲーム終了"
+
+#: myframe.cpp:220
+msgid "Not implemented yet."
+msgstr "まだ実装されていません。"
+
+#: myframe.cpp:228
+msgid ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Card graphics by jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details."
+msgstr ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"カードグラフィックは jfitz technologies 提供 - http://www.jfitz.com/\n"
+"\n"
+"このプログラムはフリーソフトウェアです。Free Software Foundation が\n"
+"発行する GNU 一般公衆ライセンスの第 2 版または(あなたの選択により)\n"
+"それ以降のバージョンの条件の下で再頒布および/または変更することができます。\n"
+"\n"
+"このプログラムは有用であることを期待して頒布されますが、\n"
+"いかなる保証もありません。商品性や特定目的への適合性の暗黙の保証もありません。\n"
+"詳細については GNU 一般公衆ライセンスを参照してください。"
+
+#: myframe.cpp:251
+msgid "A game is in progress. Do you really want to exit?"
+msgstr "ゲームが進行中です。本当に終了しますか?"
+
+#: myframe.cpp:252 myframe.cpp:288
+msgid "Game in progress"
+msgstr "ゲーム進行中"
+
+#: myframe.cpp:287
+msgid "End current game and start a new one?"
+msgstr "現在のゲームを終了して新しいゲームを始めますか?"
+
+#: myframe.cpp:297 prefsdialog.cpp:61
+msgid "Dumb"
+msgstr "愚か"
+
+#: myframe.cpp:298 prefsdialog.cpp:62
+msgid "Methodic"
+msgstr "体系的"
+
+#: myframe.cpp:299 prefsdialog.cpp:63
+msgid "Smart"
+msgstr "賢い"
+
+#: myframe.cpp:300 prefsdialog.cpp:64
+msgid "Expert"
+msgstr "エキスパート"
+
+#: myframe.cpp:315
+msgid "Mixed"
+msgstr "混合"
+
+#: myframe.cpp:316
+#, c-format
+msgid "Bot: %s"
+msgstr "ボット: %s"
+
+#: cards.cpp:65
+#, c-format
+msgid "%s of %s"
+msgstr "%2$sの%1$s"
+
+#: cards.cpp:126
+msgid "Two"
+msgstr "2"
+
+#: cards.cpp:127
+msgid "Three"
+msgstr "3"
+
+#: cards.cpp:128
+msgid "Four"
+msgstr "4"
+
+#: cards.cpp:129
+msgid "Five"
+msgstr "5"
+
+#: cards.cpp:130
+msgid "Six"
+msgstr "6"
+
+#: cards.cpp:131
+msgid "Queen"
+msgstr "クイーン"
+
+#: cards.cpp:132
+msgid "Jack"
+msgstr "ジャック"
+
+#: cards.cpp:133
+msgid "King"
+msgstr "キング"
+
+#: cards.cpp:134
+msgid "Seven"
+msgstr "7"
+
+#: cards.cpp:135
+msgid "Ace"
+msgstr "エース"
+
+#: cards.cpp:210
+msgid "Clubs"
+msgstr "クラブ"
+
+#: cards.cpp:214
+msgid "Diamonds"
+msgstr "ダイヤ"
+
+#: cards.cpp:218
+msgid "Hearts"
+msgstr "ハート"
+
+#: cards.cpp:222
+msgid "Spades"
+msgstr "スペード"
+
+#: mycanvas.cpp:268
+#, c-format
+msgid "Trumph: %s"
+msgstr "切り札: %s"
+
+#: mycanvas.cpp:478
+msgid "It's not your turn!"
+msgstr "あなたの番ではありません!"
+
+#: mycanvas.cpp:484
+msgid "Invalid move!"
+msgstr "無効な手です!"
+
+#: game.cpp:176
+msgid "First Round"
+msgstr "第1ラウンド"
+
+#: game.cpp:294
+msgid "(T)"
+msgstr "(分)"
+
+#: game.cpp:340
+msgid "Last Round: tied"
+msgstr "前のラウンド: 引き分け"
+
+#: game.cpp:342
+#, c-format
+msgid "Last Round: %hu for %s/%s"
+msgstr "前のラウンド: %s/%s に %hu"
+
+#: scoredialog.cpp:35
+msgid "Game scores"
+msgstr "得点"
+
+#: scoredialog.cpp:44
+msgid "Victories"
+msgstr "勝利数"
+
+#: scoredialog.cpp:51 trumphdialog.cpp:44 lasttrickdialog.cpp:192
+msgid "Close"
+msgstr "閉じる"
+
+#: scoredialog.cpp:87
+#, c-format
+msgid "Round %u"
+msgstr "ラウンド %u"
+
+#: trumphdialog.cpp:34
+msgid "Trumph"
+msgstr "切り札"
+
+#: trumphdialog.cpp:38 trumphdialog.cpp:56
+msgid "No trumph set"
+msgstr "切り札が設定されていません"
+
+#: trumphdialog.cpp:60
+#, c-format
+msgid ""
+"%s\n"
+"Owned by %s"
+msgstr ""
+"%s\n"
+"所有者: %s"
+
+#: prefsdialog.cpp:37
+msgid "Game Preferences"
+msgstr "ゲームの環境設定"
+
+#: prefsdialog.cpp:41
+msgid "Player name"
+msgstr "プレイヤー名"
+
+#: prefsdialog.cpp:48
+msgid "Card movement speed"
+msgstr "カード移動速度"
+
+#: prefsdialog.cpp:56
+msgid "Bot difficulty"
+msgstr "ボットの難易度"
+
+#: prefsdialog.cpp:67
+msgid ""
+"Plays any valid card, no strategy.\n"
+"At least one level must stay selected."
+msgstr ""
+"戦略なしに有効なカードを任意に出します。\n"
+"少なくとも1つのレベルを選択しておく必要があります。"
+
+#: prefsdialog.cpp:69
+msgid ""
+"Uses Monte Carlo simulation with a simple rule-based\n"
+"heuristic for each simulated play.\n"
+"At least one level must stay selected."
+msgstr ""
+"シミュレートされた各プレイに対し、単純なルールベースの\n"
+"ヒューリスティックを用いたモンテカルロシミュレーションを使用します。\n"
+"少なくとも1つのレベルを選択しておく必要があります。"
+
+#: prefsdialog.cpp:72
+msgid ""
+"Uses rule-based strategy with card tracking and\n"
+"observational memory of other players.\n"
+"At least one level must stay selected."
+msgstr ""
+"カード追跡と他のプレイヤーの観察記憶を伴う\n"
+"ルールベースの戦略を使用します。\n"
+"少なくとも1つのレベルを選択しておく必要があります。"
+
+#: prefsdialog.cpp:75
+msgid ""
+"Blends Monte Carlo simulation with the rule-based\n"
+"heuristics of the Smart level for the strongest play.\n"
+"At least one level must stay selected."
+msgstr ""
+"最強のプレイのため、モンテカルロシミュレーションと\n"
+"賢いレベルのルールベースのヒューリスティックを組み合わせます。\n"
+"少なくとも1つのレベルを選択しておく必要があります。"
+
+#: prefsdialog.cpp:92
+msgid "Card back"
+msgstr "カード裏面"
+
+#: prefsdialog.cpp:93
+msgid "Blue"
+msgstr "青"
+
+#: prefsdialog.cpp:93
+msgid "Red"
+msgstr "赤"
+
+#: prefsdialog.cpp:102 prefsdialog.cpp:182
+msgid "Language"
+msgstr "言語"
+
+#: prefsdialog.cpp:110
+msgid "Same as system"
+msgstr "システムと同じ"
+
+#: prefsdialog.cpp:118
+msgid "Takes effect on next application start."
+msgstr "次回のアプリケーション起動時に有効になります。"
+
+#: prefsdialog.cpp:123
+msgid "OK"
+msgstr "OK"
+
+#: prefsdialog.cpp:126
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: prefsdialog.cpp:153
+msgid "Invalid name."
+msgstr "無効な名前です。"
+
+#: prefsdialog.cpp:153 serverdialog.cpp:180 serverdialog.cpp:222
+#: remotedialog.cpp:152 remotedialog.cpp:195 remotedialog.cpp:201
+msgid "Error"
+msgstr "エラー"
+
+#: prefsdialog.cpp:170
+msgid ""
+"Bot difficulty change will take effect\n"
+"when you start a new game."
+msgstr ""
+"ボットの難易度の変更は新しいゲームを\n"
+"始めるときに有効になります。"
+
+#: prefsdialog.cpp:172
+msgid "Note"
+msgstr "注記"
+
+#: prefsdialog.cpp:180
+msgid "The language change will take effect the next time Sueca is started."
+msgstr "言語の変更は次回 Sueca を起動したときに有効になります。"
+
+#: lasttrickdialog.cpp:180
+msgid "Last Trick"
+msgstr "前のトリック"
+
+#: lasttrickdialog.cpp:186
+msgid "No trick yet"
+msgstr "まだトリックがありません"
+
+#: lasttrickdialog.cpp:220
+#, c-format
+msgid "Won by %s"
+msgstr "%s が獲得"
+
+#: chatpanel.cpp:46
+msgid "S&end"
+msgstr "送信(&E)"
+
+#: serverdialog.cpp:42
+msgid "Host network game"
+msgstr "ネットワークゲームを作成"
+
+#: serverdialog.cpp:52
+msgid "Bind to specific &IP address(es)"
+msgstr "特定の &IP アドレスにバインド"
+
+#: serverdialog.cpp:62
+msgid "(separate with ; if more than one)"
+msgstr "(複数の場合は ; で区切る)"
+
+#: serverdialog.cpp:68 remotedialog.cpp:60
+msgid "Port"
+msgstr "ポート"
+
+#: serverdialog.cpp:77 remotedialog.cpp:69
+msgid "Player positions"
+msgstr "プレイヤーの位置"
+
+#: serverdialog.cpp:99 remotedialog.cpp:99
+msgid "Chat"
+msgstr "チャット"
+
+#: serverdialog.cpp:112 serverdialog.cpp:159
+msgid "&Listen"
+msgstr "受信待機(&L)"
+
+#: serverdialog.cpp:114
+msgid "&Begin"
+msgstr "開始(&B)"
+
+#: serverdialog.cpp:117 remotedialog.cpp:114
+msgid "&Cancel"
+msgstr "キャンセル(&C)"
+
+#: serverdialog.cpp:172
+msgid "*** Stopped listening."
+msgstr "*** 受信待機をキャンセルしました。"
+
+#: serverdialog.cpp:180 remotedialog.cpp:201
+msgid "Invalid port."
+msgstr "無効なポートです。"
+
+#: serverdialog.cpp:209
+msgid "if you want to bind to a specific IP address please specify it"
+msgstr "特定の IP アドレスにバインドしたい場合は指定してください"
+
+#: serverdialog.cpp:214
+#, c-format
+msgid "port %lu"
+msgstr "ポート %lu"
+
+#: serverdialog.cpp:219
+#, c-format
+msgid "Could not listen for connections (%s)."
+msgstr "接続を受信待機できませんでした (%s)。"
+
+#: serverdialog.cpp:221
+msgid "Could not listen for connections."
+msgstr "接続を受信待機できませんでした。"
+
+#: serverdialog.cpp:233
+msgid "&Stop"
+msgstr "停止(&S)"
+
+#: serverdialog.cpp:234
+msgid "*** Started listening."
+msgstr "*** 受信待機を開始しました。"
+
+#: netcommon.cpp:34
+msgid "<free>"
+msgstr "<空き>"
+
+#: remotedialog.cpp:39
+msgid "<not connected>"
+msgstr "<未接続>"
+
+#: remotedialog.cpp:42
+msgid "Connect to remote game"
+msgstr "リモートゲームに接続"
+
+#: remotedialog.cpp:52
+msgid "Host address"
+msgstr "サーバーアドレス"
+
+#: remotedialog.cpp:112 remotedialog.cpp:170
+msgid "C&onnect"
+msgstr "接続(&O)"
+
+#: remotedialog.cpp:179
+msgid "*** Disconnected."
+msgstr "*** 切断されました。"
+
+#: remotedialog.cpp:182
+msgid "*** Connection aborted."
+msgstr "*** 接続が中断されました。"
+
+#: remotedialog.cpp:195
+msgid "Invalid address."
+msgstr "無効なアドレスです。"
+
+#: remotedialog.cpp:219
+#, c-format
+msgid "*** Connecting to %s:%hu..."
+msgstr "*** %s:%hu に接続中..."
+
+#: remotedialog.cpp:221
+msgid "St&op"
+msgstr "停止(&O)"
+
+#: remotehandler.cpp:82 remotehandler.cpp:88
+msgid "Connection lost."
+msgstr "接続が切れました。"
+
+#: remotehandler.cpp:84
+msgid "Connection failed."
+msgstr "接続に失敗しました。"
+
+#: remotehandler.cpp:88
+msgid "Game Aborted"
+msgstr "ゲーム中断"
+
+#: remotehandler.cpp:103
+msgid "*** Connection established."
+msgstr "*** 接続が確立されました。"
+
+#: remotehandler.cpp:104
+msgid "Disc&onnect"
+msgstr "切断(&O)"
