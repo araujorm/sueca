@@ -1,0 +1,581 @@
+# Arabic translation for sueca.
+# Copyright (C) 2003-2026 Rodrigo Araujo
+# This file is distributed under the same license as the sueca package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sueca\n"
+"Report-Msgid-Bugs-To: https://github.com/araujorm/sueca/issues\n"
+"POT-Creation-Date: 2026-04-20 02:37+0100\n"
+"PO-Revision-Date: 2026-05-03 12:00+0100\n"
+"Last-Translator: Rodrigo Araujo\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: myframe.cpp:98
+msgid "&New single player\tF2"
+msgstr "&لعبة فردية جديدة\tF2"
+
+#: myframe.cpp:98
+msgid "Start a new game against computer players"
+msgstr "ابدأ لعبة جديدة ضد الروبوتات"
+
+#: myframe.cpp:99
+msgid "&Host network game"
+msgstr "&أنشئ لعبة عبر الشبكة"
+
+#: myframe.cpp:99
+msgid "Start a network game"
+msgstr "ابدأ لعبة عبر الشبكة"
+
+#: myframe.cpp:100
+msgid "&Connect to network game"
+msgstr "ا&تصل بلعبة عبر الشبكة"
+
+#: myframe.cpp:100
+msgid "Connect to a remote game"
+msgstr "اتصل بلعبة عن بُعد"
+
+#: myframe.cpp:101
+msgid "&End Game"
+msgstr "إن&هاء اللعبة"
+
+#: myframe.cpp:101
+msgid "End current game"
+msgstr "إنهاء اللعبة الحالية"
+
+#: myframe.cpp:104
+msgid "&Preferences"
+msgstr "ال&تفضيلات"
+
+#: myframe.cpp:104
+msgid "Set game preferences"
+msgstr "ضبط تفضيلات اللعبة"
+
+#: myframe.cpp:106
+msgid "&Exit\tCtrl-Q"
+msgstr "&خروج\tCtrl-Q"
+
+#: myframe.cpp:106
+msgid "Exit program"
+msgstr "الخروج من البرنامج"
+
+#: myframe.cpp:109
+msgid "&Scores\tCtrl-S"
+msgstr "ال&نتائج\tCtrl-S"
+
+#: myframe.cpp:109
+msgid "Show current game scores"
+msgstr "إظهار نتائج اللعبة الحالية"
+
+#: myframe.cpp:111
+msgid "&Trumph\tCtrl-T"
+msgstr "ال&حكم\tCtrl-T"
+
+#: myframe.cpp:111
+msgid "Show current trumph card"
+msgstr "إظهار ورقة الحكم الحالية"
+
+#: myframe.cpp:113
+msgid "&Last Trick\tCtrl-L"
+msgstr "ال&يد الأخيرة\tCtrl-L"
+
+#: myframe.cpp:113
+msgid "Show last completed trick"
+msgstr "إظهار آخر يد مكتملة"
+
+#: myframe.cpp:117
+msgid "&Contents\tF1"
+msgstr "ال&محتويات\tF1"
+
+#: myframe.cpp:117
+msgid "Help contents"
+msgstr "محتويات المساعدة"
+
+#: myframe.cpp:118
+msgid "&About"
+msgstr "&حول"
+
+#: myframe.cpp:118 myframe.cpp:240
+msgid "About this game"
+msgstr "حول هذه اللعبة"
+
+#: myframe.cpp:121
+msgid "&Game"
+msgstr "ال&لعبة"
+
+#: myframe.cpp:122
+msgid "&View"
+msgstr "ع&رض"
+
+#: myframe.cpp:123
+msgid "&Help"
+msgstr "م&ساعدة"
+
+#: myframe.cpp:128
+msgid "Welcome!"
+msgstr "مرحباً!"
+
+#: myframe.cpp:177
+msgid "Are you sure?"
+msgstr "هل أنت متأكد؟"
+
+#: myframe.cpp:178
+msgid "End game"
+msgstr "إنهاء اللعبة"
+
+#: myframe.cpp:220
+msgid "Not implemented yet."
+msgstr "لم يتم تنفيذه بعد."
+
+#: myframe.cpp:228
+msgid ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Card graphics by jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details."
+msgstr ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"رسومات الورق بواسطة jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"هذا البرنامج برنامج حر؛ يمكنك إعادة توزيعه و/أو تعديله\n"
+"وفقاً لشروط رخصة جنو العمومية العامة كما نشرتها\n"
+"مؤسسة البرمجيات الحرة؛ سواء النسخة الثانية من الرخصة\n"
+"أو (حسب اختيارك) أي نسخة لاحقة.\n"
+"\n"
+"يُوزَّع هذا البرنامج على أمل أن يكون مفيداً،\n"
+"ولكن دون أي ضمان؛ بل دون حتى الضمان الضمني للقابلية\n"
+"للتسويق أو الملاءمة لغرض محدد. راجع رخصة جنو العمومية\n"
+"العامة للمزيد من التفاصيل."
+
+#: myframe.cpp:251
+msgid "A game is in progress. Do you really want to exit?"
+msgstr "هناك لعبة قيد التشغيل. هل تريد الخروج فعلاً؟"
+
+#: myframe.cpp:252 myframe.cpp:288
+msgid "Game in progress"
+msgstr "لعبة قيد التشغيل"
+
+#: myframe.cpp:287
+msgid "End current game and start a new one?"
+msgstr "إنهاء اللعبة الحالية وبدء لعبة جديدة؟"
+
+#: myframe.cpp:297 prefsdialog.cpp:61
+msgid "Dumb"
+msgstr "غبي"
+
+#: myframe.cpp:298 prefsdialog.cpp:62
+msgid "Methodic"
+msgstr "منهجي"
+
+#: myframe.cpp:299 prefsdialog.cpp:63
+msgid "Smart"
+msgstr "ذكي"
+
+#: myframe.cpp:300 prefsdialog.cpp:64
+msgid "Expert"
+msgstr "خبير"
+
+#: myframe.cpp:315
+msgid "Mixed"
+msgstr "متنوع"
+
+#: myframe.cpp:316
+#, c-format
+msgid "Bot: %s"
+msgstr "روبوت: %s"
+
+#: cards.cpp:65
+#, c-format
+msgid "%s of %s"
+msgstr "%s %s"
+
+#: cards.cpp:126
+msgid "Two"
+msgstr "اثنان"
+
+#: cards.cpp:127
+msgid "Three"
+msgstr "ثلاثة"
+
+#: cards.cpp:128
+msgid "Four"
+msgstr "أربعة"
+
+#: cards.cpp:129
+msgid "Five"
+msgstr "خمسة"
+
+#: cards.cpp:130
+msgid "Six"
+msgstr "ستة"
+
+#: cards.cpp:131
+msgid "Queen"
+msgstr "بنت"
+
+#: cards.cpp:132
+msgid "Jack"
+msgstr "ولد"
+
+#: cards.cpp:133
+msgid "King"
+msgstr "شايب"
+
+#: cards.cpp:134
+msgid "Seven"
+msgstr "سبعة"
+
+#: cards.cpp:135
+msgid "Ace"
+msgstr "آس"
+
+#: cards.cpp:210
+msgid "Clubs"
+msgstr "سباتي"
+
+#: cards.cpp:214
+msgid "Diamonds"
+msgstr "ديناري"
+
+#: cards.cpp:218
+msgid "Hearts"
+msgstr "كبة"
+
+#: cards.cpp:222
+msgid "Spades"
+msgstr "بستوني"
+
+#: mycanvas.cpp:268
+#, c-format
+msgid "Trumph: %s"
+msgstr "الحكم: %s"
+
+#: mycanvas.cpp:478
+msgid "It's not your turn!"
+msgstr "ليس دورك!"
+
+#: mycanvas.cpp:484
+msgid "Invalid move!"
+msgstr "حركة غير صالحة!"
+
+#: game.cpp:176
+msgid "First Round"
+msgstr "الجولة الأولى"
+
+#: game.cpp:294
+msgid "(T)"
+msgstr "(ت)"
+
+#: game.cpp:340
+msgid "Last Round: tied"
+msgstr "الجولة الأخيرة: تعادل"
+
+#: game.cpp:342
+#, c-format
+msgid "Last Round: %hu for %s/%s"
+msgstr "الجولة الأخيرة: %hu لـ %s/%s"
+
+#: scoredialog.cpp:35
+msgid "Game scores"
+msgstr "النتائج"
+
+#: scoredialog.cpp:44
+msgid "Victories"
+msgstr "الانتصارات"
+
+#: scoredialog.cpp:51 trumphdialog.cpp:44 lasttrickdialog.cpp:192
+msgid "Close"
+msgstr "إغلاق"
+
+#: scoredialog.cpp:87
+#, c-format
+msgid "Round %u"
+msgstr "الجولة %u"
+
+#: trumphdialog.cpp:34
+msgid "Trumph"
+msgstr "الحكم"
+
+#: trumphdialog.cpp:38 trumphdialog.cpp:56
+msgid "No trumph set"
+msgstr "لم يتم تحديد الحكم"
+
+#: trumphdialog.cpp:60
+#, c-format
+msgid ""
+"%s\n"
+"Owned by %s"
+msgstr ""
+"%s\n"
+"يملكها %s"
+
+#: prefsdialog.cpp:37
+msgid "Game Preferences"
+msgstr "تفضيلات اللعبة"
+
+#: prefsdialog.cpp:41
+msgid "Player name"
+msgstr "اسم اللاعب"
+
+#: prefsdialog.cpp:48
+msgid "Card movement speed"
+msgstr "سرعة حركة الورق"
+
+#: prefsdialog.cpp:56
+msgid "Bot difficulty"
+msgstr "صعوبة الروبوت"
+
+#: prefsdialog.cpp:67
+msgid ""
+"Plays any valid card, no strategy.\n"
+"At least one level must stay selected."
+msgstr ""
+"يلعب أي ورقة صالحة، بدون استراتيجية.\n"
+"يجب أن يبقى مستوى واحد على الأقل محدداً."
+
+#: prefsdialog.cpp:69
+msgid ""
+"Uses Monte Carlo simulation with a simple rule-based\n"
+"heuristic for each simulated play.\n"
+"At least one level must stay selected."
+msgstr ""
+"يستخدم محاكاة مونت كارلو مع منهج استدلالي بسيط\n"
+"مبني على القواعد لكل لعبة محاكاة.\n"
+"يجب أن يبقى مستوى واحد على الأقل محدداً."
+
+#: prefsdialog.cpp:72
+msgid ""
+"Uses rule-based strategy with card tracking and\n"
+"observational memory of other players.\n"
+"At least one level must stay selected."
+msgstr ""
+"يستخدم استراتيجية مبنية على القواعد مع تتبع الورق\n"
+"وذاكرة مراقبة اللاعبين الآخرين.\n"
+"يجب أن يبقى مستوى واحد على الأقل محدداً."
+
+#: prefsdialog.cpp:75
+msgid ""
+"Blends Monte Carlo simulation with the rule-based\n"
+"heuristics of the Smart level for the strongest play.\n"
+"At least one level must stay selected."
+msgstr ""
+"يجمع محاكاة مونت كارلو مع المنهج الاستدلالي المبني\n"
+"على القواعد لمستوى الذكي للحصول على أقوى لعب.\n"
+"يجب أن يبقى مستوى واحد على الأقل محدداً."
+
+#: prefsdialog.cpp:92
+msgid "Card back"
+msgstr "ظهر الورق"
+
+#: prefsdialog.cpp:93
+msgid "Blue"
+msgstr "أزرق"
+
+#: prefsdialog.cpp:93
+msgid "Red"
+msgstr "أحمر"
+
+#: prefsdialog.cpp:102 prefsdialog.cpp:182
+msgid "Language"
+msgstr "اللغة"
+
+#: prefsdialog.cpp:110
+msgid "Same as system"
+msgstr "نفس النظام"
+
+#: prefsdialog.cpp:118
+msgid "Takes effect on next application start."
+msgstr "يطبق عند تشغيل التطبيق المقبل."
+
+#: prefsdialog.cpp:123
+msgid "OK"
+msgstr "موافق"
+
+#: prefsdialog.cpp:126
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: prefsdialog.cpp:153
+msgid "Invalid name."
+msgstr "اسم غير صالح."
+
+#: prefsdialog.cpp:153 serverdialog.cpp:180 serverdialog.cpp:222
+#: remotedialog.cpp:152 remotedialog.cpp:195 remotedialog.cpp:201
+msgid "Error"
+msgstr "خطأ"
+
+#: prefsdialog.cpp:170
+msgid ""
+"Bot difficulty change will take effect\n"
+"when you start a new game."
+msgstr ""
+"تغيير صعوبة الروبوت يطبق\n"
+"عند بدء لعبة جديدة."
+
+#: prefsdialog.cpp:172
+msgid "Note"
+msgstr "ملاحظة"
+
+#: prefsdialog.cpp:180
+msgid "The language change will take effect the next time Sueca is started."
+msgstr "تغيير اللغة يطبق عند تشغيل Sueca في المرة المقبلة."
+
+#: lasttrickdialog.cpp:180
+msgid "Last Trick"
+msgstr "اليد الأخيرة"
+
+#: lasttrickdialog.cpp:186
+msgid "No trick yet"
+msgstr "لا توجد يد بعد"
+
+#: lasttrickdialog.cpp:220
+#, c-format
+msgid "Won by %s"
+msgstr "فاز بها %s"
+
+#: chatpanel.cpp:46
+msgid "S&end"
+msgstr "إ&رسال"
+
+#: serverdialog.cpp:42
+msgid "Host network game"
+msgstr "إنشاء لعبة عبر الشبكة"
+
+#: serverdialog.cpp:52
+msgid "Bind to specific &IP address(es)"
+msgstr "ربط بعنوان (عناوين) &IP محدد"
+
+#: serverdialog.cpp:62
+msgid "(separate with ; if more than one)"
+msgstr "(افصل بين النصوص بـ ; إذا كان أكثر من واحد)"
+
+#: serverdialog.cpp:68 remotedialog.cpp:60
+msgid "Port"
+msgstr "المنفذ"
+
+#: serverdialog.cpp:77 remotedialog.cpp:69
+msgid "Player positions"
+msgstr "مواقع اللاعبين"
+
+#: serverdialog.cpp:99 remotedialog.cpp:99
+msgid "Chat"
+msgstr "محادثة"
+
+#: serverdialog.cpp:112 serverdialog.cpp:159
+msgid "&Listen"
+msgstr "ال&استماع"
+
+#: serverdialog.cpp:114
+msgid "&Begin"
+msgstr "ا&بدأ"
+
+#: serverdialog.cpp:117 remotedialog.cpp:114
+msgid "&Cancel"
+msgstr "إل&غاء"
+
+#: serverdialog.cpp:172
+msgid "*** Stopped listening."
+msgstr "*** أُلغي الاستماع."
+
+#: serverdialog.cpp:180 remotedialog.cpp:201
+msgid "Invalid port."
+msgstr "منفذ غير صالح."
+
+#: serverdialog.cpp:209
+msgid "if you want to bind to a specific IP address please specify it"
+msgstr "إذا أردت الربط بعنوان IP محدد فيرجى تحديده"
+
+#: serverdialog.cpp:214
+#, c-format
+msgid "port %lu"
+msgstr "المنفذ %lu"
+
+#: serverdialog.cpp:219
+#, c-format
+msgid "Could not listen for connections (%s)."
+msgstr "تعذر الاستماع للاتصالات (%s)."
+
+#: serverdialog.cpp:221
+msgid "Could not listen for connections."
+msgstr "تعذر الاستماع للاتصالات."
+
+#: serverdialog.cpp:233
+msgid "&Stop"
+msgstr "إي&قاف"
+
+#: serverdialog.cpp:234
+msgid "*** Started listening."
+msgstr "*** بدأ الاستماع."
+
+#: netcommon.cpp:34
+msgid "<free>"
+msgstr "<متاح>"
+
+#: remotedialog.cpp:39
+msgid "<not connected>"
+msgstr "<غير متصل>"
+
+#: remotedialog.cpp:42
+msgid "Connect to remote game"
+msgstr "الاتصال بلعبة عن بُعد"
+
+#: remotedialog.cpp:52
+msgid "Host address"
+msgstr "عنوان الخادم"
+
+#: remotedialog.cpp:112 remotedialog.cpp:170
+msgid "C&onnect"
+msgstr "ا&تصال"
+
+#: remotedialog.cpp:179
+msgid "*** Disconnected."
+msgstr "*** انقطع الاتصال."
+
+#: remotedialog.cpp:182
+msgid "*** Connection aborted."
+msgstr "*** قُطع الاتصال."
+
+#: remotedialog.cpp:195
+msgid "Invalid address."
+msgstr "عنوان غير صالح."
+
+#: remotedialog.cpp:219
+#, c-format
+msgid "*** Connecting to %s:%hu..."
+msgstr "*** جاري الاتصال بـ %s:%hu..."
+
+#: remotedialog.cpp:221
+msgid "St&op"
+msgstr "إي&قاف"
+
+#: remotehandler.cpp:82 remotehandler.cpp:88
+msgid "Connection lost."
+msgstr "فُقد الاتصال."
+
+#: remotehandler.cpp:84
+msgid "Connection failed."
+msgstr "فشل الاتصال."
+
+#: remotehandler.cpp:88
+msgid "Game Aborted"
+msgstr "أُلغيت اللعبة"
+
+#: remotehandler.cpp:103
+msgid "*** Connection established."
+msgstr "*** تم الاتصال."
+
+#: remotehandler.cpp:104
+msgid "Disc&onnect"
+msgstr "&قطع الاتصال"
