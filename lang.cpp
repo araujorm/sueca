@@ -38,6 +38,7 @@ const LangEntry kSuecaLanguages[] = {
 	{ wxLANGUAGE_SPANISH_LATIN_AMERICA, "Español (Latinoamérica)" },
 	{ wxLANGUAGE_FRENCH,              "Français" },
 	{ wxLANGUAGE_ITALIAN,             "Italiano" },
+	{ wxLANGUAGE_DUTCH,               "Nederlands" },
 	{ wxLANGUAGE_PORTUGUESE_PORTUGAL, "Português (Portugal)" },
 	{ -2, 0 }  // sentinel
 };

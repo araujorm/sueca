@@ -1,0 +1,581 @@
+# Dutch translation for sueca.
+# Copyright (C) 2003-2026 Rodrigo Araujo
+# This file is distributed under the same license as the sueca package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sueca\n"
+"Report-Msgid-Bugs-To: https://github.com/araujorm/sueca/issues\n"
+"POT-Creation-Date: 2026-04-20 02:37+0100\n"
+"PO-Revision-Date: 2026-05-03 12:00+0100\n"
+"Last-Translator: Rodrigo Araujo\n"
+"Language-Team: Dutch\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: myframe.cpp:98
+msgid "&New single player\tF2"
+msgstr "&Nieuw eenspelerspel\tF2"
+
+#: myframe.cpp:98
+msgid "Start a new game against computer players"
+msgstr "Nieuw spel tegen bots starten"
+
+#: myframe.cpp:99
+msgid "&Host network game"
+msgstr "Netwerk&spel hosten"
+
+#: myframe.cpp:99
+msgid "Start a network game"
+msgstr "Een netwerkspel starten"
+
+#: myframe.cpp:100
+msgid "&Connect to network game"
+msgstr "&Verbinden met netwerkspel"
+
+#: myframe.cpp:100
+msgid "Connect to a remote game"
+msgstr "Verbinden met een spel op afstand"
+
+#: myframe.cpp:101
+msgid "&End Game"
+msgstr "Spel &beëindigen"
+
+#: myframe.cpp:101
+msgid "End current game"
+msgstr "Huidig spel beëindigen"
+
+#: myframe.cpp:104
+msgid "&Preferences"
+msgstr "&Voorkeuren"
+
+#: myframe.cpp:104
+msgid "Set game preferences"
+msgstr "Spelvoorkeuren instellen"
+
+#: myframe.cpp:106
+msgid "&Exit\tCtrl-Q"
+msgstr "&Afsluiten\tCtrl-Q"
+
+#: myframe.cpp:106
+msgid "Exit program"
+msgstr "Programma afsluiten"
+
+#: myframe.cpp:109
+msgid "&Scores\tCtrl-S"
+msgstr "&Scores\tCtrl-S"
+
+#: myframe.cpp:109
+msgid "Show current game scores"
+msgstr "Scores van het huidige spel tonen"
+
+#: myframe.cpp:111
+msgid "&Trumph\tCtrl-T"
+msgstr "&Troef\tCtrl-T"
+
+#: myframe.cpp:111
+msgid "Show current trumph card"
+msgstr "Huidige troefkaart tonen"
+
+#: myframe.cpp:113
+msgid "&Last Trick\tCtrl-L"
+msgstr "&Laatste slag\tCtrl-L"
+
+#: myframe.cpp:113
+msgid "Show last completed trick"
+msgstr "Laatste afgeronde slag tonen"
+
+#: myframe.cpp:117
+msgid "&Contents\tF1"
+msgstr "&Inhoud\tF1"
+
+#: myframe.cpp:117
+msgid "Help contents"
+msgstr "Inhoud van de hulp"
+
+#: myframe.cpp:118
+msgid "&About"
+msgstr "&Over"
+
+#: myframe.cpp:118 myframe.cpp:240
+msgid "About this game"
+msgstr "Over dit spel"
+
+#: myframe.cpp:121
+msgid "&Game"
+msgstr "&Spel"
+
+#: myframe.cpp:122
+msgid "&View"
+msgstr "&Beeld"
+
+#: myframe.cpp:123
+msgid "&Help"
+msgstr "&Hulp"
+
+#: myframe.cpp:128
+msgid "Welcome!"
+msgstr "Welkom!"
+
+#: myframe.cpp:177
+msgid "Are you sure?"
+msgstr "Weet je het zeker?"
+
+#: myframe.cpp:178
+msgid "End game"
+msgstr "Spel beëindigen"
+
+#: myframe.cpp:220
+msgid "Not implemented yet."
+msgstr "Nog niet geïmplementeerd."
+
+#: myframe.cpp:228
+msgid ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Card graphics by jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details."
+msgstr ""
+"(C) 2003-2026 Rodrigo Araujo\n"
+"Kaartillustraties door jfitz technologies - http://www.jfitz.com/\n"
+"\n"
+"Dit programma is vrije software; u kunt het herdistribueren en/of\n"
+"wijzigen onder de voorwaarden van de GNU General Public License zoals\n"
+"gepubliceerd door de Free Software Foundation; ofwel versie 2 van de\n"
+"licentie, ofwel (naar uw keuze) elke latere versie.\n"
+"\n"
+"Dit programma wordt verspreid in de hoop dat het nuttig zal zijn,\n"
+"maar ZONDER ENIGE GARANTIE; zelfs zonder de impliciete garantie van\n"
+"VERKOOPBAARHEID of GESCHIKTHEID VOOR EEN BEPAALD DOEL. Zie de\n"
+"GNU General Public License voor meer details."
+
+#: myframe.cpp:251
+msgid "A game is in progress. Do you really want to exit?"
+msgstr "Er is een spel bezig. Wil je echt afsluiten?"
+
+#: myframe.cpp:252 myframe.cpp:288
+msgid "Game in progress"
+msgstr "Spel bezig"
+
+#: myframe.cpp:287
+msgid "End current game and start a new one?"
+msgstr "Huidig spel beëindigen en een nieuw spel starten?"
+
+#: myframe.cpp:297 prefsdialog.cpp:61
+msgid "Dumb"
+msgstr "Dom"
+
+#: myframe.cpp:298 prefsdialog.cpp:62
+msgid "Methodic"
+msgstr "Methodisch"
+
+#: myframe.cpp:299 prefsdialog.cpp:63
+msgid "Smart"
+msgstr "Slim"
+
+#: myframe.cpp:300 prefsdialog.cpp:64
+msgid "Expert"
+msgstr "Expert"
+
+#: myframe.cpp:315
+msgid "Mixed"
+msgstr "Gemengd"
+
+#: myframe.cpp:316
+#, c-format
+msgid "Bot: %s"
+msgstr "Bot: %s"
+
+#: cards.cpp:65
+#, c-format
+msgid "%s of %s"
+msgstr "%s van %s"
+
+#: cards.cpp:126
+msgid "Two"
+msgstr "Twee"
+
+#: cards.cpp:127
+msgid "Three"
+msgstr "Drie"
+
+#: cards.cpp:128
+msgid "Four"
+msgstr "Vier"
+
+#: cards.cpp:129
+msgid "Five"
+msgstr "Vijf"
+
+#: cards.cpp:130
+msgid "Six"
+msgstr "Zes"
+
+#: cards.cpp:131
+msgid "Queen"
+msgstr "Vrouw"
+
+#: cards.cpp:132
+msgid "Jack"
+msgstr "Boer"
+
+#: cards.cpp:133
+msgid "King"
+msgstr "Heer"
+
+#: cards.cpp:134
+msgid "Seven"
+msgstr "Zeven"
+
+#: cards.cpp:135
+msgid "Ace"
+msgstr "Aas"
+
+#: cards.cpp:210
+msgid "Clubs"
+msgstr "Klaveren"
+
+#: cards.cpp:214
+msgid "Diamonds"
+msgstr "Ruiten"
+
+#: cards.cpp:218
+msgid "Hearts"
+msgstr "Harten"
+
+#: cards.cpp:222
+msgid "Spades"
+msgstr "Schoppen"
+
+#: mycanvas.cpp:268
+#, c-format
+msgid "Trumph: %s"
+msgstr "Troef: %s"
+
+#: mycanvas.cpp:478
+msgid "It's not your turn!"
+msgstr "Het is niet jouw beurt!"
+
+#: mycanvas.cpp:484
+msgid "Invalid move!"
+msgstr "Ongeldige zet!"
+
+#: game.cpp:176
+msgid "First Round"
+msgstr "Eerste ronde"
+
+#: game.cpp:294
+msgid "(T)"
+msgstr "(G)"
+
+#: game.cpp:340
+msgid "Last Round: tied"
+msgstr "Laatste ronde: gelijkspel"
+
+#: game.cpp:342
+#, c-format
+msgid "Last Round: %hu for %s/%s"
+msgstr "Laatste ronde: %hu voor %s/%s"
+
+#: scoredialog.cpp:35
+msgid "Game scores"
+msgstr "Scores"
+
+#: scoredialog.cpp:44
+msgid "Victories"
+msgstr "Overwinningen"
+
+#: scoredialog.cpp:51 trumphdialog.cpp:44 lasttrickdialog.cpp:192
+msgid "Close"
+msgstr "Sluiten"
+
+#: scoredialog.cpp:87
+#, c-format
+msgid "Round %u"
+msgstr "Ronde %u"
+
+#: trumphdialog.cpp:34
+msgid "Trumph"
+msgstr "Troef"
+
+#: trumphdialog.cpp:38 trumphdialog.cpp:56
+msgid "No trumph set"
+msgstr "Geen troef ingesteld"
+
+#: trumphdialog.cpp:60
+#, c-format
+msgid ""
+"%s\n"
+"Owned by %s"
+msgstr ""
+"%s\n"
+"In bezit van %s"
+
+#: prefsdialog.cpp:37
+msgid "Game Preferences"
+msgstr "Spelvoorkeuren"
+
+#: prefsdialog.cpp:41
+msgid "Player name"
+msgstr "Spelersnaam"
+
+#: prefsdialog.cpp:48
+msgid "Card movement speed"
+msgstr "Bewegingssnelheid van de kaarten"
+
+#: prefsdialog.cpp:56
+msgid "Bot difficulty"
+msgstr "Moeilijkheidsgraad bots"
+
+#: prefsdialog.cpp:67
+msgid ""
+"Plays any valid card, no strategy.\n"
+"At least one level must stay selected."
+msgstr ""
+"Speelt elke geldige kaart, zonder strategie.\n"
+"Er moet minstens één niveau geselecteerd blijven."
+
+#: prefsdialog.cpp:69
+msgid ""
+"Uses Monte Carlo simulation with a simple rule-based\n"
+"heuristic for each simulated play.\n"
+"At least one level must stay selected."
+msgstr ""
+"Gebruikt Monte Carlo-simulatie met een eenvoudige op regels\n"
+"gebaseerde heuristiek voor elke gesimuleerde zet.\n"
+"Er moet minstens één niveau geselecteerd blijven."
+
+#: prefsdialog.cpp:72
+msgid ""
+"Uses rule-based strategy with card tracking and\n"
+"observational memory of other players.\n"
+"At least one level must stay selected."
+msgstr ""
+"Gebruikt een op regels gebaseerde strategie met kaartbijhouding\n"
+"en observatiegeheugen van de andere spelers.\n"
+"Er moet minstens één niveau geselecteerd blijven."
+
+#: prefsdialog.cpp:75
+msgid ""
+"Blends Monte Carlo simulation with the rule-based\n"
+"heuristics of the Smart level for the strongest play.\n"
+"At least one level must stay selected."
+msgstr ""
+"Combineert Monte Carlo-simulatie met de op regels gebaseerde\n"
+"heuristieken van het niveau Slim voor het sterkste spel.\n"
+"Er moet minstens één niveau geselecteerd blijven."
+
+#: prefsdialog.cpp:92
+msgid "Card back"
+msgstr "Achterkant van de kaarten"
+
+#: prefsdialog.cpp:93
+msgid "Blue"
+msgstr "Blauw"
+
+#: prefsdialog.cpp:93
+msgid "Red"
+msgstr "Rood"
+
+#: prefsdialog.cpp:102 prefsdialog.cpp:182
+msgid "Language"
+msgstr "Taal"
+
+#: prefsdialog.cpp:110
+msgid "Same as system"
+msgstr "Gelijk aan systeem"
+
+#: prefsdialog.cpp:118
+msgid "Takes effect on next application start."
+msgstr "Wordt toegepast bij de volgende start van de applicatie."
+
+#: prefsdialog.cpp:123
+msgid "OK"
+msgstr "OK"
+
+#: prefsdialog.cpp:126
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: prefsdialog.cpp:153
+msgid "Invalid name."
+msgstr "Ongeldige naam."
+
+#: prefsdialog.cpp:153 serverdialog.cpp:180 serverdialog.cpp:222
+#: remotedialog.cpp:152 remotedialog.cpp:195 remotedialog.cpp:201
+msgid "Error"
+msgstr "Fout"
+
+#: prefsdialog.cpp:170
+msgid ""
+"Bot difficulty change will take effect\n"
+"when you start a new game."
+msgstr ""
+"De wijziging van de bot-moeilijkheidsgraad\n"
+"wordt van kracht bij de start van een nieuw spel."
+
+#: prefsdialog.cpp:172
+msgid "Note"
+msgstr "Opmerking"
+
+#: prefsdialog.cpp:180
+msgid "The language change will take effect the next time Sueca is started."
+msgstr "De taalwijziging wordt van kracht bij de volgende start van Sueca."
+
+#: lasttrickdialog.cpp:180
+msgid "Last Trick"
+msgstr "Laatste slag"
+
+#: lasttrickdialog.cpp:186
+msgid "No trick yet"
+msgstr "Nog geen slag"
+
+#: lasttrickdialog.cpp:220
+#, c-format
+msgid "Won by %s"
+msgstr "Gewonnen door %s"
+
+#: chatpanel.cpp:46
+msgid "S&end"
+msgstr "&Verzenden"
+
+#: serverdialog.cpp:42
+msgid "Host network game"
+msgstr "Netwerkspel hosten"
+
+#: serverdialog.cpp:52
+msgid "Bind to specific &IP address(es)"
+msgstr "Aan specifiek(e) &IP-adres(sen) binden"
+
+#: serverdialog.cpp:62
+msgid "(separate with ; if more than one)"
+msgstr "(scheiden met ; als er meer dan één is)"
+
+#: serverdialog.cpp:68 remotedialog.cpp:60
+msgid "Port"
+msgstr "Poort"
+
+#: serverdialog.cpp:77 remotedialog.cpp:69
+msgid "Player positions"
+msgstr "Spelersposities"
+
+#: serverdialog.cpp:99 remotedialog.cpp:99
+msgid "Chat"
+msgstr "Chat"
+
+#: serverdialog.cpp:112 serverdialog.cpp:159
+msgid "&Listen"
+msgstr "&Luisteren"
+
+#: serverdialog.cpp:114
+msgid "&Begin"
+msgstr "S&tarten"
+
+#: serverdialog.cpp:117 remotedialog.cpp:114
+msgid "&Cancel"
+msgstr "&Annuleren"
+
+#: serverdialog.cpp:172
+msgid "*** Stopped listening."
+msgstr "*** Luisteren geannuleerd."
+
+#: serverdialog.cpp:180 remotedialog.cpp:201
+msgid "Invalid port."
+msgstr "Ongeldige poort."
+
+#: serverdialog.cpp:209
+msgid "if you want to bind to a specific IP address please specify it"
+msgstr "als je aan een specifiek IP-adres wilt binden, geef dat dan op"
+
+#: serverdialog.cpp:214
+#, c-format
+msgid "port %lu"
+msgstr "poort %lu"
+
+#: serverdialog.cpp:219
+#, c-format
+msgid "Could not listen for connections (%s)."
+msgstr "Kon niet naar verbindingen luisteren (%s)."
+
+#: serverdialog.cpp:221
+msgid "Could not listen for connections."
+msgstr "Kon niet naar verbindingen luisteren."
+
+#: serverdialog.cpp:233
+msgid "&Stop"
+msgstr "&Stoppen"
+
+#: serverdialog.cpp:234
+msgid "*** Started listening."
+msgstr "*** Luisteren gestart."
+
+#: netcommon.cpp:34
+msgid "<free>"
+msgstr "<vrij>"
+
+#: remotedialog.cpp:39
+msgid "<not connected>"
+msgstr "<niet verbonden>"
+
+#: remotedialog.cpp:42
+msgid "Connect to remote game"
+msgstr "Verbinden met spel op afstand"
+
+#: remotedialog.cpp:52
+msgid "Host address"
+msgstr "Adres van de server"
+
+#: remotedialog.cpp:112 remotedialog.cpp:170
+msgid "C&onnect"
+msgstr "&Verbinden"
+
+#: remotedialog.cpp:179
+msgid "*** Disconnected."
+msgstr "*** Verbinding verbroken."
+
+#: remotedialog.cpp:182
+msgid "*** Connection aborted."
+msgstr "*** Verbinding onderbroken."
+
+#: remotedialog.cpp:195
+msgid "Invalid address."
+msgstr "Ongeldig adres."
+
+#: remotedialog.cpp:219
+#, c-format
+msgid "*** Connecting to %s:%hu..."
+msgstr "*** Verbinden met %s:%hu..."
+
+#: remotedialog.cpp:221
+msgid "St&op"
+msgstr "&Stoppen"
+
+#: remotehandler.cpp:82 remotehandler.cpp:88
+msgid "Connection lost."
+msgstr "Verbinding verloren."
+
+#: remotehandler.cpp:84
+msgid "Connection failed."
+msgstr "Verbinding mislukt."
+
+#: remotehandler.cpp:88
+msgid "Game Aborted"
+msgstr "Spel onderbroken"
+
+#: remotehandler.cpp:103
+msgid "*** Connection established."
+msgstr "*** Verbinding tot stand gebracht."
+
+#: remotehandler.cpp:104
+msgid "Disc&onnect"
+msgstr "&Verbinding verbreken"
