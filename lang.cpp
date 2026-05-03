@@ -40,6 +40,7 @@ const LangEntry kSuecaLanguages[] = {
 	{ wxLANGUAGE_FILIPINO,              "Filipino" },
 	{ wxLANGUAGE_FRENCH,                "Français" },
 	{ wxLANGUAGE_ITALIAN,               "Italiano" },
+	{ wxLANGUAGE_SWAHILI,               "Kiswahili" },
 	{ wxLANGUAGE_DUTCH,                 "Nederlands" },
 	{ wxLANGUAGE_POLISH,                "Polski" },
 	{ wxLANGUAGE_PORTUGUESE_BRAZILIAN,  "Português (Brasil)" },
