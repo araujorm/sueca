@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <wx/config.h>
 #include <wx/intl.h>
 #include "prefsdialog.hpp"
+#include "helpdialog.hpp"
 #include "cards.hpp"
 #include "main.hpp"
 
@@ -217,8 +218,8 @@ void MyFrame::OnViewLastTrick( wxCommandEvent& event )
 
 void MyFrame::Help( wxCommandEvent& event )
 {
-	wxMessageDialog msg( this, _( "Not implemented yet." ) );
-	msg.ShowModal();
+	HelpDialog dlg( this );
+	dlg.ShowModal();
 }
 
 void MyFrame::About( wxCommandEvent& event )
